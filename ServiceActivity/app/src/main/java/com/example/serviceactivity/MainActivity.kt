@@ -3,6 +3,7 @@ package com.example.serviceactivity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 
@@ -22,12 +23,16 @@ class MainActivity : AppCompatActivity() {
             // Iniciar el servicio
             startService(serviceIntent)
         }
-        findViewById<Button>(R.id.pause).setOnClickListener{
-
+        findViewById<Button>(R.id.pause).setOnClickListener {
+            val serviceIntent = Intent(this, countdownService::class.java)
+            serviceIntent.action = countdownService.ACTION_PAUSE
+            startService(serviceIntent)
         }
-        findViewById<Button>(R.id.restart).setOnClickListener{
-
+        findViewById<Button>(R.id.restart).setOnClickListener {
+            val serviceIntent = Intent(this, countdownService::class.java)
+            startService(serviceIntent)
         }
+
     }
 
     fun Finalizar(){

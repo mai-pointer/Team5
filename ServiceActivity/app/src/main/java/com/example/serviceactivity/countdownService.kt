@@ -23,24 +23,39 @@ class countdownService : Service() {
         sharedPreferences = getSharedPreferences("MyServicePrefs", Context.MODE_PRIVATE)
     }
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        val timeInMillis = intent?.getLongExtra(TIME_EXTRA, 0) ?: 0
-        if (flags and START_FLAG_REDELIVERY != 0) {
-            secondsRemaining = sharedPreferences.getLong("secondsRemaining", timeInMillis / 1000)
+        val action = intent?.action
+
+
+        if (action == ACTION_PAUSE) {
+            pauseCountdown()
         } else {
-            secondsRemaining = timeInMillis / 1000
-        }
-        job = CoroutineScope(Dispatchers.Main).launch {
-            while (secondsRemaining > 0) {
-                if (!isPaused){
-                    delay(1000)
-                    secondsRemaining--
-                    Log.d("CountdownService", "Seconds remaining: $secondsRemaining")
-                }
+            // Lógica para iniciar el contador aquí
+            val timeInMillis = intent?.getLongExtra(TIME_EXTRA, 0) ?: 0
+
+            if (START_FLAG_REDELIVERY != 0) {
+                secondsRemaining = sharedPreferences.getLong("secondsRemaining", timeInMillis / 1000)
+            } else {
+                secondsRemaining = timeInMillis / 1000
             }
-            Log.d("CountdownService", "Countdown finished")
-            playSound()
-            stopSelf()
+
+            job = CoroutineScope(Dispatchers.Main).launch {
+                while (secondsRemaining > 0) {
+                    if (!isPaused){
+                        delay(1000)
+
+                        secondsRemaining--
+                        Log.d("CountdownService", "Seconds remaining: $secondsRemaining")
+                    }
+                    else{
+                        delay(1000)
+                    }
+                }
+                Log.d("CountdownService", "Countdown finished")
+                playSound()
+                stopSelf()
+            }
         }
+
         return START_REDELIVER_INTENT
     }
 
@@ -57,11 +72,9 @@ class countdownService : Service() {
     }
 
     fun pauseCountdown() {
-        isPaused = true
+        onDestroy()
     }
-    fun restartCoutdown(){
-        isPaused = false
-    }
+
 
 
     override fun onDestroy() {
@@ -77,6 +90,7 @@ class countdownService : Service() {
 
     companion object {
         const val TIME_EXTRA = "time_extra"
+        const val ACTION_PAUSE = "com.example.serviceactivity.PAUSE"
     }
 
 }
