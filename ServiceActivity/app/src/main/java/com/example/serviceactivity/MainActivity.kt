@@ -7,18 +7,22 @@ import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var platbtn: Button
+    lateinit var contador: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         platbtn = findViewById(R.id.play)
+        contador = findViewById(R.id.contador)
 
         //Boton de inicio
         platbtn.setOnClickListener{
@@ -29,6 +33,7 @@ class MainActivity : AppCompatActivity() {
             serviceIntent.putExtra(countdownService.TIME_EXTRA, (minutos * 60 + segundos) * 1000L)
             startService(serviceIntent)
 
+            contador.visibility = View.VISIBLE
             platbtn.isEnabled = false
         }
         findViewById<Button>(R.id.pause).setOnClickListener {
@@ -69,15 +74,26 @@ class MainActivity : AppCompatActivity() {
     // Define una acción de broadcast
     companion object {
         const val ACTION_FIN = "com.example.serviceactivity.FIN"
+        const val ACTION_UPDATE = "com.example.serviceactivity.UPDATE"
+        const val TIME_EXTRA = "com.example.serviceactivity.TIME_EXTRA"
     }
 
     // Registra un receptor de broadcast
     private val broadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            if (intent?.action == ACTION_FIN) {
-                platbtn.isEnabled = true
-            }
-        }
+            when (intent?.action) {
+                ACTION_FIN -> {
+                    platbtn.isEnabled = true
+                    contador.visibility = View.INVISIBLE
+                }
 
+                ACTION_UPDATE -> {
+                    contador.text = intent.getLongExtra(TIME_EXTRA, 0).toString()
+
+                }
+
+            }
+
+        }
     }
 }

@@ -9,12 +9,8 @@ import android.os.IBinder
 import android.util.Log
 import kotlinx.coroutines.*
 
-interface CountdownListener {
-    fun onTimeTick(timeRemaining: Long)
-}
-class countdownService : Service() {
 
-    private var countdownListener: CountdownListener? = null
+class countdownService : Service() {
 
     private var mediaPlayer: MediaPlayer? = null
     private var job: Job? = null
@@ -48,7 +44,7 @@ class countdownService : Service() {
                 while (secondsRemaining > 0) {
                     if (!isPaused){
                         delay(1000)
-                        countdownListener?.onTimeTick(secondsRemaining)
+                        sendBroadcastUpdate(secondsRemaining)
                         secondsRemaining--
                         Log.d("CountdownService", "Seconds remaining: $secondsRemaining")
                     }
@@ -67,10 +63,6 @@ class countdownService : Service() {
         }
 
         return START_REDELIVER_INTENT
-    }
-
-    fun setCountdownListener(listener: CountdownListener) {
-        countdownListener = listener
     }
 
     private fun playSound() {
@@ -112,6 +104,12 @@ class countdownService : Service() {
 
 
         super.onDestroy()
+    }
+    private fun sendBroadcastUpdate(timeRemaining: Long) {
+        val intent = Intent()
+        intent.action = MainActivity.ACTION_UPDATE
+        intent.putExtra(MainActivity.TIME_EXTRA, timeRemaining)
+        sendBroadcast(intent)
     }
 
     companion object {
