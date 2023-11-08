@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
             serviceIntent.putExtra(countdownService.TIME_EXTRA, (minutos * 60 + segundos) * 1000L)
             startService(serviceIntent)
 
-            contador.visibility = View.VISIBLE
+//            contador.visibility = View.VISIBLE
             platbtn.isEnabled = false
         }
         findViewById<Button>(R.id.pause).setOnClickListener {
@@ -85,7 +85,8 @@ class MainActivity : AppCompatActivity() {
             when (intent?.action) {
                 ACTION_FIN -> {
                     platbtn.isEnabled = true
-                    contador.visibility = View.INVISIBLE
+                    contador.text = "00:00"
+//                    contador.visibility = View.INVISIBLE
                 }
                 ACTION_UPDATE -> {
                     val timeRemaining = intent.getLongExtra("timeRemaining", 0)
