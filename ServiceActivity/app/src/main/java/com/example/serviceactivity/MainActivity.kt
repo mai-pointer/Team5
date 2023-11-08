@@ -86,7 +86,6 @@ class MainActivity : AppCompatActivity() {
                     platbtn.isEnabled = true
                     contador.visibility = View.INVISIBLE
                 }
-
                 ACTION_UPDATE -> {
                     contador.text = intent.getLongExtra(TIME_EXTRA, 0).toString()
 

@@ -15,7 +15,6 @@ class countdownService : Service() {
     private var mediaPlayer: MediaPlayer? = null
     private var job: Job? = null
     private var secondsRemaining: Long = 0
-    private var isPaused = false
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate() {
@@ -31,7 +30,6 @@ class countdownService : Service() {
         }else if (action == ACTION_STOP) {
             stopCountdown()
         } else {
-            // Lógica para iniciar el contador aquí
             val timeInMillis = intent?.getLongExtra(TIME_EXTRA, 0) ?: 0
 
             if (START_FLAG_REDELIVERY != 0) {
@@ -42,15 +40,10 @@ class countdownService : Service() {
 
             job = CoroutineScope(Dispatchers.Main).launch {
                 while (secondsRemaining > 0) {
-                    if (!isPaused){
-                        delay(1000)
-                        sendBroadcastUpdate(secondsRemaining)
-                        secondsRemaining--
-                        Log.d("CountdownService", "Seconds remaining: $secondsRemaining")
-                    }
-                    else{
-                        delay(1000)
-                    }
+                    delay(1000)
+                    sendBroadcastUpdate(secondsRemaining)
+                    secondsRemaining--
+                    Log.d("CountdownService", "Seconds remaining: $secondsRemaining")
                 }
                 val intent = Intent()
                 intent.action = MainActivity.ACTION_FIN
