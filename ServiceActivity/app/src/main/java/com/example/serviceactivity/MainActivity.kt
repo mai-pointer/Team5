@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         val intentFilter = IntentFilter(ACTION_FIN)
+        intentFilter.addAction(ACTION_UPDATE) // Asegúrate de agregar la acción ACTION_UPDATE
         registerReceiver(broadcastReceiver, intentFilter)
     }
 
@@ -87,7 +88,7 @@ class MainActivity : AppCompatActivity() {
                     contador.visibility = View.INVISIBLE
                 }
                 ACTION_UPDATE -> {
-                    contador.text = intent.getLongExtra(TIME_EXTRA, 0).toString()
+                    contador.text = intent.getLongExtra("timeRemaining", 0).toString()
 
                 }
 

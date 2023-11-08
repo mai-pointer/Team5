@@ -41,7 +41,12 @@ class countdownService : Service() {
             job = CoroutineScope(Dispatchers.Main).launch {
                 while (secondsRemaining > 0) {
                     delay(1000)
-                    sendBroadcastUpdate(secondsRemaining)
+
+                    val intent = Intent()
+                    intent.action = MainActivity.ACTION_UPDATE
+                    intent.putExtra("timeRemaining", secondsRemaining)
+                    sendBroadcast(intent)
+
                     secondsRemaining--
                     Log.d("CountdownService", "Seconds remaining: $secondsRemaining")
                 }
