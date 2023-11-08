@@ -48,6 +48,7 @@ class countdownService : Service() {
                     sendBroadcast(intent)
 
                     secondsRemaining--
+
                     Log.d("CountdownService", "Seconds remaining: $secondsRemaining")
                 }
                 val intent = Intent()

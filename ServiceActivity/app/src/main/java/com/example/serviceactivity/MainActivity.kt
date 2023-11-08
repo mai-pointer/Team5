@@ -88,7 +88,11 @@ class MainActivity : AppCompatActivity() {
                     contador.visibility = View.INVISIBLE
                 }
                 ACTION_UPDATE -> {
-                    contador.text = intent.getLongExtra("timeRemaining", 0).toString()
+                    val timeRemaining = intent.getLongExtra("timeRemaining", 0)
+                    val minutes = (timeRemaining / 60).toInt()
+                    val seconds = (timeRemaining % 60).toInt()
+                    val timeString = String.format("%02d:%02d", minutes, seconds)
+                    contador.text = timeString
 
                 }
 
