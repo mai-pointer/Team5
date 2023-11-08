@@ -12,10 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ServiceActivity"
         tools:targetApi="31">
+        <activity
+            android:name=".Prueba"
+            android:exported="false" />
+
         <service
             android:name=".countdownService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity
             android:name=".MainActivity"

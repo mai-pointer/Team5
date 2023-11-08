@@ -48,6 +48,10 @@ class MainActivity : AppCompatActivity() {
             platbtn.isEnabled = true
         }
 
+        findViewById<Button>(R.id.cambiar_1).setOnClickListener {
+            val intent = Intent(this, Prueba::class.java)
+            startActivity(intent)
+        }
     }
 
     //BROADCAST EVENTS
