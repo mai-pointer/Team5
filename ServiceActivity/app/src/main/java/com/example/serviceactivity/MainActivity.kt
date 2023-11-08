@@ -4,13 +4,18 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CountdownListener {
+    private lateinit var contador : TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        contador = findViewById<TextView>(R.id.contador)
 
         //Boton de inicio
         findViewById<Button>(R.id.play).setOnClickListener{
@@ -22,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
             // Iniciar el servicio
             startService(serviceIntent)
+            contador.visibility = View.VISIBLE
         }
         findViewById<Button>(R.id.pause).setOnClickListener {
             val serviceIntent = Intent(this, countdownService::class.java)
@@ -35,7 +41,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun Finalizar(){
-
+    override fun onTimeTick(timeRemaining: Long) {
+        val minutes = (timeRemaining / 60).toInt()
+        val seconds = (timeRemaining % 60).toInt()
+        val timeString = String.format("%02d:%02d", minutes, seconds)
+        contador.text = timeString
     }
+
+
 }

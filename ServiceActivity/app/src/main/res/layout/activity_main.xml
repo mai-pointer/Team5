@@ -36,7 +36,6 @@
         android:id="@+id/contador"
         android:layout_width="211dp"
         android:layout_height="0dp"
-        android:layout_marginTop="304dp"
         android:layout_marginBottom="374dp"
         android:text="00:00"
         android:textAlignment="center"
@@ -45,8 +44,7 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/boton" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/play"
@@ -80,15 +78,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/boton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="99dp"
-        android:layout_marginBottom="157dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/contador"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
