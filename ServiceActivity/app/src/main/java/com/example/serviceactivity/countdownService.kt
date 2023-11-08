@@ -81,9 +81,17 @@ class countdownService : Service() {
         job?.cancel()
         mediaPlayer?.release()
 
-        val editor = sharedPreferences.edit()
-        editor.putLong("secondsRemaining", secondsRemaining)
-        editor.apply()
+        if(secondsRemaining <= 0){
+            val editor = sharedPreferences.edit()
+            editor.remove("secondsRemaining")
+            editor.apply()
+        } else{
+            val editor = sharedPreferences.edit()
+            editor.putLong("secondsRemaining", secondsRemaining)
+            editor.apply()
+
+        }
+
 
         super.onDestroy()
     }
