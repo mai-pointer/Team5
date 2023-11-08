@@ -32,6 +32,8 @@ class countdownService : Service() {
 
         if (action == ACTION_PAUSE) {
             pauseCountdown()
+        }else if (action == ACTION_STOP) {
+            stopCountdown()
         } else {
             // Lógica para iniciar el contador aquí
             val timeInMillis = intent?.getLongExtra(TIME_EXTRA, 0) ?: 0
@@ -54,6 +56,10 @@ class countdownService : Service() {
                         delay(1000)
                     }
                 }
+                val intent = Intent()
+                intent.action = MainActivity.ACTION_FIN
+                sendBroadcast(intent)
+
                 Log.d("CountdownService", "Countdown finished")
                 playSound()
                 stopSelf()
@@ -83,7 +89,11 @@ class countdownService : Service() {
         onDestroy()
     }
 
-
+    fun stopCountdown() {
+        secondsRemaining = 0
+        // Detén el servicio
+        stopSelf()
+    }
 
     override fun onDestroy() {
         job?.cancel()
@@ -107,6 +117,7 @@ class countdownService : Service() {
     companion object {
         const val TIME_EXTRA = "time_extra"
         const val ACTION_PAUSE = "com.example.serviceactivity.PAUSE"
+        const val ACTION_STOP = "com.example.serviceactivity.STOP"
     }
 
 }
