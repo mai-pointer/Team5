@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.squareup.picasso.Picasso
+import androidx.fragment.app.FragmentManager
 import com.example.didaktikapp.R
 
 class PlaceDetailsFragment : Fragment() {
@@ -21,6 +22,7 @@ class PlaceDetailsFragment : Fragment() {
         val textViewPlaceName: TextView = rootView.findViewById(R.id.textViewPlaceName)
         val textViewInfo: TextView = rootView.findViewById(R.id.textViewInfo)
         val imageViewPlace: ImageView = rootView.findViewById(R.id.imageViewPlace)
+        val btnBack: ImageView = rootView.findViewById(R.id.btnBack)
 
         // Recibe información del lugar desde el fragmento, por ejemplo, usando argumentos
         val args = arguments
@@ -33,7 +35,6 @@ class PlaceDetailsFragment : Fragment() {
             textViewPlaceName.text = placeName
             textViewInfo.text = placeSnippet
 
-
             // Carga la imagen desde la carpeta drawable
             val imageResId = when (placeName) {
                 "Lezamako Udala" -> R.drawable.udala
@@ -42,6 +43,12 @@ class PlaceDetailsFragment : Fragment() {
                 else -> R.drawable.default_image
             }
             imageViewPlace.setImageResource(imageResId)
+
+            // Configura el botón de retroceso
+            btnBack.setOnClickListener {
+                // Utiliza remove para asegurarte de que el fragmento se elimine correctamente
+                parentFragmentManager.beginTransaction().remove(this).commit()
+            }
         }
 
         return rootView

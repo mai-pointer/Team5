@@ -44,12 +44,13 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="8dp"
                     android:contentDescription="Botón de retroceso"
-                    android:src="@drawable/baseline_keyboard_arrow_down_24" />
+                    android:src="@drawable/baseline_keyboard_arrow_down_24"
+                    android:onClick="onBackButtonClicked"/>
             </RelativeLayout>
 
         </androidx.appcompat.widget.Toolbar>
 
-  
+
         <TextView
             android:id="@+id/textViewInfo"
             android:layout_width="wrap_content"
