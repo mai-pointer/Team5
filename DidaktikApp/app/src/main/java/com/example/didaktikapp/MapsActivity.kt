@@ -2,6 +2,7 @@ package com.example.didaktikapp
 
 import android.os.Bundle
 import android.util.Log
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -94,6 +95,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
 
         val fragment = PlaceDetailsFragment()
         fragment.arguments = bundle
+
+        // Cargar la animación desde res/anim
+        val slideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up)
+
+        // Asignar la animación al fragmento
+        fragmentTransaction.setCustomAnimations(R.anim.slide_up, 0, 0, R.anim.slide_up)
 
         fragmentTransaction.replace(R.id.fragment_container, fragment)
         fragmentTransaction.addToBackStack(null)
