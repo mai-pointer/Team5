@@ -3,12 +3,14 @@
     <style name="DidaktikAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Personalizar el texto -->
         <item name="android:fontFamily">@font/noahgrotesque</item>
+        <item name="android:textColor">@color/roca</item>
         <!-- Personalizar el fondo -->
         <item name="android:windowBackground">@color/blancoPuro</item>
     </style>
 
     <style name="Theme.DidaktikApp" parent="Base.Theme.DidaktikApp" />
 
+    <!--Boton fondo verde-->
     <style name="GreenButtonStyle">
         <item name="android:background">@color/verdeClaro</item>
         <item name="android:textColor">@color/blancoPuro</item>
@@ -16,10 +18,25 @@
         <item name="android:fontFamily">@font/noahgrotesquebold</item>
     </style>
 
+    <!--Boton fondo gris-->
     <style name="GreyButtonStyle">
         <item name="android:background">@color/blancoOscuro</item>
         <item name="android:textColor">@color/marron</item>
         <item name="android:radius">2dp</item>
         <item name="android:fontFamily">@font/noahgrotesquebold</item>
+    </style>
+
+    <!--Boton tint verde-->
+    <style name="GreenIconStyle">
+        <item name="android:tint">@color/verdeOscuro</item>
+    </style>
+    <!--Boton tint gris-->
+    <style name="GreyIconStyle">
+        <item name="android:tint">@color/grisOscuro</item>
+    </style>
+
+    <!--Texto destacado-->
+    <style name="TextoDestacadoStyle">
+        <item name="android:textColor">@color/marron</item>
     </style>
 </resources>
