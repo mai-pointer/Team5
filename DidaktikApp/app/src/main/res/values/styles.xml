@@ -1,13 +1,11 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
     <style name="DidaktikAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Personalizar el texto -->
         <item name="android:fontFamily">@font/noahgrotesque</item>
         <!-- Personalizar el fondo -->
         <item name="android:windowBackground">@color/blancoPuro</item>
     </style>
-
-    <style name="Theme.DidaktikApp" parent="Base.Theme.DidaktikApp" />
 
     <style name="GreenButtonStyle">
         <item name="android:background">@color/verdeClaro</item>
@@ -16,6 +14,7 @@
         <item name="android:fontFamily">@font/noahgrotesque</item>
     </style>
 
+    <!-- Estilo para el botón gris -->
     <style name="GreyButtonStyle">
         <item name="android:background">@color/blancoOscuro</item>
         <item name="android:textColor">@color/marron</item>

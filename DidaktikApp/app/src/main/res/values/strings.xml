@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">DidaktikApp</string>
+
+    <!-- Admin Login -->
+    <string name="adminloginTitle">Kaixo</string>
+    <string name="adminloginSubtitle">Sartu pasahitza</string>
+    <string name="adminloginPassword">Pasahitza</string>
+    <string name="adminloginValidate">Baieztatu</string>
+    <string name="adminloginBack">Atzera</string>
 </resources>

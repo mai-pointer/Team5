@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/noahgrotesqueregular" />
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="400"
+        android:font="@font/noahgrotesqueregularitalic" />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="900"
+        android:font="@font/noahgrotesqueblack" />
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="900"
+        android:font="@font/noahgrotesqueblackitalic" />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="700"
+        android:font="@font/noahgrotesquebold" />
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="700"
+        android:font="@font/noahgrotesquebolditalic" />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="1000"
+        android:font="@font/noahgrotesqueheavy" />
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="1000"
+        android:font="@font/noahgrotesqueheavyitalic" />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="300"
+        android:font="@font/noahgrotesquelight" />
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="300"
+        android:font="@font/noahgrotesquelightitalic" />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="500"
+        android:font="@font/noahgrotesquemedium" />
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="500"
+        android:font="@font/noahgrotesquemediumitalic" />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="200"
+        android:font="@font/noahgrotesquethin" />
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="200"
+        android:font="@font/noahgrotesquethinitalic" />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="100"
+        android:font="@font/noahgrotesqueultralight" />
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="100"
+        android:font="@font/noahgrotesqueultralight" />
+</font-family>
