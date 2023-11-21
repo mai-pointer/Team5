@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="DidaktikAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="DidaktikAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Personalizar el texto -->
         <item name="android:fontFamily">@font/noahgrotesque</item>
         <item name="android:textColor">@color/roca</item>
