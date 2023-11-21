@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -36,23 +35,26 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         mMap = googleMap
 
         // Add markers and move the camera
-        val lezamaUdala = LatLng(43.27424563392292, -2.832868930631767)
-        val santaMaria = LatLng(43.27386287112582, -2.8349717824168814)
-        val frontoia = LatLng(43.273644148421766, -2.833196160210576)
+        val coopAgricola = LatLng(43.27556360817825, -2.827742396615327)
+        val agricolaString = resources.getString(R.string.agricolaText)
+        val txakoli = LatLng(43.27758426733325, -2.8308136897866447)
+        val txakoliString = resources.getString(R.string.txakoli)
+        val udala = LatLng(43.27421110063913, -2.83285560353813)
+        val udalaText = resources.getString(R.string.udala)
         val zoomLevel = 15.0f
         mMap.addMarker(
-            MarkerOptions().position(lezamaUdala).title("Lezamako Udala")
-                .snippet("Texto personalizado para Lezamako Udala")
+            MarkerOptions().position(coopAgricola).title("Coop. Agrícola")
+                .snippet(agricolaString)
         )
         mMap.addMarker(
-            MarkerOptions().position(santaMaria).title("Santa Maria")
-                .snippet("Texto personalizado para Santa Maria")
+            MarkerOptions().position(txakoli).title("Txakoli")
+                .snippet(txakoliString)
         )
         mMap.addMarker(
-            MarkerOptions().position(frontoia).title("Frontoia")
-                .snippet("Texto personalizado para Frontoia")
+            MarkerOptions().position(udala).title("Udala")
+                .snippet(udalaText)
         )
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lezamaUdala, zoomLevel))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coopAgricola, zoomLevel))
 
         mMap.setOnMapClickListener(this)
         mMap.setOnMarkerClickListener(this)
@@ -84,15 +86,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         bundle.putString("placeName", marker.title)
         bundle.putString("placeSnippet", marker.snippet)
 
-        // Asigna una URL de imagen específica para cada marcador
-        val imageUrl: String = when (marker.title) {
-            "Lezamako Udala" -> "https://upload.wikimedia.org/wikipedia/commons/b/b3/Lezama_-_Ayuntamiento.jpg"
-            "Santa Maria" -> "https://lh5.googleusercontent.com/p/AF1QipP1Yfn3TJMz8nDxUEs4KpmttBt_auqHEiZJlKH_=w426-h240-k-no"
-            "Frontoia" -> "https://lh5.googleusercontent.com/p/AF1QipNkRuDv1lV45xQHb4itWcv99mNX-s71rMJZaukw=w408-h306-k-no"
-            else -> "https://ejemplo.com/imagen_predeterminada.jpg"
-            // Puedes usar una imagen predeterminada si no hay coincidencia
-        }
-
         val fragment = PlaceDetailsFragment()
         fragment.arguments = bundle
 
@@ -108,6 +101,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
     }
 
     private fun isPredefinedMarker(placeName: String?): Boolean {
-        return placeName == "Lezamako Udala" || placeName == "Santa Maria" || placeName == "Frontoia"
+        return placeName == "Coop. Agrícola" || placeName == "Txakoli" || placeName == "Udala"
     }
 }

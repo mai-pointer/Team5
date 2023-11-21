@@ -3,4 +3,8 @@
     <string name="title_activity_maps">MapsActivity</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="agricolaText">Lezamako Nekazaritza eta Abeltzaintzako Kooperatibaren 1925. urtean sortu zen  , Lezamako hemezortzi auzokidez osatuta, egun nekazaritza sektorea bere jardueren defentsa hobea antolatzen hasi zen, Lezamako bizilagunen artean, landa-gune ingurunea izanda garrantzi handia hartu zuen.</string>
+    <string name="txakoli">9 hektareako azalera betez, Bilbo Handia eskualdean kokatuta daude, Txorierriko bailararen bihotzean, Lezaman hain zuzen ere. Klima mesotermikoa da, tenperatura epelduna eta euritsua. Lurzoru franko-buztintsuak , bertoko mahatsondo moten “Hondarrabi Zuri” eta “Hondarrabi Zuri Zerratia” eta gutxiengoa diren mahatsondoen “Petit Manseng” eta “Riesling” oinarri dira eta hegoalderantz begira dauden magaletan daude landatuta gehienak.</string>
+    <string name="udala">Zatoz Lezamara Txorierriko haranaz gozatzeko! Bisitatu Txorierriko Mankomunitatearen web orria aukera guztiak ezagutzeko: ibilbideak, ostatuak, jatetxeak, garraioak... www.txori​e​rri.eus</string>
+    <string name="t3">Hello blank fragment</string>
 </resources>

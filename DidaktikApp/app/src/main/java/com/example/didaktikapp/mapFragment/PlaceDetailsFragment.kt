@@ -37,9 +37,9 @@ class PlaceDetailsFragment : Fragment() {
 
             // Carga la imagen desde la carpeta drawable
             val imageResId = when (placeName) {
-                "Lezamako Udala" -> R.drawable.udala
-                "Santa Maria" -> R.drawable.santamaria
-                "Frontoia" -> R.drawable.frontoia
+                "Coop. Agrícola" -> R.drawable.agricola
+                "Txakoli" -> R.drawable.txakoli
+                "Udala" -> R.drawable.udala
                 else -> R.drawable.default_image
             }
             imageViewPlace.setImageResource(imageResId)
