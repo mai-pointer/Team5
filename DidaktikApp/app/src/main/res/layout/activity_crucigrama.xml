@@ -6,4 +6,88 @@
     android:layout_height="match_parent"
     tools:context=".Crucigrama">
 
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/TextoDestacadoStyle"
+        android:layout_width="103dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="23dp"
+        android:text="@string/terminar"
+        android:textAlignment="textEnd"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.905"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView5"
+        style="@style/TextoDestacadoStyle"
+        android:layout_width="103dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="27dp"
+        android:textAlignment="textEnd"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.905"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="00:00" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="341dp"
+        android:layout_height="132dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="88dp"
+        android:background="@drawable/tarjeta"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="220dp"
+            android:layout_height="77dp"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.509"
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            style="@style/GreyIconStyle"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="2dp"
+            android:background="#00FFFFFF"
+            android:contentDescription="ImageButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.505"
+            app:srcCompat="@drawable/polygon_3" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            style="@style/GreenIconStyle"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="#00FFFFFF"
+            android:contentDescription="ImageButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/polygon_3__1_" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
