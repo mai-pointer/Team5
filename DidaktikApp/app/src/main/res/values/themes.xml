@@ -13,13 +13,13 @@
         <item name="android:background">@color/verdeClaro</item>
         <item name="android:textColor">@color/blancoPuro</item>
         <item name="android:radius">2dp</item>
-        <item name="android:fontFamily">@font/noahgrotesque</item>
+        <item name="android:fontFamily">@font/noahgrotesquebold</item>
     </style>
 
     <style name="GreyButtonStyle">
         <item name="android:background">@color/blancoOscuro</item>
         <item name="android:textColor">@color/marron</item>
         <item name="android:radius">2dp</item>
-        <item name="android:fontFamily">@font/noahgrotesque</item>
+        <item name="android:fontFamily">@font/noahgrotesquebold</item>
     </style>
 </resources>
