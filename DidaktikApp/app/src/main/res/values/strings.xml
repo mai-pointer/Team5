@@ -7,4 +7,7 @@
     <string name="adminloginPassword">Pasahitza</string>
     <string name="adminloginValidate">Baieztatu</string>
     <string name="adminloginBack">Atzera</string>
+    <!--  INFO  -->
+    <string name="terminar">TERMINAR</string>
+
 </resources>
