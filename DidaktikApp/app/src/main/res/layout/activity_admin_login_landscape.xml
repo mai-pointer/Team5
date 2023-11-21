@@ -9,8 +9,9 @@
 
     <RelativeLayout
         android:id="@+id/layout1"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/layout2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -31,8 +32,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textTitle"
-            android:layout_marginTop="50dp"
             android:layout_alignParentStart="true"
+            android:layout_marginTop="50dp"
             android:fontFamily="@font/noahgrotesque"
             android:text="@string/adminloginSubtitle"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -44,9 +45,9 @@
         android:id="@+id/layout2"
         android:layout_width="275dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="170dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout1">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/layout1"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textPassword"
@@ -81,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/editTextPassword"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="65dp"
             android:orientation="horizontal">
 
             <Button
