@@ -7,6 +7,18 @@
     tools:context=".AdminLoginActivity">
 
     <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noahgrotesque"
+        android:text="@string/adminloginSubtitle"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/naranja"
+        tools:layout_editor_absoluteX="82dp"
+        tools:layout_editor_absoluteY="158dp"
+        tools:text="@string/adminloginSubtitle" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noahgrotesqueblack"
@@ -15,23 +27,11 @@
         android:textColor="@color/marron"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.31"
+        app:layout_constraintHorizontal_bias="0.246"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.109"
+        app:layout_constraintVertical_bias="0.135"
         tools:text="@string/adminloginTitle" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/noahgrotesque"
-        android:text="@string/adminloginSubtitle"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@color/naranja"
-        tools:layout_editor_absoluteX="103dp"
-        tools:layout_editor_absoluteY="120dp"
-        tools:text="@string/adminloginSubtitle" />
 
     <EditText
         android:id="@+id/editTextTextPassword"
@@ -43,9 +43,9 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/marron"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="316dp" />
+        tools:layout_editor_absoluteY="378dp" />
 
     <TextView
         android:id="@+id/textView2"
@@ -55,8 +55,17 @@
         android:text="@string/adminloginPassword"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/marron"
-        tools:layout_editor_absoluteX="82dp"
-        tools:layout_editor_absoluteY="274dp" />
+        tools:layout_editor_absoluteX="81dp"
+        tools:layout_editor_absoluteY="342dp" />
+
+    <Button
+        android:id="@+id/button2"
+        style="@style/GreyButtonStyle"
+        android:layout_width="102dp"
+        android:layout_height="42dp"
+        android:text="Button"
+        tools:layout_editor_absoluteX="227dp"
+        tools:layout_editor_absoluteY="532dp" />
 
     <Button
         android:id="@+id/button"
@@ -65,7 +74,7 @@
         android:layout_height="42dp"
         android:fontFamily="@font/noahgrotesquebold"
         android:text="Button"
-        tools:layout_editor_absoluteX="82dp"
-        tools:layout_editor_absoluteY="511dp" />
+        tools:layout_editor_absoluteX="81dp"
+        tools:layout_editor_absoluteY="532dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
