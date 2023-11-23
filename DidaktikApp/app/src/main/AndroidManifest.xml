@@ -23,6 +23,12 @@
         </activity>
         <activity
             android:name=".AdminLoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Info"
+            android:exported="false" />
+        <activity
+            android:name=".Crucigrama"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
