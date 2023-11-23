@@ -4,7 +4,7 @@
         <!-- Personalizar el texto -->
         <item name="android:fontFamily">@font/noahgrotesque</item>
         <!-- Personalizar el fondo -->
-        <item name="android:windowBackground">@color/blancoPuro</item>
+        <item name="android:windowBackground">@color/blancoOscuro</item>
     </style>
 
     <style name="Theme.DidaktikApp" parent="Base.Theme.DidaktikApp" />
@@ -22,4 +22,21 @@
         <item name="android:radius">2dp</item>
         <item name="android:fontFamily">@font/noahgrotesquebold</item>
     </style>
+
+    <style name="backgroundBlancoPuro">
+        <item name="android:background">@drawable/background_blanco_puro</item>
+    </style>
+
+    <style name="backgroundGrisClaro">
+        <item name="android:background">@drawable/background_gris_claro</item>
+    </style>
+
+    <style name="transparentButton" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/roca</item>
+        <item name="android:textSize">34sp</item>
+        <item name="android:fontFamily">@font/noahgrotesquebold</item>
+        <item name="android:background">@drawable/main_menu_button</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
 </resources>
