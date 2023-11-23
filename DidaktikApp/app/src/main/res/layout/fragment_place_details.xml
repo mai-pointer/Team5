@@ -1,6 +1,7 @@
 <!-- res/layout/fragment_place_details.xml -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#85ADF3"
@@ -44,8 +45,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="8dp"
                     android:contentDescription="Botón de retroceso"
+                    android:onClick="onBackButtonClicked"
                     android:src="@drawable/baseline_keyboard_arrow_down_24"
-                    android:onClick="onBackButtonClicked"/>
+                    tools:ignore="TouchTargetSizeCheck" />
             </RelativeLayout>
 
         </androidx.appcompat.widget.Toolbar>
