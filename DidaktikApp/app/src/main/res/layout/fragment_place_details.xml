@@ -32,7 +32,7 @@
                     android:layout_marginStart="48dp"
                     android:layout_marginEnd="48dp"
                     android:layout_marginBottom="8dp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/blancoPuro"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
