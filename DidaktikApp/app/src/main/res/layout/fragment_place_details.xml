@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#85ADF3"
+    android:background="@color/blancoPuro"
     android:padding="16dp">
 
     <LinearLayout
@@ -27,12 +27,12 @@
                     android:id="@+id/textViewPlaceName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+                    android:layout_centerInParent="true"
                     android:layout_marginStart="48dp"
                     android:layout_marginEnd="48dp"
                     android:layout_marginBottom="8dp"
-                    android:textColor="@color/blancoPuro"
+                    android:fontFamily="@font/noahgrotesqueblack"
+                    android:textColor="@color/verdeOscuro"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -58,7 +58,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:textSize="16sp" />
+            android:fontFamily="@font/noahgrotesque"
+            android:textColor="@color/marron"
+            android:textSize="16sp"
+            android:padding="5dp"/>
 
         <ImageView
             android:id="@+id/imageViewPlace"
@@ -68,8 +71,6 @@
             android:adjustViewBounds="true"
             android:scaleType="fitCenter" />
 
-
-        <!-- Puedes agregar más vistas según sea necesario -->
 
     </LinearLayout>
 </ScrollView>
