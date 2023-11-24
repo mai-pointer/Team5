@@ -26,6 +26,12 @@
         <item name="android:fontFamily">@font/noahgrotesquebold</item>
     </style>
 
+    <!--Boton fondo gris-->
+    <style name="WhiteCard">
+        <item name="android:background">@color/blancoPuro</item>
+        <item name="android:radius">2dp</item>
+    </style>
+
     <!--Boton tint verde-->
     <style name="GreenIconStyle">
         <item name="android:tint">@color/verdeOscuro</item>
