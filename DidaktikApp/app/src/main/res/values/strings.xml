@@ -16,5 +16,7 @@
     <string name="adminloginBack">Atzera</string>
     <!--  INFO  -->
     <string name="terminar">TERMINAR</string>
+    <!--  AJUSTES  -->
+    <string name="profesor">Modo profesores</string>
 
 </resources>
