@@ -47,7 +47,8 @@
                 android:onClick="onHomeButtonClicked"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:src="@drawable/baseline_home_24" />
+                android:src="@drawable/baseline_home_24"
+                tools:ignore="TouchTargetSizeCheck" />
 
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>

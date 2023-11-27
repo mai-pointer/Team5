@@ -15,15 +15,8 @@
         android:theme="@style/DidaktikAppTheme"
         tools:targetApi="31">
         <activity
-            android:name=".puzzleActivity"
-            android:exported="false"
-            android:label="@string/title_activity_puzzle"
-            android:theme="@style/DidaktikAppTheme" />
-        <activity
             android:name=".PuzzleActivity"
-            android:exported="false"
-            android:label="@string/title_activity_puzzle"
-            android:theme="@style/DidaktikAppTheme" />
+            android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
