@@ -6,9 +6,10 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 
 class WordSearchActivity: AppCompatActivity() {
-    private lateinit var TableLayout: TableLayout
+    private lateinit var tableLayout: TableLayout
     private lateinit var myWordSearch: Array<Array<Char>>
 
     val size = 8
@@ -17,8 +18,9 @@ class WordSearchActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_word_search)
 
-        TableLayout = findViewById(R.id.wordSearch)
+        tableLayout = findViewById(R.id.wordSearch)
 
+        CreateGrid(tableLayout)
         myWordSearch = Array(size) { Array(size) { ' ' } }
 
     }
@@ -37,13 +39,24 @@ class WordSearchActivity: AppCompatActivity() {
                     1.0f
                 )
                 textView.gravity = Gravity.CENTER
-
+                textView.text="A"
+                textView.setBackgroundColor(resources.getColor(R.color.blancoOscuro, null))
                 val uniqueId = "R:$i C:$j"
                 textView.id = uniqueId.hashCode()
+
+                textView.setOnClickListener{
+                    SelectChar(textView)
+                }
 
                 tableRow.addView(textView)
             }
             tableLayout.addView(tableRow)
+        }
+    }
+
+    fun SelectChar(textView: TextView){
+        if (textView.backgroundTintList?.defaultColor == ContextCompat.getColor(this, R.color.blancoOscuro)) {
+            textView.setBackgroundColor(ContextCompat.getColor(this, R.color.verdeClaro))
         }
     }
 
