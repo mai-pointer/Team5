@@ -10,13 +10,16 @@
 
     <!-- General -->
     <string name="homeButton">Irten</string>
+    <string name="btnValidate">Baieztatu</string>
+    <string name="btnBack">Atzera</string>
+    <string name="btnContinue">Jarraitu</string>
+    <string name="btnRepeat">Errepikatu</string>
 
     <!-- Admin Login -->
     <string name="adminloginTitle">Kaixo</string>
     <string name="adminloginSubtitle">Sartu pasahitza</string>
     <string name="adminloginPassword">Pasahitza</string>
-    <string name="adminloginValidate">Baieztatu</string>
-    <string name="adminloginBack">Atzera</string>
+
     <!--  INFO  -->
     <string name="terminar">TERMINAR</string>
 
@@ -24,4 +27,7 @@
     <!-- Multiple choice -->
     <string name="multipleChoiceExplain">Aukeratu erantzun zuzena</string>
     <string name="multipleChoiceAnswer">Erantzun</string>
+
+    <!-- Crucigrama -->
+    <string name="wordSearchExplain">Aurkitu hurrengo hitzak</string>
 </resources>
