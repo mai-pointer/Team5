@@ -50,6 +50,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Info"
+            android:exported="false" />
+        <activity
+            android:name=".Crucigrama"
+            android:exported="false" />
     </application>
 
 </manifest>
