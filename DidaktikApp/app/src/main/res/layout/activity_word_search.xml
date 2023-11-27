@@ -22,10 +22,10 @@
                 android:id="@+id/Enuntziatua"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:fontFamily="@font/noahgrotesqueblack"
+                android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="@string/multipleChoiceExplain"
+                android:text="@string/wordSearchExplain"
                 android:textColor="@color/marron"
                 android:textSize="24sp" />
 
@@ -44,14 +44,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/noahgrotesque"
-            android:text="Galdera placeholder"
             android:textColor="@color/verdeOscuro"
             android:textSize="24sp" />
 
-        <ListView
-            android:id="@+id/aukerak"
+        <TableLayout
+            android:id="@+id/wordSearch"
             android:layout_width="match_parent"
-            android:layout_height="497dp" />
+            android:layout_height="168dp">
+
+        </TableLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,7 +68,7 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/noahgrotesquebold"
-                android:text="@string/btnValidate" />
+                android:text="@string/btnContinue" />
 
             <Space
                 android:layout_width="0dp"
@@ -81,7 +82,7 @@
                 android:layout_height="48dp"
                 android:layout_gravity="end"
                 android:layout_weight="1"
-                android:text="@string/btnBack" />
+                android:text="@string/btnRepeat" />
         </LinearLayout>
     </LinearLayout>
 
