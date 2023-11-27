@@ -20,9 +20,20 @@
     <string name="adminloginSubtitle">Sartu pasahitza</string>
     <string name="adminloginPassword">Pasahitza</string>
 
+    <!-- Main Menu -->
+    <string name="mainMenuTitulo1">El misterio de</string>
+    <string name="mainMenuTitulo2">Lezama</string>
+    <string name="mainMenuAjustes">Ajustes</string>
+    <string name="mainMenuJugar">Jugar</string>
+    <string name="mainMenuModoLibre">Modo libre</string>
     <!--  INFO  -->
     <string name="terminar">TERMINAR</string>
-
+    <string name="title_activity_puzzle">PuzzleActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
 
     <!-- Multiple choice -->
     <string name="multipleChoiceExplain">Aukeratu erantzun zuzena</string>
