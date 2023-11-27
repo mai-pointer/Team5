@@ -17,6 +17,13 @@
     <string name="adminloginPassword">Pasahitza</string>
     <string name="adminloginValidate">Baieztatu</string>
     <string name="adminloginBack">Atzera</string>
+
+    <!-- Main Menu -->
+    <string name="mainMenuTitulo1">El misterio de</string>
+    <string name="mainMenuTitulo2">Lezama</string>
+    <string name="mainMenuAjustes">Ajustes</string>
+    <string name="mainMenuJugar">Jugar</string>
+    <string name="mainMenuModoLibre">Modo libre</string>
     <!--  INFO  -->
     <string name="terminar">TERMINAR</string>
     <string name="title_activity_puzzle">PuzzleActivity</string>
