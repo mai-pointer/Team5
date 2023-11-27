@@ -23,6 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/noahgrotesqueblack"
+                android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="@string/multipleChoiceExplain"
                 android:textColor="@color/marron"
@@ -32,7 +33,6 @@
                 android:id="@+id/Etxera"
                 android:layout_width="55dp"
                 android:layout_height="52dp"
-                android:layout_gravity="right"
                 android:background="@color/blancoOscuro"
                 android:contentDescription="@string/homeButton"
                 android:src="@drawable/baseline_home_24" />
@@ -50,7 +50,7 @@
         <ListView
             android:id="@+id/aukerak"
             android:layout_width="match_parent"
-            android:layout_height="497dp" />
+            android:layout_height="182dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
