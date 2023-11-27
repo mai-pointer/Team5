@@ -24,8 +24,7 @@
         <ImageView
             android:id="@+id/image"
             android:layout_width="193dp"
-            android:layout_height="wrap_content"
-            android:src="@tools:sample/avatars" />
+            android:layout_height="wrap_content"/>
 
         <RadioButton
             android:id="@+id/radioBtn"
