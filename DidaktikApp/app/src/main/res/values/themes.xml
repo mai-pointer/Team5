@@ -92,9 +92,10 @@
     <style name="Base.DidaktikAppTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-
-    <!--Circulo main menu-->
-    <style name="CirculoMainMenu">
-        <item name="android:background">@drawable/circulo_main_menu</item>
     </style>
+        <!--Circulo main menu-->
+        <style name="CirculoMainMenu">
+            <item name="android:background">@drawable/circulo_main_menu</item>
+        </style>
+
 </resources>
