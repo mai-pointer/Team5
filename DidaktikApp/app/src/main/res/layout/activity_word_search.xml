@@ -8,22 +8,29 @@
     android:padding="50dp">
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="50dp"
+        tools:layout_editor_absoluteY="50dp">
 
         <LinearLayout
+            android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/Enuntziatua"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/noahgrotesqueblack"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
+                android:fontFamily="@font/noahgrotesqueblack"
                 android:gravity="center_vertical"
                 android:text="@string/wordSearchExplain"
                 android:textColor="@color/marron"
@@ -31,35 +38,49 @@
 
             <ImageButton
                 android:id="@+id/Etxera"
-                android:layout_width="55dp"
+                android:layout_width="52dp"
                 android:layout_height="52dp"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:background="@color/blancoOscuro"
                 android:contentDescription="@string/homeButton"
                 android:src="@drawable/baseline_home_24" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/Hitzak"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/noahgrotesque"
-            android:textColor="@color/verdeOscuro"
-            android:textSize="24sp" />
+        <LinearLayout
+            android:layout_width="309dp"
+            android:layout_height="527dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header">
 
-        <TableLayout
-            android:id="@+id/wordSearch"
-            android:layout_width="match_parent"
-            android:layout_height="168dp">
+            <TextView
+                android:id="@+id/Hitzak"
+                android:layout_width="match_parent"
+                android:layout_height="81dp"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/noahgrotesque"
+                android:textColor="@color/verdeOscuro"
+                android:textSize="24sp" />
 
-        </TableLayout>
+            <TableLayout
+                android:id="@+id/wordSearch"
+                android:layout_width="match_parent"
+                android:layout_height="263dp"
+                android:layout_marginTop="30dp">
+
+            </TableLayout>
+        </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <Button
                 android:id="@+id/btnValidate"
@@ -84,6 +105,6 @@
                 android:layout_weight="1"
                 android:text="@string/btnRepeat" />
         </LinearLayout>
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
