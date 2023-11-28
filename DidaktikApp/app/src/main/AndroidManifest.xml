@@ -48,6 +48,9 @@
             android:name=".AdminLoginActivity"
             android:exported="false" />
         <activity
+            android:name=".Ajustes"
+            android:exported="false" />
+        <activity
             android:name=".Info"
             android:exported="false" />
         <activity

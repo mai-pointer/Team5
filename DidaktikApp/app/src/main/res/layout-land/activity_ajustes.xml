@@ -4,14 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="32dp">
+    android:padding="0dp">
+
+    <RelativeLayout
+        style="@style/backgroundBlancoPuro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp">
+
+        <Button
+            android:id="@+id/button3"
+            style="@style/transparentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/mainMenuAjustes"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/profesores"
         android:layout_width="286dp"
         android:layout_height="114dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="127dp"
         android:background="@drawable/tarjeta">
 
         <ImageView
@@ -41,12 +69,13 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="307dp"
-        android:layout_height="294dp"
+        android:id="@+id/contenedor"
+        android:layout_width="304dp"
+        android:layout_height="282dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="11dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="41dp"
         android:background="@drawable/tarjeta"
         android:padding="32dp">
 
@@ -124,13 +153,18 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/about"
         android:layout_width="293dp"
         android:layout_height="105dp"
         android:layout_below="@+id/profesores"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="-1dp"
-        android:layout_marginTop="11dp"
-        android:background="@drawable/tarjeta">
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="61dp"
+        android:layout_marginEnd="43dp"
+        android:layout_marginBottom="25dp"
+        android:layout_toStartOf="@+id/contenedor"
+        android:background="@drawable/tarjeta"
+        tools:ignore="UnknownId">
 
         <ImageView
             android:id="@+id/imageView8"
@@ -140,7 +174,6 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="19dp"
             android:layout_marginTop="15dp"
-            android:src="@tools:sample/avatars"
             app:srcCompat="@drawable/tx" />
 
         <ImageView
@@ -151,7 +184,6 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="17dp"
-            android:src="@tools:sample/avatars"
             app:srcCompat="@drawable/upv" />
     </RelativeLayout>
 
