@@ -1,0 +1,49 @@
+<!-- res/layout/fragment_title.xml -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <!-- Contenedor lineal para alinear elementos -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <!-- Título de la actividad -->
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Título de actividad"
+            android:textColor="@color/marron"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Espacio para separar el título y el ícono -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Botón de inicio con ícono de casa a la derecha -->
+        <ImageButton
+            android:id="@+id/btnHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Botón de inicio"
+            android:onClick="onHomeButtonClicked"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:src="@drawable/baseline_home_24"
+            tools:ignore="TouchTargetSizeCheck" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
