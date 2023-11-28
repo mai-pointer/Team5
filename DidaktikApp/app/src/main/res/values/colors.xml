@@ -2,9 +2,9 @@
 <resources>
     <color name="blancoPuro">#FFFFFFFF</color>
     <color name="blancoOscuro">#fcfcf0</color>
-    <color name="grisClaro">#eff0dd</color>
+    <color name="grisClaro">#eff0e1</color>
     <color name="grisOscuro">#d7d5b4</color>
-    <color name="roca">#a49e6c</color>
+    <color name="roca">#a59e6a</color>
     <color name="verdeOscuro">#317432</color>
     <color name="verdeClaro">#3f873f</color>
     <color name="naranja">#e56f25</color>

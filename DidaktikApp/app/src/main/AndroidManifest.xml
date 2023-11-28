@@ -15,7 +15,7 @@
         android:theme="@style/DidaktikAppTheme"
         tools:targetApi="31">
         <activity
-            android:name=".Ajustes"
+            android:name=".PuzzleActivity"
             android:exported="false" />
         <activity
             android:name=".PreguntasPistas"
@@ -36,7 +36,16 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".MainMenuActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AdminLoginActivity"
             android:exported="false" />
         <activity
             android:name=".Info"

@@ -8,15 +8,39 @@
     <string name="udala">Zatoz Lezamara Txorierriko haranaz gozatzeko! Bisitatu Txorierriko Mankomunitatearen web orria aukera guztiak ezagutzeko: ibilbideak, ostatuak, jatetxeak, garraioak... www.txori​e​rri.eus</string>
     <string name="t3">Hello blank fragment</string>
 
+    <!-- General -->
+    <string name="homeButton">Irten</string>
+    <string name="btnValidate">Baieztatu</string>
+    <string name="btnBack">Atzera</string>
+    <string name="btnContinue">Jarraitu</string>
+    <string name="btnRepeat">Errepikatu</string>
+
     <!-- Admin Login -->
     <string name="adminloginTitle">Kaixo</string>
     <string name="adminloginSubtitle">Sartu pasahitza</string>
     <string name="adminloginPassword">Pasahitza</string>
-    <string name="adminloginValidate">Baieztatu</string>
-    <string name="adminloginBack">Atzera</string>
+
+    <!-- Main Menu -->
+    <string name="mainMenuTitulo1">El misterio de</string>
+    <string name="mainMenuTitulo2">Lezama</string>
+    <string name="mainMenuAjustes">Ajustes</string>
+    <string name="mainMenuJugar">Jugar</string>
+    <string name="mainMenuModoLibre">Modo libre</string>
     <!--  INFO  -->
     <string name="terminar">TERMINAR</string>
+    <string name="title_activity_puzzle">PuzzleActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
     <!--  AJUSTES  -->
     <string name="profesor">Modo profesores</string>
 
+    <!-- Multiple choice -->
+    <string name="multipleChoiceExplain">Aukeratu erantzun zuzena</string>
+    <string name="multipleChoiceAnswer">Erantzun</string>
+
+    <!-- Crucigrama -->
+    <string name="wordSearchExplain">Aurkitu hurrengo hitzak</string>
 </resources>

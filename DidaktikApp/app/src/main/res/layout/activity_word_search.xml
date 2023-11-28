@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blancoOscuro"
+    android:padding="50dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/Enuntziatua"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/noahgrotesqueblack"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/wordSearchExplain"
+                android:textColor="@color/marron"
+                android:textSize="24sp" />
+
+            <ImageButton
+                android:id="@+id/Etxera"
+                android:layout_width="55dp"
+                android:layout_height="52dp"
+                android:layout_gravity="right"
+                android:background="@color/blancoOscuro"
+                android:contentDescription="@string/homeButton"
+                android:src="@drawable/baseline_home_24" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/Hitzak"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noahgrotesque"
+            android:textColor="@color/verdeOscuro"
+            android:textSize="24sp" />
+
+        <TableLayout
+            android:id="@+id/wordSearch"
+            android:layout_width="match_parent"
+            android:layout_height="168dp">
+
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <Button
+                android:id="@+id/btnValidate"
+                style="@style/GreenButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/noahgrotesquebold"
+                android:text="@string/btnContinue" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5" />
+
+            <Button
+                android:id="@+id/btnBack"
+                style="@style/GreyButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_gravity="end"
+                android:layout_weight="1"
+                android:text="@string/btnRepeat" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
