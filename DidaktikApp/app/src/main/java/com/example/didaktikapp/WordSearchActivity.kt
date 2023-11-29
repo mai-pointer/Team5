@@ -1,7 +1,6 @@
 package com.example.didaktikapp
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
@@ -25,7 +24,7 @@ class WordSearchActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_word_search)
 
-        tableLayout = findViewById(R.id.wordSearch)
+        tableLayout = findViewById(R.id.Hitzak)
         val layoutParams = tableLayout.layoutParams
         layoutParams.height = layoutParams.width
         tableLayout.layoutParams = layoutParams
