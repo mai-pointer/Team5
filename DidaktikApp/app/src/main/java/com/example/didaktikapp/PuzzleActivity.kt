@@ -18,7 +18,7 @@ class PuzzleActivity : AppCompatActivity() {
 
         // Reemplaza el contenedor con el TitleFragment
         if (savedInstanceState == null) {
-            val titleFragment = TitleFragment.newInstance("Ordenar Imágenes")
+            val titleFragment = TitleFragment.newInstance("Puzzle")
             supportFragmentManager.beginTransaction()
                 .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
                 .commit()

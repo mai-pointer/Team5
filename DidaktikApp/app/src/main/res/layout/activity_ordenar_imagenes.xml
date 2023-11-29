@@ -51,12 +51,29 @@
             android:textSize="14sp" />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/hueco3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/tarjeta"
+        android:tag="hueco3">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Hueco 3"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
     <!-- Imágenes que se pueden arrastrar -->
 
     <ImageView
         android:id="@+id/imagen1"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:layout_below="@id/hueco1"
         android:layout_marginStart="50dp"
         android:layout_marginTop="298dp"
@@ -66,14 +83,25 @@
 
     <ImageView
         android:id="@+id/imagen2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:layout_below="@id/hueco2"
         android:layout_marginStart="50dp"
         android:layout_marginTop="274dp"
         android:contentDescription="Imagen arrastrable"
         android:src="@drawable/udala"
         android:tag="hueco2" />
+
+    <ImageView
+        android:id="@+id/imagen3"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_below="@id/hueco3"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="274dp"
+        android:contentDescription="Imagen arrastrable"
+        android:src="@drawable/txakoli"
+        android:tag="hueco3" />
 
     <!-- Agrega más huecos e imágenes según sea necesario -->
 
