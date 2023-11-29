@@ -38,6 +38,7 @@
             android:name=".AdminLoginActivity"
             android:exported="false" />
         <activity
+            android:name=".Ajustes"
             android:name=".OrdenarImagenesActivity"
             android:exported="false" />
         <activity
