@@ -6,11 +6,13 @@ import android.os.Bundle
 import android.view.DragEvent
 import android.view.MotionEvent
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.didaktikapp.R
+import com.example.didaktikapp.navigation.NavigationUtil
 import com.example.didaktikapp.titleFragment.TitleFragment
 
 class OrdenarImagenesActivity : AppCompatActivity() {
@@ -25,24 +27,28 @@ class OrdenarImagenesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ordenar_imagenes)
 
-        // Obtén una referencia al TitleFragment
-        val titleFragment =
-            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as TitleFragment
+        // Obtén una referencia al contenedor de fragmentos
+        val fragmentContainer = findViewById<FrameLayout>(R.id.fragmentContainerView)
+
+        // Reemplaza el contenedor con el TitleFragment
+        if (savedInstanceState == null) {
+            val titleFragment = TitleFragment.newInstance("Ordenar Imágenes")
+            supportFragmentManager.beginTransaction()
+                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
+                .commit()
+        }
 
         // Configura el click listener para el botón en el fragmento
-        titleFragment.setOnHomeButtonClickListener(View.OnClickListener {
-            // Llama a la función onHomeButtonClicked del TitleFragment
-            titleFragment.onHomeButtonClicked()
+        val titleFragment = supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
+        titleFragment?.setOnHomeButtonClickListener(View.OnClickListener {
+            onHomeButtonClicked()
         })
 
-        // Configura el título del fragmento
-        titleFragment.setTitle("Ordenar Imágenes")
-
         imagen1 = findViewById(R.id.imagen1)
-        hueco1 = findViewById(R.id.hueco1) as RelativeLayout  // Cambiado a RelativeLayout
+        hueco1 = findViewById(R.id.hueco1) as RelativeLayout
 
         imagen2 = findViewById(R.id.imagen2)
-        hueco2 = findViewById(R.id.hueco2) as RelativeLayout  // Cambiado a RelativeLayout
+        hueco2 = findViewById(R.id.hueco2) as RelativeLayout
 
         // Configurar el escuchador de arrastre para las imágenes arrastrables
         setDragListener(imagen1, hueco1)
@@ -52,7 +58,7 @@ class OrdenarImagenesActivity : AppCompatActivity() {
     private fun setDragListener(
         imagen: ImageView,
         hueco: RelativeLayout
-    ) {  // Cambiado a RelativeLayout
+    ) {
         imagen.setOnTouchListener { view, motionEvent ->
             if (motionEvent.action == MotionEvent.ACTION_DOWN) {
                 val data = View.DragShadowBuilder(view)
@@ -68,10 +74,10 @@ class OrdenarImagenesActivity : AppCompatActivity() {
                 DragEvent.ACTION_DROP -> {
                     val draggedView = event.localState
                     if (draggedView is ImageView) {
-                        val dropTarget = v.tag as? String
+                        val dropTarget = v.tag?.toString()
 
                         if (!dropTarget.isNullOrEmpty() && draggedView.tag is String) {
-                            val draggedTag = draggedView.tag as String
+                            val draggedTag = draggedView.tag?.toString()
 
                             if (dropTarget == draggedTag) {
                                 showToast("Imagen colocada correctamente en el hueco.")
@@ -105,10 +111,9 @@ class OrdenarImagenesActivity : AppCompatActivity() {
         Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 
-    fun onHomeButtonClicked(view: View) {
+    private fun onHomeButtonClicked() {
         // Acciones a realizar cuando se hace clic en el botón Home
-        // Por ejemplo, transición a MainMenuActivity
-        val intent = Intent(this, MainMenuActivity::class.java)
-        startActivity(intent)
+        // Utiliza NavigationUtil para la navegación
+        NavigationUtil.navigateToMainMenu(this)
     }
 }

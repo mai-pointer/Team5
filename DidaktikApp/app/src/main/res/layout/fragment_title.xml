@@ -34,11 +34,11 @@
         <!-- Botón de inicio con ícono de casa a la derecha -->
         <ImageButton
             android:id="@+id/btnHome"
+            android:clickable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Botón de inicio"
-            android:onClick="onHomeButtonClicked"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:src="@drawable/baseline_home_24"

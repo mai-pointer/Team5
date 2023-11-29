@@ -3,12 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Contenedor principal que contiene el FragmentContainerView y otros elementos según sea necesario -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.example.didaktikapp.titleFragment.TitleFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        tools:layout="@layout/fragment_title" />
+
     <!-- Contenedor del mapa -->
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="676dp"
+        android:layout_below="@+id/fragmentContainerView"
+
         tools:context=".MapsActivity" />
 
     <!-- Contenedor del fragmento -->
@@ -17,6 +30,6 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="4dp" />
+        android:layout_marginBottom="23dp" />
 
 </RelativeLayout>

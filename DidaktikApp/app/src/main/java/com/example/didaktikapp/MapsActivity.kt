@@ -1,8 +1,11 @@
 package com.example.didaktikapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -13,6 +16,8 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.didaktikapp.databinding.ActivityMapsBinding
 import com.example.didaktikapp.mapFragment.PlaceDetailsFragment
+import com.example.didaktikapp.navigation.NavigationUtil
+import com.example.didaktikapp.titleFragment.TitleFragment
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapClickListener,
     GoogleMap.OnMarkerClickListener {
@@ -29,6 +34,23 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         val mapFragment =
             supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        // Obtén una referencia al contenedor de fragmentos
+        val fragmentContainer = findViewById<FrameLayout>(R.id.fragmentContainerView)
+
+        // Reemplaza el contenedor con el TitleFragment
+        if (savedInstanceState == null) {
+            val titleFragment = TitleFragment.newInstance("Ordenar Imágenes")
+            supportFragmentManager.beginTransaction()
+                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
+                .commit()
+        }
+
+        // Configura el click listener para el botón en el fragmento
+        val titleFragment = supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
+        titleFragment?.setOnHomeButtonClickListener(View.OnClickListener {
+            onHomeButtonClicked()
+        })
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -102,5 +124,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
 
     private fun isPredefinedMarker(placeName: String?): Boolean {
         return placeName == "Coop. Agrícola" || placeName == "Txakoli" || placeName == "Udala"
+    }
+
+    private fun onHomeButtonClicked() {
+        // Acciones a realizar cuando se hace clic en el botón Home
+        // Utiliza NavigationUtil para la navegación
+        NavigationUtil.navigateToMainMenu(this)
     }
 }
