@@ -18,7 +18,7 @@
             android:name=".PuzzleActivity"
             android:exported="false" />
         <activity
-            android:name=".PreguntasPistas"
+            android:name=".Info"
             android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -36,7 +36,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".PreguntasPistas"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,19 +48,14 @@
             android:name=".AdminLoginActivity"
             android:exported="false" />
         <activity
+            android:name=".Crucigrama"
+            android:exported="false" />
+        <activity
             android:name=".Ajustes"
             android:exported="false" />
         <activity
-            android:name=".Info"
-            android:exported="false" />
-        <activity
-            android:name=".Crucigrama"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name=".MainMenuActivity"
+            android:exported="false">
         </activity>
     </application>
 
