@@ -11,8 +11,10 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.didaktikapp.Crucigrama
+import com.example.didaktikapp.DiferenciasActivity
 import com.example.didaktikapp.MapsActivity
 import com.example.didaktikapp.MultipleChoiceActivity
+import com.example.didaktikapp.OrdenarImagenesActivity
 import com.example.didaktikapp.PuzzleActivity
 import com.example.didaktikapp.R
 import com.example.didaktikapp.WordSearchActivity
@@ -74,11 +76,11 @@ class PlaceDetailsFragment : Fragment() {
         return when (placeName) {
             "Idi probak" -> Intent(activity, MultipleChoiceActivity::class.java)
             "Odolostea" -> Intent(activity, WordSearchActivity::class.java)
-            //"Txakoli" -> Intent(activity, DiferenciasActivity::class.java)
-            //"Udala" -> Intent(activity, DiferenciasActivity::class.java)
+            "Txakoli" -> Intent(activity, DiferenciasActivity::class.java)
+            "Udala" -> Intent(activity, DiferenciasActivity::class.java)
             "Santa Maria" -> Intent(activity, PuzzleActivity::class.java)
             "San Mameseko Arkua" -> Intent(activity, Crucigrama::class.java)
-            //"Lezamako dorrea" -> Intent(activity, InsertWordsActivity::class.java)
+            "Lezamako dorrea" -> Intent(activity, OrdenarImagenesActivity::class.java)
 
             else -> Intent(activity, MapsActivity::class.java)
         }
