@@ -8,7 +8,7 @@ import android.text.InputType
 import android.util.Log
 import android.view.Gravity
 import android.widget.EditText
-import androidx.gridlayout.widget.GridLayout
+import android.widget.GridLayout
 
 class Crucigrama : AppCompatActivity() {
 
