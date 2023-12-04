@@ -29,6 +29,11 @@
     <string name="mainMenuAjustes">Ajustes</string>
     <string name="mainMenuJugar">Jugar</string>
     <string name="mainMenuModoLibre">Modo libre</string>
+
+    <!--  Diferencias  -->
+    <string name="diferenciasTitulo">Encuentra las 6 diferencias</string>
+    <string name="diferenciasRestantes">Diferencias encontradas:</string>
+
     <!--  INFO  -->
     <string name="terminar">TERMINAR</string>
     <string name="title_activity_puzzle">PuzzleActivity</string>
