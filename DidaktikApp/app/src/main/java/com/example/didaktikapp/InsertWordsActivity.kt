@@ -18,14 +18,14 @@ class InsertWordsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_insert_words)
 
-        tableLayout = findViewById<TableLayout>(R.id.tableLayout)
+        /*tableLayout = findViewById<TableLayout>(R.id.tableLayout)
 
         tableLayout.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 tableLayout.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 insertText(tableLayout)
             }
-        })
+        })*/
     }
 
     private fun insertText(tableLayout:TableLayout) {

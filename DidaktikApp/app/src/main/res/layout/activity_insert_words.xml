@@ -47,16 +47,146 @@
 
         </LinearLayout>
 
-        <TableLayout
-            android:id="@+id/tableLayout"
-            android:layout_width="309dp"
-            android:layout_height="524dp"
-            app:layout_constraintBottom_toTopOf="@id/bottom"
+        <LinearLayout
+            android:layout_width="313dp"
+            android:layout_height="440dp"
+            android:layout_marginTop="70dp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/header">
+            app:layout_constraintTop_toTopOf="parent">
 
-        </TableLayout>
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noahgrotesque"
+                android:paddingTop="10dp"
+                android:text="Dorre hau"
+                android:textAlignment="viewStart"
+                android:textColor="@color/marron"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noahgrotesque"
+                android:paddingTop="10dp"
+                android:text="gotorleku militarra / erregearen etxea / eliza"
+                android:textAlignment="viewStart"
+                android:textColor="@color/naranja"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noahgrotesque"
+                android:paddingTop="10dp"
+                android:text="izan zen eta"
+                android:textAlignment="viewStart"
+                android:textColor="@color/marron"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noahgrotesque"
+                android:paddingTop="10dp"
+                android:text="XVI. / XVIII. / XX."
+                android:textAlignment="viewStart"
+                android:textColor="@color/naranja"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noahgrotesque"
+                android:paddingTop="10dp"
+                android:text="mendean eraiki zen."
+                android:textAlignment="viewStart"
+                android:textColor="@color/marron"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noahgrotesque"
+                android:paddingTop="10dp"
+                android:textAlignment="viewStart"
+                android:textColor="@color/marron"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noahgrotesque"
+                android:paddingTop="10dp"
+                android:text="Adreiluz / Granitoz / Hareharriz"
+                android:textAlignment="viewStart"
+                android:textColor="@color/naranja"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noahgrotesque"
+                android:paddingTop="10dp"
+                android:text="eginda dago eta hiru solairu ditu."
+                android:textAlignment="viewStart"
+                android:textColor="@color/marron"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noahgrotesque"
+                android:paddingTop="10dp"
+                android:textAlignment="viewStart"
+                android:textColor="@color/marron"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noahgrotesque"
+                android:paddingTop="10dp"
+                android:text="Gaur egun, dorrea"
+                android:textAlignment="viewStart"
+                android:textColor="@color/marron"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noahgrotesque"
+                android:paddingTop="10dp"
+                android:text="udaletxe / etxebizitza / museo"
+                android:textAlignment="viewStart"
+                android:textColor="@color/naranja"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noahgrotesque"
+                android:paddingTop="10dp"
+                android:text="bihurtu da."
+                android:textAlignment="viewStart"
+                android:textColor="@color/marron"
+                android:textSize="16sp" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/bottom"

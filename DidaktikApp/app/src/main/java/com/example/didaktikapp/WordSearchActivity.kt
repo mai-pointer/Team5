@@ -14,9 +14,12 @@ import kotlinx.coroutines.*
 
 class WordSearchActivity: AppCompatActivity() {
     private lateinit var tableLayout: TableLayout
+    private lateinit var myWords: TextView
     private lateinit var myWordSearch: Array<Array<Char>>
 
     val size = 8
+
+    private var wordList: List<String> = listOf("Word01", "Word02", "Word03", "Word04", "Word05", "Word06")
 
     private var startCoordinate: Pair<Float, Float>? = null
 
@@ -24,10 +27,12 @@ class WordSearchActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_word_search)
 
-        tableLayout = findViewById(R.id.Hitzak)
-        val layoutParams = tableLayout.layoutParams
-        layoutParams.height = layoutParams.width
-        tableLayout.layoutParams = layoutParams
+
+        myWords = findViewById(R.id.Hitzak)
+        var wordListText: String = wordList.joinToString(" ")
+        myWords.text = wordListText
+
+        tableLayout = findViewById(R.id.wordSearch)
 
         CreateGrid(tableLayout)
         myWordSearch = Array(size) { Array(size) { ' ' } }
