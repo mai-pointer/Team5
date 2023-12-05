@@ -54,7 +54,14 @@ class WordSearchActivity: AppCompatActivity() {
         SetFirstWord()
         wordMap.keys.forEachIndexed { index, element ->
             if (index > 0) {
-                element
+                var wordToCompareIndex = index-1
+                while(HasCommonChar(element, wordMap.keys.elementAt(wordToCompareIndex)) == null && wordToCompareIndex >= 0){
+                    wordToCompareIndex =- 1
+                }
+                val commonCharPos = HasCommonChar(element, wordMap.keys.elementAt(wordToCompareIndex))
+                if (commonCharPos != null) {
+                    val firstCommonPos = commonCharPos.first
+                }
             }
         }
 
@@ -83,7 +90,7 @@ class WordSearchActivity: AppCompatActivity() {
         while (!canWriteWord(randomRow, randomCol, wordList[0], Direction.values()[randomDirection])) {
             randomDirection = (randomDirection + 1) % Direction.values().size
         }
-        writeWord(randomRow, randomCol, wordMap.keys.elementAt(0), Direction.values()[randomDirection])
+        writeWord(randomRow, randomCol, wordMap.keys.elementAt(0), Direction.values()[randomDirection], 0)
     }
     enum class Direction {
         HORIZONTAL,
@@ -109,44 +116,42 @@ class WordSearchActivity: AppCompatActivity() {
         return true
     }
 
-    fun writeWord(startRow: Int, startCol: Int, word: String, direction: Direction) {
+    fun writeWord(startRow: Int, startCol: Int, word: String, direction: Direction, startFromIndex: Int) {
         val coordinates = mutableListOf<Pair<Int, Int>>()
 
         for (i in word.indices) {
+            val charIndex = startFromIndex + i
             when (direction) {
                 Direction.HORIZONTAL -> {
-                    myWordSearch[startRow][startCol + i] = word[i]
+                    myWordSearch[startRow][startCol + i] = word[charIndex]
                     coordinates.add(Pair(startRow, startCol + i))
-
                 }
                 Direction.REVERSE_HORIZONTAL -> {
-                    myWordSearch[startRow][startCol - i] = word[i]
+                    myWordSearch[startRow][startCol - i] = word[charIndex]
                     coordinates.add(Pair(startRow, startCol - i))
-
                 }
                 Direction.VERTICAL_DOWN -> {
-                    myWordSearch[startRow + i][startCol] = word[i]
+                    myWordSearch[startRow + i][startCol] = word[charIndex]
                     coordinates.add(Pair(startRow + i, startCol))
-
                 }
                 Direction.VERTICAL_UP -> {
-                    myWordSearch[startRow - i][startCol] = word[i]
+                    myWordSearch[startRow - i][startCol] = word[charIndex]
                     coordinates.add(Pair(startRow - i, startCol))
                 }
                 Direction.DIAGONAL_UP_RIGHT -> {
-                    myWordSearch[startRow - i][startCol + i] = word[i]
+                    myWordSearch[startRow - i][startCol + i] = word[charIndex]
                     coordinates.add(Pair(startRow - i, startCol + i))
                 }
                 Direction.DIAGONAL_UP_LEFT -> {
-                    myWordSearch[startRow - i][startCol - i] = word[i]
+                    myWordSearch[startRow - i][startCol - i] = word[charIndex]
                     coordinates.add(Pair(startRow - i, startCol - i))
                 }
                 Direction.DIAGONAL_DOWN_RIGHT -> {
-                    myWordSearch[startRow + i][startCol + i] = word[i]
+                    myWordSearch[startRow + i][startCol + i] = word[charIndex]
                     coordinates.add(Pair(startRow + i, startCol + i))
                 }
                 Direction.DIAGONAL_DOWN_LEFT -> {
-                    myWordSearch[startRow + i][startCol - i] = word[i]
+                    myWordSearch[startRow + i][startCol - i] = word[charIndex]
                     coordinates.add(Pair(startRow + i, startCol - i))
                 }
             }
