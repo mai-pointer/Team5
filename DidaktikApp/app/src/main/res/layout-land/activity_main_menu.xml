@@ -111,7 +111,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/contDifs"
+            android:id="@+id/button"
             style="@style/transparentButtonPri"
             android:layout_width="146dp"
             android:layout_height="74dp"
