@@ -11,7 +11,7 @@ class MainMenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
 
-        val buttonJugar: Button = findViewById(R.id.button)
+        val buttonJugar: Button = findViewById(R.id.btnJugar)
 
         // Agrega un OnClickListener al botón "Jugar"
         buttonJugar.setOnClickListener(object : View.OnClickListener {
