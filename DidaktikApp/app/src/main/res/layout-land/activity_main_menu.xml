@@ -111,13 +111,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/contDifs"
             style="@style/transparentButtonPri"
             android:layout_width="146dp"
             android:layout_height="74dp"
             android:layout_marginTop="68dp"
             android:text="@string/mainMenuJugar"
-            android:textSize="40sp"
+            android:textSize="33sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
