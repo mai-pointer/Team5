@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp">
+
+    <RelativeLayout
+        style="@style/backgroundBlancoPuro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp">
+
+        <Button
+            android:id="@+id/button3"
+            style="@style/transparentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/mainMenuAjustes"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/profesores"
+        android:layout_width="286dp"
+        android:layout_height="114dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="127dp"
+        android:background="@drawable/tarjeta">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="83dp"
+            android:layout_height="82dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="13dp"
+            android:background="@drawable/tarjeta"
+            app:srcCompat="@drawable/oig" />
+
+        <TextView
+            android:id="@+id/textView6"
+            style="@style/TextoDestacadoStyle"
+            android:layout_width="204dp"
+            android:layout_height="39dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="19dp"
+            android:layout_marginBottom="50dp"
+            android:layout_toEndOf="@+id/imageView2"
+            android:text="@string/profesor"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/contenedor"
+        android:layout_width="304dp"
+        android:layout_height="282dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="41dp"
+        android:background="@drawable/tarjeta"
+        android:padding="32dp">
+
+        <LinearLayout
+            android:id="@+id/idiomas"
+            android:layout_width="279dp"
+            android:layout_height="100dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#00FFFFFF"
+                android:scaleType="centerCrop"
+                android:src="@android:drawable/btn_star"
+                tools:ignore="SpeakableTextPresentCheck"
+                tools:src="@drawable/eu" />
+
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#00FFFFFF"
+                android:scaleType="centerCrop"
+                android:src="@android:drawable/btn_star"
+                android:tint="#00FFFFFF"
+                tools:ignore="UseAppTint,SpeakableTextPresentCheck"
+                tools:src="@drawable/es" />
+
+            <ImageButton
+                android:id="@+id/imageButton5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#00FFFFFF"
+                android:scaleType="centerCrop"
+                android:src="@android:drawable/btn_star"
+                tools:ignore="SpeakableTextPresentCheck"
+                tools:src="@drawable/en" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tema"
+            android:layout_width="281dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/idiomas"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:padding="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="101dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tarjeta"
+                android:backgroundTint="#FFFFFF">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Space
+                android:layout_width="30dp"
+                android:layout_height="89dp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/tarjeta"
+                android:backgroundTint="#222">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/about"
+        android:layout_width="293dp"
+        android:layout_height="105dp"
+        android:layout_below="@+id/profesores"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="61dp"
+        android:layout_marginEnd="43dp"
+        android:layout_marginBottom="25dp"
+        android:layout_toStartOf="@+id/contenedor"
+        android:background="@drawable/tarjeta"
+        tools:ignore="UnknownId">
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="183dp"
+            android:layout_height="76dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="15dp"
+            app:srcCompat="@drawable/tx" />
+
+        <ImageView
+            android:id="@+id/imageView12"
+            android:layout_width="59dp"
+            android:layout_height="79dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="17dp"
+            app:srcCompat="@drawable/upv" />
+    </RelativeLayout>
+
+</RelativeLayout>

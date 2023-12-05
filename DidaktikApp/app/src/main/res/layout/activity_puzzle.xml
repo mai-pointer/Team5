@@ -5,59 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Barra de navegación (Toolbar) -->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+
+    <!-- Contenedor principal que contiene el FragmentContainerView y otros elementos según sea necesario -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.example.didaktikapp.titleFragment.TitleFragment"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/blancoPuro">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        tools:layout="@layout/fragment_title" />
 
-        <!-- Contenedor lineal para alinear elementos -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="10dp">
-
-            <!-- Título de la actividad -->
-            <TextView
-                android:id="@+id/textViewTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Lezamako SantaMaria"
-                android:textColor="@color/marron"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:gravity="center"/>
-
-            <!-- Espacio para separar el título y el ícono -->
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <!-- Botón de inicio con ícono de casa a la derecha -->
-            <ImageButton
-                android:id="@+id/btnHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Botón de inicio"
-                android:onClick="onHomeButtonClicked"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:src="@drawable/baseline_home_24"
-                tools:ignore="TouchTargetSizeCheck" />
-
-        </LinearLayout>
-    </androidx.appcompat.widget.Toolbar>
 
     <!-- Contenido principal debajo de la barra de navegación -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar"
+        android:layout_height="670dp"
+        android:layout_below="@+id/fragmentContainerView"
+        android:layout_marginTop="8dp"
         android:padding="10dp">
 
         <!-- TextView centrado verticalmente en el centro -->
@@ -75,17 +41,6 @@
             android:textStyle="bold" />
 
         <!-- ImageView (botón) a la derecha -->
-        <ImageView
-            android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="8dp"
-            android:contentDescription="Botón de retroceso"
-            android:onClick="onBackButtonClicked"
-            android:src="@drawable/baseline_keyboard_arrow_down_24"
-            tools:ignore="TouchTargetSizeCheck" />
 
         <!-- Imagen a pantalla completa -->
         <ImageView
