@@ -111,7 +111,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnJugar"
             style="@style/transparentButtonPri"
             android:layout_width="146dp"
             android:layout_height="74dp"
