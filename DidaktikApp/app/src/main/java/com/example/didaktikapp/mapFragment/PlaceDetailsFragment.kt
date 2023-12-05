@@ -1,5 +1,6 @@
 package com.example.didaktikapp.mapFragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.example.didaktikapp.Crucigrama
+import com.example.didaktikapp.DiferenciasActivity
+import com.example.didaktikapp.MapsActivity
+import com.example.didaktikapp.MultipleChoiceActivity
+import com.example.didaktikapp.OrdenarImagenesActivity
+import com.example.didaktikapp.PuzzleActivity
 import com.example.didaktikapp.R
+import com.example.didaktikapp.WordSearchActivity
 
 class PlaceDetailsFragment : Fragment() {
 
@@ -37,9 +45,13 @@ class PlaceDetailsFragment : Fragment() {
 
             // Carga la imagen desde la carpeta drawable
             val imageResId = when (placeName) {
-                "Coop. Agrícola" -> R.drawable.agricola
+                "Idi probak" -> R.drawable.agricola
                 "Txakoli" -> R.drawable.txakoli
                 "Udala" -> R.drawable.udala
+                "Odolostea" -> R.drawable.harategia
+                "Santa Maria" -> R.drawable.santamaria
+                "San Mameseko Arkua" -> R.drawable.arkua
+                "Lezamako dorrea" -> R.drawable.dorrea
                 else -> R.drawable.default_image
             }
             imageViewPlace.setImageResource(imageResId)
@@ -49,8 +61,28 @@ class PlaceDetailsFragment : Fragment() {
                 // Utiliza remove para asegurarte de que el fragmento se elimine correctamente
                 parentFragmentManager.beginTransaction().remove(this).commit()
             }
+            // Agrega OnClickListener al TextView del lugar
+            textViewPlaceName.setOnClickListener {
+                // Lanza la actividad correspondiente al lugar
+                val intent = getPlaceIntent(placeName)
+                startActivity(intent)
+            }
         }
 
         return rootView
+    }
+    private fun getPlaceIntent(placeName: String?): Intent {
+        // Crea un Intent para la actividad correspondiente al lugar
+        return when (placeName) {
+            "Idi probak" -> Intent(activity, MultipleChoiceActivity::class.java)
+            "Odolostea" -> Intent(activity, WordSearchActivity::class.java)
+            "Txakoli" -> Intent(activity, DiferenciasActivity::class.java)
+            "Udala" -> Intent(activity, DiferenciasActivity::class.java)
+            "Santa Maria" -> Intent(activity, PuzzleActivity::class.java)
+            "San Mameseko Arkua" -> Intent(activity, Crucigrama::class.java)
+            "Lezamako dorrea" -> Intent(activity, OrdenarImagenesActivity::class.java)
+
+            else -> Intent(activity, MapsActivity::class.java)
+        }
     }
 }
