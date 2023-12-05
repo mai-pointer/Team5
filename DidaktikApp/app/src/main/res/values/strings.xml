@@ -49,6 +49,9 @@
     <string name="multipleChoiceExplain">Aukeratu erantzun zuzena</string>
     <string name="multipleChoiceAnswer">Erantzun</string>
 
+    <!-- Insert words -->
+    <string name="insertWordsExplain">Osatu textua</string>
+
     <!-- Crucigrama -->
     <string name="wordSearchExplain">Aurkitu hurrengo hitzak</string>
 </resources>

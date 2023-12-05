@@ -32,7 +32,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/noahgrotesqueblack"
                 android:gravity="center_vertical"
-                android:text="@string/wordSearchExplain"
+                android:text="@string/insertWordsExplain"
                 android:textColor="@color/marron"
                 android:textSize="24sp" />
 
@@ -44,34 +44,19 @@
                 android:background="@color/blancoOscuro"
                 android:contentDescription="@string/homeButton"
                 android:src="@drawable/baseline_home_24" />
+
         </LinearLayout>
 
-        <LinearLayout
+        <TableLayout
+            android:id="@+id/tableLayout"
             android:layout_width="309dp"
-            android:layout_height="527dp"
-            android:orientation="vertical"
+            android:layout_height="524dp"
             app:layout_constraintBottom_toTopOf="@id/bottom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/header">
 
-            <TextView
-                android:id="@+id/Hitzak"
-                android:layout_width="match_parent"
-                android:layout_height="81dp"
-                android:layout_marginTop="40dp"
-                android:fontFamily="@font/noahgrotesque"
-                android:textColor="@color/verdeOscuro"
-                android:textSize="24sp" />
-
-            <TableLayout
-                android:id="@+id/wordSearch"
-                android:layout_width="match_parent"
-                android:layout_height="263dp"
-                android:layout_marginTop="30dp">
-
-            </TableLayout>
-        </LinearLayout>
+        </TableLayout>
 
         <LinearLayout
             android:id="@+id/bottom"
