@@ -1,7 +1,8 @@
 package com.example.didaktikapp
 
+import android.graphics.Paint
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
@@ -17,21 +18,20 @@ import kotlin.random.Random
 
 class WordSearchActivity: AppCompatActivity() {
     private lateinit var tableLayout: TableLayout
+    private lateinit var word1: TextView
+    private lateinit var word2: TextView
+    private lateinit var word3: TextView
+    private lateinit var word4: TextView
+    private lateinit var word5: TextView
+    private lateinit var word6: TextView
     private lateinit var myWordSearch: Array<Array<Char>>
-    val size = 16
-    //private val wordList = listOf("ODOLA", "KIPULA")
-
-    val wordMap: Map<String, MutableList<Pair<Int, Int>>> = mapOf(
-        "ODOLA" to mutableListOf(),
-        "KIPULA" to mutableListOf(),
-        "PORRUA" to mutableListOf(),
-        "HESTEA" to mutableListOf(),
-        "KOIPEA" to mutableListOf(),
-        "ARROZA" to mutableListOf()
-
-    )
+    val size = 11
+    private val numberOfWords = 6
+    private val wordList = listOf( "ODOLA", "KIPULA", "PORRUA", "KOIPEA", "ARROZA", "PIPERHAUTSA", "GATZA", "ODOLOSTEA", "TXARRIA")
+    private var wordMap: MutableMap<String, MutableList<Pair<Int, Int>>> = mutableMapOf()
 
 
+    val correctCells = mutableListOf<Int>()
     private var startCoordinate: Pair<Float, Float>? = null
     private var newWord:String = ""
     private var selectedCells: MutableList<Int> = mutableListOf()
@@ -41,53 +41,71 @@ class WordSearchActivity: AppCompatActivity() {
         setContentView(R.layout.activity_word_search)
 
         tableLayout = findViewById(R.id.wordSearch)
-        val layoutParams = tableLayout.layoutParams
-        layoutParams.height = layoutParams.width
-        tableLayout.layoutParams = layoutParams
-
+        word1 = findViewById(R.id.word1)
+        word2 = findViewById(R.id.word2)
+        word3 = findViewById(R.id.word3)
+        word4 = findViewById(R.id.word4)
+        word5 = findViewById(R.id.word5)
+        word6 = findViewById(R.id.word6)
+        selectWords()
         myWordSearch = Array(size) { Array(size) { ' ' } }
-        CreateWordSearch()
-        CreateGrid(tableLayout)
+        createWordSearch()
+        createGrid(tableLayout)
 
 
     }
 
-    fun CreateWordSearch() {
-        SetIsolatedWord(wordMap.keys.elementAt(0))
+    private fun selectWords(){
+        val randomWords = wordList.shuffled().take(numberOfWords)
+        word1.text = randomWords[0]
+        word2.text = randomWords[1]
+        word3.text = randomWords[2]
+        word4.text = randomWords[3]
+        word5.text = randomWords[4]
+        word6.text = randomWords[5]
+        wordMap.putAll(randomWords.associateWith { mutableListOf<Pair<Int, Int>>() })
+    }
+
+    private fun createWordSearch() {
+        var wordWritten :Boolean
+        setIsolatedWord(wordMap.keys.elementAt(0))
         wordMap.keys.forEachIndexed { index, element ->
             if (index > 0) {
+                wordWritten = false
                 var wordToCompareIndex = index - 1
 
                 while (wordToCompareIndex >= 0) {
-                    val commonCharPos = HasCommonChar(element, wordMap.keys.elementAt(wordToCompareIndex))
+                    val commonCharPos = hasCommonChar(element, wordMap.keys.elementAt(wordToCompareIndex))
 
                     if (commonCharPos != null) {
                         val firstCommonPos = commonCharPos.first
                         val secondCommonPos = commonCharPos.second
                         val coordinates: Pair<Int, Int> = wordMap[wordMap.keys.elementAt(wordToCompareIndex)]!![secondCommonPos]
-                        var randomDirection = Random.nextInt(Direction.values().size)
+                        var randomDirection = Random.nextInt(enumValues<Direction>().size)
                         var attempts = 0
-                        val maxAttempts = Direction.values().size
+                        val maxAttempts = enumValues<Direction>().size
 
                         while (!canWriteWord(coordinates.first, coordinates.second, element, Direction.values()[randomDirection], firstCommonPos) && attempts < maxAttempts) {
-                            randomDirection = (randomDirection + 1) % Direction.values().size
+                            randomDirection = (randomDirection + 1) % enumValues<Direction>().size
                             attempts++
                         }
 
                         if (attempts < maxAttempts) {
                             writeWord(coordinates.first, coordinates.second, element, Direction.values()[randomDirection], firstCommonPos)
+                            wordWritten = true
                             break
                         }
                     }
                     wordToCompareIndex--
                 }
-
-                SetIsolatedWord(wordMap.keys.elementAt(index))
+                if (!wordWritten){
+                    setIsolatedWord(wordMap.keys.elementAt(index))
+                }
             }
         }
     }
 
-    fun HasCommonChar(myCurrentWord: String, previousWord:String):Pair<Int,Int>?{
+    private fun hasCommonChar(myCurrentWord: String, previousWord:String):Pair<Int,Int>?{
         for ((indexChar, char) in myCurrentWord.withIndex()) {
             for ((indexPreChar, preChar) in previousWord.withIndex()) {
                 if (char == preChar) {
@@ -98,16 +116,16 @@ class WordSearchActivity: AppCompatActivity() {
         return null
     }
 
-    fun Reset(){
+    private fun reset(){
         for (row in 0 until size) {
             for (col in 0 until size) {
                 myWordSearch[row][col] = ' '
             }
         }
-        CreateWordSearch()
+        createWordSearch()
     }
 
-    fun SetIsolatedWord(word: String) {
+    private fun setIsolatedWord(word: String) {
         val maxAttempts = Direction.values().size
         var attempts = 0
         val maxAttempts1 = size * size
@@ -119,7 +137,7 @@ class WordSearchActivity: AppCompatActivity() {
             var randomDirection = Random.nextInt(Direction.values().size)
 
             while (!canWriteWord(randomRow, randomCol, word, Direction.values()[randomDirection], 0) && attempts < maxAttempts) {
-                randomDirection = (randomDirection + 1) % Direction.values().size
+                randomDirection = (randomDirection + 1) % enumValues<Direction>().size
                 attempts++
             }
 
@@ -132,7 +150,7 @@ class WordSearchActivity: AppCompatActivity() {
         } while (attempts1 < maxAttempts1)
 
         if (attempts1 == maxAttempts1) {
-            Reset()
+            reset()
         }
     }
     enum class Direction {
@@ -146,209 +164,212 @@ class WordSearchActivity: AppCompatActivity() {
         DIAGONAL_DOWN_LEFT
     }
     private fun canWriteWord(startRow: Int, startCol: Int, word: String, direction: Direction, startIndex: Int): Boolean {
-        val endIndex = startIndex + word.length - 1
+        val endIndex =  (word.length - 1) - startIndex
 
         when (direction) {
             Direction.HORIZONTAL -> if (startCol + endIndex >= size || startCol - startIndex < 0) return false
             Direction.REVERSE_HORIZONTAL -> if (startCol - endIndex < 0 || startCol + startIndex >= size) return false
             Direction.VERTICAL_DOWN -> if (startRow + endIndex >= size || startRow - startIndex < 0) return false
             Direction.VERTICAL_UP -> if (startRow - endIndex < 0 || startRow + startIndex >= size) return false
-            Direction.DIAGONAL_UP_RIGHT -> if (startRow - endIndex < 0 || startCol + endIndex >= size || startCol - startIndex < 0) return false
-            Direction.DIAGONAL_UP_LEFT -> if (startRow - endIndex < 0 || startCol - endIndex < 0 || startCol + startIndex >= size) return false
-            Direction.DIAGONAL_DOWN_RIGHT -> if (startRow + endIndex >= size || startCol + endIndex >= size || startCol - startIndex < 0) return false
-            Direction.DIAGONAL_DOWN_LEFT -> if (startRow + endIndex >= size || startCol - endIndex < 0 || startCol + startIndex >= size) return false
+            Direction.DIAGONAL_UP_RIGHT -> if (startRow - endIndex < 0 || startCol + endIndex >= size || startCol - startIndex < 0 || startRow + startIndex >= size) return false
+            Direction.DIAGONAL_UP_LEFT -> if (startRow - endIndex < 0 || startCol - endIndex < 0 || startCol + startIndex >= size || startRow + startIndex >= size) return false
+            Direction.DIAGONAL_DOWN_RIGHT -> if (startRow + endIndex >= size || startCol + endIndex >= size || startCol - startIndex < 0 || startRow - startIndex < 0) return false
+            Direction.DIAGONAL_DOWN_LEFT -> if (startRow + endIndex >= size || startCol - endIndex < 0 || startCol + startIndex >= size || startRow - startIndex < 0) return false
         }
-
+        var posIndex = 0
         for (i in startIndex until word.length) {
-            val charIndex = i
             when (direction) {
                 Direction.HORIZONTAL -> {
-                    val cellValue = myWordSearch[startRow][startCol + i]
-                    if (cellValue != ' ' && cellValue != word[charIndex]) {
+                    val cellValue = myWordSearch[startRow][startCol + posIndex]
+                    if (cellValue != ' ' && cellValue != word[i]) {
                         return false
                     }
                 }
                 Direction.REVERSE_HORIZONTAL -> {
-                    val cellValue = myWordSearch[startRow][startCol - i]
-                    if (cellValue != ' ' && cellValue != word[charIndex]) {
+                    val cellValue = myWordSearch[startRow][startCol - posIndex]
+                    if (cellValue != ' ' && cellValue != word[i]) {
                         return false
                     }
                 }
                 Direction.VERTICAL_DOWN -> {
-                    val cellValue = myWordSearch[startRow + i][startCol]
-                    if (cellValue != ' ' && cellValue != word[charIndex]) {
+                    val cellValue = myWordSearch[startRow + posIndex][startCol]
+                    if (cellValue != ' ' && cellValue != word[i]) {
                         return false
                     }
                 }
                 Direction.VERTICAL_UP -> {
-                    val cellValue = myWordSearch[startRow - i][startCol]
-                    if (cellValue != ' ' && cellValue != word[charIndex]) {
+                    val cellValue = myWordSearch[startRow - posIndex][startCol]
+                    if (cellValue != ' ' && cellValue != word[i]) {
                         return false
                     }
                 }
                 Direction.DIAGONAL_UP_RIGHT -> {
-                    val cellValue = myWordSearch[startRow - i][startCol + i]
-                    if (cellValue != ' ' && cellValue != word[charIndex]) {
+                    val cellValue = myWordSearch[startRow - posIndex][startCol + posIndex]
+                    if (cellValue != ' ' && cellValue != word[i]) {
                         return false
                     }
                 }
                 Direction.DIAGONAL_UP_LEFT -> {
-                    val cellValue = myWordSearch[startRow - i][startCol - i]
-                    if (cellValue != ' ' && cellValue != word[charIndex]) {
+                    val cellValue = myWordSearch[startRow - posIndex][startCol - posIndex]
+                    if (cellValue != ' ' && cellValue != word[i]) {
                         return false
                     }
                 }
                 Direction.DIAGONAL_DOWN_RIGHT -> {
-                    val cellValue = myWordSearch[startRow + i][startCol + i]
-                    if (cellValue != ' ' && cellValue != word[charIndex]) {
+                    val cellValue = myWordSearch[startRow + posIndex][startCol + posIndex]
+                    if (cellValue != ' ' && cellValue != word[i]) {
                         return false
                     }
                 }
                 Direction.DIAGONAL_DOWN_LEFT -> {
-                    val cellValue = myWordSearch[startRow + i][startCol - i]
-                    if (cellValue != ' ' && cellValue != word[charIndex]) {
+                    val cellValue = myWordSearch[startRow + posIndex][startCol - posIndex]
+                    if (cellValue != ' ' && cellValue != word[i]) {
                         return false
                     }
                 }
             }
+            posIndex += 1
         }
         if (startIndex > 0){
-            for (i in startIndex downTo 1) {
-                val charIndex = startIndex - i
+            posIndex = 0
+            for (i in startIndex downTo 0) {
                 when (direction) {
                     Direction.HORIZONTAL -> {
-                        val cellValue = myWordSearch[startRow][startCol - i]
-                        if (cellValue != ' ' && cellValue != word[charIndex]) {
+                        val cellValue = myWordSearch[startRow][startCol - posIndex]
+                        if (cellValue != ' ' && cellValue != word[i]) {
                             return false
                         }
                     }
                     Direction.REVERSE_HORIZONTAL -> {
-                        val cellValue = myWordSearch[startRow][startCol + i]
-                        if (cellValue != ' ' && cellValue != word[charIndex]) {
+                        val cellValue = myWordSearch[startRow][startCol + posIndex]
+                        if (cellValue != ' ' && cellValue != word[i]) {
                             return false
                         }
                     }
                     Direction.VERTICAL_DOWN -> {
-                        val cellValue = myWordSearch[startRow - i][startCol]
-                        if (cellValue != ' ' && cellValue != word[charIndex]) {
+                        val cellValue = myWordSearch[startRow - posIndex][startCol]
+                        if (cellValue != ' ' && cellValue != word[i]) {
                             return false
                         }
                     }
                     Direction.VERTICAL_UP -> {
-                        val cellValue = myWordSearch[startRow + i][startCol]
-                        if (cellValue != ' ' && cellValue != word[charIndex]) {
+                        val cellValue = myWordSearch[startRow + posIndex][startCol]
+                        if (cellValue != ' ' && cellValue != word[i]) {
                             return false
                         }
                     }
                     Direction.DIAGONAL_UP_RIGHT -> {
-                        val cellValue = myWordSearch[startRow + i][startCol - i]
-                        if (cellValue != ' ' && cellValue != word[charIndex]) {
+                        val cellValue = myWordSearch[startRow + posIndex][startCol - posIndex]
+                        if (cellValue != ' ' && cellValue != word[i]) {
                             return false
                         }
                     }
                     Direction.DIAGONAL_UP_LEFT -> {
-                        val cellValue = myWordSearch[startRow + i][startCol + i]
-                        if (cellValue != ' ' && cellValue != word[charIndex]) {
+                        val cellValue = myWordSearch[startRow + posIndex][startCol + posIndex]
+                        if (cellValue != ' ' && cellValue != word[i]) {
                             return false
                         }
                     }
                     Direction.DIAGONAL_DOWN_RIGHT -> {
-                        val cellValue = myWordSearch[startRow - i][startCol - i]
-                        if (cellValue != ' ' && cellValue != word[charIndex]) {
+                        val cellValue = myWordSearch[startRow - posIndex][startCol - posIndex]
+                        if (cellValue != ' ' && cellValue != word[i]) {
                             return false
                         }
                     }
                     Direction.DIAGONAL_DOWN_LEFT -> {
-                        val cellValue = myWordSearch[startRow - i][startCol + i]
-                        if (cellValue != ' ' && cellValue != word[charIndex]) {
+                        val cellValue = myWordSearch[startRow - posIndex][startCol + posIndex]
+                        if (cellValue != ' ' && cellValue != word[i]) {
                             return false
                         }
                     }
                 }
+                posIndex += 1
             }
         }
 
         return true
     }
 
-    fun writeWord(startRow: Int, startCol: Int, word: String, direction: Direction, startFromIndex: Int) {
+    private fun writeWord(startRow: Int, startCol: Int, word: String, direction: Direction, startFromIndex: Int) {
         val coordinates = mutableListOf<Pair<Int, Int>>()
 
+        var posIndex = 0
         for (i in startFromIndex until word.length) {
-            val charIndex = i
             when (direction) {
                 Direction.HORIZONTAL -> {
-                    myWordSearch[startRow][startCol + i] = word[charIndex]
-                    coordinates.add(Pair(startRow, startCol + i))
+                    myWordSearch[startRow][startCol + posIndex] = word[i]
+                    coordinates.add(Pair(startRow, startCol + posIndex))
                 }
                 Direction.REVERSE_HORIZONTAL -> {
-                    myWordSearch[startRow][startCol - i] = word[charIndex]
-                    coordinates.add(Pair(startRow, startCol - i))
+                    myWordSearch[startRow][startCol - posIndex] = word[i]
+                    coordinates.add(Pair(startRow, startCol - posIndex))
                 }
                 Direction.VERTICAL_DOWN -> {
-                    myWordSearch[startRow + i][startCol] = word[charIndex]
-                    coordinates.add(Pair(startRow + i, startCol))
+                    myWordSearch[startRow + posIndex][startCol] = word[i]
+                    coordinates.add(Pair(startRow + posIndex, startCol))
                 }
                 Direction.VERTICAL_UP -> {
-                    myWordSearch[startRow - i][startCol] = word[charIndex]
-                    coordinates.add(Pair(startRow - i, startCol))
+                    myWordSearch[startRow - posIndex][startCol] = word[i]
+                    coordinates.add(Pair(startRow - posIndex, startCol))
                 }
                 Direction.DIAGONAL_UP_RIGHT -> {
-                    myWordSearch[startRow - i][startCol + i] = word[charIndex]
-                    coordinates.add(Pair(startRow - i, startCol + i))
+                    myWordSearch[startRow - posIndex][startCol + posIndex] = word[i]
+                    coordinates.add(Pair(startRow - posIndex, startCol + posIndex))
                 }
                 Direction.DIAGONAL_UP_LEFT -> {
-                    myWordSearch[startRow - i][startCol - i] = word[charIndex]
-                    coordinates.add(Pair(startRow - i, startCol - i))
+                    myWordSearch[startRow - posIndex][startCol - posIndex] = word[i]
+                    coordinates.add(Pair(startRow - posIndex, startCol - posIndex))
                 }
                 Direction.DIAGONAL_DOWN_RIGHT -> {
-                    myWordSearch[startRow + i][startCol + i] = word[charIndex]
-                    coordinates.add(Pair(startRow + i, startCol + i))
+                    myWordSearch[startRow + posIndex][startCol + posIndex] = word[i]
+                    coordinates.add(Pair(startRow + posIndex, startCol + posIndex))
                 }
                 Direction.DIAGONAL_DOWN_LEFT -> {
-                    myWordSearch[startRow + i][startCol - i] = word[charIndex]
-                    coordinates.add(Pair(startRow + i, startCol - i))
+                    myWordSearch[startRow + posIndex][startCol - posIndex] = word[i]
+                    coordinates.add(Pair(startRow + posIndex, startCol - posIndex))
                 }
             }
+            posIndex += 1
         }
 
         if (startFromIndex > 0){
-            for (i in startFromIndex downTo 1) {
-                val charIndex = startFromIndex - i
+            posIndex = 0
+            for (i in startFromIndex downTo 0) {
                 when (direction) {
                     Direction.HORIZONTAL -> {
-                        myWordSearch[startRow][startCol - i] = word[charIndex]
-                        coordinates.add(Pair(startRow, startCol - i))
+                        myWordSearch[startRow][startCol - posIndex] = word[i]
+                        coordinates.add(Pair(startRow, startCol - posIndex))
                     }
                     Direction.REVERSE_HORIZONTAL -> {
-                        myWordSearch[startRow][startCol + i] = word[charIndex]
-                        coordinates.add(Pair(startRow, startCol + i))
+                        myWordSearch[startRow][startCol + posIndex] = word[i]
+                        coordinates.add(Pair(startRow, startCol + posIndex))
                     }
                     Direction.VERTICAL_DOWN -> {
-                        myWordSearch[startRow - i][startCol] = word[charIndex]
-                        coordinates.add(Pair(startRow - i, startCol))
+                        myWordSearch[startRow - posIndex][startCol] = word[i]
+                        coordinates.add(Pair(startRow - posIndex, startCol))
                     }
                     Direction.VERTICAL_UP -> {
-                        myWordSearch[startRow + i][startCol] = word[charIndex]
-                        coordinates.add(Pair(startRow + i, startCol))
+                        myWordSearch[startRow + posIndex][startCol] = word[i]
+                        coordinates.add(Pair(startRow + posIndex, startCol))
                     }
                     Direction.DIAGONAL_UP_RIGHT -> {
-                        myWordSearch[startRow + i][startCol - i] = word[charIndex]
-                        coordinates.add(Pair(startRow + i, startCol - i))
+                        myWordSearch[startRow + posIndex][startCol - posIndex] = word[i]
+                        coordinates.add(Pair(startRow + posIndex, startCol - posIndex))
                     }
                     Direction.DIAGONAL_UP_LEFT -> {
-                        myWordSearch[startRow + i][startCol + i] = word[charIndex]
-                        coordinates.add(Pair(startRow + i, startCol + i))
+                        myWordSearch[startRow + posIndex][startCol + posIndex] = word[i]
+                        coordinates.add(Pair(startRow + posIndex, startCol + posIndex))
                     }
                     Direction.DIAGONAL_DOWN_RIGHT -> {
-                        myWordSearch[startRow - i][startCol - i] = word[charIndex]
-                        coordinates.add(Pair(startRow - i, startCol - i))
+                        myWordSearch[startRow - posIndex][startCol - posIndex] = word[i]
+                        coordinates.add(Pair(startRow - posIndex, startCol - posIndex))
                     }
                     Direction.DIAGONAL_DOWN_LEFT -> {
-                        myWordSearch[startRow - i][startCol + i] = word[charIndex]
-                        coordinates.add(Pair(startRow - i, startCol + i))
+                        myWordSearch[startRow - posIndex][startCol + posIndex] = word[i]
+                        coordinates.add(Pair(startRow - posIndex, startCol + posIndex))
                     }
                 }
+                posIndex += 1
             }
         }
         wordMap[word]?.addAll(coordinates)
@@ -356,14 +377,15 @@ class WordSearchActivity: AppCompatActivity() {
 
 
 
-    fun CreateGrid(tableLayout:TableLayout) {
+    private fun createGrid(tableLayout:TableLayout) {
+        val allowedChars = ('A'..'Z')
         tableLayout.viewTreeObserver.addOnGlobalLayoutListener(
             object : ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
                     tableLayout.viewTreeObserver.removeOnGlobalLayoutListener(this)
 
                     val tableLayoutWidth = tableLayout.width
-                    val cellSize = tableLayoutWidth / size
+                    val cellSize = tableLayoutWidth.div(size)
 
                     for (i in 0 until size) {
                         // Crea una nueva fila
@@ -374,7 +396,9 @@ class WordSearchActivity: AppCompatActivity() {
 
                             val layoutParams = TableRow.LayoutParams(cellSize, cellSize)
                             frameLayout.layoutParams = layoutParams
-                            frameLayout.setPadding(15,15,15,15)
+                            frameLayout.setPadding(13,13,13,13)
+                            frameLayout.setBackgroundColor(ContextCompat.getColor(this@WordSearchActivity, R.color.blancoOscuro))
+
                             // Crear un TextView dentro del FrameLayout
                             val textView = TextView(this@WordSearchActivity)
 
@@ -384,14 +408,13 @@ class WordSearchActivity: AppCompatActivity() {
                             )
                             textView.layoutParams = textLayoutParams
                             textView.gravity = Gravity.CENTER
-                            textView.textSize = 8f
-                            if(!myWordSearch[i][j].toString().equals("")){
+                            textView.textSize = 12f
+                            if(!myWordSearch[i][j].toString().equals(" ")){
                                 textView.text = myWordSearch[i][j].toString()
                             } else{
 
-                                textView.text = ""
+                                //textView.text = allowedChars.random().toString()
                             }
-                            //textView.text = "A"
                             val uniqueId = "R:$i C:$j"
                             textView.id = uniqueId.hashCode()
 
@@ -428,7 +451,7 @@ class WordSearchActivity: AppCompatActivity() {
                                 if(!selectedCells.contains(textView.id)){
                                     newWord += textView.text
                                     selectedCells.add(textView.id)
-                                    frameLayout.setBackgroundColor(ContextCompat.getColor(this@WordSearchActivity, R.color.verdeClaro))
+                                    frameLayout.setBackgroundColor(ContextCompat.getColor(this@WordSearchActivity, R.color.naranja))
                                 }
                             }
                         }
@@ -438,14 +461,14 @@ class WordSearchActivity: AppCompatActivity() {
             }
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 startCoordinate = null
-                HandleClick()
+                handleClick()
                 return true
             }
             else -> return false
         }
     }
 
-    private fun HandleClick(){
+    private fun handleClick(){
         val toast = Toast.makeText(this, newWord, Toast.LENGTH_LONG)
         toast.show()
 
@@ -456,11 +479,37 @@ class WordSearchActivity: AppCompatActivity() {
                 val textView = frameLayout.getChildAt(0) as TextView
 
                 selectedCells.forEach{code ->
-                    if (code.equals(textView.id)){
-                        frameLayout.setBackgroundColor(ContextCompat.getColor(this@WordSearchActivity, R.color.blancoOscuro))
+                    if (code.equals(textView.id)  ){
+                        if(wordMap.keys.contains(newWord)){
+                            frameLayout.setBackgroundColor(ContextCompat.getColor(this@WordSearchActivity, R.color.verdeClaro))
+                            correctCells.add(textView.id)
+                        } else{
+                            if (correctCells.contains(textView.id)){
+                                frameLayout.setBackgroundColor(ContextCompat.getColor(this@WordSearchActivity, R.color.verdeClaro))
+                            } else{
+                                frameLayout.setBackgroundColor(ContextCompat.getColor(this@WordSearchActivity, R.color.blancoOscuro))
+                            }
+                        }
+
                     }
 
                 }
+            }
+        }
+
+        if(wordMap.keys.contains(newWord)){
+            if (word1.text == newWord){
+                word1.paintFlags = word1.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            }else if (word2.text == newWord){
+                word2.paintFlags = word1.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            }else if (word3.text == newWord){
+                word3.paintFlags = word1.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            }else if (word4.text == newWord){
+                word4.paintFlags = word1.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            }else if (word5.text == newWord){
+                word5.paintFlags = word1.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            }else{
+                word6.paintFlags = word1.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
             }
         }
         newWord = ""
