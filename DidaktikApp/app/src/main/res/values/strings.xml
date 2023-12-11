@@ -43,7 +43,8 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <!--  AJUSTES  -->
-    <string name="profesor">Modo profesores</string>
+    <string name="profesor">Modo profesor</string>
+    <string name="inicio">Inicio</string>
 
     <!-- Multiple choice -->
     <string name="multipleChoiceExplain">Aukeratu erantzun zuzena</string>
