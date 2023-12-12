@@ -24,10 +24,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
 
+    // Variable para saber si el usuario es admin o no
+    var esAdmin: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Recibe el valor de la variable admin
+        esAdmin = intent.getBooleanExtra("admin", false)
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment =

@@ -22,6 +22,7 @@
     <string name="adminloginTitle">Kaixo</string>
     <string name="adminloginSubtitle">Sartu pasahitza</string>
     <string name="adminloginPassword">Pasahitza</string>
+    <string name="incorrecto">Pasahitza ez da zuzena</string>
 
     <!-- Main Menu -->
     <string name="mainMenuTitulo1">Lezamaren misterioa</string>
@@ -55,4 +56,6 @@
 
     <!-- Crucigrama -->
     <string name="wordSearchExplain">Aurkitu hurrengo hitzak</string>
+
+
 </resources>
