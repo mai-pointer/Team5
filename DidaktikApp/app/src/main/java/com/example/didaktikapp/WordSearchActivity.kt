@@ -3,6 +3,7 @@ package com.example.didaktikapp
 import android.content.res.Configuration
 import android.graphics.Paint
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
@@ -56,8 +57,8 @@ class WordSearchActivity: AppCompatActivity() {
 
         createGrid(tableLayout)
 
-        // Obtén una referencia al contenedor de fragmentos
-        /*val fragmentContainer = findViewById<FrameLayout>(R.id.fragmentContainerView)
+
+        val fragmentContainer = findViewById<FrameLayout>(R.id.fragmentContainerView)
 
         // Reemplaza el contenedor con el TitleFragment
         if (savedInstanceState == null) {
@@ -71,16 +72,16 @@ class WordSearchActivity: AppCompatActivity() {
         val titleFragment = supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
         titleFragment?.setOnHomeButtonClickListener{
             onHomeButtonClicked()
-        }*/
+        }
 
 
     }
 
-    /*override fun onConfigurationChanged(newConfig: Configuration) {
+    override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
 
         createGrid(tableLayout)
-    }*/
+    }
 
     private fun selectWords(){
         val randomWords = wordList.shuffled().take(numberOfWords)
@@ -412,15 +413,14 @@ class WordSearchActivity: AppCompatActivity() {
                     tableLayout.viewTreeObserver.removeOnGlobalLayoutListener(this)
 
                     val orientation = resources.configuration.orientation
+                    val tableLayoutWidth = tableLayout.width
+                    val tableLayoutHeight = tableLayout.height
                     var cellSize:Int
-                    if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                        val tableLayoutHeight = tableLayout.height
+                    if (tableLayoutHeight<tableLayoutWidth) {
                         cellSize = tableLayoutHeight.div(size)
                     } else {
-                        val tableLayoutWidth = tableLayout.width
                         cellSize = tableLayoutWidth.div(size)
                     }
-                    setContentView(R.layout.activity_word_search)
 
                     for (i in 0 until size) {
                         // Crea una nueva fila
@@ -446,6 +446,7 @@ class WordSearchActivity: AppCompatActivity() {
                             textView.textSize = 14f
                             if(myWordSearch[i][j].toString() != " "){
                                 textView.text = myWordSearch[i][j].toString()
+                                Log.d("sopa", myWordSearch[i][j].toString())
                             }else{
                                 textView.text = allowedChars.random().toString()
                             }
