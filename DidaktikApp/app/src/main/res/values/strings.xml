@@ -28,7 +28,7 @@
     <string name="mainMenuTitulo2">Lezama</string>
     <string name="mainMenuAjustes">Ajustes</string>
     <string name="mainMenuJugar">Jugar</string>
-    <string name="mainMenuModoLibre">Modo libre</string>
+    <string name="mainMenuModoLibre">Modo competitivo</string>
 
     <!--  Diferencias  -->
     <string name="diferenciasTitulo">Encuentra las 6 diferencias</string>

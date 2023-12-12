@@ -19,14 +19,14 @@
         android:layout_marginBottom="0dp">
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/salirBtn"
             style="@style/transparentButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/mainMenuAjustes"
+            android:text="@string/inicio"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
