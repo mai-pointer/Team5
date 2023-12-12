@@ -7,6 +7,7 @@
     android:padding="0dp">
 
     <RelativeLayout
+        android:id="@+id/salirmenu"
         style="@style/backgroundBlancoPuro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,14 +19,14 @@
         android:layout_marginBottom="0dp">
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/salirBtn"
             style="@style/transparentButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/mainMenuAjustes"
+            android:text="@string/inicio"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -33,13 +34,14 @@
 
     <RelativeLayout
         android:id="@+id/profesores"
-        android:layout_width="286dp"
-        android:layout_height="114dp"
+        android:layout_width="283dp"
+        android:layout_height="101dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="50dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="127dp"
+        android:layout_marginEnd="32dp"
+        android:layout_toStartOf="@+id/contenedor"
         android:background="@drawable/tarjeta">
 
         <ImageView
@@ -70,12 +72,14 @@
 
     <RelativeLayout
         android:id="@+id/contenedor"
-        android:layout_width="304dp"
-        android:layout_height="282dp"
+        android:layout_width="325dp"
+        android:layout_height="284dp"
+        android:layout_above="@+id/salirmenu"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="41dp"
+        android:layout_marginBottom="25dp"
         android:background="@drawable/tarjeta"
         android:padding="32dp">
 
@@ -92,7 +96,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="#00FFFFFF"
                 android:scaleType="centerCrop"
-                android:src="@android:drawable/btn_star"
+                android:src="@drawable/eu"
                 tools:ignore="SpeakableTextPresentCheck"
                 tools:src="@drawable/eu" />
 
@@ -103,7 +107,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="#00FFFFFF"
                 android:scaleType="centerCrop"
-                android:src="@android:drawable/btn_star"
+                android:src="@drawable/es"
                 android:tint="#00FFFFFF"
                 tools:ignore="UseAppTint,SpeakableTextPresentCheck"
                 tools:src="@drawable/es" />
@@ -115,7 +119,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="#00FFFFFF"
                 android:scaleType="centerCrop"
-                android:src="@android:drawable/btn_star"
+                android:src="@drawable/en"
                 tools:ignore="SpeakableTextPresentCheck"
                 tools:src="@drawable/en" />
 
@@ -154,14 +158,13 @@
 
     <RelativeLayout
         android:id="@+id/about"
-        android:layout_width="293dp"
-        android:layout_height="105dp"
-        android:layout_below="@+id/profesores"
+        android:layout_width="285dp"
+        android:layout_height="104dp"
+        android:layout_above="@+id/salirmenu"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="61dp"
-        android:layout_marginEnd="43dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="27dp"
         android:layout_toStartOf="@+id/contenedor"
         android:background="@drawable/tarjeta"
         tools:ignore="UnknownId">
@@ -172,8 +175,8 @@
             android:layout_height="76dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="13dp"
             app:srcCompat="@drawable/tx" />
 
         <ImageView
@@ -182,8 +185,8 @@
             android:layout_height="79dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="17dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="18dp"
             app:srcCompat="@drawable/upv" />
     </RelativeLayout>
 

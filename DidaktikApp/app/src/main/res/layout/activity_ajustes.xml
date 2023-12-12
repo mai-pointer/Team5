@@ -7,6 +7,7 @@
     android:padding="0dp">
 
     <RelativeLayout
+        android:id="@+id/inicioBtn"
         style="@style/backgroundBlancoPuro"
         android:layout_width="match_parent"
         android:layout_height="76dp"
@@ -18,16 +19,16 @@
         android:layout_marginBottom="-3dp">
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/salirBtn"
             style="@style/transparentButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/mainMenuAjustes"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="17dp"
+            android:layout_marginBottom="15dp"
+            android:text="@string/inicio" />
+
 
     </RelativeLayout>
 
@@ -74,9 +75,11 @@
         android:layout_width="wrap_content"
         android:layout_height="283dp"
         android:layout_above="@+id/about"
+        android:layout_below="@+id/profesores"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="29dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="36dp"
         android:layout_marginBottom="46dp"
         android:background="@drawable/tarjeta"
@@ -95,7 +98,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="#00FFFFFF"
                 android:scaleType="centerCrop"
-                android:src="@android:drawable/btn_star"
+                android:src="@drawable/eu"
                 tools:ignore="SpeakableTextPresentCheck"
                 tools:src="@drawable/eu" />
 
@@ -106,7 +109,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="#00FFFFFF"
                 android:scaleType="centerCrop"
-                android:src="@android:drawable/btn_star"
+                android:src="@drawable/es"
                 android:tint="#00FFFFFF"
                 tools:ignore="UseAppTint,SpeakableTextPresentCheck"
                 tools:src="@drawable/es" />
@@ -118,7 +121,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="#00FFFFFF"
                 android:scaleType="centerCrop"
-                android:src="@android:drawable/btn_star"
+                android:src="@drawable/en"
                 tools:ignore="SpeakableTextPresentCheck"
                 tools:src="@drawable/en" />
 
@@ -134,7 +137,7 @@
             android:padding="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="120dp"
+                android:layout_width="114dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/tarjeta"
                 android:backgroundTint="#FFFFFF">
@@ -143,7 +146,7 @@
 
             <Space
                 android:layout_width="42dp"
-                android:layout_height="89dp" />
+                android:layout_height="82dp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
