@@ -19,7 +19,7 @@
             android:name=".DiferenciasActivity"
             android:exported="false" />
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".PuzzleActivity"
             android:exported="false" />
         <activity
             android:name=".PreguntasPistas"
@@ -30,7 +30,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".PuzzleActivity"
+            android:name=".MainMenuActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
