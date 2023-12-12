@@ -18,21 +18,21 @@
         app:srcCompat="@drawable/lamia_removebg_preview" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/info"
         android:layout_width="303dp"
         android:layout_height="166dp"
         android:layout_marginBottom="20dp"
         android:paddingTop="16dp"
         android:textAlignment="center"
         android:textColor="@color/roca"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintBottom_toTopOf="@+id/contador"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.527"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/contador"
         android:layout_width="146dp"
         android:layout_height="12dp"
         android:layout_marginTop="180dp"
@@ -85,7 +85,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/terminar_info"
         android:layout_width="103dp"
         android:layout_height="36dp"
         android:layout_marginBottom="24dp"
@@ -100,7 +100,7 @@
         style="@style/TextoDestacadoStyle"/>
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/play"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="28dp"
@@ -111,12 +111,12 @@
         style="@style/GreenIconStyle" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/pause"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="280dp"
         android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+        app:layout_constraintEnd_toStartOf="@+id/play"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

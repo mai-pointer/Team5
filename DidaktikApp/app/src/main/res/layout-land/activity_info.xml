@@ -13,14 +13,14 @@
         android:layout_marginStart="17dp"
         android:layout_marginEnd="28dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintEnd_toStartOf="@+id/info"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.343"
         app:srcCompat="@drawable/lamia_removebg_preview" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/info"
         android:layout_width="350dp"
         android:layout_height="155dp"
         android:layout_marginEnd="36dp"
@@ -34,7 +34,7 @@
         tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/contador"
         android:layout_width="146dp"
         android:layout_height="12dp"
         android:orientation="horizontal"
@@ -84,7 +84,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/terminar_info"
         style="@style/TextoDestacadoStyle"
         android:layout_width="103dp"
         android:layout_height="36dp"
@@ -99,7 +99,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/play"
         style="@style/GreenIconStyle"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -110,13 +110,13 @@
         app:srcCompat="@drawable/play_1" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/pause"
         style="@style/GreyIconStyle"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="280dp"
         android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+        app:layout_constraintEnd_toStartOf="@+id/play"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

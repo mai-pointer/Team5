@@ -30,7 +30,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".Crucigrama"
+            android:name=".Info"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,10 +51,10 @@
             android:name=".OrdenarImagenesActivity"
             android:exported="false" />
         <activity
-            android:name=".Info"
+            android:name=".MainMenuActivity"
             android:exported="false" />
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".Crucigrama"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
