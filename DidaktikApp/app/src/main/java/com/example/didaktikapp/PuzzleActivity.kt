@@ -3,13 +3,11 @@ package com.example.didaktikapp
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Toast
 import com.example.didaktikapp.navigation.NavigationUtil
 import com.example.didaktikapp.titleFragment.TitleFragment
-import kotlin.random.Random
 
 class PuzzleActivity : AppCompatActivity() {
 
@@ -139,9 +137,9 @@ class PuzzleActivity : AppCompatActivity() {
         // Configura el click listener para el botón en el fragmento
         val titleFragment =
             supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
-        titleFragment?.setOnHomeButtonClickListener(View.OnClickListener {
+        titleFragment?.setOnHomeButtonClickListener{
             onHomeButtonClicked()
-        })
+        }
 
         val flattenedList = imageArray.flatten().toMutableList()
         flattenedList.shuffle()
@@ -238,7 +236,7 @@ class PuzzleActivity : AppCompatActivity() {
         var myDirection = 0
         var attemps = 0
         val maxAttemps = 3
-        while (!canMove(coordinates, Direction.values()[myDirection]) && attemps <= maxAttemps) {
+        /*while (!canMove(coordinates, Direction.values()[myDirection]) && attemps <= maxAttemps) {
             myDirection += 1
             Log.d("Puzle", attemps.toString())
             attemps += 1
@@ -248,6 +246,13 @@ class PuzzleActivity : AppCompatActivity() {
             changeImage(coordinates, Direction.values()[myDirection])
         } else {
             Log.d("Puzle", "No se puede mover esta ficha")
+        }*/
+
+        for(i in 0 until 4){
+            if (canMove(coordinates, Direction.values()[myDirection])){
+                changeImage(coordinates, Direction.values()[myDirection])
+                }
+            myDirection += 1
         }
     }
 
@@ -259,11 +264,18 @@ class PuzzleActivity : AppCompatActivity() {
         val row = coordinates.first
         val col = coordinates.second
         when (direction) {
-            Direction.UP -> if (row - 1 < 0 || changedImageArray[row - 1][col] > 0) return false
-            Direction.DOWN -> if (row + 1 > 2 || changedImageArray[row + 1][col] > 0) return false
-            Direction.LEFT -> if (col - 1 < 0 || changedImageArray[row][col - 1] > 0) return false
-            Direction.RIGTH -> if (col + 1 > 2 || changedImageArray[row][col + 1] > 0) return false
+            Direction.UP -> if (row - 1 < 0) return false
+            Direction.DOWN -> if (row + 1 > 2) return false
+            Direction.LEFT -> if (col - 1 < 0) return false
+            Direction.RIGTH -> if (col + 1 > 2) return false
         }
+        when (direction) {
+            Direction.UP -> if (changedImageArray[row - 1][col] > 0) return false
+            Direction.DOWN -> if (changedImageArray[row + 1][col] > 0) return false
+            Direction.LEFT -> if (changedImageArray[row][col - 1] > 0) return false
+            Direction.RIGTH -> if (changedImageArray[row][col + 1] > 0) return false
+        }
+
         return true
     }
 
@@ -336,7 +348,7 @@ class PuzzleActivity : AppCompatActivity() {
     }
     private fun showPuzzleCompleteToast() {
         // Muestra un Toast indicando que el rompecabezas está completo
-        Toast.makeText(this, "Puzlea bukatuta. Zorionak!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Puzlea bukatuta. Zorionak!", Toast.LENGTH_LONG).show()
     }
 
 }
