@@ -12,7 +12,7 @@ class Ajustes : AppCompatActivity() {
         setContentView(R.layout.activity_ajustes)
 
         //Salir
-        findViewById<RelativeLayout>(R.id.inicioBtn).setOnClickListener{
+        findViewById<RelativeLayout>(R.id.salirBtn).setOnClickListener{
             val intent = Intent(this@Ajustes, MainMenuActivity::class.java)
             startActivity(intent)
         }
