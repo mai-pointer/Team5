@@ -1,7 +1,7 @@
 package com.example.didaktikapp
 
+import android.content.res.Configuration
 import android.graphics.Paint
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
 import android.view.MotionEvent
@@ -14,6 +14,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.didaktikapp.navigation.NavigationUtil
+import com.example.didaktikapp.titleFragment.TitleFragment
 import kotlin.random.Random
 
 class WordSearchActivity: AppCompatActivity() {
@@ -31,13 +33,14 @@ class WordSearchActivity: AppCompatActivity() {
     private var wordMap: MutableMap<String, MutableList<Pair<Int, Int>>> = mutableMapOf()
 
 
-    val correctCells = mutableListOf<Int>()
+    private val correctCells = mutableListOf<Int>()
     private var startCoordinate: Pair<Float, Float>? = null
     private var newWord:String = ""
     private var selectedCells: MutableList<Int> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_word_search)
 
         tableLayout = findViewById(R.id.wordSearch)
@@ -50,10 +53,34 @@ class WordSearchActivity: AppCompatActivity() {
         selectWords()
         myWordSearch = Array(size) { Array(size) { ' ' } }
         createWordSearch()
+
         createGrid(tableLayout)
+
+        // Obtén una referencia al contenedor de fragmentos
+        /*val fragmentContainer = findViewById<FrameLayout>(R.id.fragmentContainerView)
+
+        // Reemplaza el contenedor con el TitleFragment
+        if (savedInstanceState == null) {
+            val titleFragment = TitleFragment.newInstance("Letra zopa")
+            supportFragmentManager.beginTransaction()
+                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
+                .commit()
+        }
+
+        // Configura el click listener para el botón en el fragmento
+        val titleFragment = supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
+        titleFragment?.setOnHomeButtonClickListener{
+            onHomeButtonClicked()
+        }*/
 
 
     }
+
+    /*override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+
+        createGrid(tableLayout)
+    }*/
 
     private fun selectWords(){
         val randomWords = wordList.shuffled().take(numberOfWords)
@@ -384,8 +411,16 @@ class WordSearchActivity: AppCompatActivity() {
                 override fun onGlobalLayout() {
                     tableLayout.viewTreeObserver.removeOnGlobalLayoutListener(this)
 
-                    val tableLayoutWidth = tableLayout.width
-                    val cellSize = tableLayoutWidth.div(size)
+                    val orientation = resources.configuration.orientation
+                    var cellSize:Int
+                    if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                        val tableLayoutHeight = tableLayout.height
+                        cellSize = tableLayoutHeight.div(size)
+                    } else {
+                        val tableLayoutWidth = tableLayout.width
+                        cellSize = tableLayoutWidth.div(size)
+                    }
+                    setContentView(R.layout.activity_word_search)
 
                     for (i in 0 until size) {
                         // Crea una nueva fila
@@ -408,12 +443,11 @@ class WordSearchActivity: AppCompatActivity() {
                             )
                             textView.layoutParams = textLayoutParams
                             textView.gravity = Gravity.CENTER
-                            textView.textSize = 12f
-                            if(!myWordSearch[i][j].toString().equals(" ")){
+                            textView.textSize = 14f
+                            if(myWordSearch[i][j].toString() != " "){
                                 textView.text = myWordSearch[i][j].toString()
-                            } else{
-
-                                //textView.text = allowedChars.random().toString()
+                            }else{
+                                textView.text = allowedChars.random().toString()
                             }
                             val uniqueId = "R:$i C:$j"
                             textView.id = uniqueId.hashCode()
@@ -479,7 +513,7 @@ class WordSearchActivity: AppCompatActivity() {
                 val textView = frameLayout.getChildAt(0) as TextView
 
                 selectedCells.forEach{code ->
-                    if (code.equals(textView.id)  ){
+                    if (code == textView.id){
                         if(wordMap.keys.contains(newWord)){
                             frameLayout.setBackgroundColor(ContextCompat.getColor(this@WordSearchActivity, R.color.verdeClaro))
                             correctCells.add(textView.id)
@@ -525,5 +559,9 @@ class WordSearchActivity: AppCompatActivity() {
         return (x > viewX && x < viewX + view.width && y > viewY && y < viewY + view.height)
     }
 
-
+    private fun onHomeButtonClicked() {
+        // Acciones a realizar cuando se hace clic en el botón Home
+        // Utiliza NavigationUtil para la navegación
+        NavigationUtil.navigateToMainMenu(this)
+    }
 }
