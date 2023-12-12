@@ -3,13 +3,11 @@ package com.example.didaktikapp
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Toast
 import com.example.didaktikapp.navigation.NavigationUtil
 import com.example.didaktikapp.titleFragment.TitleFragment
-import kotlin.random.Random
 
 class PuzzleActivity : AppCompatActivity() {
 
@@ -60,15 +58,17 @@ class PuzzleActivity : AppCompatActivity() {
         image7 = findViewById(R.id.block7)
         image8 = findViewById(R.id.block8)
 
-        imageViewsMap = mutableMapOf(Pair(0, 0) to image0,
-        Pair(0, 1) to image1,
-        Pair(0, 2) to image2,
-        Pair(1, 0) to image3,
-        Pair(1, 1) to image4,
-        Pair(1, 2) to image5,
-        Pair(2, 0) to image6,
-        Pair(2, 1) to image7,
-        Pair(2, 2) to image8)
+        imageViewsMap = mutableMapOf(
+            Pair(0, 0) to image0,
+            Pair(0, 1) to image1,
+            Pair(0, 2) to image2,
+            Pair(1, 0) to image3,
+            Pair(1, 1) to image4,
+            Pair(1, 2) to image5,
+            Pair(2, 0) to image6,
+            Pair(2, 1) to image7,
+            Pair(2, 2) to image8
+        )
 
         image0.setOnClickListener {
             val pair = findPairByImageView(image0)
@@ -139,9 +139,9 @@ class PuzzleActivity : AppCompatActivity() {
         // Configura el click listener para el botón en el fragmento
         val titleFragment =
             supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
-        titleFragment?.setOnHomeButtonClickListener(View.OnClickListener {
+        titleFragment?.setOnHomeButtonClickListener {
             onHomeButtonClicked()
-        })
+        }
 
         val flattenedList = imageArray.flatten().toMutableList()
         flattenedList.shuffle()
@@ -154,6 +154,7 @@ class PuzzleActivity : AppCompatActivity() {
         pintarImagenes()
 
     }
+
     fun findPairByImageView(imageView: ImageView): Pair<Int, Int>? {
         return imageViewsMap.entries.find { it.value == imageView }?.key
     }
@@ -234,20 +235,15 @@ class PuzzleActivity : AppCompatActivity() {
         )
     }
 
-    private fun onImageClick(coordinates:Pair<Int, Int>) {
+    private fun onImageClick(coordinates: Pair<Int, Int>) {
         var myDirection = 0
         var attemps = 0
         val maxAttemps = 3
-        while (!canMove(coordinates, Direction.values()[myDirection]) && attemps <= maxAttemps) {
+        for (i in 0 until 4) {
+            if (canMove(coordinates, Direction.values()[myDirection])) {
+                changeImage(coordinates, Direction.values()[myDirection])
+            }
             myDirection += 1
-            Log.d("Puzle", attemps.toString())
-            attemps += 1
-            Log.d("Puzle", attemps.toString())
-        }
-        if (attemps <= maxAttemps) {
-            changeImage(coordinates, Direction.values()[myDirection])
-        } else {
-            Log.d("Puzle", "No se puede mover esta ficha")
         }
     }
 
@@ -255,74 +251,132 @@ class PuzzleActivity : AppCompatActivity() {
         UP, DOWN, LEFT, RIGTH
     }
 
-    fun canMove(coordinates:Pair<Int,Int>, direction: Direction): Boolean {
+    fun canMove(coordinates: Pair<Int, Int>, direction: Direction): Boolean {
         val row = coordinates.first
         val col = coordinates.second
         when (direction) {
-            Direction.UP -> if (row - 1 < 0 || changedImageArray[row - 1][col] > 0) return false
-            Direction.DOWN -> if (row + 1 > 2 || changedImageArray[row + 1][col] > 0) return false
-            Direction.LEFT -> if (col - 1 < 0 || changedImageArray[row][col - 1] > 0) return false
-            Direction.RIGTH -> if (col + 1 > 2 || changedImageArray[row][col + 1] > 0) return false
+            Direction.UP -> if (row - 1 < 0) return false
+            Direction.DOWN -> if (row + 1 > 2) return false
+            Direction.LEFT -> if (col - 1 < 0) return false
+            Direction.RIGTH -> if (col + 1 > 2) return false
         }
+        when (direction) {
+            Direction.UP -> if (changedImageArray[row - 1][col] > 0) return false
+            Direction.DOWN -> if (changedImageArray[row + 1][col] > 0) return false
+            Direction.LEFT -> if (changedImageArray[row][col - 1] > 0) return false
+            Direction.RIGTH -> if (changedImageArray[row][col + 1] > 0) return false
+        }
+
         return true
     }
 
-    fun changeImage(coordinates:Pair<Int,Int>, direction: Direction) {
+    fun changeImage(coordinates: Pair<Int, Int>, direction: Direction) {
         val row = coordinates.first
         val col = coordinates.second
         when (direction) {
             Direction.UP -> {
-                val newCoordinates:Pair<Int, Int> = Pair(row - 1, col)
+                val newCoordinates: Pair<Int, Int> = Pair(row - 1, col)
                 val myCurrentImage = myImagesArray[changedImageArray[row][col]]
                 val targetImage = findImageViewByPair(newCoordinates)
-                targetImage?.setImageResource(resources.getIdentifier(myCurrentImage, "drawable", packageName))
+                targetImage?.setImageResource(
+                    resources.getIdentifier(
+                        myCurrentImage,
+                        "drawable",
+                        packageName
+                    )
+                )
 
                 val emptyImage = findImageViewByPair(coordinates)
-                emptyImage?.setImageResource(resources.getIdentifier("image0", "drawable", packageName))
+                emptyImage?.setImageResource(
+                    resources.getIdentifier(
+                        "image0",
+                        "drawable",
+                        packageName
+                    )
+                )
 
                 val myVal = changedImageArray[row][col]
                 changedImageArray[row][col] = 0
-                changedImageArray[row-1][col] = myVal
+                changedImageArray[row - 1][col] = myVal
             }
+
             Direction.DOWN -> {
-                val newCoordinates:Pair<Int, Int> = Pair(row + 1, col)
+                val newCoordinates: Pair<Int, Int> = Pair(row + 1, col)
                 val myCurrentImage = myImagesArray[changedImageArray[row][col]]
                 val targetImage = findImageViewByPair(newCoordinates)
-                targetImage?.setImageResource(resources.getIdentifier(myCurrentImage, "drawable", packageName))
+                targetImage?.setImageResource(
+                    resources.getIdentifier(
+                        myCurrentImage,
+                        "drawable",
+                        packageName
+                    )
+                )
 
                 val emptyImage = findImageViewByPair(coordinates)
-                emptyImage?.setImageResource(resources.getIdentifier("image0", "drawable", packageName))
+                emptyImage?.setImageResource(
+                    resources.getIdentifier(
+                        "image0",
+                        "drawable",
+                        packageName
+                    )
+                )
 
                 val myVal = changedImageArray[row][col]
                 changedImageArray[row][col] = 0
-                changedImageArray[row+1][col] = myVal
+                changedImageArray[row + 1][col] = myVal
 
             }
+
             Direction.LEFT -> {
-                val newCoordinates:Pair<Int, Int> = Pair(row, col-1)
+                val newCoordinates: Pair<Int, Int> = Pair(row, col - 1)
                 val myCurrentImage = myImagesArray[changedImageArray[row][col]]
                 val targetImage = findImageViewByPair(newCoordinates)
-                targetImage?.setImageResource(resources.getIdentifier(myCurrentImage, "drawable", packageName))
+                targetImage?.setImageResource(
+                    resources.getIdentifier(
+                        myCurrentImage,
+                        "drawable",
+                        packageName
+                    )
+                )
 
                 val emptyImage = findImageViewByPair(coordinates)
-                emptyImage?.setImageResource(resources.getIdentifier("image0", "drawable", packageName))
+                emptyImage?.setImageResource(
+                    resources.getIdentifier(
+                        "image0",
+                        "drawable",
+                        packageName
+                    )
+                )
 
                 val myVal = changedImageArray[row][col]
                 changedImageArray[row][col] = 0
-                changedImageArray[row][col-1] = myVal
+                changedImageArray[row][col - 1] = myVal
             }
+
             Direction.RIGTH -> {
-                val newCoordinates:Pair<Int, Int> = Pair(row, col+1)
+                val newCoordinates: Pair<Int, Int> = Pair(row, col + 1)
                 val myCurrentImage = myImagesArray[changedImageArray[row][col]]
                 val targetImage = findImageViewByPair(newCoordinates)
-                targetImage?.setImageResource(resources.getIdentifier(myCurrentImage, "drawable", packageName))
+                targetImage?.setImageResource(
+                    resources.getIdentifier(
+                        myCurrentImage,
+                        "drawable",
+                        packageName
+                    )
+                )
 
                 val emptyImage = findImageViewByPair(coordinates)
-                emptyImage?.setImageResource(resources.getIdentifier("image0", "drawable", packageName))
+                emptyImage?.setImageResource(
+                    resources.getIdentifier(
+                        "image0",
+                        "drawable",
+                        packageName
+                    )
+                )
 
                 val myVal = changedImageArray[row][col]
                 changedImageArray[row][col] = 0
-                changedImageArray[row][col+1] = myVal
+                changedImageArray[row][col + 1] = myVal
             }
         }
         if (isPuzzleComplete()) {
@@ -334,9 +388,10 @@ class PuzzleActivity : AppCompatActivity() {
         val flatChangedArray = changedImageArray.flatten()
         return flatChangedArray.withIndex().all { (index, value) -> index == value }
     }
+
     private fun showPuzzleCompleteToast() {
         // Muestra un Toast indicando que el rompecabezas está completo
-        Toast.makeText(this, "Puzlea bukatuta. Zorionak!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Puzlea bukatuta. Zorionak!", Toast.LENGTH_LONG).show()
     }
 
 }
