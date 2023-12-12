@@ -24,6 +24,7 @@ class MainMenuActivity : AppCompatActivity() {
         buttonAjustes.setOnClickListener{
             // Crea un Intent para lanzar la actividad Ajustes
             val intent = Intent(this@MainMenuActivity, Ajustes::class.java)
+            intent.putExtra("admin", false)
             startActivity(intent)
         }
     }
