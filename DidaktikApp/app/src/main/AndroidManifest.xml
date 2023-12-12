@@ -19,25 +19,14 @@
             android:name=".DiferenciasActivity"
             android:exported="false" />
         <activity
-            android:name=".MainMenuActivity"
-            android:exported="false" />
-        <activity
             android:name=".PreguntasPistas"
             android:exported="false" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
         <activity
             android:name=".OrdenarImagenesActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".AdminLoginActivity"
             android:exported="false" />
@@ -62,6 +51,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service
+            android:name=".GameManager"
+            android:exported="false" />
     </application>
-
 </manifest>

@@ -14,6 +14,11 @@ class MainMenuActivity : AppCompatActivity() {
         val buttonJugar: Button = findViewById(R.id.btnJugar)
         val buttonAjustes: Button = findViewById(R.id.ajustesBtn)
 
+        // Inicia el servicio al comienzo de la aplicación
+        startService(
+            Intent(this, GameManager::class.java)
+        )
+
         // Agrega un OnClickListener al botón "Jugar"
         buttonJugar.setOnClickListener{
             // Crea un Intent para lanzar la actividad Jugar

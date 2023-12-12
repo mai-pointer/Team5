@@ -119,13 +119,13 @@ class Crucigrama : AppCompatActivity() {
                     }
                     if (casilla.editText.text.toString().uppercase()!= casilla.caracter.toString().uppercase()){
                         bien = false
-                        Toast.makeText(this, "¡Has fallado!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, R.string.mensaje_fallido, Toast.LENGTH_SHORT).show()
                         casilla.editText.setTextColor(Color.RED)
                     }
                 }
             }
             if (bien){
-                Toast.makeText(this, "¡Terminado!", Toast.LENGTH_SHORT).show()
+                //Acaba la partida
             }
 
         }
