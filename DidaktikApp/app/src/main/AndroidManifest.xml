@@ -30,7 +30,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".PuzzleActivity"
+            android:name=".OrdenarImagenesActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,7 +48,7 @@
             android:name=".Ajustes"
             android:exported="false" />
         <activity
-            android:name=".OrdenarImagenesActivity"
+            android:name=".PuzzleActivity"
             android:exported="false" />
         <activity
             android:name=".Info"
