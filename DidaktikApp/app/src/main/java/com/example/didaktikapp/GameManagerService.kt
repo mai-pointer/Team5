@@ -5,26 +5,39 @@ import android.content.Context
 import android.content.Intent
 import android.os.IBinder
 
-class GameManager : Service() {
+object GamesRepository {
+    val games = listOf(
+        Game("Juego1", listOf(
+            Info::class.java,
+            Crucigrama::class.java,
+        )),
+    )
+}
+
+class GameManagerService : Service() {
 
     // Variables para almacenar el estado del juego y la posición actual en las pantallas.
     private lateinit var context: Context
     private var juegoActual: Game? = null
     private var pantallaActual = 0
 
+    fun initialize(context: Context) {
+        this.context = context
+    }
+
     override fun onBind(intent: Intent?): IBinder? {
         return null
     }
 
     // Método para iniciar un nuevo juego.
-    private fun startGame(gameName: String) {
+    fun startGame(gameName: String) {
         juegoActual = GamesRepository.games.firstOrNull { it.name == gameName }
         pantallaActual = 0
         pantalla()
     }
 
     // Método para avanzar a la siguiente pantalla en el juego.
-    private fun nextScreen() {
+    fun nextScreen() {
         // Verifica si hay más pantallas en el juego.
         if (pantallaActual < (juegoActual?.screenOrder?.size ?: 0) - 1) {
             // Avanza a la siguiente pantalla.
@@ -50,17 +63,19 @@ class GameManager : Service() {
     }
 }
 
-data class Game(val name: String, val screenOrder: List<Class<*>>)
+object GameManager {
+    private var gameManagerService: GameManagerService? = null
 
-object GamesRepository {
-    val games = listOf(
-        Game("Juego1", listOf(
-            Info::class.java,
-            Crucigrama::class.java,
-        )),
-    )
+    fun initialize(context: Context) {
+        if (gameManagerService == null) {
+            gameManagerService = GameManagerService()
+            gameManagerService?.initialize(context)
+        }
+    }
+
+    fun get(): GameManagerService? {
+        return gameManagerService
+    }
 }
 
-//GameManager.instance.startGame("Juego1", applicationContext)
-//GameManager.instance.nextScreen() // Avanzar a la siguiente pantalla
-
+data class Game(val name: String, val screenOrder: List<Class<*>>)

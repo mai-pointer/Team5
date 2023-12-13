@@ -26,14 +26,12 @@
         android:id="@+id/constraintLayout"
         android:layout_width="337dp"
         android:layout_height="132dp"
-        android:layout_marginTop="511dp"
-        android:layout_marginBottom="6dp"
+        android:layout_marginBottom="88dp"
         android:background="@drawable/tarjeta"
-        app:layout_constraintBottom_toTopOf="@+id/terminar_crucigrama"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintHorizontal_bias="0.608"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/pista"
@@ -80,13 +78,12 @@
         android:id="@+id/crucigrama"
         android:layout_width="261dp"
         android:layout_height="391dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.403">
+        app:layout_constraintVertical_bias="0.688">
 
     </androidx.gridlayout.widget.GridLayout>
 
@@ -95,7 +92,6 @@
         style="@style/GreyButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:layout_marginBottom="16dp"
         android:text="@string/terminar"
         app:layout_constraintBottom_toBottomOf="parent"
