@@ -84,25 +84,20 @@ class PlaceDetailsFragment : Fragment() {
 
         return rootView
     }
-//    private fun getPlaceIntent(placeName: String?): Intent {
-//        // Crea un Intent para la actividad correspondiente al lugar
-//        return when (placeName) {
-//            "Idi probak" -> Intent(activity, MultipleChoiceActivity::class.java)
-//            "Odolostea" -> Intent(activity, WordSearchActivity::class.java)
-//            "Txakoli" -> Intent(activity, DiferenciasActivity::class.java)
-//            "Udala" -> Intent(activity, DiferenciasActivity::class.java)
-//            "Santa Maria" -> Intent(activity, PuzzleActivity::class.java)
-//            "San Mameseko Arkua" -> Intent(activity, Crucigrama::class.java)
-//            "Lezamako dorrea" -> Intent(activity, OrdenarImagenesActivity::class.java)
-//
-//            "Idi probak" -> GameManager.get()?.startGame("Juego1")
-//            "Odolostea" -> GameManager.get()?.startGame("Juego1")
-//            "Txakoli" -> GameManager.get()?.startGame("Juego1")
-//            "Udala" -> GameManager.get()?.startGame("Juego1")
-//            "Santa Maria" -> GameManager.get()?.startGame("Juego1")
-//            "San Mameseko Arkua" -> GameManager.get()?.startGame("Juego1")
-//            "Lezamako dorrea" -> GameManager.get()?.startGame("Juego1")
-//
-//            else -> Intent(activity, MapsActivity::class.java)
-//        }
+
+//    ELIMINAR
+    private fun getPlaceIntent(placeName: String?): Intent {
+    // Crea un Intent para la actividad correspondiente al lugar
+    return when (placeName) {
+        "Idi probak" -> Intent(activity, MultipleChoiceActivity::class.java)
+        "Odolostea" -> Intent(activity, WordSearchActivity::class.java)
+        "Txakoli" -> Intent(activity, DiferenciasActivity::class.java)
+        "Udala" -> Intent(activity, DiferenciasActivity::class.java)
+        "Santa Maria" -> Intent(activity, PuzzleActivity::class.java)
+        "San Mameseko Arkua" -> Intent(activity, Crucigrama::class.java)
+        "Lezamako dorrea" -> Intent(activity, OrdenarImagenesActivity::class.java)
+
+        else -> Intent(activity, MapsActivity::class.java)
+    }
+    }
 }

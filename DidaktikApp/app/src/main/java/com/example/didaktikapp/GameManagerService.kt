@@ -92,7 +92,7 @@ class GameManagerService : Service() {
             pantalla()
         } else {
             //Si no, vuelve al menú principal
-            val intent = Intent(context, MainMenuActivity::class.java)
+            val intent = Intent(context, MapsActivity::class.java)
             context.startActivity(intent)
         }
     }

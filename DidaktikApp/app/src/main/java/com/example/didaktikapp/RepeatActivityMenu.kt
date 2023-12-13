@@ -16,8 +16,9 @@ class RepeatActivityMenu(private val activity: AppCompatActivity)  {
             restartActivity(intent)
         }
         builder.setNegativeButton("Ez") { _, _ ->
-            // Si el usuario hace clic en "Ez" (No), regresa al menú principal
-            navigateToMainMenu()
+            // Si el usuario hace clic en "Ez" (No), continua con el juego
+//          NavigationUtil.navigateToMainMenu(activity)
+            GameManager.get()?.nextScreen()
         }
 
         // Mostrar el cuadro de diálogo
@@ -27,10 +28,6 @@ class RepeatActivityMenu(private val activity: AppCompatActivity)  {
     private fun restartActivity(intent: Intent) {
         activity.finish()
         activity.startActivity(intent)
-    }
-
-    private fun navigateToMainMenu() {
-        NavigationUtil.navigateToMainMenu(activity)
     }
 
 }

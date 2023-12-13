@@ -19,6 +19,9 @@
             android:name=".OrdenarImagenesActivity"
             android:exported="false" />
         <activity
+            android:name=".WordSearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".PreguntasPistas"
             android:exported="false" />
         <meta-data
@@ -44,6 +47,12 @@
             android:exported="false" />
         <activity
             android:name=".Crucigrama"
+            android:exported="false" />
+        <activity
+            android:name=".InsertWordsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MultipleChoiceActivity"
             android:exported="false" />
         <activity
             android:name=".MainMenuActivity"
