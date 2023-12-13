@@ -16,7 +16,7 @@
         android:theme="@style/DidaktikAppTheme"
         tools:targetApi="31">
         <activity
-            android:name=".DiferenciasActivity"
+            android:name=".OrdenarImagenesActivity"
             android:exported="false" />
         <activity
             android:name=".PreguntasPistas"
@@ -25,25 +25,25 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
         <activity
-            android:name=".Crucigrama"
-            android:exported="false" />
-        <activity
-            android:name=".Ajustes"
-            android:exported="false" />
-        <activity
             android:name=".AdminLoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Info"
             android:exported="false" />
         <activity
             android:name=".MapsActivity"
             android:exported="false" />
         <activity
+            android:name=".Ajustes"
+            android:exported="false" />
+        <activity
+            android:name=".DiferenciasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Info"
+            android:exported="false" />
+        <activity
             android:name=".PuzzleActivity"
             android:exported="false" />
         <activity
-            android:name=".WordSearchActivity"
+            android:name=".Crucigrama"
             android:exported="false" />
         <activity
             android:name=".MainMenuActivity"

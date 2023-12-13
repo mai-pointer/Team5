@@ -11,7 +11,6 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.didaktikapp.R
 import com.example.didaktikapp.navigation.NavigationUtil
 import com.example.didaktikapp.titleFragment.TitleFragment
 
@@ -27,6 +26,8 @@ class OrdenarImagenesActivity : AppCompatActivity() {
     private lateinit var hueco4: RelativeLayout
     private lateinit var imagen5: ImageView
     private lateinit var hueco5: RelativeLayout
+
+    private val repeatActivityMenu = RepeatActivityMenu(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,8 +104,9 @@ class OrdenarImagenesActivity : AppCompatActivity() {
                                 hueco.setBackgroundColor(Color.GREEN)
 
                                 // Verificar si todas las imágenes están colocadas
-                                if (imagen1.visibility == View.INVISIBLE && imagen2.visibility == View.INVISIBLE) {
-                                    showToast("¡Juego completado!")
+                                if (checkAllImagesPlacedCorrectly()) {
+                                    val intent = Intent(this ,OrdenarImagenesActivity::class.java)
+                                    repeatActivityMenu.showGameOverDialog(this, intent)
                                 }
                             } else {
                                 showToast("La imagen no es la correcta para este hueco.")
@@ -123,6 +125,14 @@ class OrdenarImagenesActivity : AppCompatActivity() {
                 else -> true
             }
         }
+    }
+    private fun checkAllImagesPlacedCorrectly(): Boolean {
+        // Verificar si todas las imágenes están colocadas correctamente
+        return imagen1.visibility == View.INVISIBLE &&
+                imagen2.visibility == View.INVISIBLE &&
+                imagen3.visibility == View.INVISIBLE &&
+                imagen4.visibility == View.INVISIBLE &&
+                imagen5.visibility == View.INVISIBLE
     }
 
     private fun showToast(message: String) {
