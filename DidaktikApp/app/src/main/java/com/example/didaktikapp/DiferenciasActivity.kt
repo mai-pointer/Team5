@@ -54,7 +54,7 @@ class DiferenciasActivity : AppCompatActivity() {
     }
 
     private fun actualizarContador() {
-        var btnCont = findViewById<Button>(R.id.contDifs)
+        var btnCont = findViewById<Button>(R.id.btnJugar)
         var imgTouch = findViewById<ImageView>(R.id.clickimg)
 
         if (contDifs >=6) {

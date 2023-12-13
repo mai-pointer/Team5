@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -12,138 +13,123 @@
         android:name="com.example.didaktikapp.titleFragment.TitleFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         tools:layout="@layout/fragment_title" />
 
+    <!-- LinearLayout vertical que contiene el FragmentContainerView y el GridLayout del puzzle -->
+    <LinearLayout
+        android:layout_width="450dp"
+        android:layout_height="520dp"
+        android:layout_below="@id/fragmentContainerView"
+        android:layout_marginTop="45dp"
+        android:orientation="vertical">
 
-    <!-- Contenido principal debajo de la barra de navegación -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="670dp"
-        android:layout_below="@+id/fragmentContainerView"
-        android:layout_marginTop="8dp"
-        android:padding="10dp">
 
-        <!-- TextView centrado verticalmente en el centro -->
-        <TextView
-            android:id="@+id/textViewPlaceName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="48dp"
-            android:layout_marginEnd="48dp"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="@font/noahgrotesqueblack"
-            android:textColor="@color/verdeOscuro"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <!-- ImageView (botón) a la derecha -->
-
-        <!-- Imagen a pantalla completa -->
-        <ImageView
-            android:id="@+id/imageViewFullscreen"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@null"
-            android:scaleType="centerCrop"
-            android:src="@drawable/baseline_church_24"
-            android:tint="@color/grisOscuro"
-            tools:ignore="UseAppTint" />
-
-        <!-- Cuadrícula estilo puzle encima de la imagen -->
         <GridLayout
             android:id="@+id/gridLayoutPuzzle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_gravity="center"
+            android:layout_weight="1"
             android:columnCount="3"
-            android:rowCount="9">
+            android:rowCount="3">
 
-            <!-- Primer cuadro -->
+            <!-- Espacio en blanco (bloque sin imagen) -->
             <ImageView
+                android:id="@+id/emptyBlock"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="2dp"
-                android:background="@drawable/bordered_transparent_background"
-                android:contentDescription="@null" />
+                android:contentDescription="@null"
+                android:src="@drawable/image0" />
 
+            <!-- Bloques de puzzle -->
             <ImageView
+                android:id="@+id/block1"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="2dp"
-                android:background="@drawable/bordered_transparent_background"
-                android:contentDescription="@null" />
+                android:contentDescription="@null"
+                android:src="@drawable/image1" />
 
             <ImageView
+                android:id="@+id/block2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="2dp"
-                android:background="@drawable/bordered_transparent_background"
-                android:contentDescription="@null" />
+                android:contentDescription="@null"
+                android:src="@drawable/image2" />
 
             <ImageView
+                android:id="@+id/block3"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="2dp"
-                android:background="@drawable/bordered_transparent_background"
-                android:contentDescription="@null" />
+                android:contentDescription="@null"
+                android:src="@drawable/image3" />
 
             <ImageView
+                android:id="@+id/block4"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="2dp"
-                android:background="@drawable/bordered_transparent_background"
-                android:contentDescription="@null" />
+                android:contentDescription="@null"
+                android:src="@drawable/image4" />
 
             <ImageView
+                android:id="@+id/block5"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="2dp"
-                android:background="@drawable/bordered_transparent_background"
-                android:contentDescription="@null" />
+                android:contentDescription="@null"
+                android:src="@drawable/image5" />
 
             <ImageView
+                android:id="@+id/block6"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="2dp"
-                android:background="@drawable/bordered_transparent_background"
-                android:contentDescription="@null" />
+                android:contentDescription="@null"
+                android:src="@drawable/image6" />
 
             <ImageView
+                android:id="@+id/block7"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="2dp"
-                android:background="@drawable/bordered_transparent_background"
-                android:contentDescription="@null" />
+                android:contentDescription="@null"
+                android:src="@drawable/image7" />
 
             <ImageView
+                android:id="@+id/block8"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="2dp"
-                android:background="@drawable/bordered_transparent_background"
-                android:contentDescription="@null" />
+                android:contentDescription="@null"
+                android:src="@drawable/image8" />
+
 
         </GridLayout>
-    </RelativeLayout>
+    </LinearLayout>
+
 </RelativeLayout>

@@ -19,9 +19,14 @@ class OrdenarImagenesActivity : AppCompatActivity() {
 
     private lateinit var imagen1: ImageView
     private lateinit var hueco1: RelativeLayout
-
     private lateinit var imagen2: ImageView
     private lateinit var hueco2: RelativeLayout
+    private lateinit var imagen3: ImageView
+    private lateinit var hueco3: RelativeLayout
+    private lateinit var imagen4: ImageView
+    private lateinit var hueco4: RelativeLayout
+    private lateinit var imagen5: ImageView
+    private lateinit var hueco5: RelativeLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +44,8 @@ class OrdenarImagenesActivity : AppCompatActivity() {
         }
 
         // Configura el click listener para el botón en el fragmento
-        val titleFragment = supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
+        val titleFragment =
+            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
         titleFragment?.setOnHomeButtonClickListener(View.OnClickListener {
             onHomeButtonClicked()
         })
@@ -50,9 +56,21 @@ class OrdenarImagenesActivity : AppCompatActivity() {
         imagen2 = findViewById(R.id.imagen2)
         hueco2 = findViewById(R.id.hueco2) as RelativeLayout
 
+        imagen3 = findViewById(R.id.imagen3)
+        hueco3 = findViewById(R.id.hueco3) as RelativeLayout
+
+        imagen4 = findViewById(R.id.imagen4)
+        hueco4 = findViewById(R.id.hueco4) as RelativeLayout
+
+        imagen5 = findViewById(R.id.imagen5)
+        hueco5 = findViewById(R.id.hueco5) as RelativeLayout
+
         // Configurar el escuchador de arrastre para las imágenes arrastrables
         setDragListener(imagen1, hueco1)
         setDragListener(imagen2, hueco2)
+        setDragListener(imagen3, hueco3)
+        setDragListener(imagen4, hueco4)
+        setDragListener(imagen5, hueco5)
     }
 
     private fun setDragListener(

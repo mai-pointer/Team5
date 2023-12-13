@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/competitivoBtn"
             style="@style/transparentButtonSec"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,12 +33,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button2"
+            app:layout_constraintStart_toEndOf="@+id/competitivoBtn"
             app:srcCompat="@drawable/candado"
             app:tint="@color/grisClaro" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/ajustesBtn"
             style="@style/transparentButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/contDifs"
+            android:id="@+id/btnJugar"
             style="@style/transparentButtonPri"
             android:layout_width="146dp"
             android:layout_height="74dp"
