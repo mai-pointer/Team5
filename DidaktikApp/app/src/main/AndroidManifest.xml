@@ -16,7 +16,7 @@
         android:theme="@style/DidaktikAppTheme"
         tools:targetApi="31">
         <activity
-            android:name=".DiferenciasActivity"
+            android:name=".OrdenarImagenesActivity"
             android:exported="false" />
         <activity
             android:name=".PreguntasPistas"
@@ -34,13 +34,19 @@
             android:name=".Ajustes"
             android:exported="false" />
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".DiferenciasActivity"
             android:exported="false" />
         <activity
             android:name=".Info"
             android:exported="false" />
         <activity
             android:name=".PuzzleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Crucigrama"
+            android:exported="false" />
+        <activity
+            android:name=".MainMenuActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
