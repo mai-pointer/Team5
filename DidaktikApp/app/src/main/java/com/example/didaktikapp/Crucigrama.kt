@@ -126,6 +126,7 @@ class Crucigrama : AppCompatActivity() {
             }
             if (bien){
                 //Acaba la partida
+                GameManager.get()?.nextScreen()
             }
 
         }

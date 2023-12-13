@@ -23,10 +23,8 @@ class MainMenuActivity : AppCompatActivity() {
         // Agrega un OnClickListener al botón "Jugar"
         buttonJugar.setOnClickListener{
             // Crea un Intent para lanzar la actividad Jugar
-//            val intent = Intent(this@MainMenuActivity, MapsActivity::class.java)
-//            startActivity(intent)
-
-            GameManager.get()?.startGame("Juego1")
+            val intent = Intent(this@MainMenuActivity, MapsActivity::class.java)
+            startActivity(intent)
         }
         // Agrega un OnClickListener al botón "Ajustes"
         buttonAjustes.setOnClickListener{

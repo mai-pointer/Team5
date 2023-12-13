@@ -28,7 +28,7 @@
             android:name=".MapsActivity"
             android:exported="false" />
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".PuzzleActivity"
             android:exported="false" />
         <activity
             android:name=".AdminLoginActivity"
@@ -43,10 +43,13 @@
             android:name=".Crucigrama"
             android:exported="false" />
         <activity
+            android:name=".MultipleChoiceActivity"
+            android:exported="false" />
+        <activity
             android:name=".DiferenciasActivity"
             android:exported="false" />
         <activity
-            android:name=".PuzzleActivity"
+            android:name=".MainMenuActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
