@@ -3,7 +3,6 @@ package com.example.didaktikapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 
 class MainMenuActivity : AppCompatActivity() {
@@ -13,6 +12,13 @@ class MainMenuActivity : AppCompatActivity() {
 
         val buttonJugar: Button = findViewById(R.id.btnJugar)
         val buttonAjustes: Button = findViewById(R.id.ajustesBtn)
+
+        // Inicia el servicio al comienzo de la aplicación
+        startService(
+            Intent(this, GameManagerService::class.java)
+        )
+        GameManager.initialize(this)
+
 
         // Agrega un OnClickListener al botón "Jugar"
         buttonJugar.setOnClickListener{

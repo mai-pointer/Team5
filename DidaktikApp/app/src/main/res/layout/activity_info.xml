@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".Info">
 
+    <Button
+        android:id="@+id/terminar_info"
+        style="@style/GreyButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/terminar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.87"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="300dp"
@@ -83,21 +96,6 @@
             android:layout_weight="1"
             app:srcCompat="@drawable/ellipse_6" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="103dp"
-        android:layout_height="36dp"
-        android:layout_marginBottom="24dp"
-        android:text="@string/terminar"
-        android:textAlignment="textEnd"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.905"
-        app:layout_constraintStart_toStartOf="parent"
-        style="@style/TextoDestacadoStyle"/>
 
     <ImageView
         android:id="@+id/imageView3"
