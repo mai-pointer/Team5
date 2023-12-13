@@ -25,22 +25,28 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
         <activity
-            android:name=".AdminLoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MapsActivity"
+            android:name=".Crucigrama"
             android:exported="false" />
         <activity
             android:name=".Ajustes"
             android:exported="false" />
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".AdminLoginActivity"
             android:exported="false" />
         <activity
             android:name=".Info"
             android:exported="false" />
         <activity
+            android:name=".MapsActivity"
+            android:exported="false" />
+        <activity
             android:name=".PuzzleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WordSearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainMenuActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
