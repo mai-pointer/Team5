@@ -10,6 +10,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.didaktikapp.R
 import com.example.didaktikapp.navigation.NavigationUtil
@@ -27,6 +28,9 @@ class OrdenarImagenesActivity : AppCompatActivity() {
     private lateinit var hueco4: RelativeLayout
     private lateinit var imagen5: ImageView
     private lateinit var hueco5: RelativeLayout
+
+    private var imagesPlacedCorrectly = 0
+    private val totalImages = 5
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,9 +106,11 @@ class OrdenarImagenesActivity : AppCompatActivity() {
                                 draggedView.visibility = View.INVISIBLE
                                 hueco.setBackgroundColor(Color.GREEN)
 
+                                imagesPlacedCorrectly++
+
                                 // Verificar si todas las imágenes están colocadas
-                                if (imagen1.visibility == View.INVISIBLE && imagen2.visibility == View.INVISIBLE) {
-                                    showToast("¡Juego completado!")
+                                if (imagesPlacedCorrectly == totalImages) {
+                                    showGameOverDialog()
                                 }
                             } else {
                                 showToast("La imagen no es la correcta para este hueco.")
@@ -132,6 +138,35 @@ class OrdenarImagenesActivity : AppCompatActivity() {
     private fun onHomeButtonClicked() {
         // Acciones a realizar cuando se hace clic en el botón Home
         // Utiliza NavigationUtil para la navegación
+        NavigationUtil.navigateToMainMenu(this)
+    }
+
+    private fun showGameOverDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Jokoa amaituta")
+        builder.setMessage("Berriro jolaztu nahi duzu?")
+        builder.setPositiveButton("Bai") { _, _ ->
+            // Si el usuario hace clic en "Bai" (Sí), reinicia la actividad
+            restartActivity()
+        }
+        builder.setNegativeButton("Ez") { _, _ ->
+            // Si el usuario hace clic en "Ez" (No), regresa al menú principal
+            navigateToMainMenu()
+        }
+
+        // Mostrar el cuadro de diálogo
+        builder.show()
+    }
+
+    private fun restartActivity() {
+        // Reiniciar la actividad actual
+        val intent = intent
+        finish()
+        startActivity(intent)
+    }
+
+    private fun navigateToMainMenu() {
+        // Regresar al menú principal
         NavigationUtil.navigateToMainMenu(this)
     }
 }
