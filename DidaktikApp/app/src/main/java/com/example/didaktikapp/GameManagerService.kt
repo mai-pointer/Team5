@@ -32,6 +32,7 @@ class GameManagerService : Service() {
         "Juego4" to listOf(
             OrdenarImagenesActivity::class.java,
             Info::class.java,
+            DiferenciasActivity::class.java,
             MultipleChoiceActivity::class.java,
             Info::class.java
         ),
