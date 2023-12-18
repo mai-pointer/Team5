@@ -22,6 +22,7 @@ class GameManagerService : Service() {
             Info::class.java
         ),
         "Juego3" to listOf(
+            DiferenciasActivity::class.java, //PRUEBA
             PreguntasPistas::class.java,
             Info::class.java,
             Info::class.java,
@@ -29,6 +30,7 @@ class GameManagerService : Service() {
             Info::class.java,
             ),
         "Juego4" to listOf(
+            OrdenarImagenesActivity::class.java,
             Info::class.java,
             MultipleChoiceActivity::class.java,
             Info::class.java
@@ -51,11 +53,10 @@ class GameManagerService : Service() {
             Info::class.java,
             Info::class.java,
             InsertWordsActivity::class.java,
-            OrdenarImagenesActivity::class.java,
         ),
         "HASIERAKO JARDUERA" to listOf(
             Info::class.java,
-        ),
+            ),
         "AMAIERAKO JARDUERA" to listOf(
             Info::class.java,
             OrdenarImagenesActivity::class.java,

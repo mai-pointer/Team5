@@ -93,9 +93,9 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageView14"
-            android:layout_width="112dp"
-            android:layout_height="95dp"
-            android:layout_marginBottom="76dp"
+            android:layout_width="281dp"
+            android:layout_height="215dp"
+            android:layout_marginBottom="60dp"
             android:src="@drawable/_00"
             app:layout_constraintBottom_toTopOf="@+id/bottom"
             app:layout_constraintEnd_toEndOf="parent"

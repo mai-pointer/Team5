@@ -10,6 +10,7 @@ import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
@@ -30,6 +31,11 @@ class InsertWordsActivity : AppCompatActivity() {
         val textView = findViewById<TextView>(R.id.tv1)
         textView.text = createSpannableText(originalText)
         textView.movementMethod = LinkMovementMethod.getInstance()
+
+        val btnValidate = findViewById<Button>(R.id.btnValidate)
+        btnValidate.setOnClickListener {
+            validateText()
+        }
     }
 
     private fun createSpannableText(text: String): SpannableStringBuilder {
@@ -78,5 +84,25 @@ class InsertWordsActivity : AppCompatActivity() {
             val dialog = builder.create()
             dialog.show()
         }
+    }
+    private fun validateText() {
+        val insertedText = findViewById<TextView>(R.id.tv1).text.toString()
+        val expectedText = "Dorre hau (gotorleku militarra) izan zen eta (XVI.) mendean eraiki zen. (Hareharriz) eginda dago eta hiru solairu ditu. Gaur egun, dorrea (etxebizitza) bihurtu da."
+
+        val alertDialog = AlertDialog.Builder(this)
+            .setTitle("Resultado de la validación")
+            .setCancelable(false)
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+
+        if (insertedText == expectedText) {
+            alertDialog.setMessage("¡Ganaste!")
+        } else {
+            alertDialog.setMessage("Perdiste")
+        }
+
+        alertDialog.show()
     }
 }

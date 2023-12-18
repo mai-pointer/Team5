@@ -67,19 +67,8 @@
             android:name=".Crucigrama"
             android:exported="false" />
         <activity
-            android:name=".InsertWordsActivity"
-            android:exported="false" />
-        <activity
             android:name=".MultipleChoiceActivity"
             android:exported="false" />
-        <activity
-            android:name=".MainMenuActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
