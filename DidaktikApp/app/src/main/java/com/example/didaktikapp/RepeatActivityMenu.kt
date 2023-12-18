@@ -11,13 +11,12 @@ class RepeatActivityMenu(private val activity: AppCompatActivity)  {
         val builder = AlertDialog.Builder(context)
         builder.setTitle("Jokoa amaituta")
         builder.setMessage("Berriro jolastu nahi duzu?")
-        builder.setPositiveButton("Bai") { _, _ ->
+        builder.setPositiveButton("Reiniciar") { _, _ ->
             // Si el usuario hace clic en "Bai" (Sí), reinicia la actividad
             restartActivity(intent)
         }
-        builder.setNegativeButton("Ez") { _, _ ->
+        builder.setNegativeButton("Continuar") { _, _ ->
             // Si el usuario hace clic en "Ez" (No), continua con el juego
-//          NavigationUtil.navigateToMainMenu(activity)
             GameManager.get()?.nextScreen()
         }
 
