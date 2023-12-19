@@ -5,10 +5,11 @@ import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
@@ -17,50 +18,60 @@ import com.example.didaktikapp.databinding.ActivityMapsBinding
 import com.example.didaktikapp.mapFragment.PlaceDetailsFragment
 import com.example.didaktikapp.navigation.NavigationUtil
 import com.example.didaktikapp.titleFragment.TitleFragment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.concurrent.CompletableFuture
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapClickListener,
+class MapsActivity : AppCompatActivity(), GoogleMap.OnMapClickListener,
     GoogleMap.OnMarkerClickListener {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
+    private lateinit var progressBar: ProgressBar
+
 
     // Variable para saber si el usuario es admin o no
-    var esAdmin: Boolean = false
+    private var esAdmin: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        progressBar = findViewById(R.id.progressBar)
+
+        fragmentHeader(savedInstanceState)
+
         // Recibe el valor de la variable admin
         esAdmin = intent.getBooleanExtra("admin", false)
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment =
-            supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
 
-        // Obtén una referencia al contenedor de fragmentos
-        val fragmentContainer = findViewById<FrameLayout>(R.id.fragmentContainerView)
-
-        // Reemplaza el contenedor con el TitleFragment
-        if (savedInstanceState == null) {
-            val titleFragment = TitleFragment.newInstance("Jokoa aukeratu mapan")
-            supportFragmentManager.beginTransaction()
-                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
-                .commit()
-        }
-
-        // Configura el click listener para el botón en el fragmento
-        val titleFragment = supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
-        titleFragment?.setOnHomeButtonClickListener(View.OnClickListener {
-            onHomeButtonClicked()
-        })
+        createMap()
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
+    fun createMap() = lifecycleScope.launch {
+        progressBar.visibility = View.VISIBLE
 
+        val getMapJob = async(Dispatchers.Main) {
+            getMap()
+        }
+        getMapJob.await()
+
+        progressBar.visibility = View.GONE
+    }
+
+    private fun getMap() {
+        val mapFragment =  supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+
+        mapFragment.getMapAsync { googleMap ->
+            addMarkers(googleMap)
+        }
+    }
+
+    private fun addMarkers(googleMap: GoogleMap){
+        mMap = googleMap
         // Add markers and move the camera
         val idiProbak = LatLng(43.27556360817825, -2.827742396615327)
         val agricolaString = resources.getString(R.string.agricolaText)
@@ -107,8 +118,30 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         )
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(santaMaria, zoomLevel))
 
-        mMap.setOnMapClickListener(this)
-        mMap.setOnMarkerClickListener(this)
+        mMap.setOnMapClickListener(this@MapsActivity)
+        mMap.setOnMarkerClickListener(this@MapsActivity)
+
+        progressBar.visibility = View.GONE
+    }
+
+    private fun fragmentHeader(savedInstanceState: Bundle?) {
+        // Obtén una referencia al contenedor de fragmentos
+        val fragmentContainer = findViewById<FrameLayout>(R.id.fragmentContainerView)
+
+        // Reemplaza el contenedor con el TitleFragment
+        if (savedInstanceState == null) {
+            val titleFragment = TitleFragment.newInstance("Jokoa aukeratu mapan")
+            supportFragmentManager.beginTransaction()
+                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
+                .commit()
+        }
+
+        // Configura el click listener para el botón en el fragmento
+        val titleFragment =
+            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
+        titleFragment?.setOnHomeButtonClickListener {
+            onHomeButtonClicked()
+        }
     }
 
     override fun onMapClick(point: LatLng) {
@@ -141,7 +174,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         fragment.arguments = bundle
 
         // Cargar la animación desde res/anim
-        val slideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up)
+        AnimationUtils.loadAnimation(this, R.anim.slide_up)
 
         // Asignar la animación al fragmento
         fragmentTransaction.setCustomAnimations(R.anim.slide_up, 0, 0, R.anim.slide_up)

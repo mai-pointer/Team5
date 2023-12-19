@@ -5,8 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:configChanges="keyboardHidden|orientation|screenSize"
         android:allowBackup="true"
+        android:configChanges="keyboardHidden|orientation|screenSize"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -19,19 +19,21 @@
             android:name=".OrdenarImagenesActivity"
             android:exported="false" />
         <activity
-            android:name=".WordSearchActivity"
+            android:name=".MainMenuActivity"
             android:exported="false" />
         <activity
             android:name=".PreguntasPistas"
             android:exported="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
         <activity
             android:name=".AdminLoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MapsActivity"
+            android:name=".WordSearchActivity"
             android:exported="false" />
         <activity
             android:name=".Ajustes"
@@ -55,7 +57,7 @@
             android:name=".MultipleChoiceActivity"
             android:exported="false" />
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".MapsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
