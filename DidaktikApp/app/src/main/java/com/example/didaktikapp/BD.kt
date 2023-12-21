@@ -1,7 +1,12 @@
-package com.gernika.roomejemplo
+package com.example.didaktikapp
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
+import android.util.Log
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.room.ColumnInfo
 import androidx.room.Dao
 import androidx.room.Database
@@ -15,6 +20,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.Update
 import androidx.sqlite.db.SupportSQLiteDatabase
+import kotlinx.coroutines.launch
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 //CLASES------------------
 
@@ -22,22 +31,19 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 data class Partida(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val juego: String,
-    val pantalla: Int
+    var juego: String,
+    var pantalla: Int
 )
 
 //DAO------------------
 
 @Dao
-interface ProfesorDao : BaseDao<Partida> {
+interface PartidaDao : BaseDao<Partida> {
     @Query("SELECT * FROM Partida")
     fun getAll(): List<Partida>
-}
 
-@Dao
-interface AsignaturaDao : BaseDao<Partida> {
-    @Query("SELECT * FROM Partida")
-    fun getAll(): List<Partida>
+    @Query("SELECT * FROM Partida Where id = :id")
+    fun get(id: Int): Partida
 }
 
 interface BaseDao<T> {
@@ -63,14 +69,43 @@ interface BaseDao<T> {
 
 //BD------------------
 
-@Database(entities = [Partida::class], version = 1)
+@Database(entities = [Partida::class], version = 2)
 abstract class BD : RoomDatabase() {
-    abstract fun profesorDao(): ProfesorDao
-    abstract fun asignaturaDao(): AsignaturaDao
+    abstract fun PartidaDao(): PartidaDao
 }
 
 class MyApp : Application() {
     val database by lazy {
         Room.databaseBuilder(this, BD::class.java, "bd").fallbackToDestructiveMigration().allowMainThreadQueries().build()
+    }
+}
+
+//FUNCIONES------------------
+class BDManager {
+    companion object {
+        var coroutineScope: CoroutineScope? = null
+
+        fun inicializar(coroutineScope: CoroutineScope) {
+            this.coroutineScope = coroutineScope
+        }
+
+        fun partida(
+            context: Context,
+            callback: (sharedPreferences: SharedPreferences, partidaDao: PartidaDao) -> Unit
+        ) {
+            coroutineScope?.launch{
+                try {
+                    val application = context.applicationContext as MyApp
+                    val partidaBD = application.database.PartidaDao()
+                    val sharedPreferences =
+                        context.getSharedPreferences("Lezama", Context.MODE_PRIVATE)
+
+                    callback(sharedPreferences, partidaBD)
+
+                } catch (e: Exception) {
+                    Log.e("room", "Error: ${e.message}")
+                }
+            }
+        }
     }
 }
