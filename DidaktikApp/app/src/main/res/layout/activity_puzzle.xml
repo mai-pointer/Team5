@@ -4,10 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
 
     <!-- Contenedor principal que contiene el FragmentContainerView y otros elementos según sea necesario -->
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
         android:name="com.example.didaktikapp.titleFragment.TitleFragment"
@@ -18,12 +19,12 @@
         android:layout_alignParentEnd="true"
         tools:layout="@layout/fragment_title" />
 
-    <!-- LinearLayout vertical que contiene el FragmentContainerView y el GridLayout del puzzle -->
     <LinearLayout
+        android:id="@+id/puzzle"
         android:layout_width="450dp"
         android:layout_height="520dp"
         android:layout_below="@id/fragmentContainerView"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="30dp"
         android:orientation="vertical">
 
 
@@ -130,6 +131,24 @@
 
 
         </GridLayout>
+
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/botomMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/puzzle">
+
+        <ImageView
+            android:id="@+id/clueBtn"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:contentDescription="@null"
+            android:src="@drawable/bulb" />
+    </LinearLayout>
+
+    <!-- LinearLayout vertical que contiene el FragmentContainerView y el GridLayout del puzzle -->
 
 </RelativeLayout>
