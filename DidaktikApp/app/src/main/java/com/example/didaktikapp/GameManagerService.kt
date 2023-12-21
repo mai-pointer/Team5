@@ -27,7 +27,7 @@ class GameManagerService : Service() {
             Info::class.java,
             Info::class.java,
             Info::class.java,
-            ),
+        ),
         "Juego4" to listOf(
             Info::class.java,
             DiferenciasActivity::class.java,
@@ -61,7 +61,7 @@ class GameManagerService : Service() {
             Info::class.java,
             OrdenarImagenesActivity::class.java,
             Info::class.java,
-       )
+        )
     )
 
     //Variables
@@ -84,6 +84,7 @@ class GameManagerService : Service() {
         nombreJuego = gameName
         juegoActual = games[gameName]
         pantallaActual = 0
+        guardar()
         pantalla()
     }
 
@@ -105,7 +106,7 @@ class GameManagerService : Service() {
     }
 
     private fun guardar(){
-        BDManager.partida(context){ sharedPreferences, partidaBD ->
+        BDManager.partida{ sharedPreferences, partidaBD ->
             val juegoActualId = sharedPreferences.getInt("juego_actual", -1)
 
             if (juegoActualId != -1) {

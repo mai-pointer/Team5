@@ -84,21 +84,27 @@ class MyApp : Application() {
 class BDManager {
     companion object {
         var coroutineScope: CoroutineScope? = null
+        var context: Context? = null
+        var database: BD? = null
 
-        fun inicializar(coroutineScope: CoroutineScope) {
+        fun inicializar(context: Context, coroutineScope: CoroutineScope, database: BD) {
+            this.context = context
             this.coroutineScope = coroutineScope
+            this.database = database
         }
 
         fun partida(
-            context: Context,
             callback: (sharedPreferences: SharedPreferences, partidaDao: PartidaDao) -> Unit
         ) {
-            coroutineScope?.launch{
+            if (context == null || coroutineScope == null || database == null) {
+                throw Exception("BDManager no inicializado")
+                return
+            }
+            coroutineScope!!.launch{
                 try {
-                    val application = context.applicationContext as MyApp
-                    val partidaBD = application.database.PartidaDao()
+                    val partidaBD = database!!.PartidaDao()
                     val sharedPreferences =
-                        context.getSharedPreferences("Lezama", Context.MODE_PRIVATE)
+                        context!!.getSharedPreferences("Lezama", Context.MODE_PRIVATE)
 
                     callback(sharedPreferences, partidaBD)
 
