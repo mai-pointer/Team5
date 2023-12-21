@@ -1,5 +1,7 @@
 package com.example.didaktikapp
 
+import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -7,6 +9,7 @@ import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -18,6 +21,10 @@ import com.example.didaktikapp.databinding.ActivityMapsBinding
 import com.example.didaktikapp.mapFragment.PlaceDetailsFragment
 import com.example.didaktikapp.navigation.NavigationUtil
 import com.example.didaktikapp.titleFragment.TitleFragment
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.LocationServices
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapClickListener,
     GoogleMap.OnMarkerClickListener {
@@ -25,6 +32,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
     private lateinit var progressBar: ProgressBar
+    private lateinit var locationProvider: LocationProvider
 
     // Variable para saber si el usuario es admin o no
     var esAdmin: Boolean = false
@@ -33,6 +41,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         super.onCreate(savedInstanceState)
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        locationProvider = LocationProvider(this, locationCallback)
 
         progressBar = findViewById(R.id.progressBar)
         setupHeaderFragment(savedInstanceState)
@@ -47,6 +57,27 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         mapFragment.getMapAsync(this)
 
     }
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        when (requestCode) {
+            LocationProvider.LOCATION_PERMISSION_REQUEST_CODE -> {
+                // Verifica si el permiso de ubicación fue otorgado
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permiso otorgado; puedes iniciar la actualización de ubicación
+                    locationProvider.startLocationUpdates()
+                } else {
+                    Log.d("Location permission", "Request denied")
+                }
+            }
+        }
+    }
+
+
 
     private fun setupHeaderFragment(savedInstanceState: Bundle?) {
         val fragmentContainer = findViewById<FrameLayout>(R.id.fragmentContainerView)
@@ -120,6 +151,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         }
     }
 
+    private val locationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
+            super.onLocationResult(locationResult)
+            val lastLocation: Location? = locationResult.lastLocation
+
+            if (lastLocation != null) {
+                checkProximityToMarker(lastLocation.latitude, lastLocation.longitude)
+            }
+        }
+    }
+
+    private fun checkProximityToMarker(latitude: Double, longitude: Double) {
+
+    }
+
     override fun onMapClick(point: LatLng) {
         // Este método se ejecuta cuando se hace clic en cualquier parte del mapa
         // Puedes realizar acciones adicionales aquí si es necesario
@@ -127,15 +173,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        // Se ejecuta cuando se hace clic en un marcador
-        // Aquí puedes realizar acciones específicas para el marcador clicado
         Log.d("MarkerClick", "Click en el marcador: ${marker.title}, Snippet: ${marker.snippet}")
 
         if (isPredefinedMarker(marker.title)) {
             openPlaceDetailsFragment(marker)
         }
 
-        // Devuelve 'true' para indicar que el evento ha sido consumido
         return true
     }
 
@@ -168,5 +211,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         // Acciones a realizar cuando se hace clic en el botón Home
         // Utiliza NavigationUtil para la navegación
         NavigationUtil.navigateToMainMenu(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        locationProvider.stopLocationUpdates()
     }
 }
