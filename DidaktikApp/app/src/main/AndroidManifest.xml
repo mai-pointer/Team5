@@ -45,7 +45,7 @@
             android:name=".Info"
             android:exported="false" />
         <activity
-            android:name=".PuzzleActivity"
+            android:name=".MapsActivity"
             android:exported="false" />
         <activity
             android:name=".Crucigrama"
@@ -57,7 +57,7 @@
             android:name=".MultipleChoiceActivity"
             android:exported="false" />
         <activity
-            android:name=".MapsActivity"
+            android:name=".PuzzleActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
