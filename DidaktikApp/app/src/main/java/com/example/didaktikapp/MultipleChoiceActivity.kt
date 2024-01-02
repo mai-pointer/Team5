@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MultipleChoiceActivity : AppCompatActivity() {
 
-    private var isPictureAnswer = false
+    private var isPictureAnswer: Boolean? = null
     private var question: String? = null
     private var answer1: String? = null
     private var answer2: String? = null
@@ -27,6 +27,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
     }
 
     private fun initializeVariables(){
+        isPictureAnswer = intent.getBooleanExtra("isPicture", false)
         question = intent.getStringExtra("question")
         answer1 = intent.getStringExtra("answer1")
         answer2 = intent.getStringExtra("answer2")
