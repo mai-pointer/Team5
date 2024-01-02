@@ -1,9 +1,18 @@
 package com.example.didaktikapp
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
+import androidx.lifecycle.lifecycleScope
+import androidx.room.RoomDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainMenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,6 +28,27 @@ class MainMenuActivity : AppCompatActivity() {
         )
         GameManager.initialize(this)
 
+        //Crea la base de datos si no existe
+        val scope = CoroutineScope(Dispatchers.Main)
+        scope.launch {
+            delay(100)
+            BDManager.inicializar(this@MainMenuActivity, lifecycleScope,(application as MyApp).database)
+            BDManager.partida{ sharedPreferences, partidaBD ->
+                val juegoActualId = sharedPreferences.getInt("juego_actual", -1)
+
+                if (juegoActualId == -1) {
+                    // No hay valor en SharedPreferences, crea un nuevo elemento en la base de datos.
+                    val nuevoJuego = Partida(0, "Juego1", 0)
+                    partidaBD.insert(nuevoJuego)
+
+                    // Guarda el ID del nuevo juego en SharedPreferences.
+                    val editor = sharedPreferences.edit()
+                    editor.putInt("juego_actual", nuevoJuego.id)
+                    editor.apply()
+                }
+            }
+        }
+//        scope.cancel()
 
         // Agrega un OnClickListener al botón "Jugar"
         buttonJugar.setOnClickListener{

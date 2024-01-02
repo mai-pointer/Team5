@@ -2,7 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
-
+    //Room
+    id("kotlin-kapt")
 }
 
 android {
@@ -44,6 +45,11 @@ android {
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
     implementation("com.google.android.material:material:1.11.0")
+    //Room
+    implementation("androidx.room:room-runtime:2.2.5")
+    kapt("androidx.room:room-compiler:2.2.5")
+
+    implementation("com.google.android.material:material:1.6.0")
     implementation("com.makeramen:roundedimageview:2.3.0")
     implementation ("androidx.gridlayout:gridlayout:1.0.0")
     implementation("androidx.core:core-ktx:1.12.0")
