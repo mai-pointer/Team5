@@ -5,26 +5,47 @@ package com.example.didaktikapp
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.location.Location
+import android.os.Binder
 import android.os.IBinder
+import android.util.Log
 import com.google.android.gms.maps.model.LatLng
 
 class MapManagerService : Service() {
 
     // Almacena la información de las ubicaciones del mapa
-    val mapLocations = mutableMapOf<String, LatLng>()
+    private val mapLocations = mutableMapOf<String, LatLng>()
 
     // Variables
     private lateinit var context: Context
     private var currentLocationIndex = 0
 
-    // Inicializa el servicio
-    fun initialize(context: Context) {
-        this.context = context
-        // Agrega las ubicaciones del mapa según tu lógica
-        initializeMapLocations()
+    // LocationProvider para obtener la ubicación del dispositivo
+    private lateinit var locationProvider: LocationProvider
+
+    // Binder para la conexión con la actividad
+    private val binder = LocalBinder()
+
+    inner class LocalBinder : Binder() {
+        fun getService(): MapManagerService = this@MapManagerService
     }
 
-    // Agrega las ubicaciones iniciales del mapa
+    override fun onBind(intent: Intent?): IBinder? {
+        return binder
+    }
+
+    fun initialize(context: Context) {
+        this.context = context
+        initializeMapLocations()
+
+        locationProvider = LocationProvider()
+        locationProvider.setLocationListener(object : LocationProvider.LocationListener {
+            override fun onLocationChanged(location: Location) {
+                checkProximity(location)
+            }
+        })
+    }
+
     private fun initializeMapLocations() {
         mapLocations.put("Idi Probak", LatLng(43.27556360817825, -2.827742396615327))
         mapLocations.put("Harategia", LatLng(43.27394169280981, -2.832619209726283))
@@ -35,30 +56,47 @@ class MapManagerService : Service() {
         mapLocations.put("Dorrea", LatLng(43.27279428065491, -2.8434245883650817))
     }
 
-    override fun onBind(intent: Intent?): IBinder? {
-        return null
+    fun myLocation(): Location {
+        return locationProvider.provideLocation()
+    }
+
+    fun getLocationsToShow(esAdmin:Boolean): List<LatLng> {
+        return if (esAdmin) {
+            mapLocations.values.toList()
+        } else {
+            listOf(getCurrentLocation())
+        }
+    }
+
+    private fun checkProximity(currentUserPos:Location):Boolean{
+        val targetLocation = getCurrentLocation()
+
+        val distance = calculateDistance(currentUserPos.latitude, currentUserPos.longitude, targetLocation.latitude, targetLocation.longitude)
+
+        val proximityThreshold = 50
+
+        return distance <= proximityThreshold
+    }
+
+    private fun calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Float {
+        val results = FloatArray(1)
+        Location.distanceBetween(lat1, lon1, lat2, lon2, results)
+        return results[0]
     }
 
     // Obtiene la ubicación actual del mapa
-    fun getCurrentLocation(): LatLng? {
-        return if (currentLocationIndex < mapLocations.size) {
-            mapLocations.values.elementAt(currentLocationIndex)
-        } else {
-            null
-        }
+    fun getCurrentLocation(): LatLng {
+        return mapLocations.values.elementAt(currentLocationIndex)
     }
 
     // Muestra la siguiente ubicación del mapa
     fun showNextLocation() {
         if (currentLocationIndex < mapLocations.size - 1) {
-            // Si hay más ubicaciones, muestra la siguiente
             currentLocationIndex++
             notifyLocationChanged()
         } else {
-            // Si no, realiza alguna acción, como volver al menú principal
-            // Puedes agregar tu lógica aquí
-            val intent = Intent(context, MapsActivity::class.java)
-            context.startActivity(intent)
+            MapManager.destroy()
+            // Llamar a la actividad final
         }
     }
 
@@ -68,26 +106,30 @@ class MapManagerService : Service() {
         intent.putExtra("location", getCurrentLocation())
         context.sendBroadcast(intent)
     }
-}
 
-/*private var mapManagerService: MapManagerService? = null
-
-// ...
-
-// Inicializa el servicio en el método onCreate
-mapManagerService = MapManagerService()
-mapManagerService?.initialize(this)
-
-// ...
-
-// En el método onMarkerClick
-private fun onMarkerClick(marker: Marker): Boolean {
-    // ...
-
-    if (isPredefinedMarker(marker.title)) {
-        openPlaceDetailsFragment(marker)
-        mapManagerService?.showNextLocation()
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
-    // ...
-}*/
+    //Singleton
+    object MapManager {
+        private var mapManagerService: MapManagerService? = null
+
+        //Inicializa el singleton
+        fun initialize(context: Context) {
+            if (mapManagerService == null) {
+                mapManagerService = MapManagerService()
+                mapManagerService?.initialize(context)
+            }
+        }
+
+        //Devuelve el servicio
+        fun get(): MapManagerService? {
+            return mapManagerService
+        }
+
+        fun destroy() {
+            mapManagerService = null
+        }
+    }
+}
