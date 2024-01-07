@@ -47,6 +47,8 @@ dependencies {
     implementation("com.google.android.material:material:1.11.0")
     //Room
     implementation("androidx.room:room-runtime:2.2.5")
+    implementation("androidx.sqlite:sqlite-ktx:2.4.0")
+    implementation("androidx.room:room-common:2.6.1")
     kapt("androidx.room:room-compiler:2.2.5")
 
     implementation("com.google.android.material:material:1.6.0")
