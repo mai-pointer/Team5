@@ -44,14 +44,15 @@ android {
 
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("com.google.android.material:material:1.11.0")
     //Room
-    implementation("androidx.room:room-runtime:2.2.5")
+    implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.sqlite:sqlite-ktx:2.4.0")
     implementation("androidx.room:room-common:2.6.1")
-    kapt("androidx.room:room-compiler:2.2.5")
+    kapt("androidx.room:room-compiler:2.6.1")
 
-    implementation("com.google.android.material:material:1.6.0")
+    implementation("com.google.android.material:material:1.11.0")
     implementation("com.makeramen:roundedimageview:2.3.0")
     implementation ("androidx.gridlayout:gridlayout:1.0.0")
     implementation("androidx.core:core-ktx:1.12.0")
@@ -61,7 +62,7 @@ dependencies {
     implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
-    implementation ("androidx.databinding:databinding-runtime:8.2.0")
+    implementation ("androidx.databinding:databinding-runtime:8.2.1")
     implementation("androidx.gridlayout:gridlayout:1.0.0")
     implementation("com.google.android.gms:play-services-location:21.0.1")
     testImplementation("junit:junit:4.13.2")

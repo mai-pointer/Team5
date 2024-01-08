@@ -1,17 +1,17 @@
 package com.example.didaktikapp
 
-// MapManagerService.kt
-
 import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.location.Location
 import android.os.Binder
 import android.os.IBinder
-import android.util.Log
+import kotlinx.coroutines.*
 import com.google.android.gms.maps.model.LatLng
 
 class MapManagerService : Service() {
+    private val miJob = Job()
+    private val miScope = CoroutineScope(Dispatchers.Default + miJob)
 
     // Almacena la información de las ubicaciones del mapa
     private val mapLocations = mutableMapOf<String, LatLng>()
@@ -19,6 +19,7 @@ class MapManagerService : Service() {
     // Variables
     private lateinit var context: Context
     private var currentLocationIndex = 0
+    private var myCurrentPosition: Location? = null
 
     // LocationProvider para obtener la ubicación del dispositivo
     private lateinit var locationProvider: LocationProvider
@@ -31,19 +32,27 @@ class MapManagerService : Service() {
     }
 
     override fun onBind(intent: Intent?): IBinder? {
+
         return binder
     }
 
     fun initialize(context: Context) {
         this.context = context
         initializeMapLocations()
-
         locationProvider = LocationProvider()
-        locationProvider.setLocationListener(object : LocationProvider.LocationListener {
-            override fun onLocationChanged(location: Location) {
-                checkProximity(location)
+        updateLocation()
+    }
+
+    fun updateLocation() {
+        miScope.launch {
+            while (miScope.isActive) {
+                myCurrentPosition = locationProvider.getUserLocation(context)
+                if (checkProximity(myCurrentPosition)){
+                    //TODO: comenzar la próxima actividad
+                }
+                delay(5000)
             }
-        })
+        }
     }
 
     private fun initializeMapLocations() {
@@ -56,8 +65,8 @@ class MapManagerService : Service() {
         mapLocations.put("Dorrea", LatLng(43.27279428065491, -2.8434245883650817))
     }
 
-    fun myLocation(): Location {
-        return locationProvider.provideLocation()
+    fun myPosition(): Location? {
+        return myCurrentPosition
     }
 
     fun getLocationsToShow(esAdmin:Boolean): List<LatLng> {
@@ -68,13 +77,10 @@ class MapManagerService : Service() {
         }
     }
 
-    private fun checkProximity(currentUserPos:Location):Boolean{
+    private fun checkProximity(currentUserPos:Location?):Boolean{
         val targetLocation = getCurrentLocation()
-
-        val distance = calculateDistance(currentUserPos.latitude, currentUserPos.longitude, targetLocation.latitude, targetLocation.longitude)
-
+        val distance = calculateDistance(currentUserPos!!.latitude, currentUserPos!!.longitude, targetLocation.latitude, targetLocation.longitude)
         val proximityThreshold = 50
-
         return distance <= proximityThreshold
     }
 
@@ -96,7 +102,7 @@ class MapManagerService : Service() {
             notifyLocationChanged()
         } else {
             MapManager.destroy()
-            // Llamar a la actividad final
+            // TODO:Llamar a la actividad final
         }
     }
 
@@ -109,6 +115,7 @@ class MapManagerService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
+        miJob.cancel()
     }
 
     //Singleton
