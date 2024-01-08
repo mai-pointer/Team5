@@ -106,6 +106,7 @@ class GameManagerService : Service() {
     }
 
     private fun guardar(){
+        //BD------------>
         BDManager.partida{ sharedPreferences, partidaBD ->
             val juegoActualId = sharedPreferences.getInt("juego_actual", -1)
 
@@ -116,6 +117,7 @@ class GameManagerService : Service() {
                 partidaBD.update(juegoActual)
             }
         }
+        //BD------------<
     }
 
     //Lanza la pantalla actual

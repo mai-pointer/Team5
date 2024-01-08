@@ -29,11 +29,16 @@ class MainMenuActivity : AppCompatActivity() {
         GameManager.initialize(this)
 
         //Crea la base de datos si no existe
+        //BD------------>
+
         val scope = CoroutineScope(Dispatchers.Main)
+        val myAppContext = application as? MyApp ?: return
+        val database = myAppContext.database
+
         scope.launch {
             delay(100)
-            BDManager.inicializar(this@MainMenuActivity, lifecycleScope,(application as MyApp).database)
-            BDManager.partida{ sharedPreferences, partidaBD ->
+            BDManager.inicializar(this@MainMenuActivity, lifecycleScope, database)
+            BDManager.partida { sharedPreferences, partidaBD ->
                 val juegoActualId = sharedPreferences.getInt("juego_actual", -1)
 
                 if (juegoActualId == -1) {
@@ -48,7 +53,8 @@ class MainMenuActivity : AppCompatActivity() {
                 }
             }
         }
-//        scope.cancel()
+        scope.cancel()
+        //BD------------<
 
         // Agrega un OnClickListener al botón "Jugar"
         buttonJugar.setOnClickListener{
