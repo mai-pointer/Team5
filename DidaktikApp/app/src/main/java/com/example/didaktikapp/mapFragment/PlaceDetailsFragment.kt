@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.didaktikapp.Crucigrama
 import com.example.didaktikapp.DiferenciasActivity
+import com.example.didaktikapp.GameManager
 import com.example.didaktikapp.MapsActivity
 import com.example.didaktikapp.MultipleChoiceActivity
 import com.example.didaktikapp.OrdenarImagenesActivity
@@ -64,25 +65,39 @@ class PlaceDetailsFragment : Fragment() {
             // Agrega OnClickListener al TextView del lugar
             textViewPlaceName.setOnClickListener {
                 // Lanza la actividad correspondiente al lugar
-                val intent = getPlaceIntent(placeName)
-                startActivity(intent)
+
+//****          val intent = getPlaceIntent(placeName)
+//****          startActivity(intent)
+
+                when (placeName) {
+                    "Idi probak" -> GameManager.get()?.startGame("Juego1")
+                    "Odolostea" -> GameManager.get()?.startGame("Juego2")
+                    "Txakoli" -> GameManager.get()?.startGame("Juego3")
+                    "Udala" -> GameManager.get()?.startGame("Juego4")
+                    "Santa Maria" -> GameManager.get()?.startGame("Juego5")
+                    "San Mameseko Arkua" -> GameManager.get()?.startGame("Juego6")
+                    "Lezamako dorrea" -> GameManager.get()?.startGame("Juego7")
+                    else -> Intent(activity, MapsActivity::class.java)
+                }
             }
         }
 
         return rootView
     }
-    private fun getPlaceIntent(placeName: String?): Intent {
-        // Crea un Intent para la actividad correspondiente al lugar
-        return when (placeName) {
-            "Idi probak" -> Intent(activity, MultipleChoiceActivity::class.java)
-            "Odolostea" -> Intent(activity, WordSearchActivity::class.java)
-            "Txakoli" -> Intent(activity, DiferenciasActivity::class.java)
-            "Udala" -> Intent(activity, DiferenciasActivity::class.java)
-            "Santa Maria" -> Intent(activity, PuzzleActivity::class.java)
-            "San Mameseko Arkua" -> Intent(activity, Crucigrama::class.java)
-            "Lezamako dorrea" -> Intent(activity, OrdenarImagenesActivity::class.java)
 
-            else -> Intent(activity, MapsActivity::class.java)
-        }
+//    ELIMINAR
+    private fun getPlaceIntent(placeName: String?): Intent {
+    // Crea un Intent para la actividad correspondiente al lugar
+    return when (placeName) {
+        "Idi probak" -> Intent(activity, MultipleChoiceActivity::class.java)
+        "Odolostea" -> Intent(activity, WordSearchActivity::class.java)
+        "Txakoli" -> Intent(activity, DiferenciasActivity::class.java)
+        "Udala" -> Intent(activity, DiferenciasActivity::class.java)
+        "Santa Maria" -> Intent(activity, PuzzleActivity::class.java)
+        "San Mameseko Arkua" -> Intent(activity, Crucigrama::class.java)
+        "Lezamako dorrea" -> Intent(activity, OrdenarImagenesActivity::class.java)
+
+        else -> Intent(activity, MapsActivity::class.java)
+    }
     }
 }

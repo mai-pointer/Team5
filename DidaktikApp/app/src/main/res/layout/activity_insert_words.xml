@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blancoOscuro"
-    android:padding="50dp">
+    android:padding="30dp">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,6 +14,17 @@
         android:orientation="vertical"
         tools:layout_editor_absoluteX="50dp"
         tools:layout_editor_absoluteY="50dp">
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="54dp"
+            android:text="textView"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header" />
 
         <LinearLayout
             android:id="@+id/header"
@@ -47,17 +58,6 @@
 
         </LinearLayout>
 
-        <TableLayout
-            android:id="@+id/tableLayout"
-            android:layout_width="309dp"
-            android:layout_height="524dp"
-            app:layout_constraintBottom_toTopOf="@id/bottom"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/header">
-
-        </TableLayout>
-
         <LinearLayout
             android:id="@+id/bottom"
             android:layout_width="match_parent"
@@ -90,6 +90,19 @@
                 android:layout_weight="1"
                 android:text="@string/btnRepeat" />
         </LinearLayout>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageView14"
+            android:layout_width="281dp"
+            android:layout_height="215dp"
+            android:layout_marginBottom="60dp"
+            android:src="@drawable/_00"
+            app:layout_constraintBottom_toTopOf="@+id/bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.484"
+            app:layout_constraintStart_toStartOf="parent"
+            app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

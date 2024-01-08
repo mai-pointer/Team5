@@ -5,8 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:configChanges="keyboardHidden|orientation|screenSize"
         android:allowBackup="true"
+        android:configChanges="keyboardHidden|orientation|screenSize"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -16,10 +16,13 @@
         android:theme="@style/DidaktikAppTheme"
         tools:targetApi="31">
         <activity
-            android:name=".DiferenciasActivity"
+            android:name=".JuegoTorre"
             android:exported="false" />
         <activity
-            android:name=".PuzzleActivity"
+            android:name=".OrdenarImagenesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainMenuActivity"
             android:exported="false" />
         <activity
             android:name=".PreguntasPistas"
@@ -30,31 +33,31 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".Info"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".AdminLoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MapsActivity"
+            android:name=".WordSearchActivity"
             android:exported="false" />
         <activity
             android:name=".Ajustes"
             android:exported="false" />
         <activity
-            android:name=".OrdenarImagenesActivity"
+            android:name=".DiferenciasActivity"
             android:exported="false" />
         <activity
             android:name=".MainMenuActivity"
             android:exported="false" />
         <activity
+            android:name=".PuzzleActivity"
+            android:exported="false" />
+        <activity
             android:name=".Crucigrama"
+            android:exported="false" />
+        <activity
+            android:name=".MultipleChoiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MapsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

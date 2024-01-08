@@ -11,7 +11,6 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.didaktikapp.R
 import com.example.didaktikapp.navigation.NavigationUtil
 import com.example.didaktikapp.titleFragment.TitleFragment
 
@@ -19,9 +18,16 @@ class OrdenarImagenesActivity : AppCompatActivity() {
 
     private lateinit var imagen1: ImageView
     private lateinit var hueco1: RelativeLayout
-
     private lateinit var imagen2: ImageView
     private lateinit var hueco2: RelativeLayout
+    private lateinit var imagen3: ImageView
+    private lateinit var hueco3: RelativeLayout
+    private lateinit var imagen4: ImageView
+    private lateinit var hueco4: RelativeLayout
+    private lateinit var imagen5: ImageView
+    private lateinit var hueco5: RelativeLayout
+
+    private val repeatActivityMenu = RepeatActivityMenu(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +45,8 @@ class OrdenarImagenesActivity : AppCompatActivity() {
         }
 
         // Configura el click listener para el botón en el fragmento
-        val titleFragment = supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
+        val titleFragment =
+            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
         titleFragment?.setOnHomeButtonClickListener(View.OnClickListener {
             onHomeButtonClicked()
         })
@@ -50,9 +57,21 @@ class OrdenarImagenesActivity : AppCompatActivity() {
         imagen2 = findViewById(R.id.imagen2)
         hueco2 = findViewById(R.id.hueco2) as RelativeLayout
 
+        imagen3 = findViewById(R.id.imagen3)
+        hueco3 = findViewById(R.id.hueco3) as RelativeLayout
+
+        imagen4 = findViewById(R.id.imagen4)
+        hueco4 = findViewById(R.id.hueco4) as RelativeLayout
+
+        imagen5 = findViewById(R.id.imagen5)
+        hueco5 = findViewById(R.id.hueco5) as RelativeLayout
+
         // Configurar el escuchador de arrastre para las imágenes arrastrables
         setDragListener(imagen1, hueco1)
         setDragListener(imagen2, hueco2)
+        setDragListener(imagen3, hueco3)
+        setDragListener(imagen4, hueco4)
+        setDragListener(imagen5, hueco5)
     }
 
     private fun setDragListener(
@@ -85,8 +104,9 @@ class OrdenarImagenesActivity : AppCompatActivity() {
                                 hueco.setBackgroundColor(Color.GREEN)
 
                                 // Verificar si todas las imágenes están colocadas
-                                if (imagen1.visibility == View.INVISIBLE && imagen2.visibility == View.INVISIBLE) {
-                                    showToast("¡Juego completado!")
+                                if (checkAllImagesPlacedCorrectly()) {
+                                    val intent = Intent(this ,OrdenarImagenesActivity::class.java)
+                                    repeatActivityMenu.showGameOverDialog(this, intent)
                                 }
                             } else {
                                 showToast("La imagen no es la correcta para este hueco.")
@@ -105,6 +125,14 @@ class OrdenarImagenesActivity : AppCompatActivity() {
                 else -> true
             }
         }
+    }
+    private fun checkAllImagesPlacedCorrectly(): Boolean {
+        // Verificar si todas las imágenes están colocadas correctamente
+        return imagen1.visibility == View.INVISIBLE &&
+                imagen2.visibility == View.INVISIBLE &&
+                imagen3.visibility == View.INVISIBLE &&
+                imagen4.visibility == View.INVISIBLE &&
+                imagen5.visibility == View.INVISIBLE
     }
 
     private fun showToast(message: String) {

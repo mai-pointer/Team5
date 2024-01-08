@@ -1,25 +1,28 @@
 package com.example.didaktikapp
 
-import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.text.Editable
-import android.text.InputFilter
 import android.text.InputType
 import android.text.TextWatcher
 import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.GridLayout
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.didaktikapp.navigation.NavigationUtil
+import com.example.didaktikapp.titleFragment.TitleFragment
 
 class Crucigrama : AppCompatActivity() {
+    private val repeatActivityMenu = RepeatActivityMenu(this)
 
     //VARIABLES PARA LA PLANTILLA Y LAS PISTAS
     val pistas = arrayListOf(
@@ -47,6 +50,24 @@ class Crucigrama : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crucigrama)
+
+        // Obtén una referencia al contenedor de fragmentos
+        val fragmentContainer = findViewById<FrameLayout>(R.id.fragmentContainerView)
+
+        // Reemplaza el contenedor con el TitleFragment
+        if (savedInstanceState == null) {
+            val titleFragment = TitleFragment.newInstance("Gurutzegrama")
+            supportFragmentManager.beginTransaction()
+                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
+                .commit()
+        }
+
+        // Configura el click listener para el botón en el fragmento
+        val titleFragment =
+            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
+        titleFragment?.setOnHomeButtonClickListener(View.OnClickListener {
+            onHomeButtonClicked()
+        })
 
         //VARIABLES
         val crucigrama: List<List<Celda>> = Crear(plantilla.trimIndent())
@@ -119,13 +140,15 @@ class Crucigrama : AppCompatActivity() {
                     }
                     if (casilla.editText.text.toString().uppercase()!= casilla.caracter.toString().uppercase()){
                         bien = false
-                        Toast.makeText(this, "¡Has fallado!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, R.string.mensaje_fallido, Toast.LENGTH_SHORT).show()
                         casilla.editText.setTextColor(Color.RED)
                     }
                 }
             }
             if (bien){
-                Toast.makeText(this, "¡Terminado!", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this ,Crucigrama::class.java)
+                repeatActivityMenu.showGameOverDialog(this, intent)
+
             }
 
         }
@@ -271,5 +294,10 @@ class Crucigrama : AppCompatActivity() {
         }
 
         data class Casilla(val caracter: Char, val editText: EditText)
+    }
+    private fun onHomeButtonClicked() {
+        // Acciones a realizar cuando se hace clic en el botón Home
+        // Utiliza NavigationUtil para la navegación
+        NavigationUtil.navigateToMainMenu(this)
     }
 }

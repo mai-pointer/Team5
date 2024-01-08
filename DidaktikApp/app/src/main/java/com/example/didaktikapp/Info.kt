@@ -4,6 +4,7 @@ import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import android.widget.Button
 
 class Info : AppCompatActivity() {
 
@@ -22,6 +23,9 @@ class Info : AppCompatActivity() {
 //        intent.getDoubleExtra("punto", 0.0)
 
         findViewById<TextView>(R.id.info).text = informacion[1.2]?.texto
+        findViewById<Button>(R.id.terminar_info).setOnClickListener{
+            GameManager.get()?.nextScreen()
+        }
     }
 
     data class Informacion(val texto: String, val audio: Int? = null)
