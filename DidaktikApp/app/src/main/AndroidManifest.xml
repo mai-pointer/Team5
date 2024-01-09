@@ -16,7 +16,7 @@
         android:theme="@style/DidaktikAppTheme"
         tools:targetApi="31">
         <activity
-            android:name=".JuegoTorre"
+            android:name=".MainMenuActivity"
             android:exported="false" />
         <activity
             android:name=".OrdenarImagenesActivity"
@@ -60,7 +60,7 @@
             android:name=".MultipleChoiceActivity"
             android:exported="false" />
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".JuegoTorre"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
