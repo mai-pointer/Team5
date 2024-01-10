@@ -38,7 +38,7 @@ class OrdenarImagenesActivity : AppCompatActivity() {
 
         // Reemplaza el contenedor con el TitleFragment
         if (savedInstanceState == null) {
-            val titleFragment = TitleFragment.newInstance("Ordenar Imágenes")
+            val titleFragment = TitleFragment.newInstance("Irudiak ordenatu")
             supportFragmentManager.beginTransaction()
                 .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
                 .commit()
@@ -105,7 +105,7 @@ class OrdenarImagenesActivity : AppCompatActivity() {
 
                                 // Verificar si todas las imágenes están colocadas
                                 if (checkAllImagesPlacedCorrectly()) {
-                                    val intent = Intent(this ,OrdenarImagenesActivity::class.java)
+                                    val intent = Intent(this, OrdenarImagenesActivity::class.java)
                                     repeatActivityMenu.showGameOverDialog(this, intent)
                                 }
                             } else {
@@ -126,6 +126,7 @@ class OrdenarImagenesActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun checkAllImagesPlacedCorrectly(): Boolean {
         // Verificar si todas las imágenes están colocadas correctamente
         return imagen1.visibility == View.INVISIBLE &&
