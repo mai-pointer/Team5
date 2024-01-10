@@ -127,6 +127,10 @@ class Info : AppCompatActivity() {
 
         //Boton terminar
         findViewById<Button>(R.id.terminar_info).setOnClickListener{
+            mediaPlayer?.stop()
+            mediaPlayer?.release()
+            mediaPlayer = null
+
             GameManager.get()?.nextScreen()
         }
     }
