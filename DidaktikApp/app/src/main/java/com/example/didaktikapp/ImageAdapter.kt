@@ -1,5 +1,6 @@
 package com.example.didaktikapp
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -44,6 +45,6 @@ class ImageAdapter(private val images: MutableList<Pair<Int, String>>) : Recycle
 
     fun removeImage(position: Int) {
         images.removeAt(position)
-        notifyItemRemoved(position)
+        //notifyItemRemoved(position)
     }
 }
