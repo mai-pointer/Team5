@@ -1,12 +1,17 @@
 package com.example.didaktikapp
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -18,6 +23,7 @@ import com.example.didaktikapp.databinding.ActivityMapsBinding
 import com.example.didaktikapp.mapFragment.PlaceDetailsFragment
 import com.example.didaktikapp.navigation.NavigationUtil
 import com.example.didaktikapp.titleFragment.TitleFragment
+import com.example.didaktikapp.MapManagerService.MapManager
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapClickListener,
     GoogleMap.OnMarkerClickListener {
@@ -25,6 +31,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
     private lateinit var progressBar: ProgressBar
+    private var mapManagerService: MapManagerService? = MapManagerService()
+
 
     // Variable para saber si el usuario es admin o no
     var esAdmin: Boolean = false
@@ -33,19 +41,31 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         super.onCreate(savedInstanceState)
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        esAdmin = intent.getBooleanExtra("admin", false)
         progressBar = findViewById(R.id.progressBar)
+
         setupHeaderFragment(savedInstanceState)
 
-        // Recibe el valor de la variable admin
-        esAdmin = intent.getBooleanExtra("admin", false)
-
+        if(!esAdmin){
+            checkPermissions()
+        }else{
+            initMap()
+        }
         progressBar.visibility = View.VISIBLE
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+    }
+
+    private fun initMap(){
+
+        mapManagerService = MapManager.get()
+
+        if(mapManagerService == null){
+            MapManager.initialize(this)
+            mapManagerService = MapManager.get()
+        }
+
         val mapFragment =
             supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-
     }
 
     private fun setupHeaderFragment(savedInstanceState: Bundle?) {
@@ -66,58 +86,40 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        // Add markers and move the camera
-        val idiProbak = LatLng(43.27556360817825, -2.827742396615327)
-        val agricolaString = resources.getString(R.string.agricolaText)
-        val txakoli = LatLng(43.27758426733325, -2.8308136897866447)
-        val txakoliString = resources.getString(R.string.txakoli)
-        val udala = LatLng(43.27421110063913, -2.83285560353813)
-        val udalaText = resources.getString(R.string.udala)
-        val harategia = LatLng(43.27394169280981, -2.832619209726283)
-        val harategiaText = resources.getString(R.string.harategia)
-        val santaMaria = LatLng(43.27387138926826, -2.8349795537580893)
-        val santaMariaText = resources.getString(R.string.santamaria)
-        val dorrea = LatLng(43.27279428065491, -2.8434245883650817)
-        val dorreaText = resources.getString(R.string.dorrea)
-        val arkua = LatLng(43.276383439897, -2.8369511900475195)
-        val arkuaText = resources.getString(R.string.arkua)
+        val locationsToShow = mapManagerService?.getLocationsToShow(esAdmin)
+
+        if (locationsToShow != null) {
+            for (location in locationsToShow) {
+                addMarker(location)
+            }
+        }
+
         val zoomLevel = 14.0f
-        mMap.addMarker(
-            MarkerOptions().position(idiProbak).title("Idi probak")
-                .snippet(agricolaString)
-        )
-        mMap.addMarker(
-            MarkerOptions().position(txakoli).title("Txakoli")
-                .snippet(txakoliString)
-        )
-        mMap.addMarker(
-            MarkerOptions().position(udala).title("Udala")
-                .snippet(udalaText)
-        )
-        mMap.addMarker(
-            MarkerOptions().position(santaMaria).title("Santa Maria")
-                .snippet(santaMariaText)
-        )
-        mMap.addMarker(
-            MarkerOptions().position(harategia).title("Odolostea")
-                .snippet(harategiaText)
-        )
-        mMap.addMarker(
-            MarkerOptions().position(dorrea).title("Lezamako dorrea")
-                .snippet(dorreaText)
-        )
-        mMap.addMarker(
-            MarkerOptions().position(arkua).title("San Mameseko Arkua")
-                .snippet(arkuaText)
-        )
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(santaMaria, zoomLevel))
+        val myPos = LatLng (mapManagerService?.myPosition()!!.latitude, mapManagerService?.myPosition()!!.longitude)
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPos, zoomLevel))
 
         mMap.setOnMapClickListener(this)
-        mMap.setOnMarkerClickListener(this)
+
+        if (esAdmin){
+            mMap.setOnMarkerClickListener(this)
+        }
+
         mMap.setOnMapLoadedCallback {
-            // Ocultar ProgressBar después de que el mapa se haya cargado completamente
             progressBar.visibility = View.GONE
         }
+    }
+
+
+    // Añade un marcador en la ubicación proporcionada
+    private fun addMarker(location: LatLng) {
+        mMap.clear() // Borra todos los marcadores existentes
+        val snippet = getSnippetForLocation(location) // Implementa esta función según tus necesidades
+        mMap.addMarker(MarkerOptions().position(location).title("Ubicación Actual").snippet(snippet))
+    }
+
+    // Obtiene el snippet correspondiente a la ubicación dada
+    private fun getSnippetForLocation(location: LatLng): String {
+        return "Snippet para ${location.latitude}, ${location.longitude}"
     }
 
     override fun onMapClick(point: LatLng) {
@@ -127,15 +129,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        // Se ejecuta cuando se hace clic en un marcador
-        // Aquí puedes realizar acciones específicas para el marcador clicado
         Log.d("MarkerClick", "Click en el marcador: ${marker.title}, Snippet: ${marker.snippet}")
 
         if (isPredefinedMarker(marker.title)) {
             openPlaceDetailsFragment(marker)
         }
 
-        // Devuelve 'true' para indicar que el evento ha sido consumido
         return true
     }
 
@@ -164,9 +163,37 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         return placeName == "Idi probak" || placeName == "Txakoli" || placeName == "Udala" || placeName == "Odolostea" || placeName == "Santa Maria" || placeName == "Lezamako dorrea" || placeName == "San Mameseko Arkua"
     }
 
-    private fun onHomeButtonClicked() {
-        // Acciones a realizar cuando se hace clic en el botón Home
-        // Utiliza NavigationUtil para la navegación
-        NavigationUtil.navigateToMainMenu(this)
+    private fun onHomeButtonClicked() { NavigationUtil.navigateToMainMenu(this) }
+
+    private fun checkPermissions(){
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            requestLocationPermision()
+        }else{
+            initMap()
+        }
+    }
+
+    fun requestLocationPermision(){
+        if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION) || ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)){
+            Toast.makeText(this, "Lokalizatze baimenak baztertu dituzu. Mesedez onartu lokalizatze baimenak.", Toast.LENGTH_LONG).show()
+        }else{
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION), 777)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if(requestCode == 777){
+            if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED){
+                initMap()
+            }else{
+                Toast.makeText(this, "Baimenak baztertu dituzu", Toast.LENGTH_LONG).show()
+            }
+        }
+
     }
 }

@@ -1,9 +1,17 @@
 package com.example.didaktikapp
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainMenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +26,6 @@ class MainMenuActivity : AppCompatActivity() {
             Intent(this, GameManagerService::class.java)
         )
         GameManager.initialize(this)
-
 
         // Agrega un OnClickListener al botón "Jugar"
         buttonJugar.setOnClickListener{

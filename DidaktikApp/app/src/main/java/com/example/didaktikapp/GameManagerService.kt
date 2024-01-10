@@ -25,7 +25,7 @@ class GameManagerService : Service() {
             PreguntasPistas::class.java,
             Info::class.java,
             Info::class.java,
-            Info::class.java,
+            Video::class.java,
             Info::class.java,
         ),
         "Juego4" to listOf(
@@ -38,7 +38,7 @@ class GameManagerService : Service() {
             Info::class.java,
             Info::class.java,
             Info::class.java,
-            Info::class.java,
+            Video::class.java,
             PuzzleActivity::class.java,
             Info::class.java,
         ),
@@ -67,7 +67,9 @@ class GameManagerService : Service() {
     //Variables
     private lateinit var context: Context
     private var juegoActual: List<Class<*>>? = null
+    private var juegoNumero = 0
     private var pantallaActual = 0
+    private var nombreJuego: String = ""
 
     //Inicializa el servicio
     fun initialize(context: Context) {
@@ -80,6 +82,7 @@ class GameManagerService : Service() {
 
     //Inicia el juego seleccionado
     fun startGame(gameName: String) {
+        nombreJuego = gameName
         juegoActual = games[gameName]
         pantallaActual = 0
         pantalla()
@@ -93,6 +96,8 @@ class GameManagerService : Service() {
             pantalla()
         } else {
             //Si no, vuelve al menú principal
+            pantallaActual = 0
+
             val intent = Intent(context, MapsActivity::class.java)
             context.startActivity(intent)
         }
@@ -107,6 +112,11 @@ class GameManagerService : Service() {
             screenIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(screenIntent)
         }
+    }
+
+    //Devuelve el número de pantalla actual
+    fun pantallaActual(): String {
+        return  games.entries.find { it.value == juegoActual }?.key + "." + (pantallaActual+1).toString()
     }
 }
 
