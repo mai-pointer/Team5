@@ -17,7 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/DidaktikAppTheme"
         tools:targetApi="31">
-        
+        <activity
+            android:name=".InfoFoto"
+            android:exported="false" />
+        <activity
+            android:name=".Video"
+            android:exported="false" />
         <activity
             android:name=".OrdenarImagenesActivity"
             android:exported="false" />
@@ -32,6 +37,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity
+            android:name=".InsertWordsActivity"
+            android:exported="false" />
         <activity
             android:name=".AdminLoginActivity"
             android:exported="false" />
@@ -61,6 +69,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

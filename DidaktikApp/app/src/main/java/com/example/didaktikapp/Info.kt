@@ -40,7 +40,7 @@ class Info : AppCompatActivity() {
             R.raw.juegocuatrouno
         ),
         "Juego4.4" to Informacion(
-            "",
+            "(falta el texto)",
             R.raw.juegocuatrocuatro
         ),
         "Juego5.1" to Informacion(

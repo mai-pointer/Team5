@@ -1,5 +1,6 @@
 package com.example.didaktikapp
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
@@ -23,6 +24,7 @@ class InsertWordsActivity : AppCompatActivity() {
         "Dorre hau (gotorleku militarra / erregearen etxea / eliza) izan zen eta (XVI. / XVIII. / XX.) mendean eraiki zen. (Adreiluz / Granitoz / Hareharriz) eginda dago eta hiru solairu ditu. Gaur egun, dorrea (udaletxe / etxebizitza / museo) bihurtu da."
 
     private val selectedOptions = mutableSetOf<String>()
+    private val repeatActivityMenu = RepeatActivityMenu(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,7 +100,9 @@ class InsertWordsActivity : AppCompatActivity() {
             .create()
 
         if (insertedText == expectedText) {
-            alertDialog.setMessage("¡Ganaste!")
+//            alertDialog.setMessage("¡Ganaste!")
+            val intent = Intent(this ,Crucigrama::class.java)
+            repeatActivityMenu.showGameOverDialog(this, intent)
         } else {
             alertDialog.setMessage("Perdiste")
         }
