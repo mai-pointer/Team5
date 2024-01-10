@@ -1,5 +1,6 @@
 package com.example.didaktikapp
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.widget.Button
@@ -11,6 +12,7 @@ import com.example.didaktikapp.navigation.NavigationUtil
 import com.example.didaktikapp.titleFragment.TitleFragment
 
 class MultipleChoiceActivity : AppCompatActivity() {
+    private val repeatActivityMenu = RepeatActivityMenu(this)
 
     private var isPictureAnswer: Boolean? = null
     private var question: String? = null
@@ -34,7 +36,8 @@ class MultipleChoiceActivity : AppCompatActivity() {
 
         baieztatu.setOnClickListener{
             if (chosenAnswer?.equals(correctAnswer) == true){
-
+                val intent = Intent(this ,  MultipleChoiceActivity::class.java)
+                repeatActivityMenu.showGameOverDialog(this, intent)
             } else{
 
             }
