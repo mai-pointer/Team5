@@ -1,13 +1,16 @@
 package com.example.didaktikapp
 
+import android.annotation.SuppressLint
 import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.location.Location
+import android.location.LocationManager
 import android.os.Binder
 import android.os.IBinder
 import kotlinx.coroutines.*
 import com.google.android.gms.maps.model.LatLng
+import kotlin.coroutines.resume
 
 class MapManagerService : Service() {
     private val miJob = Job()
@@ -36,14 +39,38 @@ class MapManagerService : Service() {
         return binder
     }
 
+    @SuppressLint("MissingPermission")
     fun initialize(context: Context) {
         this.context = context
         initializeMapLocations()
         locationProvider = LocationProvider()
         updateLocation()
+        val locationManager : LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val myvar = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
     }
 
-    fun updateLocation() {
+    @SuppressLint("MissingPermission")
+    fun updateLocation(){
+        val locationManager : LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        runBlocking {
+            val myPos: Deferred<Location?> = async {
+                return@async locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+            }
+            myCurrentPosition = myPos.await()
+        }
+
+        miScope.launch {
+            while (miScope.isActive) {
+                myCurrentPosition = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                if (checkProximity(myCurrentPosition)){
+                    //TODO: comenzar la próxima actividad
+                }
+                delay(5000)
+            }
+        }
+    }
+
+    /*fun updateLocation() {
         miScope.launch {
             while (miScope.isActive) {
                 myCurrentPosition = locationProvider.getUserLocation(context)
@@ -53,7 +80,8 @@ class MapManagerService : Service() {
                 delay(5000)
             }
         }
-    }
+    }*/
+
 
     private fun initializeMapLocations() {
         mapLocations.put("Idi Probak", LatLng(43.27556360817825, -2.827742396615327))

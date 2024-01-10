@@ -7,58 +7,62 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
+import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.LocationServices
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.suspendCancellableCoroutine
 
-class LocationProvider{
+class LocationProvider(){
    @SuppressLint("MissingPermission")
-   suspend fun getUserLocation (context: Context): Location?{
-       val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
-       val isUserLocationPermissionsGranted = true
+   fun getUserLocation (context: Context): Location{
+       //val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
        val locationManager :LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
        val isGPSEnabled :Boolean = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER) || locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-
-       if(!isGPSEnabled || !isUserLocationPermissionsGranted){
+       val posToReturn: Location
+       /*if(!isGPSEnabled){
            return null
+       }*/
+
+       runBlocking {
+           val myPos: Deferred<Location?> = async {
+               return@async locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+           }
+           posToReturn = myPos.await()!!
        }
 
-       return suspendCancellableCoroutine { cont ->
+       return posToReturn
+       /*val myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+       return myLocation*/
+
+       /*return suspendCancellableCoroutine { cont ->
            fusedLocationProviderClient.lastLocation.apply{
+               Log.e("ClientProvider", "0 ")
                if(isComplete){
                    if(isSuccessful) {
-                       cont.resume(result) {}
+                       Log.e("ClientProvider", "1 " + result.toString())
+                       cont.resume(result){}
                    }else{
+                       Log.e("ClientProvider", "2 ")
                        cont.resume(null){}
                    }
+                   Log.e("ClientProvider", "3")
                    return@suspendCancellableCoroutine
                }
                addOnSuccessListener {
+                   Log.e("ClientProvider", "4 " + it.toString())
                    cont.resume(it){}
                }
                addOnFailureListener {
+                   Log.e("ClientProvider", "5 ")
                    cont.resume(null){it}
                }
-           }
-       }
+          }
+       }*/
    }
-
-    private fun checkPermissions(context: Context){
-        if(ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            //TODO: llamar a las funciones requestPermission
-        }else{
-
-        }
-    }
-
-    fun requestLocationPermision(activity: Activity){
-        if(ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.ACCESS_COARSE_LOCATION)){
-
-        }else{
-            ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION), 777)
-        }
-    }
 
 
 }
