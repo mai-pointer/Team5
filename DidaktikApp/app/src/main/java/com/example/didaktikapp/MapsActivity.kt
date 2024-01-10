@@ -2,6 +2,7 @@ package com.example.didaktikapp
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -35,13 +36,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
 
 
     // Variable para saber si el usuario es admin o no
-    var esAdmin: Boolean = false
+    var esAdmin: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        esAdmin = intent.getBooleanExtra("admin", false)
+        esAdmin = intent.getBooleanExtra("admin", true)
         progressBar = findViewById(R.id.progressBar)
 
         setupHeaderFragment(savedInstanceState)
@@ -87,23 +88,25 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         mMap = googleMap
 
         val locationsToShow = mapManagerService?.getLocationsToShow(esAdmin)
-
+        var referenceMarker: LatLng? = null
         if (locationsToShow != null) {
             for (location in locationsToShow) {
-                addMarker(location)
+                addMarker(location.value, location.key)
+                referenceMarker = location.value
             }
         }
 
         val zoomLevel = 14.0f
-        val myPos = LatLng (mapManagerService?.myPosition()!!.latitude, mapManagerService?.myPosition()!!.longitude)
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPos, zoomLevel))
-
-        mMap.setOnMapClickListener(this)
 
         if (esAdmin){
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(referenceMarker!!, zoomLevel))
             mMap.setOnMarkerClickListener(this)
+        }else{
+            val myPos = LatLng (mapManagerService?.myPosition()!!.latitude, mapManagerService?.myPosition()!!.longitude)
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPos, zoomLevel))
         }
 
+        mMap.setOnMapClickListener(this)
         mMap.setOnMapLoadedCallback {
             progressBar.visibility = View.GONE
         }
@@ -111,10 +114,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
 
 
     // Añade un marcador en la ubicación proporcionada
-    private fun addMarker(location: LatLng) {
-        mMap.clear() // Borra todos los marcadores existentes
-        val snippet = getSnippetForLocation(location) // Implementa esta función según tus necesidades
-        mMap.addMarker(MarkerOptions().position(location).title("Ubicación Actual").snippet(snippet))
+    private fun addMarker(location: LatLng, titulo:String) {
+        val snippet = getSnippetForLocation(location)
+        mMap.addMarker(MarkerOptions().position(location).title(titulo).snippet(snippet))
     }
 
     // Obtiene el snippet correspondiente a la ubicación dada
@@ -123,17 +125,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
     }
 
     override fun onMapClick(point: LatLng) {
-        // Este método se ejecuta cuando se hace clic en cualquier parte del mapa
-        // Puedes realizar acciones adicionales aquí si es necesario
         Log.d("MapClick", "Click en el mapa: $point")
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
         Log.d("MarkerClick", "Click en el marcador: ${marker.title}, Snippet: ${marker.snippet}")
-
-        if (isPredefinedMarker(marker.title)) {
-            openPlaceDetailsFragment(marker)
-        }
+        openPlaceDetailsFragment(marker)
 
         return true
     }
@@ -141,9 +138,20 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
     private fun openPlaceDetailsFragment(marker: Marker) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
 
+        val text:String = when (marker.title) {
+            "Idi probak" -> this.getString(R.string.agricolaText)
+            "Txakoli" -> this.getString(R.string.txakoli)
+            "Udala" -> this.getString(R.string.udala)
+            "Odolostea" -> this.getString(R.string.harategia)
+            "Santa Maria" -> this.getString(R.string.santamaria)
+            "San Mameseko Arkua" -> this.getString(R.string.arkua)
+            "Lezamako dorrea" -> this.getString(R.string.dorrea)
+            else -> "LoremIpsum"
+        }
+
         val bundle = Bundle()
         bundle.putString("placeName", marker.title)
-        bundle.putString("placeSnippet", marker.snippet)
+        bundle.putString("placeSnippet", text)
 
         val fragment = PlaceDetailsFragment()
         fragment.arguments = bundle

@@ -44,9 +44,7 @@ class MapManagerService : Service() {
         this.context = context
         initializeMapLocations()
         locationProvider = LocationProvider()
-        updateLocation()
-        val locationManager : LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        val myvar = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+        //updateLocation()
     }
 
     @SuppressLint("MissingPermission")
@@ -84,24 +82,27 @@ class MapManagerService : Service() {
 
 
     private fun initializeMapLocations() {
-        mapLocations.put("Idi Probak", LatLng(43.27556360817825, -2.827742396615327))
-        mapLocations.put("Harategia", LatLng(43.27394169280981, -2.832619209726283))
+        mapLocations.put("Idi probak", LatLng(43.27556360817825, -2.827742396615327))
+        mapLocations.put("Odolostea", LatLng(43.27394169280981, -2.832619209726283))
         mapLocations.put("Txakoli", LatLng(43.27758426733325, -2.8308136897866447))
         mapLocations.put("Udala", LatLng(43.27421110063913, -2.83285560353813))
         mapLocations.put("Santa Maria", LatLng(43.27387138926826, -2.8349795537580893))
-        mapLocations.put("Arkua", LatLng(43.276383439897, -2.8369511900475195))
-        mapLocations.put("Dorrea", LatLng(43.27279428065491, -2.8434245883650817))
+        mapLocations.put("San Mameseko Arkua", LatLng(43.276383439897, -2.8369511900475195))
+        mapLocations.put("Lezamako dorrea", LatLng(43.27279428065491, -2.8434245883650817))
     }
 
     fun myPosition(): Location? {
         return myCurrentPosition
     }
 
-    fun getLocationsToShow(esAdmin:Boolean): List<LatLng> {
+    fun getLocationsToShow(esAdmin:Boolean): MutableMap<String, LatLng> {
+        val myString = mapLocations.keys.elementAt(currentLocationIndex)
+        val coordinates = getCurrentLocation()
+        val myLocation:MutableMap<String, LatLng> = mutableMapOf (myString to coordinates)
         return if (esAdmin) {
-            mapLocations.values.toList()
+            mapLocations
         } else {
-            listOf(getCurrentLocation())
+            myLocation
         }
     }
 
@@ -122,6 +123,7 @@ class MapManagerService : Service() {
     fun getCurrentLocation(): LatLng {
         return mapLocations.values.elementAt(currentLocationIndex)
     }
+
 
     // Muestra la siguiente ubicación del mapa
     fun showNextLocation() {
