@@ -69,6 +69,7 @@ class GameManagerService : Service() {
     private var juegoActual: List<Class<*>>? = null
     private var juegoNumero = 0
     private var pantallaActual = 0
+    private var nombreJuego: String = ""
 
     //Inicializa el servicio
     fun initialize(context: Context) {
@@ -81,8 +82,10 @@ class GameManagerService : Service() {
 
     //Inicia el juego seleccionado
     fun startGame(gameName: String) {
+        nombreJuego = gameName
         juegoActual = games[gameName]
         pantallaActual = 0
+        guardar()
         pantalla()
     }
 
@@ -91,11 +94,28 @@ class GameManagerService : Service() {
         if (pantallaActual < (juegoActual?.size ?: 0) - 1) {
             //Si hay más pantallas, pasa a la siguiente
             pantallaActual++
+            guardar()
             pantalla()
         } else {
             //Si no, vuelve al menú principal
+            pantallaActual = 0
+            guardar()
+
             val intent = Intent(context, MapsActivity::class.java)
             context.startActivity(intent)
+        }
+    }
+
+    private fun guardar(){
+        BDManager.partida{ sharedPreferences, partidaBD ->
+            val juegoActualId = sharedPreferences.getInt("juego_actual", -1)
+
+            if (juegoActualId != -1) {
+                val juegoActual = partidaBD.get(juegoActualId)
+                juegoActual.juego = nombreJuego
+                juegoActual.pantalla = pantallaActual
+                partidaBD.update(juegoActual)
+            }
         }
     }
 
