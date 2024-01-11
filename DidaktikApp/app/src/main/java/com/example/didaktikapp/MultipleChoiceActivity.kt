@@ -1,6 +1,10 @@
 package com.example.didaktikapp
 
+import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.widget.Button
 import android.widget.FrameLayout
@@ -11,6 +15,14 @@ import com.example.didaktikapp.navigation.NavigationUtil
 import com.example.didaktikapp.titleFragment.TitleFragment
 
 class MultipleChoiceActivity : AppCompatActivity() {
+
+    val myQuestion = hashMapOf<String, MultipleChoiceActivity.Question>(
+        "Juego1.3" to MultipleChoiceActivity.Question(
+            "Zein da idia?", null, null, null, drawableToBitmap(R.drawable.default_image), drawableToBitmap(R.drawable.default_image), drawableToBitmap(R.drawable.default_image), 'a'),
+        "Juego1.4" to MultipleChoiceActivity.Question(
+            "Urteko zein unetan egiten dira idi-probak?", "Herriko festetan", "Gabonetan", "Aste Santuan", null, null, null, 'a'),
+        "Juego4.3" to MultipleChoiceActivity.Question(
+            "Nor zen Mikel Zarate?", "Euskal Idazlea", "Euskal bertsozalea", "Bertsolari famatua", null, null, null, 'a'))
 
     private var isPictureAnswer: Boolean? = null
     private var question: String? = null
@@ -28,7 +40,8 @@ class MultipleChoiceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_multiple_choice)
 
-        initializeVariables()
+        val pantalla = GameManager.get()?.pantallaActual()
+        initializeVariables(pantalla)
         setupHeaderFragment(savedInstanceState)
         adaptAnswers()
 
@@ -62,22 +75,23 @@ class MultipleChoiceActivity : AppCompatActivity() {
         NavigationUtil.navigateToMainMenu(this)
     }
 
-    private fun initializeVariables(){
+    private fun initializeVariables(pantalla:String?){
         galderaText = findViewById(R.id.galdera)
         aukerak = findViewById(R.id.aukerak)
         baieztatu = findViewById(R.id.btnValidate)
         atzera = findViewById(R.id.btnBack)
 
-        isPictureAnswer = intent.getBooleanExtra("isPicture", false)
-        question = intent.getStringExtra("question")
-        correctAnswer = intent.getCharExtra("correctAnswer", 'a')
-        answers['a'] = intent.getStringExtra("answer1")
-        answers['b'] = intent.getStringExtra("answer2")
-        answers['c'] = intent.getStringExtra("answer3")
+        isPictureAnswer = myQuestion[pantalla]?.respuesta1 != null
 
-        pictures['a'] = intent.getParcelableExtra("picture1")
-        pictures['b'] = intent.getParcelableExtra("picture2")
-        pictures['c'] = intent.getParcelableExtra("picture3")
+        question = myQuestion[pantalla]?.pregunta
+        correctAnswer = myQuestion[pantalla]?.answer
+        answers['a'] = myQuestion[pantalla]?.respuesta1
+        answers['b'] = myQuestion[pantalla]?.respuesta2
+        answers['c'] = myQuestion[pantalla]?.respuesta3
+
+        pictures['a'] = myQuestion[pantalla]?.picture1
+        pictures['b'] = myQuestion[pantalla]?.picture2
+        pictures['c'] = myQuestion[pantalla]?.picture3
     }
 
     private fun adaptAnswers(){
@@ -99,4 +113,25 @@ class MultipleChoiceActivity : AppCompatActivity() {
         }
     }
 
+    fun Context.drawableToBitmap(drawableId: Int): Bitmap {
+        val drawable = this.resources.getDrawable(drawableId, null)
+        if (drawable is BitmapDrawable) {
+            if (drawable.bitmap != null) {
+                return drawable.bitmap
+            }
+        }
+
+        val bitmap = if (drawable.intrinsicWidth <= 0 || drawable.intrinsicHeight <= 0) {
+            Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
+        } else {
+            Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+        }
+
+        val canvas = Canvas(bitmap)
+        drawable.setBounds(0, 0, canvas.width, canvas.height)
+        drawable.draw(canvas)
+        return bitmap
+    }
+
+    data class Question(val pregunta: String, val respuesta1:String?, val respuesta2:String?, val respuesta3:String?, val picture1:Bitmap?, val picture2:Bitmap?, val picture3:Bitmap?, val answer:Char)
 }
