@@ -41,6 +41,9 @@
             android:name=".InsertWordsActivity"
             android:exported="false" />
         <activity
+            android:name=".JuegoTorre"
+            android:exported="false" />
+        <activity
             android:name=".AdminLoginActivity"
             android:exported="false" />
         <activity
