@@ -105,8 +105,8 @@ class InsertWordsActivity : AppCompatActivity() {
             repeatActivityMenu.showGameOverDialog(this, intent)
         } else {
             alertDialog.setMessage("Perdiste")
+            alertDialog.show()
         }
 
-        alertDialog.show()
     }
 }
