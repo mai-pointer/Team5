@@ -2,7 +2,6 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
-
 }
 
 android {
@@ -40,8 +39,10 @@ android {
         jvmTarget = "1.8"
     }
 }
-
+    
 dependencies {
+    implementation ("com.android.volley:volley:1.2.1")
+    implementation ("io.socket:socket.io-client:2.0.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
     implementation("com.google.android.material:material:1.6.0")
     implementation("com.makeramen:roundedimageview:2.3.0")
