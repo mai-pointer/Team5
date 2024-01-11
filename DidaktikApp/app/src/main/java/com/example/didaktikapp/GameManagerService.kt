@@ -51,7 +51,6 @@ class GameManagerService : Service() {
             Info::class.java,
             InfoFoto::class.java,
             InsertWordsActivity::class.java,
-            OrdenarImagenesActivity::class.java,
             JuegoTorre::class.java,
         ),
         "HASIERAKO JARDUERA" to listOf(
