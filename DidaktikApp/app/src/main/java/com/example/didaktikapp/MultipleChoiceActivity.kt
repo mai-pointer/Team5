@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.didaktikapp.navigation.NavigationUtil
@@ -48,10 +49,9 @@ class MultipleChoiceActivity : AppCompatActivity() {
 
         baieztatu.setOnClickListener{
             if (chosenAnswer?.equals(correctAnswer) == true){
-                val intent = Intent(this ,  MultipleChoiceActivity::class.java)
-                repeatActivityMenu.showGameOverDialog(this, intent)
+                Toast.makeText(this, "Zorionak", Toast.LENGTH_SHORT).show()
             } else{
-
+                Toast.makeText(this, "Gaizki", Toast.LENGTH_SHORT).show()
             }
         }
         atzera.setOnClickListener{
