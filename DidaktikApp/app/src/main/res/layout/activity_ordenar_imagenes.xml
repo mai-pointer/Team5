@@ -10,156 +10,176 @@
         android:name="com.example.didaktikapp.titleFragment.TitleFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         tools:layout="@layout/fragment_title" />
 
     <!-- Huecos para las imágenes con nombres -->
 
-    <RelativeLayout
-        android:id="@+id/hueco1"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="150dp"
-        android:background="@drawable/tarjeta"
-        android:tag="hueco1">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="Idi probak"
-            android:textSize="14sp" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/hueco2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/tarjeta"
-        android:tag="hueco2">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Udala"
-            android:textSize="14sp" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/hueco3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="250dp"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/tarjeta"
-        android:tag="hueco3">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Txakoli"
-            android:textSize="14sp" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/hueco4"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="155dp"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/tarjeta"
-        android:tag="hueco4">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Arkua"
-            android:textSize="14sp" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/hueco5"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="270dp"
-        android:layout_marginTop="150dp"
-        android:background="@drawable/tarjeta"
-        android:tag="hueco5">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="Dorrea"
-            android:textSize="14sp" />
-    </RelativeLayout>
-
     <!-- Imágenes que se pueden arrastrar -->
 
-    <ImageView
-        android:id="@+id/imagen1"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_below="@id/hueco1"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="298dp"
-        android:contentDescription="Imagen arrastrable"
-        android:src="@drawable/idiprobak"
-        android:tag="hueco1" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="513dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/directions">
 
-    <ImageView
-        android:id="@+id/imagen2"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_below="@id/hueco2"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="274dp"
-        android:contentDescription="Imagen arrastrable"
-        android:src="@drawable/udala"
-        android:tag="hueco2" />
+        <ImageView
+            android:id="@+id/imagen1"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="298dp"
+            android:contentDescription="Imagen arrastrable"
+            android:src="@drawable/idiprobak"
+            android:tag="hueco1" />
 
-    <ImageView
-        android:id="@+id/imagen3"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_below="@id/hueco3"
-        android:layout_marginStart="170dp"
-        android:layout_marginTop="294dp"
-        android:contentDescription="Imagen arrastrable"
-        android:src="@drawable/txakoli"
-        android:tag="hueco3" />
+        <ImageView
+            android:id="@+id/imagen2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="185dp"
+            android:contentDescription="Imagen arrastrable"
+            android:src="@drawable/udala"
+            android:tag="hueco2" />
 
-    <ImageView
-        android:id="@+id/imagen4"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_below="@id/hueco4"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="374dp"
-        android:contentDescription="Imagen arrastrable"
-        android:src="@drawable/arkua"
-        android:tag="hueco4" />
+        <ImageView
+            android:id="@+id/imagen3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="170dp"
+            android:layout_marginTop="234dp"
+            android:contentDescription="Imagen arrastrable"
+            android:src="@drawable/txakoli"
+            android:tag="hueco3" />
 
-    <ImageView
-        android:id="@+id/imagen5"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_below="@id/hueco5"
-        android:layout_marginStart="290dp"
-        android:layout_marginTop="150dp"
-        android:contentDescription="Imagen arrastrable"
-        android:src="@drawable/dorrea"
-        android:tag="hueco5" />
+        <ImageView
+            android:id="@+id/imagen4"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="374dp"
+            android:contentDescription="Imagen arrastrable"
+            android:src="@drawable/arkua"
+            android:tag="hueco4" />
+
+        <ImageView
+            android:id="@+id/imagen5"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="190dp"
+            android:layout_marginTop="150dp"
+            android:contentDescription="Imagen arrastrable"
+            android:src="@drawable/dorrea"
+            android:tag="hueco5" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="316dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="372dp"
+        android:background="@drawable/lezama"
+        android:gravity="center">
+
+        <RelativeLayout
+            android:id="@+id/hueco1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="150dp"
+            android:background="@drawable/tarjeta"
+            android:tag="hueco1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="Idi probak"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/hueco2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/tarjeta"
+            android:tag="hueco2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Udala"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/hueco3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="196dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/tarjeta"
+            android:tag="hueco3">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Txakoli"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/hueco4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/tarjeta"
+            android:tag="hueco4">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Arkua"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/hueco5"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="0dp"
+            android:background="@drawable/tarjeta"
+            android:tag="hueco5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="Dorrea"
+                android:textSize="14sp" />
+        </RelativeLayout>
+    </RelativeLayout>
 
     <!-- Agrega más huecos e imágenes según sea necesario -->
 
