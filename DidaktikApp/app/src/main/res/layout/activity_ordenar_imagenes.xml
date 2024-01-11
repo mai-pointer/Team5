@@ -52,7 +52,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="170dp"
+            android:layout_marginStart="230dp"
             android:layout_marginTop="234dp"
             android:contentDescription="Imagen arrastrable"
             android:src="@drawable/txakoli"
