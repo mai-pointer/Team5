@@ -148,7 +148,6 @@ class Crucigrama : AppCompatActivity() {
             if (bien){
                 val intent = Intent(this ,Crucigrama::class.java)
                 repeatActivityMenu.showGameOverDialog(this, intent)
-
             }
 
         }

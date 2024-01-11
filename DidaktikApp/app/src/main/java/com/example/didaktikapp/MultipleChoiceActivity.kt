@@ -15,6 +15,7 @@ import com.example.didaktikapp.navigation.NavigationUtil
 import com.example.didaktikapp.titleFragment.TitleFragment
 
 class MultipleChoiceActivity : AppCompatActivity() {
+    private val repeatActivityMenu = RepeatActivityMenu(this)
 
     val myQuestion = hashMapOf<String, MultipleChoiceActivity.Question>(
         "Juego1.3" to MultipleChoiceActivity.Question(
@@ -47,7 +48,8 @@ class MultipleChoiceActivity : AppCompatActivity() {
 
         baieztatu.setOnClickListener{
             if (chosenAnswer?.equals(correctAnswer) == true){
-
+                val intent = Intent(this ,  MultipleChoiceActivity::class.java)
+                repeatActivityMenu.showGameOverDialog(this, intent)
             } else{
 
             }
