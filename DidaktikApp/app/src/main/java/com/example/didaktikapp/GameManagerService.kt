@@ -49,7 +49,6 @@ class GameManagerService : Service() {
         ),
         "Juego7" to listOf(
             Info::class.java,
-            InfoFoto::class.java,
             InsertWordsActivity::class.java,
             JuegoTorre::class.java,
         ),
