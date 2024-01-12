@@ -43,6 +43,9 @@ android {
 }
 
 dependencies {
+    implementation("androidx.room:room-runtime:2.2.5")
+    kapt("androidx.room:room-compiler:2.2.5")
+
     implementation ("com.google.android.exoplayer:exoplayer-core:2.16.1")
     implementation ("com.google.android.exoplayer:exoplayer-ui:2.16.1")
 

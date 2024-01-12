@@ -103,16 +103,16 @@ class GameManagerService : Service() {
 
     private fun guardar(){
         //BD------------>
-        BDManager.partida{ sharedPreferences, partidaBD ->
-            val juegoActualId = sharedPreferences.getInt("juego_actual", -1)
-
-            if (juegoActualId != -1) {
-                val juegoActual = partidaBD.get(juegoActualId)
-                juegoActual.juego = nombreJuego
-                juegoActual.pantalla = pantallaActual
-                partidaBD.update(juegoActual)
-            }
-        }
+//        BDManager.partida{ sharedPreferences, partidaBD ->
+//            val juegoActualId = sharedPreferences.getInt("juego_actual", -1)
+//
+//            if (juegoActualId != -1) {
+//                val juegoActual = partidaBD.get(juegoActualId)
+//                juegoActual.juego = nombreJuego
+//                juegoActual.pantalla = pantallaActual
+//                partidaBD.update(juegoActual)
+//            }
+//        }
         //BD------------<
     }
 
