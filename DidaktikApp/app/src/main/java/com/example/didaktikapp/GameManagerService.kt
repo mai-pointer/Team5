@@ -25,7 +25,7 @@ class GameManagerService : Service() {
             PreguntasPistas::class.java,
             Info::class.java,
             Info::class.java,
-            Info::class.java,
+            Video::class.java,
             Info::class.java,
         ),
         "Juego4" to listOf(
@@ -36,9 +36,9 @@ class GameManagerService : Service() {
         ),
         "Juego5" to listOf(
             Info::class.java,
+            PreguntasPistas::class.java,
             Info::class.java,
-            Info::class.java,
-            Info::class.java,
+            Video::class.java,
             PuzzleActivity::class.java,
             Info::class.java,
         ),
@@ -49,10 +49,8 @@ class GameManagerService : Service() {
         ),
         "Juego7" to listOf(
             Info::class.java,
-            Info::class.java,
-            Info::class.java,
             InsertWordsActivity::class.java,
-            OrdenarImagenesActivity::class.java,
+            JuegoTorre::class.java,
         ),
         "HASIERAKO JARDUERA" to listOf(
             Info::class.java,
@@ -67,6 +65,7 @@ class GameManagerService : Service() {
     //Variables
     private lateinit var context: Context
     private var juegoActual: List<Class<*>>? = null
+    private var juegoNumero = 0
     private var pantallaActual = 0
     private var nombreJuego: String = ""
 
@@ -84,7 +83,6 @@ class GameManagerService : Service() {
         nombreJuego = gameName
         juegoActual = games[gameName]
         pantallaActual = 0
-        guardar()
         pantalla()
     }
 
@@ -93,12 +91,10 @@ class GameManagerService : Service() {
         if (pantallaActual < (juegoActual?.size ?: 0) - 1) {
             //Si hay más pantallas, pasa a la siguiente
             pantallaActual++
-            guardar()
             pantalla()
         } else {
             //Si no, vuelve al menú principal
             pantallaActual = 0
-            guardar()
 
             val intent = Intent(context, MapsActivity::class.java)
             context.startActivity(intent)
@@ -129,6 +125,11 @@ class GameManagerService : Service() {
             screenIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(screenIntent)
         }
+    }
+
+    //Devuelve el número de pantalla actual
+    fun pantallaActual(): String {
+        return  games.entries.find { it.value == juegoActual }?.key + "." + (pantallaActual+1).toString()
     }
 }
 

@@ -1,7 +1,6 @@
 package com.example.didaktikapp
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -20,15 +19,16 @@ class PuzzleActivity : AppCompatActivity() {
     lateinit var image6: ImageView
     lateinit var image7: ImageView
     lateinit var image8: ImageView
+    lateinit var clue: ImageView
+
+    private var isClueMode = false;
 
     private val imageArray: Array<Array<Int>> = Array(3) { row ->
         Array(3) { col ->
             row * 3 + col
         }
     }
-
     private lateinit var changedImageArray: Array<Array<Int>>
-
     private var myImagesArray =
         arrayOf(
             "image0",
@@ -43,7 +43,6 @@ class PuzzleActivity : AppCompatActivity() {
         )
     private var imageViewsMap: MutableMap<Pair<Int, Int>, ImageView> = mutableMapOf()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_puzzle)
@@ -57,6 +56,7 @@ class PuzzleActivity : AppCompatActivity() {
         image6 = findViewById(R.id.block6)
         image7 = findViewById(R.id.block7)
         image8 = findViewById(R.id.block8)
+        clue = findViewById(R.id.clueBtn)
 
         imageViewsMap = mutableMapOf(
             Pair(0, 0) to image0,
@@ -72,56 +72,108 @@ class PuzzleActivity : AppCompatActivity() {
 
         image0.setOnClickListener {
             val pair = findPairByImageView(image0)
-            if (pair != null) {
-                onImageClick(pair)
+            if(isClueMode){
+                getClue(pair)
+            } else{
+                if (pair != null) {
+                    onImageClick(pair)
+                }
             }
         }
         image1.setOnClickListener {
             val pair = findPairByImageView(image1)
-            if (pair != null) {
-                onImageClick(pair)
+            if(isClueMode){
+                getClue(pair)
+            } else{
+
+                if (pair != null) {
+                    onImageClick(pair)
+                }
             }
         }
         image2.setOnClickListener {
             val pair = findPairByImageView(image2)
-            if (pair != null) {
-                onImageClick(pair)
+            if(isClueMode){
+                getClue(pair)
+            } else{
+
+                if (pair != null) {
+                    onImageClick(pair)
+                }
             }
         }
         image3.setOnClickListener {
             val pair = findPairByImageView(image3)
-            if (pair != null) {
-                onImageClick(pair)
+            if(isClueMode){
+                getClue(pair)
+            } else{
+                if (pair != null) {
+                    onImageClick(pair)
+                }
             }
         }
         image4.setOnClickListener {
             val pair = findPairByImageView(image4)
-            if (pair != null) {
-                onImageClick(pair)
+            if(isClueMode){
+                getClue(pair)
+            } else{
+
+                if (pair != null) {
+                    onImageClick(pair)
+                }
             }
         }
         image5.setOnClickListener {
             val pair = findPairByImageView(image5)
-            if (pair != null) {
-                onImageClick(pair)
+            if(isClueMode){
+                getClue(pair)
+            } else{
+
+                if (pair != null) {
+                    onImageClick(pair)
+                }
             }
         }
         image6.setOnClickListener {
             val pair = findPairByImageView(image6)
-            if (pair != null) {
-                onImageClick(pair)
+            if(isClueMode){
+                getClue(pair)
+            } else{
+
+                if (pair != null) {
+                    onImageClick(pair)
+                }
             }
         }
         image7.setOnClickListener {
             val pair = findPairByImageView(image7)
-            if (pair != null) {
-                onImageClick(pair)
+            if(isClueMode){
+                getClue(pair)
+            } else{
+
+                if (pair != null) {
+                    onImageClick(pair)
+                }
             }
         }
         image8.setOnClickListener {
             val pair = findPairByImageView(image8)
-            if (pair != null) {
-                onImageClick(pair)
+            if(isClueMode){
+                getClue(pair)
+            } else{
+
+                if (pair != null) {
+                    onImageClick(pair)
+                }
+            }
+
+        }
+        clue.setOnClickListener{
+            if (!isClueMode){
+                isClueMode = true
+            } else{
+                isClueMode = false
+                clue.isEnabled = false
             }
         }
 
@@ -155,17 +207,55 @@ class PuzzleActivity : AppCompatActivity() {
 
     }
 
+    private fun getClue(coordinates: Pair<Int, Int>?){
+        val row = coordinates?.first
+        val col = coordinates?.second
+
+        val currentImageIndex = changedImageArray[row!!][col!!]
+        val currentImage = myImagesArray[currentImageIndex]
+
+        val targetRow = currentImageIndex / 3
+        val targetCol = currentImageIndex % 3
+
+        val targetImageIndex = changedImageArray[targetRow][targetCol]
+        val targetImage = myImagesArray[targetImageIndex]
+
+        val newCoordinates: Pair<Int,Int> = Pair(targetRow, targetCol)
+
+        var targetImageViwe = findImageViewByPair(newCoordinates)
+
+        targetImageViwe?.setImageResource(
+            resources.getIdentifier(
+                currentImage,
+                "drawable",
+                packageName
+            )
+        )
+
+        val currentImageView = findImageViewByPair(coordinates)
+        currentImageView?.setImageResource(
+            resources.getIdentifier(
+                targetImage,
+                "drawable",
+                packageName
+            )
+        )
+
+        changedImageArray[row][col] = targetImageIndex
+        changedImageArray[targetRow][targetCol] = currentImageIndex
+
+        isClueMode = false
+    }
+
     fun findPairByImageView(imageView: ImageView): Pair<Int, Int>? {
         return imageViewsMap.entries.find { it.value == imageView }?.key
     }
 
-    fun findImageViewByPair(pair: Pair<Int, Int>): ImageView? {
+    fun findImageViewByPair(pair: Pair<Int, Int>?): ImageView? {
         return imageViewsMap[pair]
     }
 
     private fun onHomeButtonClicked() {
-        // Acciones a realizar cuando se hace clic en el botón Home
-        // Utiliza NavigationUtil para la navegación
         NavigationUtil.navigateToMainMenu(this)
     }
 
@@ -237,18 +327,18 @@ class PuzzleActivity : AppCompatActivity() {
 
     private fun onImageClick(coordinates: Pair<Int, Int>) {
         var myDirection = 0
-        var attemps = 0
-        val maxAttemps = 3
+
         for (i in 0 until 4) {
             if (canMove(coordinates, Direction.values()[myDirection])) {
                 changeImage(coordinates, Direction.values()[myDirection])
+                break
             }
             myDirection += 1
         }
     }
 
     enum class Direction {
-        UP, DOWN, LEFT, RIGTH
+        UP, DOWN, LEFT, RIGHT
     }
 
     fun canMove(coordinates: Pair<Int, Int>, direction: Direction): Boolean {
@@ -258,13 +348,13 @@ class PuzzleActivity : AppCompatActivity() {
             Direction.UP -> if (row - 1 < 0) return false
             Direction.DOWN -> if (row + 1 > 2) return false
             Direction.LEFT -> if (col - 1 < 0) return false
-            Direction.RIGTH -> if (col + 1 > 2) return false
+            Direction.RIGHT -> if (col + 1 > 2) return false
         }
         when (direction) {
             Direction.UP -> if (changedImageArray[row - 1][col] > 0) return false
             Direction.DOWN -> if (changedImageArray[row + 1][col] > 0) return false
             Direction.LEFT -> if (changedImageArray[row][col - 1] > 0) return false
-            Direction.RIGTH -> if (changedImageArray[row][col + 1] > 0) return false
+            Direction.RIGHT -> if (changedImageArray[row][col + 1] > 0) return false
         }
 
         return true
@@ -353,7 +443,7 @@ class PuzzleActivity : AppCompatActivity() {
                 changedImageArray[row][col - 1] = myVal
             }
 
-            Direction.RIGTH -> {
+            Direction.RIGHT -> {
                 val newCoordinates: Pair<Int, Int> = Pair(row, col + 1)
                 val myCurrentImage = myImagesArray[changedImageArray[row][col]]
                 val targetImage = findImageViewByPair(newCoordinates)

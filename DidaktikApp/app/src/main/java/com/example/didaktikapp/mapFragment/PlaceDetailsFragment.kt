@@ -55,6 +55,7 @@ class PlaceDetailsFragment : Fragment() {
                 "Lezamako dorrea" -> R.drawable.dorrea
                 else -> R.drawable.default_image
             }
+
             imageViewPlace.setImageResource(imageResId)
 
             // Configura el botón de retroceso

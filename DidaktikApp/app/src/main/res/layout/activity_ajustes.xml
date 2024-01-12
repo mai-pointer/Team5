@@ -58,7 +58,7 @@
             app:srcCompat="@drawable/oig" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/answerText"
             style="@style/TextoDestacadoStyle"
             android:layout_width="204dp"
             android:layout_height="39dp"
