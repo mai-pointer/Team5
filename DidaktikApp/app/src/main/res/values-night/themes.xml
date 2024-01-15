@@ -71,7 +71,7 @@
 
     <!--Boton tint verde-->
     <style name="GreenIconStyle">
-        <item name="android:tint">@color/blancoOscuro</item>
+        <item name="android:tint">@color/material_dynamic_neutral10</item>
     </style>
     <!--Boton tint gris-->
     <style name="GreyIconStyle">
