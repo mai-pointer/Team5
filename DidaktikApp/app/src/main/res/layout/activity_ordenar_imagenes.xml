@@ -33,7 +33,7 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="298dp"
             android:contentDescription="Imagen arrastrable"
-            android:src="@drawable/idiprobak"
+            android:src="@drawable/idiprobakpista"
             android:tag="hueco1" />
 
         <ImageView
