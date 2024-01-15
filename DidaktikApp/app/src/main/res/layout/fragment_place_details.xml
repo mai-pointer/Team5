@@ -2,9 +2,9 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/backgroundBlancoPuro"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blancoPuro"
     android:padding="16dp">
 
     <LinearLayout
@@ -24,6 +24,7 @@
 
                 <!-- TextView centrado verticalmente en el centro -->
                 <TextView
+                    style="style/GreenIconStyle"
                     android:id="@+id/textViewPlaceName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -32,7 +33,6 @@
                     android:layout_marginEnd="48dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/noahgrotesqueblack"
-                    android:textColor="@color/verdeOscuro"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -54,12 +54,12 @@
 
 
         <TextView
+            style="@style/TextoDestacadoStyle"
             android:id="@+id/textViewInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/noahgrotesque"
-            android:textColor="@color/marron"
             android:textSize="16sp"
             android:padding="5dp"/>
 

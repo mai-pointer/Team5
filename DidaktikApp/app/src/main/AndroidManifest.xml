@@ -24,7 +24,7 @@
             android:name=".Video"
             android:exported="false" />
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".OrdenarImagenesActivity"
             android:exported="false" />
         <activity
             android:name=".PreguntasPistas"
@@ -68,7 +68,7 @@
             android:name=".MultipleChoiceActivity"
             android:exported="false" />
         <activity
-            android:name=".OrdenarImagenesActivity"
+            android:name=".MainMenuActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

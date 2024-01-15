@@ -43,13 +43,13 @@ android {
 }
 
 dependencies {
-    implementation ("com.google.android.exoplayer:exoplayer-core:2.16.1")
-    implementation ("com.google.android.exoplayer:exoplayer-ui:2.16.1")
-
+    implementation("com.google.android.exoplayer:exoplayer-core:2.16.1")
+    implementation("com.google.android.exoplayer:exoplayer-ui:2.16.1")
+    implementation("com.google.android.material:material:1.4.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
     implementation("com.google.android.material:material:1.6.0")
     implementation("com.makeramen:roundedimageview:2.3.0")
-    implementation ("androidx.gridlayout:gridlayout:1.0.0")
+    implementation("androidx.gridlayout:gridlayout:1.0.0")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
@@ -57,7 +57,7 @@ dependencies {
     implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
-    implementation ("androidx.databinding:databinding-runtime:8.2.1")
+    implementation("androidx.databinding:databinding-runtime:8.2.1")
     implementation("androidx.gridlayout:gridlayout:1.0.0")
     implementation("com.google.android.gms:play-services-location:21.0.1")
     testImplementation("junit:junit:4.13.2")

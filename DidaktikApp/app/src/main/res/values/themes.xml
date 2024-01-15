@@ -9,7 +9,6 @@
         <item name="android:windowBackground">@color/blancoOscuro</item>
     </style>
 
-    <style name="Theme.DidaktikApp" parent="Base.Theme.DidaktikApp" />
 
     <!--Boton fondo verde-->
     <style name="GreenButtonStyle">
