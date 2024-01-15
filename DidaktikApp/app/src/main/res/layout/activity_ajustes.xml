@@ -34,14 +34,14 @@
 
     <RelativeLayout
         android:id="@+id/profesores"
-        android:layout_width="362dp"
-        android:layout_height="110dp"
+        android:layout_width="342dp"
+        android:layout_height="112dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="23dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="147dp"
+        android:layout_marginEnd="36dp"
         android:background="@drawable/tarjeta">
 
         <ImageView
@@ -73,15 +73,15 @@
     <RelativeLayout
         android:id="@+id/contenedor"
         android:layout_width="wrap_content"
-        android:layout_height="283dp"
+        android:layout_height="354dp"
         android:layout_above="@+id/about"
         android:layout_below="@+id/profesores"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginBottom="46dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/tarjeta"
         android:padding="32dp">
 
@@ -191,5 +191,36 @@
             app:srcCompat="@drawable/upv" />
 
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/nuevapartida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="39dp"
+        android:layout_toEndOf="@+id/eliminarpartida"
+        android:text="@string/nuevo" />
+
+    <Button
+        android:id="@+id/eliminarpartida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="39dp"
+        android:text="@string/eliminar" />
+
+    <Spinner
+        android:id="@+id/listapartidas"
+        android:layout_width="138dp"
+        android:layout_height="52dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="34dp"
+        android:layout_toEndOf="@+id/nuevapartida" />
 
 </RelativeLayout>

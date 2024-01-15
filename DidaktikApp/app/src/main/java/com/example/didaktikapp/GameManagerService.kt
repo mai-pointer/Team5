@@ -3,7 +3,11 @@ package com.example.didaktikapp
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.IBinder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class GameManagerService : Service() {
 
@@ -65,7 +69,7 @@ class GameManagerService : Service() {
     //Variables
     private lateinit var context: Context
     private var juegoActual: List<Class<*>>? = null
-    private var juegoNumero = 0
+//    private var juegoNumero = 0
     private var pantallaActual = 0
     private var nombreJuego: String = ""
 
@@ -84,6 +88,8 @@ class GameManagerService : Service() {
         juegoActual = games[gameName]
         pantallaActual = 0
         pantalla()
+
+        guardar()
     }
 
     //Pasa a la siguiente pantalla
@@ -98,6 +104,24 @@ class GameManagerService : Service() {
 
             val intent = Intent(context, MapsActivity::class.java)
             context.startActivity(intent)
+        }
+
+        guardar()
+    }
+
+    fun guardar()
+    {
+        BDManager.Iniciar{ partidaDao, sharedPreferences ->
+            GlobalScope.launch(Dispatchers.IO){
+                partidaDao.update(
+                    Partida(
+                        id = sharedPreferences.getInt("partida_id", 1),
+                        juego = nombreJuego,
+                        pantalla = pantallaActual,
+                        tiempo = 0.0f
+                    )
+                )
+            }
         }
     }
 

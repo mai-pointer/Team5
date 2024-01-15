@@ -2,18 +2,18 @@ package com.example.didaktikapp
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.Button
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.CoroutineScope
+import android.widget.Spinner
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class MainMenuActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
@@ -26,6 +26,23 @@ class MainMenuActivity : AppCompatActivity() {
             Intent(this, GameManagerService::class.java)
         )
         GameManager.initialize(this)
+
+        // Inicializar la BD
+        BDManager.context = this
+        BDManager.Iniciar{ partidaDao, sharedPreferences ->
+            var partida_id = sharedPreferences.getInt("partida_id", -1)
+
+            if (partida_id == -1){
+                val nuevaPartida = Partida(juego = "Juego1", pantalla = 0, tiempo = 0.0f)
+                GlobalScope.launch(Dispatchers.IO) {
+                    partidaDao.insert(nuevaPartida)
+                    runOnUiThread {
+                        sharedPreferences.edit().putInt("partida_id", nuevaPartida.id).apply()
+                    }
+                }
+            }
+        }
+
 
         // Agrega un OnClickListener al botón "Jugar"
         buttonJugar.setOnClickListener{
