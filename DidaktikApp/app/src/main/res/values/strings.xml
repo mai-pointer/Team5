@@ -46,7 +46,10 @@
     <!-- AJUSTES -->
     <string name="profesor">Irakasle modua</string>
     <string name="inicio">Hasiera</string>
-
+    <string name="eliminar">Eliminar</string>
+    <string name="nuevo">Nuevo</string>
+    <string name="partida">Partida</string>
+    <string name="error_ajustes_1">No se pueden eliminar todas las partidas</string>
     <!-- Multiple choice -->
     <string name="multipleChoiceExplain">Aukeratu erantzun zuzena</string>
     <string name="multipleChoiceAnswer">Erantzuna</string>
