@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lezamas Treasure</string>
+    <string name="title_activity_maps">Maps Activity</string>
+
+    <string name="agricolaText">The Agricultural and Livestock Cooperative of Lezama was established in 1925, formed by eighteen villagers of the town. At that time, a better defense of their activities in the agricultural and livestock sector began to be organized, gaining great importance among the inhabitants of Lezama and its rural surroundings.</string>
+    <string name="txakoli">With an extension of 9 hectares, it is located in the Bilbo Handia region, in the heart of Txorierri, and, of course, in Lezama. The climate is mesothermal, with mild temperatures and rainfall. The soils are loamy-clayey, planted mainly with local vine varieties "Hondarrabi Zuri" and "Hondarrabi Zuri Zerratia," as well as other minor varieties such as "Petit Manseng" and "Riesling" facing south.</string>
+    <string name="udala">Come and enjoy the Txorierri valley in Lezama! Visit the website of the Txorierri Consortium to discover all the options: routes, restaurants, accommodations, transportation, etc. www.txorierri.eus</string>
+    <string name="harategia">We are in the Lezama butcher shop, where a very popular product in the town and its surroundings is elaborated. Finding that product may take some work, but you will have some useful photos to help you.</string>
+    <string name="santamaria">We are currently at the Church of Santa María, located in the center of Lezama. The Church of Santa María was built in the 16th century and has a Gothic style.</string>
+    <string name="dorrea">We have arrived in the Aretxalde neighborhood, and we have the Lezama tower in front of us. This tower was once a fortified military site. Additionally, it was a symbol of economic and social power, indicating the noble origin of its owners.</string>
+    <string name="arkua">The "San Mamés" soccer field was built in 1913 and has undergone several expansions since then. In 1945, it was expanded, and a large iron arch was installed on the west stand. This arch became one of the distinctive features of the soccer field and the club itself. San Mamés field was demolished in 2013, but after some popular mobilizations, it was decided to preserve the arch. So they dismantled the arch, restored it, and moved it to the facilities that Athletic has in Lezama.</string>
+
+    <!-- General -->
+    <string name="homeButton">Exit</string>
+    <string name="btnValidate">Validate</string>
+    <string name="btnBack">Back</string>
+    <string name="btnContinue">Continue</string>
+    <string name="btnRepeat">Repeat</string>
+    <string name="btnDarkMode">Dark mode</string>
+
+    <!-- Admin Login -->
+    <string name="adminloginTitle">Hello</string>
+    <string name="adminloginSubtitle">Enter the password</string>
+    <string name="adminloginPassword">Password</string>
+    <string name="incorrecto">Incorrect password</string>
+
+    <!-- Main Menu -->
+    <string name="mainMenuTitulo1">The Mystery of Lezama</string>
+    <string name="mainMenuTitulo2">Lezama</string>
+    <string name="mainMenuAjustes">Settings</string>
+    <string name="mainMenuJugar">Play</string>
+    <string name="mainMenuModoLibre">Free Mode</string>
+
+    <!-- Differences -->
+    <string name="diferenciasTitulo">Find 6 differences</string>
+    <string name="diferenciasRestantes">Remaining differences:</string>
+
+    <!-- INFO -->
+    <string name="terminar">FINISH</string>
+    <string name="title_activity_puzzle">Puzzle Activity</string>
+    <string name="first_fragment_label">First fragment</string>
+    <string name="second_fragment_label">Second fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <!-- SETTINGS -->
+    <string name="profesor">Teacher Mode</string>
+    <string name="inicio">Home</string>
+
+    <!-- Multiple choice -->
+    <string name="multipleChoiceExplain">Choose the correct answer</string>
+    <string name="multipleChoiceAnswer">Answer</string>
+
+    <!-- Insert words -->
+    <string name="insertWordsExplain">Complete the text</string>
+
+    <!-- Crossword -->
+    <string name="wordSearchExplain">Find the following words</string>
+    <string name="mensaje_fallido">You failed!</string>
+
+    <!-- Repeat -->
+    <string name="terminar_juego">Game over</string>
+
+    <!-- Multiple Choice -->
+    <!-- 1.3 -->
+    <string name="galdera1.3">Which one is the ox?</string>
+    <string name="erantzun1.3">b</string>
+
+    <!-- 1.4 -->
+    <!--1-->
+    <string name="galdera1.4.1">In which moments of the year are the ox tests carried out?</string>
+    <string name="aukera1.4.1.a">During rural festivals</string>
+    <string name="aukera1.4.1.b">At Christmas</string>
+    <string name="aukera1.4.1.c">During Holy Week</string>
+    <string name="erantzun1.4.1">a</string>
+
+    <!--2-->
+    <string name="galdera1.4.2">How much do the oxen weigh?</string>
+    <string name="aukera1.4.2.a">Between 100 and 200 kg</string>
+    <string name="aukera1.4.2.b">Between 500 and 650 kg</string>
+    <string name="aukera1.4.2.c">Between 650 and 750 kg</string>
+    <string name="erantzun1.4.2">b</string>
+
+    <!--3-->
+    <string name="galdera1.4.3">What do the oxen eat before participating in the tests?</string>
+    <string name="aukera1.4.3.a">Abas</string>
+    <string name="aukera1.4.3.b">Lettuce</string>
+    <string name="aukera1.4.3.c">Pods</string>
+    <string name="erantzun1.4.3">a</string>
+
+    <!-- 4.3 -->
+    <!--1-->
+    <string name="galdera4.3.1">Who was Mikel Zarate?</string>
+    <string name="aukera4.3.1.a">Basque writer</string>
+    <string name="aukera4.3.1.b">Enthusiast of Basque poetry</string>
+    <string name="aukera4.3.1.c">The most famous writer in Spain</string>
+    <string name="aukera4.3.1.d">Famous bertsolari (improviser)</string>
+    <string name="erantzun4.3.1">a</string>
+
+    <!--2-->
+    <string name="galdera4.3.2">When was he born?</string>
+    <string name="aukera4.3.2.a">In the 18th century</string>
+    <string name="aukera4.3.2.b">In 1935</string>
+    <string name="aukera4.3.2.c">In the 21st century</string>
+    <string name="aukera4.3.2.d">In 1933</string>
+    <string name="erantzun4.3.2">d</string>
+
+    <!--3-->
+    <string name="galdera4.3.3">Where was he born?</string>
+    <string name="aukera4.3.3.a">In Bilbao</string>
+    <string name="aukera4.3.3.b">In France, although he was Basque-speaking</string>
+    <string name="aukera4.3.3.c">In Lezama</string>
+    <string name="aukera4.3.3.d">In Pamplona</string>
+    <string name="erantzun4.3.3">c</string>
+
+    <!--4-->
+    <string name="galdera4.3.4">Where did he study as a student?</string>
+    <string name="aukera4.3.4.a">In the Summer Courses of Derio</string>
+    <string name="aukera4.3.4.b">In the summer school of Derio</string>
+    <string name="aukera4.3.4.c">In the Summer Courses of Deusto</string>
+    <string name="aukera4.3.4.d">In the summer school of Deusto</string>
+    <string name="erantzun4.3.4">a</string>
+
+    <!--5-->
+    <string name="galdera4.3.5">How many books did he publish?</string>
+    <string name="aukera4.3.5.a">He did not publish any books</string>
+    <string name="aukera4.3.5.b">1</string>
+    <string name="aukera4.3.5.c">2</string>
+    <string name="aukera4.3.5.d">More than 10, as he was a writer</string>
+    <string name="erantzun4.3.5">b</string>
+
+    <!--6-->
+    <string name="galdera4.3.6">When did he publish the book of childrens stories?</string>
+    <string name="aukera4.3.6.a">In 1973</string>
+    <string name="aukera4.3.6.b">In 1933</string>
+    <string name="aukera4.3.6.c">In 1793</string>
+    <string name="aukera4.3.6.d">In 1937</string>
+    <string name="erantzun4.3.6">a</string>
+
+    <!-- Pistak -->
+    <!-- 1.1-->
+    <string name="galdera1.1">What sport was practiced here?</string>
+    <string name="argazki1.1a">stones</string>
+    <string name="argazki1.1b">idiprobak</string>
+    <string name="audio1.1">idi</string>
+    <string name="erantzun1.1a">DRAG TESTS</string>
+    <string name="erantzun1.1b">DRAG TESTS</string>
+</resources>
+
