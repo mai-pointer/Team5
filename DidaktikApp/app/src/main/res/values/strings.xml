@@ -17,6 +17,7 @@
     <string name="btnBack">Atzera</string>
     <string name="btnContinue">Jarraitu</string>
     <string name="btnRepeat">Errepikatu</string>
+    <string name="btnDarkMode">Ilun modua</string>
 
     <!-- Admin Login -->
     <string name="adminloginTitle">Kaixo</string>
@@ -27,7 +28,7 @@
     <!-- Main Menu -->
     <string name="mainMenuTitulo1">Lezamaren misterioa</string>
     <string name="mainMenuTitulo2">Lezama</string>
-    <string name="mainMenuAjustes">Ajustes</string>
+    <string name="mainMenuAjustes">Doikuntzak</string>
     <string name="mainMenuJugar">Jolastu</string>
     <string name="mainMenuModoLibre">Lehiaketa modua</string>
 
@@ -57,8 +58,7 @@
     <!-- Crucigrama -->
     <string name="wordSearchExplain">Aurkitu hurrengo hitzak</string>
     <string name="mensaje_fallido">Huts egin duzu!</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
     <!-- Repetir -->
     <string name="terminar_juego">Jokoa amaituta</string>
