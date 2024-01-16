@@ -5,11 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.example.didaktikapp.Crucigrama
 import com.example.didaktikapp.DiferenciasActivity
 import com.example.didaktikapp.GameManager
@@ -31,7 +29,7 @@ class PlaceDetailsFragment : Fragment() {
         val textViewPlaceName: TextView = rootView.findViewById(R.id.textViewPlaceName)
         val textViewInfo: TextView = rootView.findViewById(R.id.textViewInfo)
         val imageViewPlace: ImageView = rootView.findViewById(R.id.imageViewPlace)
-        val btnBack: ImageView = rootView.findViewById(R.id.btnBack)
+        val btnBack: ImageView = rootView.findViewById(R.id.btnContinue)
 
         // Recibe información del lugar desde el fragmento, por ejemplo, usando argumentos
         val args = arguments

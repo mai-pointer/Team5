@@ -12,7 +12,7 @@ import android.widget.RadioButton
 import android.widget.TextView
 
 
-class PictureAnswerAdapter(private val context: Context, private var pictures: MutableMap<Char, Bitmap?>, private val callback: OnButtonClickListener) : BaseAdapter() {
+class PictureAnswerAdapter(private val context: Context, private var pictures: MutableMap<Char, Bitmap?>, private val chosenAnswer:Char?, private val callback: OnButtonClickListener) : BaseAdapter() {
     //Funciones del adaptador
     override fun getCount(): Int {
         return pictures.size
@@ -51,8 +51,11 @@ class PictureAnswerAdapter(private val context: Context, private var pictures: M
         val key = pictures.keys.toList()[position]
         val image = pictures[key]
 
-        elementos.image.setImageBitmap(image)
+        if(key == chosenAnswer){
+            elementos.button.isChecked=true
+        }
 
+        elementos.image.setImageBitmap(image)
         elementos.button.setOnClickListener{
             callback.onButtonClick(key)
         }
@@ -66,8 +69,50 @@ class PictureAnswerAdapter(private val context: Context, private var pictures: M
         lateinit var button: RadioButton
     }
 }
+class PictureAdapter(private val context: Context, private var pictures: MutableList<Bitmap>) : BaseAdapter() {
+    //Funciones del adaptador
+    override fun getCount(): Int {
+        return pictures.size
+    }
+    override fun getItem(position: Int): Any {
+        return pictures.toList()[position]
+    }
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
 
-class AnswerAdapter(private val context: Context, private var answers: MutableMap<Char, String?>, private val callback: OnButtonClickListener) : BaseAdapter() {
+    //Edita la view
+    @SuppressLint("ResourceType")
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+
+        //Declara la view y el alamcen de los datos
+        val view: View
+        val elementos: Elementos
+
+        if (convertView == null) {
+            view = LayoutInflater.from(context).inflate(R.layout.pista_picture, parent, false)
+            elementos = Elementos() // declara la clase
+
+            // Obtener las vistas del diseño
+            elementos.image = view.findViewById(R.id.image)
+            view.tag = elementos
+        } else {
+            view = convertView
+            elementos = view.tag as Elementos
+        }
+
+        val key = pictures.toList()[position]
+        elementos.image.setImageBitmap(key)
+
+        return view
+    }
+
+    //Clase para guardar los elementos de la view
+    private class Elementos {
+        lateinit var image: ImageView
+    }
+}
+class AnswerAdapter(private val context: Context, private var answers: MutableMap<Char, String?>,  private val chosenAnswer:Char?, private val callback: OnButtonClickListener) : BaseAdapter() {
     //Funciones del adaptador
     override fun getCount(): Int {
         return answers.size
@@ -107,6 +152,11 @@ class AnswerAdapter(private val context: Context, private var answers: MutableMa
         val respuesta = answers[key]
 
         elementos.answer.text = respuesta
+
+        if(key == chosenAnswer){
+            elementos.button.isChecked=true
+        }
+
 
         elementos.button.setOnClickListener{
             callback.onButtonClick(key)

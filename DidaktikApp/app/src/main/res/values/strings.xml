@@ -142,10 +142,22 @@
     <!-- Pistak -->
     <!-- 1.1-->
     <string name="galdera1.1">Ze kirol egiten zen hemen?</string>
-    <string name="argazki1.1a">harriak</string>
-    <string name="argazki1.1b">idiprobak</string>
-    <string name="audio1.1">idi</string>
     <string name="erantzun1.1a">IDI PROBAK</string>
     <string name="erantzun1.1b">IDI-PROBAK</string>
+
+    <!-- 2.1-->
+    <string name="galdera2.1">Lezamako harategian oso ospetsua den produktu bat prestatzen dute osagai hauekin. Ze produktu da hori?</string>
+    <string name="erantzun2.1a">ODOLOSTE</string>
+    <string name="erantzun2.1b">ODOLOSTEA</string>
+
+    <!-- 3.1-->
+    <string name="galdera3.1">Badakizue zer den edari hau?</string>
+    <string name="erantzun3.1a">TXAKOLI</string>
+    <string name="erantzun3.1b">TXAKOLIA</string>
+
+    <!-- 5.2-->
+    <string name="galdera5.2">Zer ikusten duzue elizan? zer objetu adierazgarri ditu? Komentatu zuen artean</string>
+    <string name="erantzun5.2a">KANPAIAK</string>
+    <string name="erantzun5.2b">KANPAI</string>
 
 </resources>

@@ -1,101 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/blancoOscuro"
+    android:padding="30dp">
 
-  <Button
-      android:id="@+id/terminar_preguntapista"
-      style="@style/GreyButtonStyle"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentEnd="true"
-      android:layout_alignParentBottom="true"
-      android:layout_marginEnd="36dp"
-      android:layout_marginBottom="21dp"
-      android:text="@string/terminar"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.87"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
-  <TextView
-      android:id="@+id/textPregunta"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentStart="true"
-      android:layout_alignParentTop="true"
-      android:layout_alignParentEnd="true"
-      android:layout_marginStart="62dp"
-      android:layout_marginTop="41dp"
-      android:layout_marginEnd="63dp"
-      android:padding="16dp"
-      android:textAlignment="center"
-      android:textColor="@color/marron"
-      android:textSize="22sp"
-      tools:text="¿Cuál es tu respuesta?" />
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
 
-  <RadioGroup
-      android:id="@+id/radioGroup"
-      android:layout_width="335dp"
-      android:layout_height="wrap_content"
-      android:layout_below="@+id/imagenVideo"
-      android:layout_alignParentStart="true"
-      android:layout_alignParentEnd="true"
-      android:layout_alignParentBottom="true"
-      android:layout_marginStart="37dp"
-      android:layout_marginTop="15dp"
-      android:layout_marginEnd="38dp"
-      android:layout_marginBottom="135dp"
-      android:padding="16dp">
-
-    <RadioButton
-        android:id="@+id/opcion1"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.example.didaktikapp.titleFragment.TitleFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:textColor="@color/roca"
-        tools:text="Opción 1" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_title" />
 
-    <RadioButton
-        android:id="@+id/opcion2"
+    <TextView
+        android:id="@+id/galdera"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:textColor="@color/roca"
-        tools:text="Opción 2" />
+        android:fontFamily="@font/noahgrotesque"
+        android:text="Galdera placeholder"
+        android:textColor="@color/verdeOscuro"
+        android:textSize="24sp" />
 
-    <RadioButton
-        android:id="@+id/opcion"
+
+    <EditText
+        android:id="@+id/userAnswer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:textColor="@color/roca"
-        tools:text="Opción 3" />
+        android:ems="10"
+        android:inputType="text" />
 
-    <RadioButton
-        android:id="@+id/opcion3"
+    <ListView
+        android:id="@+id/pistak"
+        android:layout_width="match_parent"
+        android:layout_height="417dp" />
+
+    <ImageButton
+        android:id="@+id/playaudio"
+        style="@style/GreenIconStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitXY"
+        android:src="@drawable/play_1"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.945"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:textColor="@color/roca"
-        tools:text="Opción 4" />
-  </RadioGroup>
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-  <ImageView
-      android:id="@+id/imagenVideo"
-      android:layout_width="238dp"
-      android:layout_height="250dp"
-      android:layout_below="@+id/textPregunta"
-      android:layout_alignParentStart="true"
-      android:layout_alignParentEnd="true"
-      android:layout_marginStart="86dp"
-      android:layout_marginTop="4dp"
-      android:layout_marginEnd="87dp"
-      android:adjustViewBounds="true"
-      android:contentDescription="Imagen"
-      android:scaleType="fitCenter"
-      tools:srcCompat="@tools:sample/avatars[2]" />
-</RelativeLayout>
+      <Button
+          android:id="@+id/btnValidate"
+          style="@style/GreenButtonStyle"
+          android:layout_width="0dp"
+          android:layout_height="48dp"
+          android:layout_weight="1"
+          android:fontFamily="@font/noahgrotesquebold"
+          android:text="@string/btnValidate" />
+
+      <Space
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="0.5" />
+
+      <Button
+          android:id="@+id/btnContinue"
+          style="@style/GreyButtonStyle"
+          android:layout_width="0dp"
+          android:layout_height="48dp"
+          android:layout_gravity="end"
+          android:layout_weight="1"
+          android:enabled="false"
+          android:text="@string/btnContinue" />
+    </LinearLayout>
+  </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

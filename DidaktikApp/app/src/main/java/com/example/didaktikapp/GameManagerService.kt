@@ -13,6 +13,8 @@ class GameManagerService : Service() {
             PreguntasPistas::class.java,
             Info::class.java,
             MultipleChoiceActivity::class.java,
+            MultipleChoiceActivity::class.java,
+            MultipleChoiceActivity::class.java,
             MultipleChoiceActivity::class.java
         ),
         "Juego2" to listOf(
@@ -31,6 +33,11 @@ class GameManagerService : Service() {
         "Juego4" to listOf(
             Info::class.java,
             DiferenciasActivity::class.java,
+            MultipleChoiceActivity::class.java,
+            MultipleChoiceActivity::class.java,
+            MultipleChoiceActivity::class.java,
+            MultipleChoiceActivity::class.java,
+            MultipleChoiceActivity::class.java,
             MultipleChoiceActivity::class.java,
             Info::class.java
         ),
