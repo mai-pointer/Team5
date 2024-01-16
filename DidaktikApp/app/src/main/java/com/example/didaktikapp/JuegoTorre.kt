@@ -20,6 +20,7 @@ import com.example.didaktikapp.titleFragment.TitleFragment
 import com.example.didaktikapp.ImageAdapter
 
 class JuegoTorre : AppCompatActivity() {
+    private val repeatActivityMenu = RepeatActivityMenu(this)
 
     private var draggedImagePosition: Int? = null
     private lateinit var imageAdapter: ImageAdapter
@@ -253,30 +254,8 @@ class JuegoTorre : AppCompatActivity() {
     }
 
     private fun showRestartDialog() {
-        val builder = AlertDialog.Builder(this)
-
-        // Configura el título y el mensaje del diálogo
-        builder.setTitle("¿Berrabiarazi jokoa?")
-            .setMessage("¿Berrabiarazi nahi duzu jokoa edo jarraitu?")
-
-        // Configura el botón positivo para reiniciar el juego
-        builder.setPositiveButton("Berrabiarazi") { dialog, which ->
-            // Reinicia la actividad (JuegoTorre)
-            val intent = intent
-            finish()
-            startActivity(intent)
-        }
-
-        // Configura el botón negativo para ir al menú principal
-        builder.setNegativeButton("Jarraitu") { dialog, which ->
-            // Vuelve al menú principal
-            val mainMenuIntent = Intent(this, MainMenuActivity::class.java)
-            startActivity(mainMenuIntent)
-            finish()
-        }
-
-        // Muestra el diálogo
-        builder.create().show()
+        val intent = Intent(this ,Crucigrama::class.java)
+        repeatActivityMenu.showGameOverDialog(this, intent)
     }
 }
 
