@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
@@ -32,7 +33,7 @@ class PreguntasPistas : AppCompatActivity() {
 
     private lateinit var userAnswer: EditText
     private lateinit var galderaText: TextView
-    private lateinit var pistak: ListView
+    private lateinit var pistak: ImageView
     private lateinit var baieztatu: Button
     private lateinit var playaudio: ImageButton
     private lateinit var jarraitu: Button
@@ -44,13 +45,13 @@ class PreguntasPistas : AppCompatActivity() {
 
         myPista = hashMapOf<String, PreguntasPistas.Pista>(
             "Juego1.1" to PreguntasPistas.Pista(
-                resources.getString(R.string.galdera1_1), R.drawable.harriak, R.drawable.idiprobakpista, null, null, R.raw.idi, resources.getString(R.string.erantzun1_1a), resources.getString(R.string.erantzun1_1b)),
+                resources.getString(R.string.galdera1_1), R.drawable.idiprobakpista,  R.raw.idi, resources.getString(R.string.erantzun1_1a), resources.getString(R.string.erantzun1_1b)),
             "Juego2.1" to PreguntasPistas.Pista(
-                resources.getString(R.string.galdera2_1), R.drawable.arroza, R.drawable.kipula, R.drawable.odola, R.drawable.porrua, null, resources.getString(R.string.erantzun2_1a), resources.getString(R.string.erantzun2_1b)),
+                resources.getString(R.string.galdera2_1), R.drawable.odolostepista, null, resources.getString(R.string.erantzun2_1a), resources.getString(R.string.erantzun2_1b)),
             "Juego3.1" to PreguntasPistas.Pista(
-                resources.getString(R.string.galdera3_1), R.drawable.txakoliedaria, R.drawable.mahatsak, null, null, null, resources.getString(R.string.erantzun3_1a), resources.getString(R.string.erantzun3_1b)),
+                resources.getString(R.string.galdera3_1), R.drawable.txakolipista, null, resources.getString(R.string.erantzun3_1a), resources.getString(R.string.erantzun3_1b)),
             "Juego5.2" to PreguntasPistas.Pista(
-                resources.getString(R.string.galdera5_2), null, null, null, null, null, resources.getString(R.string.erantzun5_2a), resources.getString(R.string.erantzun5_2b))
+                resources.getString(R.string.galdera5_2), null, null, resources.getString(R.string.erantzun5_2a), resources.getString(R.string.erantzun5_2b))
         )
 
         setContentView(R.layout.activity_preguntas_pistas)
@@ -112,15 +113,6 @@ class PreguntasPistas : AppCompatActivity() {
         } else{
             pistak.visibility = View.INVISIBLE
         }
-        if(myPista[pantalla]?.picture2 != null) {
-            pictures.add(drawableToBitmap(myPista[pantalla]?.picture2))
-        }
-        if(myPista[pantalla]?.picture3 != null) {
-            pictures.add(drawableToBitmap(myPista[pantalla]?.picture3))
-        }
-        if(myPista[pantalla]?.picture4 != null) {
-            pictures.add(drawableToBitmap(myPista[pantalla]?.picture4))
-        }
 
         if(myPista[pantalla]?.audio != null){
             playaudio.visibility = View.VISIBLE
@@ -159,7 +151,7 @@ class PreguntasPistas : AppCompatActivity() {
         return bitmap
     }
 
-    data class Pista(val pregunta: String, val picture1:Int?, val picture2:Int?, val picture3:Int?, val picture4:Int?, val audio: Int?, val answer:String, val answer2:String)
+    data class Pista(val pregunta: String, val picture1:Int?, val audio: Int?, val answer:String, val answer2:String)
 }
 
 

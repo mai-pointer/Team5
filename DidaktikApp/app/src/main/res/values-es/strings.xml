@@ -142,9 +142,28 @@
     <!-- Pistak -->
     <!-- 1.1-->
     <string name="galdera1.1">¿Qué deporte se practicaba aquí?</string>
-    <string name="argazki1.1a">harriak</string>
-    <string name="argazki1.1b">idiprobak</string>
-    <string name="audio1.1">idi</string>
     <string name="erantzun1.1a">PRUEBAS DE ARRASTRE</string>
     <string name="erantzun1.1b">PRUEBAS DE ARRASTRE</string>
+
+    <!-- 2.1 -->
+    <string name="galdera2.1">En la carnicería de Lezama preparan un producto muy popular con estos ingredientes. ¿Qué producto es?</string>
+    <string name="erantzun2.1a">CHORIZO</string>
+    <string name="erantzun2.1b">CHORIZOS</string>
+
+    <!-- 3.1 -->
+    <string name="galdera3.1">¿Sabéis qué bebida es esta?</string>
+    <string name="erantzun3.1a">TXAKOLI</string>
+    <string name="erantzun3.1b">VINO BLANCO</string>
+
+    <!-- 5.2 -->
+    <string name="galdera5.2">¿Qué veis en la iglesia? ¿Qué objetos representativos tiene? Comentad entre vosotros.</string>
+    <string name="erantzun5.2a">CAMPANAS</string>
+    <string name="erantzun5.2b">CAMPANA</string>
+
+    <!-- Titulos fragments-->
+    <string name="pistakTitle">Con estas pistas, responde a la pregunta</string>
+    <string name="crucigramaTitle">Completa los espacios siguiendo las definiciones</string>
+    <string name="sopaLetrasTitle">Encuentra las siguientes palabras</string>
+    <string name="multipleChoiceTitle">Elige la respuesta correcta</string>
+    <string name="puzleTitle">Completa el puzzle</string>
 </resources>

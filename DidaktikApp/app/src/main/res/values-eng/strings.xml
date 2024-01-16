@@ -141,10 +141,29 @@
     <!-- Pistak -->
     <!-- 1.1-->
     <string name="galdera1.1">What sport was practiced here?</string>
-    <string name="argazki1.1a">stones</string>
-    <string name="argazki1.1b">idiprobak</string>
-    <string name="audio1.1">idi</string>
     <string name="erantzun1.1a">DRAG TESTS</string>
     <string name="erantzun1.1b">DRAG TESTS</string>
+
+    <!-- 2.1 -->
+    <string name="galdera2.1">In the Lezama butcher shop, they prepare a very popular product with these ingredients. What product is it?</string>
+    <string name="erantzun2.1a">CHORIZO</string>
+    <string name="erantzun2.1b">CHORIZOS</string>
+
+    <!-- 3.1 -->
+    <string name="galdera3.1">Do you know what drink this is?</string>
+    <string name="erantzun3.1a">TXAKOLI</string>
+    <string name="erantzun3.1b">WHITE WINE</string>
+
+    <!-- 5.2 -->
+    <string name="galdera5.2">What do you see in the church? What representative objects does it have? Discuss among yourselves.</string>
+    <string name="erantzun5.2a">BELLS</string>
+    <string name="erantzun5.2b">BELL</string>
+
+    <!-- Titulos fragments-->
+    <string name="pistakTitle">With these clues, answer the question</string>
+    <string name="crucigramaTitle">Fill in the blanks following the definitions</string>
+    <string name="sopaLetrasTitle">Find the following words</string>
+    <string name="multipleChoiceTitle">Choose the correct answer</string>
+    <string name="puzleTitle">Complete the puzzle</string>
 </resources>
 

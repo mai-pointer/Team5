@@ -160,4 +160,12 @@
     <string name="erantzun5.2a">KANPAIAK</string>
     <string name="erantzun5.2b">KANPAI</string>
 
+
+    <!-- Titulos fragments-->
+    <string name="pistakTitle">Pista hauekin, erantzun galderari</string>
+    <string name="crucigramaTitle">Bete hutsuneak definizioak jarraituz</string>
+    <string name="sopaLetrasTitle">Aurkitu hurrengo hitzak</string>
+    <string name="multipleChoiceTitle">Aukeratu erantzun zuzena</string>
+    <string name="puzleTitle">Amaitu puzlea</string>
+
 </resources>
