@@ -2,7 +2,6 @@ package com.example.didaktikapp
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -70,7 +69,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
     }
 
     private fun setupHeaderFragment(savedInstanceState: Bundle?) {
-        val fragmentContainer = findViewById<FrameLayout>(R.id.fragmentContainerView)
+        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
         if (savedInstanceState == null) {
             val titleFragment = TitleFragment.newInstance("Jokoa aukeratu mapan")
             supportFragmentManager.beginTransaction()

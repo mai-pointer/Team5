@@ -12,11 +12,14 @@ import android.text.style.ForegroundColorSpan
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.didaktikapp.navigation.NavigationUtil
+import com.example.didaktikapp.titleFragment.TitleFragment
 
 class InsertWordsActivity : AppCompatActivity() {
 
@@ -29,6 +32,24 @@ class InsertWordsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_insert_words)
+
+
+        // Reemplaza el contenedor con el TitleFragment
+        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
+
+        if (savedInstanceState == null) {
+            val titleFragment = TitleFragment.newInstance("InsertWords")
+            supportFragmentManager.beginTransaction()
+                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
+                .commit()
+        }
+
+        // Configura el click listener para el botón en el fragmento
+        val titleFragment =
+            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
+        titleFragment?.setOnHomeButtonClickListener(View.OnClickListener {
+            NavigationUtil.navigateToMainMenu(this)
+        })
 
         val textView = findViewById<TextView>(R.id.tv1)
         textView.text = createSpannableText(originalText)

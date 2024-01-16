@@ -4,9 +4,13 @@ import android.graphics.PorterDuff
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.ImageButton
+import com.example.didaktikapp.navigation.NavigationUtil
+import com.example.didaktikapp.titleFragment.TitleFragment
 
 class Info : AppCompatActivity() {
 
@@ -104,6 +108,23 @@ class Info : AppCompatActivity() {
         val pantalla = GameManager.get()?.pantallaActual()
 
         findViewById<TextView>(R.id.info).text = informacion[pantalla]?.texto
+
+        // Reemplaza el contenedor con el TitleFragment
+        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
+
+        if (savedInstanceState == null) {
+            val titleFragment = TitleFragment.newInstance("Info")
+            supportFragmentManager.beginTransaction()
+                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
+                .commit()
+        }
+
+        // Configura el click listener para el botón en el fragmento
+        val titleFragment =
+            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
+        titleFragment?.setOnHomeButtonClickListener(View.OnClickListener {
+            NavigationUtil.navigateToMainMenu(this)
+        })
 
         //Audios
         mediaPlayer = MediaPlayer.create(this, informacion[pantalla]?.audio!!)

@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.widget.Button
 import android.widget.FrameLayout
@@ -59,7 +58,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
         }
     }
     private fun setupHeaderFragment(savedInstanceState: Bundle?) {
-        val fragmentContainer = findViewById<FrameLayout>(R.id.fragmentContainerView)
+        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
         if (savedInstanceState == null) {
             val titleFragment = TitleFragment.newInstance("Aukeratu erantzun zuzena")
             supportFragmentManager.beginTransaction()

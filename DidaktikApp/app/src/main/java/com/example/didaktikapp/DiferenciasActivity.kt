@@ -23,7 +23,7 @@ class DiferenciasActivity : AppCompatActivity() {
         setContentView(R.layout.activity_diferencias)
 
         // Obtén una referencia al contenedor de fragmentos
-        val fragmentContainer = findViewById<FrameLayout>(R.id.fragmentContainerView)
+        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
 
         // Reemplaza el contenedor con el TitleFragment
         if (savedInstanceState == null) {

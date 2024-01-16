@@ -5,58 +5,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blancoOscuro"
-    android:padding="30dp">
+    android:padding="0dp">
 
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/titleFragmentTag"
+        android:name="com.example.didaktikapp.titleFragment.TitleFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_title" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="377dp"
+        android:layout_height="762dp"
+        android:layout_marginBottom="30dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="50dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleFragmentTag"
+        app:layout_constraintVertical_bias="0.156">
 
         <TextView
             android:id="@+id/tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="54dp"
+            android:layout_marginBottom="372dp"
             android:text="textView"
             android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/imageView14"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/header" />
-
-        <LinearLayout
-            android:id="@+id/header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/Enuntziatua"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:fontFamily="@font/noahgrotesqueblack"
-                android:gravity="center_vertical"
-                android:text="@string/insertWordsExplain"
-                android:textColor="@color/marron"
-                android:textSize="24sp" />
-
-            <ImageButton
-                android:id="@+id/Etxera"
-                android:layout_width="52dp"
-                android:layout_height="52dp"
-                android:layout_gravity="end"
-                android:background="@color/blancoOscuro"
-                android:contentDescription="@string/homeButton"
-                android:src="@drawable/baseline_home_24" />
-
-        </LinearLayout>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <LinearLayout
             android:id="@+id/bottom"
@@ -71,7 +60,7 @@
                 android:id="@+id/btnValidate"
                 style="@style/GreenButtonStyle"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
+                android:layout_height="55dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/noahgrotesquebold"
                 android:text="@string/btnContinue" />
@@ -85,7 +74,7 @@
                 android:id="@+id/btnBack"
                 style="@style/GreyButtonStyle"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
+                android:layout_height="55dp"
                 android:layout_gravity="end"
                 android:layout_weight="1"
                 android:text="@string/btnRepeat" />

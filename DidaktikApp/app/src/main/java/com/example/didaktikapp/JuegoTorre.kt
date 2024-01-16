@@ -3,7 +3,6 @@ package com.example.didaktikapp
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.DragEvent
 import android.view.View
 import android.widget.FrameLayout
@@ -11,13 +10,10 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.component2
 import androidx.viewpager2.widget.ViewPager2
 import com.example.didaktikapp.navigation.NavigationUtil
 import com.example.didaktikapp.titleFragment.TitleFragment
-import com.example.didaktikapp.ImageAdapter
 
 class JuegoTorre : AppCompatActivity() {
     private val repeatActivityMenu = RepeatActivityMenu(this)
@@ -79,7 +75,7 @@ class JuegoTorre : AppCompatActivity() {
         setDragListener(hueco3, 2)
 
         // Obtén una referencia al contenedor de fragmentos
-        val fragmentContainer = findViewById<FrameLayout>(R.id.fragmentContainerView)
+        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
 
         if (savedInstanceState == null) {
             val titleFragment = TitleFragment.newInstance("Dorrea")
