@@ -52,6 +52,8 @@
     <string name="multipleChoiceExplain">Choose the correct answer</string>
     <string name="multipleChoiceAnswer">Answer</string>
 
+    <string name="zureerantzuna">Your answer</string>
+
     <!-- Insert words -->
     <string name="insertWordsExplain">Complete the text</string>
 
@@ -141,6 +143,7 @@
     <!-- Pistak -->
     <!-- 1.1-->
     <string name="galdera1.1">What sport was practiced here?</string>
+    <string name="pista1.1">Clue: Find the relation between the sound and the pictures</string>
     <string name="erantzun1.1a">DRAG TESTS</string>
     <string name="erantzun1.1b">DRAG TESTS</string>
 

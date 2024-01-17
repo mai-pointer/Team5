@@ -33,6 +33,7 @@ class PreguntasPistas : AppCompatActivity() {
 
     private lateinit var userAnswer: EditText
     private lateinit var galderaText: TextView
+    private lateinit var pistaText: TextView
     private lateinit var pistak: ImageView
     private lateinit var baieztatu: Button
     private lateinit var playaudio: ImageButton
@@ -45,19 +46,18 @@ class PreguntasPistas : AppCompatActivity() {
 
         myPista = hashMapOf<String, PreguntasPistas.Pista>(
             "Juego1.1" to PreguntasPistas.Pista(
-                resources.getString(R.string.galdera1_1), R.drawable.idiprobakpista,  R.raw.idi, resources.getString(R.string.erantzun1_1a), resources.getString(R.string.erantzun1_1b)),
+                resources.getString(R.string.galdera1_1), R.drawable.idiprobakpista,  R.raw.idi, resources.getString(R.string.pista1_1), resources.getString(R.string.erantzun1_1a), resources.getString(R.string.erantzun1_1b)),
             "Juego2.1" to PreguntasPistas.Pista(
-                resources.getString(R.string.galdera2_1), R.drawable.odolostepista, null, resources.getString(R.string.erantzun2_1a), resources.getString(R.string.erantzun2_1b)),
+                resources.getString(R.string.galdera2_1), R.drawable.odolostepista, null, null, resources.getString(R.string.erantzun2_1a), resources.getString(R.string.erantzun2_1b)),
             "Juego3.1" to PreguntasPistas.Pista(
-                resources.getString(R.string.galdera3_1), R.drawable.txakolipista, null, resources.getString(R.string.erantzun3_1a), resources.getString(R.string.erantzun3_1b)),
+                resources.getString(R.string.galdera3_1), R.drawable.txakolipista, null,null, resources.getString(R.string.erantzun3_1a), resources.getString(R.string.erantzun3_1b)),
             "Juego5.2" to PreguntasPistas.Pista(
-                resources.getString(R.string.galdera5_2), null, null, resources.getString(R.string.erantzun5_2a), resources.getString(R.string.erantzun5_2b))
+                resources.getString(R.string.galdera5_2), null, null, null, resources.getString(R.string.erantzun5_2a), resources.getString(R.string.erantzun5_2b))
         )
 
         setContentView(R.layout.activity_preguntas_pistas)
         initializeVariables(pantalla)
         setupHeaderFragment(savedInstanceState)
-        adaptAnswers()
 
         playaudio.setOnClickListener{
             mediaPlayer?.start()
@@ -98,7 +98,8 @@ class PreguntasPistas : AppCompatActivity() {
     private fun initializeVariables(pantalla:String?){
         userAnswer = findViewById(R.id.userAnswer)
         galderaText = findViewById(R.id.galdera)
-        pistak = findViewById(R.id.pistak)
+        pistaText = findViewById(R.id.pistaText)
+        pistak = findViewById(R.id.imagepista)
         playaudio = findViewById(R.id.playaudio)
         baieztatu = findViewById(R.id.btnValidate)
         jarraitu = findViewById(R.id.btnContinue)
@@ -108,27 +109,25 @@ class PreguntasPistas : AppCompatActivity() {
 
         if(myPista[pantalla]?.picture1 != null) {
             pistak.visibility = View.VISIBLE
-            hasPictures = true
-            pictures.add(drawableToBitmap(myPista[pantalla]?.picture1))
+            pistak.setImageBitmap(drawableToBitmap(myPista[pantalla]?.picture1))
         } else{
             pistak.visibility = View.INVISIBLE
         }
 
         if(myPista[pantalla]?.audio != null){
             playaudio.visibility = View.VISIBLE
-            hasAudio = true
             mediaPlayer = MediaPlayer.create(this, myPista[pantalla]?.audio!!)
         } else{
             playaudio.visibility = View.INVISIBLE
         }
-        galderaText.text = myPista[pantalla]?.pregunta
-    }
 
-    private fun adaptAnswers(){
-        if(hasPictures == true) {
-            val adapter = PictureAdapter(this, pictures)
-            pistak.adapter = adapter
+        if(myPista[pantalla]?.pista != null){
+            pistaText.visibility = View.VISIBLE
+            pistaText.text = myPista[pantalla]?.pista
+        } else{
+            pistaText.visibility = View.INVISIBLE
         }
+        galderaText.text = myPista[pantalla]?.pregunta
     }
 
     private fun Context.drawableToBitmap(drawableId: Int?): Bitmap {
@@ -151,7 +150,7 @@ class PreguntasPistas : AppCompatActivity() {
         return bitmap
     }
 
-    data class Pista(val pregunta: String, val picture1:Int?, val audio: Int?, val answer:String, val answer2:String)
+    data class Pista(val pregunta: String, val picture1:Int?, val audio: Int?, val pista: String?, val answer:String, val answer2:String)
 }
 
 

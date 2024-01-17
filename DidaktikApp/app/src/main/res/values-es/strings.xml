@@ -52,6 +52,8 @@
     <string name="multipleChoiceExplain">Elige la respuesta correcta</string>
     <string name="multipleChoiceAnswer">Respuesta</string>
 
+    <string name="zureerantzuna">Tu reespuesta</string>
+
     <!-- Insert words -->
     <string name="insertWordsExplain">Completa el texto</string>
 
@@ -142,6 +144,8 @@
     <!-- Pistak -->
     <!-- 1.1-->
     <string name="galdera1.1">¿Qué deporte se practicaba aquí?</string>
+    <string name="pista1.1">Pista: ¿Que relación hay entre el sonido y las fotos?</string>
+
     <string name="erantzun1.1a">PRUEBAS DE ARRASTRE</string>
     <string name="erantzun1.1b">PRUEBAS DE ARRASTRE</string>
 

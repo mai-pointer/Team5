@@ -52,6 +52,9 @@
     <string name="multipleChoiceExplain">Aukeratu erantzun zuzena</string>
     <string name="multipleChoiceAnswer">Erantzuna</string>
 
+    <!-- Pista -->
+    <string name="zureerantzuna">Zure erantzuna</string>
+
     <!-- Insert words -->
     <string name="insertWordsExplain">Osatu testua</string>
 
@@ -142,6 +145,7 @@
     <!-- Pistak -->
     <!-- 1.1-->
     <string name="galdera1.1">Ze kirol egiten zen hemen?</string>
+    <string name="pista1.1">Pista: Zer erlazio dago soinua eta argazkien artean?</string>
     <string name="erantzun1.1a">IDI PROBAK</string>
     <string name="erantzun1.1b">IDI-PROBAK</string>
 
