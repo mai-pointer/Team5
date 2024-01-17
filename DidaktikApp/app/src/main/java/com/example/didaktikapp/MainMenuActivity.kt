@@ -53,5 +53,10 @@ class MainMenuActivity : AppCompatActivity() {
             intent.putExtra("admin", false)
             startActivity(intent)
         }
+        //Boton competitivo
+        val buttonCompetitivo: Button = findViewById(R.id.competitivoBtn)
+        buttonCompetitivo.setOnClickListener{
+            GameManager.get()?.startGame("Competitivo")
+        }
     }
 }

@@ -69,13 +69,21 @@ class GameManagerService : Service() {
             Info::class.java,
             OrdenarImagenesActivity::class.java,
             Info::class.java,
+        ),
+        "Competitivo" to listOf(
+            WordSearchActivity::class.java,
+            DiferenciasActivity::class.java,
+            PuzzleActivity::class.java,
+            Crucigrama::class.java,
+            InsertWordsActivity::class.java,
+            JuegoTorre::class.java,
+            OrdenarImagenesActivity::class.java,
         )
     )
 
     //Variables
     private lateinit var context: Context
     var juegoActual: List<Class<*>>? = null
-//    private var juegoNumero = 0
     private var pantallaActual = 0
     private var nombreJuego: String = ""
 
