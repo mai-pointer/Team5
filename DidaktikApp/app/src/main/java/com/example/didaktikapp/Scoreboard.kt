@@ -10,6 +10,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import io.socket.client.IO
 import io.socket.client.Socket
 import kotlinx.coroutines.Dispatchers
@@ -66,7 +67,14 @@ class Scoreboard : AppCompatActivity() {
 // Inicia la animación
         animatorSet.start()
 
+        // Obtén la referencia del ImageView
+        val imageView = findViewById<ImageView>(R.id.gifconfeti)
 
+        // Carga el GIF usando Glide
+        Glide.with(this)
+            .asGif()
+            .load(R.drawable.confeti)
+            .into(imageView)
 
 
 
