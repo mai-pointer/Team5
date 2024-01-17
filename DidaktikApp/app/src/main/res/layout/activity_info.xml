@@ -30,7 +30,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.851"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+        app:layout_constraintVertical_bias="0.69" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -43,6 +44,7 @@
         app:srcCompat="@drawable/lamia_removebg_preview" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="301dp"
         android:layout_height="366dp"
         android:layout_marginTop="24dp"

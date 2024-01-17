@@ -1,13 +1,9 @@
 package com.example.didaktikapp
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.Spinner
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -33,7 +29,7 @@ class MainMenuActivity : AppCompatActivity() {
             var partida_id = sharedPreferences.getInt("partida_id", -1)
 
             if (partida_id == -1){
-                val nuevaPartida = Partida(juego = "Juego1", pantalla = 0, tiempo = 0.0f)
+                val nuevaPartida = Partida(juego = "Juego1", pantalla = 0, hj = false)
                 GlobalScope.launch(Dispatchers.IO) {
                     partidaDao.insert(nuevaPartida)
                     runOnUiThread {

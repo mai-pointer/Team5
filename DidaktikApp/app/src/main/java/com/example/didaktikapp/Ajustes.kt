@@ -169,7 +169,7 @@ class Ajustes : AppCompatActivity() {
 
     fun NuevaPartida(partidaDao: PartidaDao, sharedPreferences: SharedPreferences)
     {
-        val nuevaPartida = Partida(juego = "Juego1", pantalla = 0, tiempo = 0.0f)
+        val nuevaPartida =  Partida(juego = "Juego1", pantalla = 0, hj = false)
         GlobalScope.launch(Dispatchers.IO) {
             partidaDao.insert(nuevaPartida)
             runOnUiThread {
