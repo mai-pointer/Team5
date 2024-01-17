@@ -28,6 +28,7 @@ import com.example.didaktikapp.MapManagerService.MapManager
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapClickListener,
     GoogleMap.OnMarkerClickListener {
 
+    private var hasShownFirstLocation: Boolean = false
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
     private lateinit var progressBar: ProgressBar
@@ -85,6 +86,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+
+        if (hasShownFirstLocation){
+            mapManagerService?.showNextLocation()
+        }
+
+        hasShownFirstLocation = true
 
         val locationsToShow = mapManagerService?.getLocationsToShow(esAdmin)
         var referenceMarker: LatLng? = null
