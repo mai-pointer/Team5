@@ -135,7 +135,6 @@ class Info : AppCompatActivity() {
 
         playaudio.setOnClickListener{
             mediaPlayer?.start()
-
             playaudio.setColorFilter(resources.getColor(R.color.verdeOscuro), PorterDuff.Mode.SRC_IN)
             pauseaudio.setColorFilter(resources.getColor(R.color.grisOscuro), PorterDuff.Mode.SRC_IN)
         }

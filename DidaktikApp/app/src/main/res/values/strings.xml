@@ -17,6 +17,7 @@
     <string name="btnBack">Atzera</string>
     <string name="btnContinue">Jarraitu</string>
     <string name="btnRepeat">Errepikatu</string>
+    <string name="btnDarkMode">Ilun modua</string>
 
     <!-- Admin Login -->
     <string name="adminloginTitle">Kaixo</string>
@@ -27,7 +28,7 @@
     <!-- Main Menu -->
     <string name="mainMenuTitulo1">Lezamaren misterioa</string>
     <string name="mainMenuTitulo2">Lezama</string>
-    <string name="mainMenuAjustes">Ajustes</string>
+    <string name="mainMenuAjustes">Doikuntzak</string>
     <string name="mainMenuJugar">Jolastu</string>
     <string name="mainMenuModoLibre">Lehiaketa modua</string>
 
@@ -54,14 +55,16 @@
     <string name="multipleChoiceExplain">Aukeratu erantzun zuzena</string>
     <string name="multipleChoiceAnswer">Erantzuna</string>
 
+    <!-- Pista -->
+    <string name="zureerantzuna">Zure erantzuna</string>
+
     <!-- Insert words -->
     <string name="insertWordsExplain">Osatu testua</string>
 
     <!-- Crucigrama -->
     <string name="wordSearchExplain">Aurkitu hurrengo hitzak</string>
     <string name="mensaje_fallido">Huts egin duzu!</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
     <!-- Repetir -->
     <string name="terminar_juego">Jokoa amaituta</string>
@@ -145,15 +148,31 @@
     <!-- Pistak -->
     <!-- 1.1-->
     <string name="galdera1.1">Ze kirol egiten zen hemen?</string>
-    <string name="argazki1.1a">harriak</string>
-    <string name="argazki1.1b">idiprobak</string>
-    <string name="audio1.1">idi</string>
+    <string name="pista1.1">Pista: Zer erlazio dago soinua eta argazkien artean?</string>
     <string name="erantzun1.1a">IDI PROBAK</string>
     <string name="erantzun1.1b">IDI-PROBAK</string>
 
-    <!-- Repetir -->
-    <string name="continuar">Quieres continuar la partida?</string>
-    <string name="si">Continuar</string>
-    <string name="no">Repetir</string>
+    <!-- 2.1-->
+    <string name="galdera2.1">Lezamako harategian oso ospetsua den produktu bat prestatzen dute osagai hauekin. Ze produktu da hori?</string>
+    <string name="erantzun2.1a">ODOLOSTE</string>
+    <string name="erantzun2.1b">ODOLOSTEA</string>
+
+    <!-- 3.1-->
+    <string name="galdera3.1">Badakizue zer den edari hau?</string>
+    <string name="erantzun3.1a">TXAKOLI</string>
+    <string name="erantzun3.1b">TXAKOLIA</string>
+
+    <!-- 5.2-->
+    <string name="galdera5.2">Zer ikusten duzue elizan? zer objetu adierazgarri ditu? Komentatu zuen artean</string>
+    <string name="erantzun5.2a">KANPAIAK</string>
+    <string name="erantzun5.2b">KANPAI</string>
+
+
+    <!-- Titulos fragments-->
+    <string name="pistakTitle">Pista hauekin, erantzun galderari</string>
+    <string name="crucigramaTitle">Bete hutsuneak definizioak jarraituz</string>
+    <string name="sopaLetrasTitle">Aurkitu hurrengo hitzak</string>
+    <string name="multipleChoiceTitle">Aukeratu erantzun zuzena</string>
+    <string name="puzleTitle">Amaitu puzlea</string>
 
 </resources>

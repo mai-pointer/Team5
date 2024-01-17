@@ -59,7 +59,6 @@
 
         <TextView
             android:id="@+id/answerText"
-            style="@style/TextoDestacadoStyle"
             android:layout_width="204dp"
             android:layout_height="39dp"
             android:layout_alignParentBottom="true"
@@ -72,6 +71,7 @@
 
     <RelativeLayout
         android:id="@+id/contenedor"
+        style="@style/backgroundGrisClaro"
         android:layout_width="wrap_content"
         android:layout_height="354dp"
         android:layout_above="@+id/about"
@@ -92,7 +92,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/botonEuskera"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -103,7 +103,7 @@
                 tools:src="@drawable/eu" />
 
             <ImageButton
-                android:id="@+id/imageButton4"
+                android:id="@+id/botonCastellano"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -115,7 +115,7 @@
                 tools:src="@drawable/es" />
 
             <ImageButton
-                android:id="@+id/imageButton5"
+                android:id="@+id/botonIngles"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -125,37 +125,28 @@
                 tools:ignore="SpeakableTextPresentCheck"
                 tools:src="@drawable/en" />
 
+
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/tema"
-            android:layout_width="281dp"
-            android:layout_height="100dp"
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/modoOscuro"
+            android:layout_width="249dp"
+            android:layout_height="30dp"
             android:layout_below="@+id/idiomas"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            android:padding="0dp">
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="31dp"
+            android:layout_marginEnd="30dp"
+            android:minHeight="48dp"
+            android:text="@string/btnDarkMode"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.292"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="114dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/tarjeta"
-                android:backgroundTint="#FFFFFF">
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <Space
-                android:layout_width="42dp"
-                android:layout_height="82dp" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/tarjeta"
-                android:backgroundTint="#222">
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout
