@@ -175,4 +175,10 @@
     <string name="multipleChoiceTitle">Aukeratu erantzun zuzena</string>
     <string name="puzleTitle">Amaitu puzlea</string>
 
+    <!-- Repetir -->
+    <string name="continuar">Partida jarraitu nahi duzu?</string>
+    <string name="si">Jarraitu</string>
+    <string name="no">Errepikatu</string>
+
+
 </resources>
