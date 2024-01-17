@@ -10,7 +10,7 @@ data class Partida(
     val id: Int = 0,
     val juego: String,
     val pantalla: Int,
-    val tiempo: Float
+    val hj: Boolean
 )
 
 @Dao
@@ -47,7 +47,7 @@ interface BaseDao<T> {
 }
 
 
-@Database(entities = [Partida::class], version = 1, exportSchema = false)
+@Database(entities = [Partida::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun partidaDao(): PartidaDao
 }
@@ -62,7 +62,7 @@ class AppDatabaseInitializer {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "app_database"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
                 instance = newInstance
                 newInstance
             }

@@ -12,6 +12,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.didaktikapp.MapManagerService.MapManager
+import com.example.didaktikapp.databinding.ActivityMapsBinding
+import com.example.didaktikapp.mapFragment.PlaceDetailsFragment
+import com.example.didaktikapp.navigation.NavigationUtil
+import com.example.didaktikapp.titleFragment.TitleFragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -19,11 +24,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.example.didaktikapp.databinding.ActivityMapsBinding
-import com.example.didaktikapp.mapFragment.PlaceDetailsFragment
-import com.example.didaktikapp.navigation.NavigationUtil
-import com.example.didaktikapp.titleFragment.TitleFragment
-import com.example.didaktikapp.MapManagerService.MapManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapClickListener,
     GoogleMap.OnMarkerClickListener {
@@ -52,6 +55,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
             initMap()
         }
         progressBar.visibility = View.VISIBLE
+
+        //Inicia el HASIERAKO JARDUERA
+        BDManager.Iniciar{ partidaDao, sharedPreferences ->
+            GlobalScope.launch(Dispatchers.IO){
+                val partida = partidaDao.get(sharedPreferences.getInt("partida_id", 1))
+                if(!partida.hj){
+                    GameManager.get()?.startGame("HASIERAKO JARDUERA")
+                    partidaDao.update(
+                        Partida(
+                            partida.id,
+                            partida.juego,
+                            partida.pantalla,
+                            true
+                        )
+                    )
+                }
+            }
+        }
     }
 
     private fun initMap(){
