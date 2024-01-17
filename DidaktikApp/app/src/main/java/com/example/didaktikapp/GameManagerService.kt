@@ -3,7 +3,6 @@ package com.example.didaktikapp
 import android.app.Service
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.IBinder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -125,7 +124,7 @@ class GameManagerService : Service() {
                         id = sharedPreferences.getInt("partida_id", 1),
                         juego = nombreJuego,
                         pantalla = pantallaActual,
-                        tiempo = 0.0f
+                        hj = true
                     )
                 )
             }
