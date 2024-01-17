@@ -13,6 +13,8 @@ import com.google.android.gms.maps.model.LatLng
 import kotlin.coroutines.resume
 
 class MapManagerService : Service() {
+    private var gameManagerService: GameManagerService? = GameManagerService()
+
     private val miJob = Job()
     private val miScope = CoroutineScope(Dispatchers.Default + miJob)
 
@@ -39,12 +41,11 @@ class MapManagerService : Service() {
         return binder
     }
 
-    @SuppressLint("MissingPermission")
     fun initialize(context: Context) {
         this.context = context
         initializeMapLocations()
         locationProvider = LocationProvider()
-        //updateLocation()
+        updateLocation()
     }
 
     @SuppressLint("MissingPermission")
@@ -61,26 +62,14 @@ class MapManagerService : Service() {
             while (miScope.isActive) {
                 myCurrentPosition = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
                 if (checkProximity(myCurrentPosition)){
-                    //TODO: comenzar la próxima actividad
+                    gameManagerService = GameManager.get()
+                    val myGame = gameManagerService!!.juegoActual()
+                    gameManagerService?.startGame(myGame)
                 }
                 delay(5000)
             }
         }
     }
-
-    /*fun updateLocation() {
-        miScope.launch {
-            while (miScope.isActive) {
-                myCurrentPosition = locationProvider.getUserLocation(context)
-                if (checkProximity(myCurrentPosition)){
-                    //TODO: comenzar la próxima actividad
-                }
-                delay(5000)
-            }
-        }
-    }*/
-
-
     private fun initializeMapLocations() {
         mapLocations.put("Idi probak", LatLng(43.27556360817825, -2.827742396615327))
         mapLocations.put("Odolostea", LatLng(43.27394169280981, -2.832619209726283))
@@ -132,7 +121,8 @@ class MapManagerService : Service() {
             notifyLocationChanged()
         } else {
             MapManager.destroy()
-            // TODO:Llamar a la actividad final
+            gameManagerService = GameManager.get()
+            gameManagerService?.startGame("AMAIERAKO JARDUERA")
         }
     }
 

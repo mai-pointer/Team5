@@ -75,7 +75,7 @@ class GameManagerService : Service() {
 
     //Variables
     private lateinit var context: Context
-    private var juegoActual: List<Class<*>>? = null
+    var juegoActual: List<Class<*>>? = null
 //    private var juegoNumero = 0
     private var pantallaActual = 0
     private var nombreJuego: String = ""
@@ -146,6 +146,10 @@ class GameManagerService : Service() {
     //Devuelve el número de pantalla actual
     fun pantallaActual(): String {
         return  games.entries.find { it.value == juegoActual }?.key + "." + (pantallaActual+1).toString()
+    }
+
+    fun juegoActual(): String {
+        return  games.entries.find { it.value == juegoActual }?.key.toString()
     }
 }
 
