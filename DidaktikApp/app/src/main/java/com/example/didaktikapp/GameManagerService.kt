@@ -4,6 +4,9 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.IBinder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class GameManagerService : Service() {
 
@@ -12,6 +15,8 @@ class GameManagerService : Service() {
         "Juego1" to listOf(
             PreguntasPistas::class.java,
             Info::class.java,
+            MultipleChoiceActivity::class.java,
+            MultipleChoiceActivity::class.java,
             MultipleChoiceActivity::class.java,
             MultipleChoiceActivity::class.java
         ),
@@ -25,20 +30,25 @@ class GameManagerService : Service() {
             PreguntasPistas::class.java,
             Info::class.java,
             Info::class.java,
-            Info::class.java,
+            Video::class.java,
             Info::class.java,
         ),
         "Juego4" to listOf(
             Info::class.java,
             DiferenciasActivity::class.java,
             MultipleChoiceActivity::class.java,
+            MultipleChoiceActivity::class.java,
+            MultipleChoiceActivity::class.java,
+            MultipleChoiceActivity::class.java,
+            MultipleChoiceActivity::class.java,
+            MultipleChoiceActivity::class.java,
             Info::class.java
         ),
         "Juego5" to listOf(
             Info::class.java,
+            PreguntasPistas::class.java,
             Info::class.java,
-            Info::class.java,
-            Info::class.java,
+            Video::class.java,
             PuzzleActivity::class.java,
             Info::class.java,
         ),
@@ -49,10 +59,8 @@ class GameManagerService : Service() {
         ),
         "Juego7" to listOf(
             Info::class.java,
-            Info::class.java,
-            Info::class.java,
             InsertWordsActivity::class.java,
-            OrdenarImagenesActivity::class.java,
+            JuegoTorre::class.java,
         ),
         "HASIERAKO JARDUERA" to listOf(
             Info::class.java,
@@ -61,13 +69,23 @@ class GameManagerService : Service() {
             Info::class.java,
             OrdenarImagenesActivity::class.java,
             Info::class.java,
+        ),
+        "Competitivo" to listOf(
+            WordSearchActivity::class.java,
+            DiferenciasActivity::class.java,
+            PuzzleActivity::class.java,
+            Crucigrama::class.java,
+            InsertWordsActivity::class.java,
+            JuegoTorre::class.java,
+            OrdenarImagenesActivity::class.java,
         )
     )
 
     //Variables
     private lateinit var context: Context
-    private var juegoActual: List<Class<*>>? = null
+    var juegoActual: List<Class<*>>? = null
     private var pantallaActual = 0
+    private var nombreJuego: String = ""
 
     //Inicializa el servicio
     fun initialize(context: Context) {
@@ -80,9 +98,12 @@ class GameManagerService : Service() {
 
     //Inicia el juego seleccionado
     fun startGame(gameName: String) {
+        nombreJuego = gameName
         juegoActual = games[gameName]
         pantallaActual = 0
         pantalla()
+
+        guardar()
     }
 
     //Pasa a la siguiente pantalla
@@ -93,8 +114,28 @@ class GameManagerService : Service() {
             pantalla()
         } else {
             //Si no, vuelve al menú principal
+            pantallaActual = 0
+
             val intent = Intent(context, MapsActivity::class.java)
             context.startActivity(intent)
+        }
+
+        guardar()
+    }
+
+    fun guardar()
+    {
+        BDManager.Iniciar{ partidaDao, sharedPreferences ->
+            GlobalScope.launch(Dispatchers.IO){
+                partidaDao.update(
+                    Partida(
+                        id = sharedPreferences.getInt("partida_id", 1),
+                        juego = nombreJuego,
+                        pantalla = pantallaActual,
+                        hj = true
+                    )
+                )
+            }
         }
     }
 
@@ -107,6 +148,15 @@ class GameManagerService : Service() {
             screenIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(screenIntent)
         }
+    }
+
+    //Devuelve el número de pantalla actual
+    fun pantallaActual(): String {
+        return  games.entries.find { it.value == juegoActual }?.key + "." + (pantallaActual+1).toString()
+    }
+
+    fun juegoActual(): String {
+        return  games.entries.find { it.value == juegoActual }?.key.toString()
     }
 }
 

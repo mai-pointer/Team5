@@ -52,7 +52,7 @@ class Crucigrama : AppCompatActivity() {
         setContentView(R.layout.activity_crucigrama)
 
         // Obtén una referencia al contenedor de fragmentos
-        val fragmentContainer = findViewById<FrameLayout>(R.id.fragmentContainerView)
+        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
 
         // Reemplaza el contenedor con el TitleFragment
         if (savedInstanceState == null) {
@@ -148,7 +148,6 @@ class Crucigrama : AppCompatActivity() {
             if (bien){
                 val intent = Intent(this ,Crucigrama::class.java)
                 repeatActivityMenu.showGameOverDialog(this, intent)
-
             }
 
         }

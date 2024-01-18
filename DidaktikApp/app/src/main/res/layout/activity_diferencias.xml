@@ -7,7 +7,7 @@
     tools:context=".DiferenciasActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
+        android:id="@+id/titleFragmentTag"
         android:name="com.example.didaktikapp.titleFragment.TitleFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

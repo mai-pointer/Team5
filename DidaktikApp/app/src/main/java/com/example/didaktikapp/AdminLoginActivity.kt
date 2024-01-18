@@ -1,13 +1,10 @@
 package com.example.didaktikapp
 
 import android.content.Intent
-import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.RelativeLayout
-import android.widget.TextView
 import android.widget.Toast
 
 class AdminLoginActivity : AppCompatActivity() {
@@ -32,7 +29,7 @@ class AdminLoginActivity : AppCompatActivity() {
             }
         }
         //Salir
-        findViewById<Button>(R.id.btnBack).setOnClickListener{
+        findViewById<Button>(R.id.btnContinue).setOnClickListener{
             val intent = Intent(this@AdminLoginActivity, Ajustes::class.java)
             startActivity(intent)
         }

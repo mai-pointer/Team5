@@ -38,7 +38,7 @@
 
                 <!-- ImageView (botón) a la derecha -->
                 <ImageView
-                    android:id="@+id/btnBack"
+                    android:id="@+id/btnContinue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"

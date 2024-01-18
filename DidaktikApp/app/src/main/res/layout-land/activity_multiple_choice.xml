@@ -39,7 +39,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/Hitzak"
+            android:id="@+id/galdera"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/noahgrotesque"
@@ -74,7 +74,7 @@
                 android:layout_weight="0.5" />
 
             <Button
-                android:id="@+id/btnBack"
+                android:id="@+id/btnContinue"
                 style="@style/GreyButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="48dp"

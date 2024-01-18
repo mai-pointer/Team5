@@ -10,7 +10,7 @@
     <!-- Contenedor principal que contiene el FragmentContainerView y otros elementos según sea necesario -->
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
+        android:id="@+id/titleFragmentTag"
         android:name="com.example.didaktikapp.titleFragment.TitleFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
         android:id="@+id/puzzle"
         android:layout_width="450dp"
         android:layout_height="520dp"
-        android:layout_below="@id/fragmentContainerView"
+        android:layout_below="@id/titleFragmentTag"
         android:layout_marginTop="30dp"
         android:orientation="vertical">
 
