@@ -1,5 +1,6 @@
 package com.example.didaktikapp
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
@@ -11,11 +12,14 @@ import android.text.style.ForegroundColorSpan
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.didaktikapp.navigation.NavigationUtil
+import com.example.didaktikapp.titleFragment.TitleFragment
 
 class InsertWordsActivity : AppCompatActivity() {
 
@@ -23,10 +27,29 @@ class InsertWordsActivity : AppCompatActivity() {
         "Dorre hau (gotorleku militarra / erregearen etxea / eliza) izan zen eta (XVI. / XVIII. / XX.) mendean eraiki zen. (Adreiluz / Granitoz / Hareharriz) eginda dago eta hiru solairu ditu. Gaur egun, dorrea (udaletxe / etxebizitza / museo) bihurtu da."
 
     private val selectedOptions = mutableSetOf<String>()
+    private val repeatActivityMenu = RepeatActivityMenu(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_insert_words)
+
+
+        // Reemplaza el contenedor con el TitleFragment
+        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
+
+        if (savedInstanceState == null) {
+            val titleFragment = TitleFragment.newInstance("InsertWords")
+            supportFragmentManager.beginTransaction()
+                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
+                .commit()
+        }
+
+        // Configura el click listener para el botón en el fragmento
+        val titleFragment =
+            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
+        titleFragment?.setOnHomeButtonClickListener(View.OnClickListener {
+            NavigationUtil.navigateToMainMenu(this)
+        })
 
         val textView = findViewById<TextView>(R.id.tv1)
         textView.text = createSpannableText(originalText)
@@ -98,11 +121,13 @@ class InsertWordsActivity : AppCompatActivity() {
             .create()
 
         if (insertedText == expectedText) {
-            alertDialog.setMessage("¡Ganaste!")
+//            alertDialog.setMessage("¡Ganaste!")
+            val intent = Intent(this ,Crucigrama::class.java)
+            repeatActivityMenu.showGameOverDialog(this, intent)
         } else {
             alertDialog.setMessage("Perdiste")
+            alertDialog.show()
         }
 
-        alertDialog.show()
     }
 }

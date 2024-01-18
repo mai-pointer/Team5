@@ -1,11 +1,15 @@
 package com.example.didaktikapp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainMenuActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
@@ -18,6 +22,22 @@ class MainMenuActivity : AppCompatActivity() {
             Intent(this, GameManagerService::class.java)
         )
         GameManager.initialize(this)
+
+        // Inicializar la BD
+        BDManager.context = this
+        BDManager.Iniciar{ partidaDao, sharedPreferences ->
+            var partida_id = sharedPreferences.getInt("partida_id", -1)
+
+            if (partida_id == -1){
+                val nuevaPartida = Partida(juego = "Juego1", pantalla = 0, hj = false)
+                GlobalScope.launch(Dispatchers.IO) {
+                    partidaDao.insert(nuevaPartida)
+                    runOnUiThread {
+                        sharedPreferences.edit().putInt("partida_id", nuevaPartida.id).apply()
+                    }
+                }
+            }
+        }
 
 
         // Agrega un OnClickListener al botón "Jugar"
@@ -32,6 +52,11 @@ class MainMenuActivity : AppCompatActivity() {
             val intent = Intent(this@MainMenuActivity, Ajustes::class.java)
             intent.putExtra("admin", false)
             startActivity(intent)
+        }
+        //Boton competitivo
+        val buttonCompetitivo: Button = findViewById(R.id.competitivoBtn)
+        buttonCompetitivo.setOnClickListener{
+            GameManager.get()?.startGame("Competitivo")
         }
     }
 }

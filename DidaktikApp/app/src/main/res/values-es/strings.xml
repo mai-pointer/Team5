@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">El tesoro de Lezama</string>
+    <string name="title_activity_maps">Actividad de mapas</string>
+
+    <string name="agricolaText">La Cooperativa Agrícola y Ganadera de Lezama fue creada en 1925, formada por dieciocho vecinos del pueblo. En ese momento, comenzó a organizarse una mejor defensa de sus actividades en el sector agrícola y ganadero, cobrando gran importancia entre los habitantes de Lezama y su entorno rural.</string>
+    <string name="txakoli">Con una extensión de 9 hectáreas, se encuentra ubicada en la comarca de Bilbo Handia, en el corazón de Txorierri y, por supuesto, en Lezama. El clima es mesotérmico, con temperaturas suaves y lluvias. Los suelos son francos-arcillosos, plantados principalmente con variedades de viñedos locales "Hondarrabi Zuri" y "Hondarrabi Zuri Zerratia", así como otras variedades minoritarias como "Petit Manseng" y "Riesling" orientadas hacia el sur.</string>
+    <string name="udala">¡Ven a disfrutar del valle de Txorierri en Lezama! Visita la página web de la Mancomunidad de Txorierri para conocer todas las opciones: rutas, restaurantes, alojamientos, transporte, etc. www.txori​e​rri.eus</string>
+    <string name="harategia">Estamos en la carnicería de Lezama, donde se elabora un producto muy popular en el pueblo y sus alrededores. Encontrar ese producto puede llevarte un poco de trabajo, pero tendrás algunas fotos útiles para ayudarte.</string>
+    <string name="santamaria">Actualmente estamos en la Iglesia de Santa María, ubicada en el centro de Lezama. La Iglesia de Santa María fue construida en el siglo XVI y tiene un estilo gótico.</string>
+    <string name="dorrea">Hemos llegado al barrio de Aretxalde y tenemos la torre de Lezama frente a nosotros. Esta torre fue en su momento un lugar militar fortificado. Además, fue un símbolo de poder económico y social, ya que indicaba el origen noble de sus propietarios.</string>
+    <string name="arkua">El campo de fútbol "San Mamés" se construyó en 1913 y desde entonces ha experimentado varias expansiones. En 1945, se amplió y se instaló un gran arco de hierro en la tribuna oeste. Este arco se convirtió en una de las características distintivas del campo de fútbol y del propio club. El campo de San Mamés fue demolido en 2013, pero después de algunas movilizaciones populares, se decidió conservar el arco. Así que desmontaron el arco, lo restauraron y lo trasladaron a las instalaciones que el Athletic tiene en Lezama.</string>
+
+    <!-- General -->
+    <string name="homeButton">Salir</string>
+    <string name="btnValidate">Validar</string>
+    <string name="btnBack">Atrás</string>
+    <string name="btnContinue">Continuar</string>
+    <string name="btnRepeat">Repetir</string>
+    <string name="btnDarkMode">Modo oscuro</string>
+
+    <!-- Admin Login -->
+    <string name="adminloginTitle">Hola</string>
+    <string name="adminloginSubtitle">Introduce la contraseña</string>
+    <string name="adminloginPassword">Contraseña</string>
+    <string name="incorrecto">Contraseña incorrecta</string>
+
+    <!-- Main Menu -->
+    <string name="mainMenuTitulo1">El misterio de Lezama</string>
+    <string name="mainMenuTitulo2">Lezama</string>
+    <string name="mainMenuAjustes">Ajustes</string>
+    <string name="mainMenuJugar">Jugar</string>
+    <string name="mainMenuModoLibre">Modo libre</string>
+
+    <!-- Diferencias -->
+    <string name="diferenciasTitulo">Encuentra 6 diferencias</string>
+    <string name="diferenciasRestantes">Diferencias restantes:</string>
+
+    <!-- INFO -->
+    <string name="terminar">TERMINAR</string>
+    <string name="title_activity_puzzle">Actividad de puzle</string>
+    <string name="first_fragment_label">Primer fragmento</string>
+    <string name="second_fragment_label">Segundo fragmento</string>
+    <string name="next">Siguiente</string>
+    <string name="previous">Anterior</string>
+
+    <!-- AJUSTES -->
+    <string name="profesor">Modo profesor</string>
+    <string name="inicio">Inicio</string>
+
+    <!-- Multiple choice -->
+    <string name="multipleChoiceExplain">Elige la respuesta correcta</string>
+    <string name="multipleChoiceAnswer">Respuesta</string>
+
+    <string name="zureerantzuna">Tu reespuesta</string>
+
+    <!-- Insert words -->
+    <string name="insertWordsExplain">Completa el texto</string>
+
+    <!-- Crucigrama -->
+    <string name="wordSearchExplain">Encuentra las siguientes palabras</string>
+    <string name="mensaje_fallido">¡Fallaste!</string>
+
+
+    <!-- Repetir -->
+    <string name="terminar_juego">Juego terminado</string>
+
+    <!-- Multiple Choice -->
+    <!-- 1.3 -->
+    <string name="galdera1.3">¿Cuál es el buey?</string>
+    <string name="erantzun1.3">b</string>
+
+    <!-- 1.4 -->
+    <!--1-->
+    <string name="galdera1.4.1">¿En qué momentos del año se realizan las pruebas con los bueyes?</string>
+    <string name="aukera1.4.1.a">En las fiestas rurales</string>
+    <string name="aukera1.4.1.b">En Navidad</string>
+    <string name="aukera1.4.1.c">En la Semana Santa</string>
+    <string name="erantzun1.4.1">a</string>
+
+    <!--2-->
+    <string name="galdera1.4.2">¿Cuánto pesan los bueyes?</string>
+    <string name="aukera1.4.2.a">Entre 100 y 200 kg</string>
+    <string name="aukera1.4.2.b">Entre 500 y 650 kg</string>
+    <string name="aukera1.4.2.c">Entre 650 y 750 kg</string>
+    <string name="erantzun1.4.2">b</string>
+
+    <!--3-->
+    <string name="galdera1.4.3">¿Qué comen los bueyes antes de participar en las pruebas?</string>
+    <string name="aukera1.4.3.a">Abas</string>
+    <string name="aukera1.4.3.b">Lechuga</string>
+    <string name="aukera1.4.3.c">Bainas</string>
+    <string name="erantzun1.4.3">a</string>
+
+    <!-- 4.3 -->
+    <!--1-->
+    <string name="galdera4.3.1">¿Quién fue Mikel Zarate?</string>
+    <string name="aukera4.3.1.a">Escritor vasco</string>
+    <string name="aukera4.3.1.b">Aficionado a la poesía vasca</string>
+    <string name="aukera4.3.1.c">El escritor más famoso de España</string>
+    <string name="aukera4.3.1.d">Bertsolari famoso</string>
+    <string name="erantzun4.3.1">a</string>
+
+    <!--2-->
+    <string name="galdera4.3.2">¿Cuándo nació?</string>
+    <string name="aukera4.3.2.a">En el siglo XVIII</string>
+    <string name="aukera4.3.2.b">En 1935</string>
+    <string name="aukera4.3.2.c">En el siglo XXI</string>
+    <string name="aukera4.3.2.d">En 1933</string>
+    <string name="erantzun4.3.2">d</string>
+
+    <!--3-->
+    <string name="galdera4.3.3">¿Dónde nació?</string>
+    <string name="aukera4.3.3.a">En Bilbao</string>
+    <string name="aukera4.3.3.b">En Francia, aunque era euskaldun</string>
+    <string name="aukera4.3.3.c">En Lezama</string>
+    <string name="aukera4.3.3.d">En Pamplona</string>
+    <string name="erantzun4.3.3">c</string>
+
+    <!--4-->
+    <string name="galdera4.3.4">¿Dónde estudió como alumno?</string>
+    <string name="aukera4.3.4.a">En los Cursos de Verano de Derio</string>
+    <string name="aukera4.3.4.b">En la escuela de verano de Derio</string>
+    <string name="aukera4.3.4.c">En los Cursos de Verano de Deusto</string>
+    <string name="aukera4.3.4.d">En la escuela de verano de Deusto</string>
+    <string name="erantzun4.3.4">a</string>
+
+    <!--5-->
+    <string name="galdera4.3.5">¿Cuántos libros publicó?</string>
+    <string name="aukera4.3.5.a">No publicó ningún libro</string>
+    <string name="aukera4.3.5.b">1</string>
+    <string name="aukera4.3.5.c">2</string>
+    <string name="aukera4.3.5.d">Más de 10, ya que era escritor</string>
+    <string name="erantzun4.3.5">b</string>
+
+    <!--6-->
+    <string name="galdera4.3.6">¿Cuándo publicó el libro de cuentos infantiles?</string>
+    <string name="aukera4.3.6.a">En 1973</string>
+    <string name="aukera4.3.6.b">En 1933</string>
+    <string name="aukera4.3.6.c">En 1793</string>
+    <string name="aukera4.3.6.d">En 1937</string>
+    <string name="erantzun4.3.6">a</string>
+
+    <!-- Pistak -->
+    <!-- 1.1-->
+    <string name="galdera1.1">¿Qué deporte se practicaba aquí?</string>
+    <string name="pista1.1">Pista: ¿Que relación hay entre el sonido y las fotos?</string>
+
+    <string name="erantzun1.1a">PRUEBAS DE ARRASTRE</string>
+    <string name="erantzun1.1b">PRUEBAS DE ARRASTRE</string>
+
+    <!-- 2.1 -->
+    <string name="galdera2.1">En la carnicería de Lezama preparan un producto muy popular con estos ingredientes. ¿Qué producto es?</string>
+    <string name="erantzun2.1a">CHORIZO</string>
+    <string name="erantzun2.1b">CHORIZOS</string>
+
+    <!-- 3.1 -->
+    <string name="galdera3.1">¿Sabéis qué bebida es esta?</string>
+    <string name="erantzun3.1a">TXAKOLI</string>
+    <string name="erantzun3.1b">VINO BLANCO</string>
+
+    <!-- 5.2 -->
+    <string name="galdera5.2">¿Qué veis en la iglesia? ¿Qué objetos representativos tiene? Comentad entre vosotros.</string>
+    <string name="erantzun5.2a">CAMPANAS</string>
+    <string name="erantzun5.2b">CAMPANA</string>
+
+    <!-- Titulos fragments-->
+    <string name="pistakTitle">Con estas pistas, responde a la pregunta</string>
+    <string name="crucigramaTitle">Completa los espacios siguiendo las definiciones</string>
+    <string name="sopaLetrasTitle">Encuentra las siguientes palabras</string>
+    <string name="multipleChoiceTitle">Elige la respuesta correcta</string>
+    <string name="puzleTitle">Completa el puzzle</string>
+
+    <!-- Repetir -->
+    <string name="continuar">Quieres continuar la partida?</string>
+    <string name="si">Continuar</string>
+    <string name="no">Repetir</string>
+</resources>
