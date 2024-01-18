@@ -25,7 +25,7 @@
             android:name=".OrdenarImagenesActivity"
             android:exported="false" />
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".Scoreboard"
             android:exported="false" />
         <activity
             android:name=".PreguntasPistas"
@@ -60,7 +60,7 @@
             android:name=".MultipleChoiceActivity"
             android:exported="false" />
         <activity
-            android:name=".Scoreboard"
+            android:name=".MainMenuActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -92,9 +92,7 @@ class Scoreboard : AppCompatActivity() {
 
             // Devuelve una lista ficticia por ahora
             return@withContext listOf(
-                Score("Usuario1", 150),
-                Score("Usuario2", 120),
-                Score("Usuario3", 90)
+                Score("Cargando datos", 0),
             )
         }
     }
