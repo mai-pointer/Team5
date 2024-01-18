@@ -45,7 +45,7 @@ class MapManagerService : Service() {
         this.context = context
         initializeMapLocations()
         locationProvider = LocationProvider()
-        updateLocation()
+        //updateLocation()
     }
 
     @SuppressLint("MissingPermission")

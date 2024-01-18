@@ -1,5 +1,6 @@
 package com.example.didaktikapp
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
@@ -9,20 +10,30 @@ import android.text.InputType
 import android.text.TextWatcher
 import android.view.Gravity
 import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.GridLayout
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.didaktikapp.navigation.NavigationUtil
 import com.example.didaktikapp.titleFragment.TitleFragment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class Crucigrama : AppCompatActivity() {
     private val repeatActivityMenu = RepeatActivityMenu(this)
+    private var gameManagerService: GameManagerService? = GameManagerService()
+    private var initialProgress = 0
+    private var maxProgress = 0
+    private lateinit var progressBar: ProgressBar
 
     //VARIABLES PARA LA PLANTILLA Y LAS PISTAS
     val pistas = arrayListOf(
@@ -51,23 +62,10 @@ class Crucigrama : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crucigrama)
 
-        // Obtén una referencia al contenedor de fragmentos
-        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
+        gameManagerService = GameManager.get()
 
-        // Reemplaza el contenedor con el TitleFragment
-        if (savedInstanceState == null) {
-            val titleFragment = TitleFragment.newInstance("Gurutzegrama")
-            supportFragmentManager.beginTransaction()
-                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
-                .commit()
-        }
-
-        // Configura el click listener para el botón en el fragmento
-        val titleFragment =
-            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
-        titleFragment?.setOnHomeButtonClickListener(View.OnClickListener {
-            onHomeButtonClicked()
-        })
+        setupHeaderFragment(savedInstanceState)
+        setupProgressBar()
 
         //VARIABLES
         val crucigrama: List<List<Celda>> = Crear(plantilla.trimIndent())
@@ -146,6 +144,9 @@ class Crucigrama : AppCompatActivity() {
                 }
             }
             if (bien){
+                GlobalScope.launch(Dispatchers.Main) {
+                    addProgress()
+                }
                 val intent = Intent(this ,Crucigrama::class.java)
                 repeatActivityMenu.showGameOverDialog(this, intent)
             }
@@ -153,6 +154,48 @@ class Crucigrama : AppCompatActivity() {
         }
     }
 
+    private fun setupHeaderFragment(savedInstanceState: Bundle?) {
+        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
+        if (savedInstanceState == null) {
+            val titleFragment = TitleFragment.newInstance(resources.getString(R.string.crucigramaTitle))
+            supportFragmentManager.beginTransaction()
+                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
+                .commit()
+        }
+        val titleFragment =
+            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
+        titleFragment?.setOnHomeButtonClickListener {
+            onHomeButtonClicked()
+        }
+    }
+
+    private fun setupProgressBar() {
+        progressBar = findViewById(R.id.crucigramaProgressBar)
+        initialProgress = gameManagerService!!.getCurrentScreenIndex()
+        maxProgress = gameManagerService!!.getTotalScreenIndex()
+        setInitialProgress(initialProgress, maxProgress)
+    }
+
+    private fun setInitialProgress(initialProgress: Int, maxProgress: Int) {
+        // Asegúrate de que el progreso inicial no exceda el máximo
+        val normalizedProgress = if (initialProgress > maxProgress) maxProgress else initialProgress
+        // Establece el progreso inicial
+        progressBar.progress = normalizedProgress
+
+        // Establece el máximo progreso (opcional, pero es una buena práctica)
+        progressBar.max = maxProgress
+    }
+
+    private suspend fun addProgress(){
+        val newProgress = initialProgress + 1
+        withContext(Dispatchers.IO) {
+            val progressAnimator =
+                ObjectAnimator.ofInt(progressBar, "progress", initialProgress, newProgress)
+            progressAnimator.duration = 5000
+            progressAnimator.interpolator = AccelerateDecelerateInterpolator()
+            progressAnimator.start()
+        }
+    }
     fun Pistas(cambio: Int, literal: Boolean = false){
 
         //Cambia el color

@@ -79,6 +79,7 @@ class GameManagerService : Service() {
 //    private var juegoNumero = 0
     private var pantallaActual = 0
     private var nombreJuego: String = ""
+    private var screenCount: Int? = 0
 
     //Inicializa el servicio
     fun initialize(context: Context) {
@@ -94,6 +95,7 @@ class GameManagerService : Service() {
         nombreJuego = gameName
         juegoActual = games[gameName]
         pantallaActual = 0
+        screenCount = juegoActual?.size
         pantalla()
 
         guardar()
@@ -143,6 +145,12 @@ class GameManagerService : Service() {
         }
     }
 
+    private fun getCurrentGameProgress(){
+        //TODO
+
+
+    }
+
     //Devuelve el número de pantalla actual
     fun pantallaActual(): String {
         return  games.entries.find { it.value == juegoActual }?.key + "." + (pantallaActual+1).toString()
@@ -150,6 +158,14 @@ class GameManagerService : Service() {
 
     fun juegoActual(): String {
         return  games.entries.find { it.value == juegoActual }?.key.toString()
+    }
+
+    fun getCurrentScreenIndex():Int{
+        return pantallaActual
+    }
+
+    fun getTotalScreenIndex():Int{
+        return screenCount!!
     }
 }
 

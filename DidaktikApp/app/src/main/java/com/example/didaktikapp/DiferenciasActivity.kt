@@ -22,23 +22,7 @@ class DiferenciasActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_diferencias)
 
-        // Obtén una referencia al contenedor de fragmentos
-        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
-
-        // Reemplaza el contenedor con el TitleFragment
-        if (savedInstanceState == null) {
-            val titleFragment = TitleFragment.newInstance("Ezberdintasunak")
-            supportFragmentManager.beginTransaction()
-                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
-                .commit()
-        }
-
-        // Configura el click listener para el botón en el fragmento
-        val titleFragment =
-            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
-        titleFragment?.setOnHomeButtonClickListener(View.OnClickListener {
-            onHomeButtonClicked()
-        })
+        setupHeaderFragment(savedInstanceState)
 
 
         botones = listOf(
@@ -70,6 +54,22 @@ class DiferenciasActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun setupHeaderFragment(savedInstanceState: Bundle?) {
+        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
+        if (savedInstanceState == null) {
+            val titleFragment = TitleFragment.newInstance(resources.getString(R.string.diferenciasTitulo))
+            supportFragmentManager.beginTransaction()
+                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
+                .commit()
+        }
+        val titleFragment =
+            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
+        titleFragment?.setOnHomeButtonClickListener {
+            onHomeButtonClicked()
+        }
+    }
+
 
     private fun ocultarDiferencias() {
         for (diferencia in diferencias) {

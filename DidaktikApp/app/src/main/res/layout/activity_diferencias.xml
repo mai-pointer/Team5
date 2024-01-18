@@ -19,6 +19,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/fragment_title" />
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/progressContainerView"
+        android:layout_width="399dp"
+        android:layout_height="42dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleFragmentTag"
+        tools:layout="@layout/fragment_progress"/>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"
@@ -49,13 +58,13 @@
         style="@style/TextoResplandecienteStyle"
         android:layout_width="322dp"
         android:layout_height="94dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="84dp"
         android:text="@string/diferenciasTitulo"
         android:textAlignment="center"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

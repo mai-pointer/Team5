@@ -1,5 +1,8 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".OrdenarImagenesActivity">
@@ -10,82 +13,35 @@
         android:name="com.example.didaktikapp.titleFragment.TitleFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/fragment_title" />
 
     <!-- Huecos para las imágenes con nombres -->
 
     <!-- Imágenes que se pueden arrastrar -->
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="513dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
-        android:background="@drawable/directions">
-
-        <ImageView
-            android:id="@+id/imagen1"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="298dp"
-            android:contentDescription="Imagen arrastrable"
-            android:src="@drawable/idiprobakpista"
-            android:tag="hueco1" />
-
-        <ImageView
-            android:id="@+id/imagen2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="185dp"
-            android:contentDescription="Imagen arrastrable"
-            android:src="@drawable/udala"
-            android:tag="hueco2" />
-
-        <ImageView
-            android:id="@+id/imagen3"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="230dp"
-            android:layout_marginTop="234dp"
-            android:contentDescription="Imagen arrastrable"
-            android:src="@drawable/txakoli"
-            android:tag="hueco3" />
-
-        <ImageView
-            android:id="@+id/imagen4"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="200dp"
-            android:layout_marginTop="374dp"
-            android:contentDescription="Imagen arrastrable"
-            android:src="@drawable/arkua"
-            android:tag="hueco4" />
-
-        <ImageView
-            android:id="@+id/imagen5"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="190dp"
-            android:layout_marginTop="150dp"
-            android:contentDescription="Imagen arrastrable"
-            android:src="@drawable/dorrea"
-            android:tag="hueco5" />
-    </RelativeLayout>
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/progressContainerView"
+        android:layout_width="399dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleFragmentTag"
+        tools:layout="@layout/fragment_progress" />
 
     <RelativeLayout
+        android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
         android:layout_height="316dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="372dp"
+        android:layout_marginBottom="317dp"
         android:background="@drawable/lezama"
-        android:gravity="center">
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <RelativeLayout
             android:id="@+id/hueco1"
@@ -179,8 +135,81 @@
                 android:text="Dorrea"
                 android:textSize="14sp" />
         </RelativeLayout>
+
     </RelativeLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="407dp"
+        android:layout_height="296dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/directions"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/imagen1"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="93dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="Imagen arrastrable"
+            android:src="@drawable/idiprobak"
+            android:tag="hueco1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imagen2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="96dp"
+            android:contentDescription="Imagen arrastrable"
+            android:src="@drawable/udala"
+            android:tag="hueco2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imagen4"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginBottom="29dp"
+            android:contentDescription="Imagen arrastrable"
+            android:src="@drawable/arkua"
+            android:tag="hueco4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imagen5" />
+
+        <ImageView
+            android:id="@+id/imagen3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="33dp"
+            android:layout_marginBottom="29dp"
+            android:contentDescription="Imagen arrastrable"
+            android:src="@drawable/txakoli"
+            android:tag="hueco3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/imagen5"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginBottom="58dp"
+            android:contentDescription="Imagen arrastrable"
+            android:src="@drawable/dorrea"
+            android:tag="hueco5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Agrega más huecos e imágenes según sea necesario -->
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

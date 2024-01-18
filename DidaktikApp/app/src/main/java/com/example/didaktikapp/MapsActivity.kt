@@ -36,13 +36,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
 
 
     // Variable para saber si el usuario es admin o no
-    private var esAdmin: Boolean = false
+    private var esAdmin: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        esAdmin = intent.getBooleanExtra("admin", false)
+        esAdmin = intent.getBooleanExtra("admin", true)
+        esAdmin = true
         progressBar = findViewById(R.id.progressBar)
 
         setupHeaderFragment(savedInstanceState)

@@ -19,6 +19,15 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/fragment_title" />
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/progressContainerView"
+        android:layout_width="399dp"
+        android:layout_height="42dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleFragmentTag"
+        tools:layout="@layout/fragment_progress"/>
+
     <Button
         android:id="@+id/terminar_info"
         style="@style/GreyButtonStyle"
