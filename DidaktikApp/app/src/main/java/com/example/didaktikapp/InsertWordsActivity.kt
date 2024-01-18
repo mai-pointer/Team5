@@ -3,19 +3,15 @@ package com.example.didaktikapp
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.text.Spannable
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
-import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
-import android.widget.PopupMenu
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.didaktikapp.navigation.NavigationUtil
@@ -122,7 +118,7 @@ class InsertWordsActivity : AppCompatActivity() {
 
         if (insertedText == expectedText) {
 //            alertDialog.setMessage("¡Ganaste!")
-            val intent = Intent(this ,Crucigrama::class.java)
+            val intent = Intent(this ,InsertWordsActivity::class.java)
             repeatActivityMenu.showGameOverDialog(this, intent)
         } else {
             alertDialog.setMessage("Perdiste")
