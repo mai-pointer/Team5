@@ -151,14 +151,6 @@ class Ajustes : AppCompatActivity() {
                         val selectedPartidaId = partidas[position].id
                         sharedPreferences.edit().putInt("partida_id", selectedPartidaId).apply()
 
-                        //ELIMINAR ****************************************************
-                        GlobalScope.launch(Dispatchers.IO){
-                            val partida = partidaDao.get(selectedPartidaId)
-                            runOnUiThread {
-                                Toast.makeText(this@Ajustes, "Partida seleccionada: ${partida.juego} - ${partida.pantalla}", Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                        //ELIMINAR ****************************************************
                     }
 
                     override fun onNothingSelected(parentView: AdapterView<*>){}
@@ -169,7 +161,7 @@ class Ajustes : AppCompatActivity() {
 
     fun NuevaPartida(partidaDao: PartidaDao, sharedPreferences: SharedPreferences)
     {
-        val nuevaPartida =  Partida(juego = "Juego1", pantalla = 0, hj = false)
+        val nuevaPartida =  Partida(juego = "Juego1", pantalla = 0, hj = false, juegoMapa =  0)
         GlobalScope.launch(Dispatchers.IO) {
             partidaDao.insert(nuevaPartida)
             runOnUiThread {

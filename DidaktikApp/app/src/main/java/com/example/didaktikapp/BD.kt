@@ -10,6 +10,7 @@ data class Partida(
     val id: Int = 0,
     val juego: String,
     val pantalla: Int,
+    val juegoMapa: Int,
     val hj: Boolean
 )
 

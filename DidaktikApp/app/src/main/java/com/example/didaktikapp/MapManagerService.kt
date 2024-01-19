@@ -8,9 +8,8 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.Binder
 import android.os.IBinder
-import kotlinx.coroutines.*
 import com.google.android.gms.maps.model.LatLng
-import kotlin.coroutines.resume
+import kotlinx.coroutines.*
 
 class MapManagerService : Service() {
     private var gameManagerService: GameManagerService? = GameManagerService()
@@ -43,6 +42,15 @@ class MapManagerService : Service() {
 
     fun initialize(context: Context) {
         this.context = context
+
+        // BD ---
+        BDManager.Iniciar{ partidaDao, sharedPreferences ->
+            GlobalScope.launch(Dispatchers.IO){
+                val partida = partidaDao.get(sharedPreferences.getInt("partida_id", -1))
+                currentLocationIndex = partida.juegoMapa ?: 0
+            }
+        }
+
         initializeMapLocations()
         locationProvider = LocationProvider()
         updateLocation()
@@ -71,13 +79,14 @@ class MapManagerService : Service() {
         }
     }
     private fun initializeMapLocations() {
-        mapLocations.put("Idi probak", LatLng(43.27556360817825, -2.827742396615327))
-        mapLocations.put("Odolostea", LatLng(43.27394169280981, -2.832619209726283))
-        mapLocations.put("Txakoli", LatLng(43.27758426733325, -2.8308136897866447))
-        mapLocations.put("Udala", LatLng(43.27421110063913, -2.83285560353813))
-        mapLocations.put("Santa Maria", LatLng(43.27387138926826, -2.8349795537580893))
-        mapLocations.put("San Mameseko Arkua", LatLng(43.276383439897, -2.8369511900475195))
-        mapLocations.put("Lezamako dorrea", LatLng(43.27279428065491, -2.8434245883650817))
+//        mapLocations.put("Idi probak", LatLng(43.27556360817825, -2.827742396615327))
+//        mapLocations.put("Odolostea", LatLng(43.27394169280981, -2.832619209726283))
+//        mapLocations.put("Txakoli", LatLng(43.27758426733325, -2.8308136897866447))
+//        mapLocations.put("Udala", LatLng(43.27421110063913, -2.83285560353813))
+//        mapLocations.put("Santa Maria", LatLng(43.27387138926826, -2.8349795537580893))
+//        mapLocations.put("San Mameseko Arkua", LatLng(43.276383439897, -2.8369511900475195))
+//        mapLocations.put("Lezamako dorrea", LatLng(43.27279428065491, -2.8434245883650817))
+        mapLocations.put("PRUEBA", LatLng(43.257559, -2.902346))
     }
 
     fun myPosition(): Location? {
@@ -119,6 +128,24 @@ class MapManagerService : Service() {
         if (currentLocationIndex < mapLocations.size - 1) {
             currentLocationIndex++
             notifyLocationChanged()
+
+            // BD ----
+            BDManager.Iniciar{ partidaDao, sharedPreferences ->
+                GlobalScope.launch(Dispatchers.IO){
+                    val partida = partidaDao.get(sharedPreferences.getInt("partida_id", -1))
+
+                    partidaDao.update(
+                        Partida(
+                            id = sharedPreferences.getInt("partida_id", 1),
+                            juego = partida.juego,
+                            pantalla = partida.pantalla,
+                            juegoMapa = currentLocationIndex,
+                            hj = partida.hj
+                        )
+                    )
+                }
+            }
+
         } else {
             MapManager.destroy()
             gameManagerService = GameManager.get()

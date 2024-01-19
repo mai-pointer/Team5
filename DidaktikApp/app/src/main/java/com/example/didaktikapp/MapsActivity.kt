@@ -61,13 +61,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         BDManager.Iniciar{ partidaDao, sharedPreferences ->
             GlobalScope.launch(Dispatchers.IO){
                 val partida = partidaDao.get(sharedPreferences.getInt("partida_id", 1))
-                if(!partida.hj){
+                if(!partida.hj ?: false){
                     GameManager.get()?.startGame("HASIERAKO JARDUERA")
                     partidaDao.update(
                         Partida(
                             partida.id,
                             partida.juego,
                             partida.pantalla,
+                            partida.juegoMapa,
                             true
                         )
                     )

@@ -132,6 +132,7 @@ class GameManagerService : Service() {
                         id = sharedPreferences.getInt("partida_id", 1),
                         juego = nombreJuego,
                         pantalla = pantallaActual,
+                        juegoMapa = 0,
                         hj = true
                     )
                 )

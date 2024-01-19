@@ -29,7 +29,7 @@ class MainMenuActivity : AppCompatActivity() {
             var partida_id = sharedPreferences.getInt("partida_id", -1)
 
             if (partida_id == -1){
-                val nuevaPartida = Partida(juego = "Juego1", pantalla = 0, hj = false)
+                val nuevaPartida = Partida(juego = "Juego1", pantalla = 0, hj = false, juegoMapa =  0)
                 GlobalScope.launch(Dispatchers.IO) {
                     partidaDao.insert(nuevaPartida)
                     runOnUiThread {
