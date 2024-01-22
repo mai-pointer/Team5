@@ -1,14 +1,21 @@
 package com.example.didaktikapp
 
 import android.app.Service
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.ServiceConnection
 import android.os.IBinder
+import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class GameManagerService : Service() {
+
+    //SERVICIO DE TIEMPO
+    private lateinit var servicio_tiempo: ServicioTiempo
+    private var servicio_activo = false
 
     //Almacena la información de los juegos
     val games = mapOf(
@@ -118,6 +125,19 @@ class GameManagerService : Service() {
 
             val intent = Intent(context, MapsActivity::class.java)
             context.startActivity(intent)
+
+            //En caso de que sea modo competitivo
+            if("Competitivo" == nombreJuego)
+            {
+                if (servicio_activo) {
+                    val tiempo = servicio_tiempo.Detener()
+                    Log.i("TIEMPO", tiempo)
+                    unbindService(serviceConnection)
+                    servicio_activo = false
+
+                    //************VAS AL SCOREBOARD************
+                }
+            }
         }
 
         guardar()
@@ -158,6 +178,20 @@ class GameManagerService : Service() {
 
     fun juegoActual(): String {
         return  games.entries.find { it.value == juegoActual }?.key.toString()
+    }
+
+    //SERVICIO DE TIEMPO
+
+    private val serviceConnection = object : ServiceConnection {
+        override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+            val binder = service as ServicioTiempo.LocalBinder
+            servicio_tiempo = binder.getService()
+            servicio_activo = true
+        }
+
+        override fun onServiceDisconnected(name: ComponentName?) {
+            servicio_activo = false
+        }
     }
 }
 

@@ -57,6 +57,8 @@ class MainMenuActivity : AppCompatActivity() {
         val buttonCompetitivo: Button = findViewById(R.id.competitivoBtn)
         buttonCompetitivo.setOnClickListener{
             GameManager.get()?.startGame("Competitivo")
+            val serviceIntent = Intent(this, ServicioTiempo::class.java)
+            startService(serviceIntent)
         }
     }
 }
