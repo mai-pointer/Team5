@@ -26,11 +26,12 @@ class MainMenuActivity : AppCompatActivity() {
         // Inicializar la BD
         BDManager.context = this
         BDManager.Iniciar{ partidaDao, sharedPreferences ->
-            var partida_id = sharedPreferences.getInt("partida_id", -1)
+            GlobalScope.launch(Dispatchers.IO) {
 
-            if (partida_id == -1){
+            var partidas = partidaDao.getAll()
+
+            if (partidas.size == 0){
                 val nuevaPartida = Partida(juego = "Juego1", pantalla = 0, hj = false, juegoMapa =  0)
-                GlobalScope.launch(Dispatchers.IO) {
                     partidaDao.insert(nuevaPartida)
                     runOnUiThread {
                         sharedPreferences.edit().putInt("partida_id", nuevaPartida.id).apply()
