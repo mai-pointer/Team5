@@ -50,7 +50,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
                 val id = sharedPreferences.getInt("partida_id", 1)
                 val partida = partidaDao.get(id)
 
-                Log.i("BDManager", "ID: $id || BD: ${partida}")
                 if(!partida.hj){
                     GameManager.get()?.startGame("HASIERAKO JARDUERA")
                     partidaDao.update(

@@ -1,10 +1,7 @@
 package com.example.didaktikapp
 
-import android.content.ComponentName
 import android.content.Intent
-import android.content.ServiceConnection
 import android.os.Bundle
-import android.os.IBinder
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.Dispatchers
@@ -38,9 +35,6 @@ class MainMenuActivity : AppCompatActivity() {
                     val nuevaPartida = Partida(juego = "Juego1", pantalla = 0, hj = false, juegoMapa =  0)
                     partidaDao.insert(nuevaPartida)
                     sharedPreferences.edit().putInt("partida_id", 1).apply()
-
-                    runOnUiThread {
-                    }
                 }
             }
         }
@@ -63,33 +57,10 @@ class MainMenuActivity : AppCompatActivity() {
         val buttonCompetitivo: Button = findViewById(R.id.competitivoBtn)
         buttonCompetitivo.setOnClickListener{
             GameManager.get()?.startGame("Competitivo")
-
-            val serviceIntent = Intent(this, ServicioTiempo::class.java)
-            startService(serviceIntent)
-            bindService(serviceIntent, serviceConnection, BIND_AUTO_CREATE)
         }
     }
 
-    override fun onDestroy() {
-        // Asegúrate de desvincular el servicio cuando la actividad se destruye
-        unbindService(serviceConnection)
-        super.onDestroy()
-    }
 
 
-    private lateinit var servicio_tiempo: ServicioTiempo
-    private var servicio_activo = false
-
-    private val serviceConnection = object : ServiceConnection {
-        override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-            val binder = service as ServicioTiempo.LocalBinder
-            servicio_tiempo = binder.getService()
-            servicio_activo = true
-        }
-
-        override fun onServiceDisconnected(name: ComponentName?) {
-            servicio_activo = false
-        }
-    }
 
 }

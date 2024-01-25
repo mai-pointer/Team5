@@ -13,10 +13,6 @@ import kotlinx.coroutines.launch
 
 class GameManagerService : Service() {
 
-    //SERVICIO DE TIEMPO
-    private lateinit var servicio_tiempo: ServicioTiempo
-    private var servicio_activo = false
-
     //Almacena la información de los juegos
     val games = mapOf(
         "Juego1" to listOf(
@@ -78,13 +74,14 @@ class GameManagerService : Service() {
             Info::class.java,
         ),
         "Competitivo" to listOf(
-            WordSearchActivity::class.java,
-            DiferenciasActivity::class.java,
-            PuzzleActivity::class.java,
-            Crucigrama::class.java,
-            InsertWordsActivity::class.java,
-            JuegoTorre::class.java,
-            OrdenarImagenesActivity::class.java,
+//            WordSearchActivity::class.java,
+//            DiferenciasActivity::class.java,
+//            PuzzleActivity::class.java,
+//            Crucigrama::class.java,
+//            InsertWordsActivity::class.java,
+//            JuegoTorre::class.java,
+//            OrdenarImagenesActivity::class.java,
+            Info::class.java,
         )
     )
 
@@ -105,6 +102,16 @@ class GameManagerService : Service() {
 
     //Inicia el juego seleccionado
     fun startGame(gameName: String) {
+
+        //En caso de que sea modo competitivo
+        if("Competitivo" == gameName)
+        {
+            context
+            val serviceIntent = Intent(context, ServicioTiempo::class.java)
+            context.startService(serviceIntent)
+            context.bindService(serviceIntent, serviceConnection, BIND_AUTO_CREATE)
+        }
+
         nombreJuego = gameName
         juegoActual = games[gameName]
         pantallaActual = 0
@@ -123,9 +130,6 @@ class GameManagerService : Service() {
             //Si no, vuelve al menú principal
             pantallaActual = 0
 
-            val intent = Intent(context, MapsActivity::class.java)
-            context.startActivity(intent)
-
             //En caso de que sea modo competitivo
             if("Competitivo" == nombreJuego)
             {
@@ -136,7 +140,14 @@ class GameManagerService : Service() {
                     servicio_activo = false
 
                     //************VAS AL SCOREBOARD************
+                    val intent = Intent(context, MainMenuActivity::class.java)
+                    context.startActivity(intent)
+                    //************VAS AL SCOREBOARD************
                 }
+            }
+            else{
+                val intent = Intent(context, MapsActivity::class.java)
+                context.startActivity(intent)
             }
         }
 
@@ -180,8 +191,10 @@ class GameManagerService : Service() {
         return  games.entries.find { it.value == juegoActual }?.key.toString()
     }
 
-    //SERVICIO DE TIEMPO
+    //VARIABLES DEL SERVICIO
 
+    private lateinit var servicio_tiempo: ServicioTiempo
+    private var servicio_activo = false
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             val binder = service as ServicioTiempo.LocalBinder
@@ -193,6 +206,14 @@ class GameManagerService : Service() {
             servicio_activo = false
         }
     }
+
+    override fun onDestroy() {
+        // Asegúrate de desvincular el servicio cuando la actividad se destruye
+        unbindService(serviceConnection)
+        super.onDestroy()
+    }
+
+
 }
 
 //Singleton
