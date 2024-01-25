@@ -61,7 +61,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         BDManager.Iniciar{ partidaDao, sharedPreferences ->
             GlobalScope.launch(Dispatchers.IO){
                 val partida = partidaDao.get(sharedPreferences.getInt("partida_id", 1))
-                if(!partida.hj ?: false){
+                if(!partida.hj){
                     GameManager.get()?.startGame("HASIERAKO JARDUERA")
                     partidaDao.update(
                         Partida(
@@ -75,6 +75,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
                 }
             }
         }
+
     }
 
     private fun initMap(){

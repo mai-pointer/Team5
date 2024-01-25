@@ -2,6 +2,7 @@ package com.example.didaktikapp
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.room.*
 
 @Entity(tableName = "partida_table")
@@ -77,7 +78,7 @@ class  BDManager{
 
         fun Iniciar(funcion: (PartidaDao, SharedPreferences) -> Unit)
         {
-            if(context == null) throw Exception("No se ha inicializado el BDManager")
+            if(context == null) Log.d("BDManager", "Contexto nulo")
 
             // Inicializar la BD
             val appDatabase = AppDatabaseInitializer.getDatabase(context!!)
@@ -88,6 +89,7 @@ class  BDManager{
 //            var partida_id = sharedPreferences.getInt("partida_id", -1)
 
             funcion.invoke(partidaDao, sharedPreferences)
+
         }
     }
 }

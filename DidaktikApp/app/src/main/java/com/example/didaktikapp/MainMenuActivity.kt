@@ -27,7 +27,8 @@ class MainMenuActivity : AppCompatActivity() {
         GameManager.initialize(this)
 
         // Inicializar la BD
-        BDManager.context = this
+        BDManager.context = this@MainMenuActivity
+
         BDManager.Iniciar{ partidaDao, sharedPreferences ->
             GlobalScope.launch(Dispatchers.IO) {
 
