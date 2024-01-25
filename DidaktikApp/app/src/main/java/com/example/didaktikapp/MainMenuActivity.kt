@@ -26,7 +26,7 @@ class MainMenuActivity : AppCompatActivity() {
         // Inicializar la BD
         BDManager.context = applicationContext
 
-        BDManager.Iniciar{ partidaDao, sharedPreferences ->
+        BDManager.Iniciar{ partidaDao, competitivoDao, sharedPreferences ->
             GlobalScope.launch(Dispatchers.IO) {
 
                 var partidas = partidaDao.getAll()

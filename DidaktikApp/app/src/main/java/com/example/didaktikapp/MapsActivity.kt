@@ -45,7 +45,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         super.onCreate(savedInstanceState)
 
         //Inicia el HASIERAKO JARDUERA
-        BDManager.Iniciar{ partidaDao, sharedPreferences ->
+        BDManager.Iniciar{ partidaDao, competitivoDao, sharedPreferences ->
             GlobalScope.launch(Dispatchers.IO){
                 val id = sharedPreferences.getInt("partida_id", 1)
                 val partida = partidaDao.get(id)

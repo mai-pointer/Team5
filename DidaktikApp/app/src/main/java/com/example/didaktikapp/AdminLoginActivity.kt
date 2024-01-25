@@ -29,7 +29,7 @@ class AdminLoginActivity : AppCompatActivity() {
             }
         }
         //Salir
-        findViewById<Button>(R.id.btnContinue).setOnClickListener{
+        findViewById<Button>(R.id.btnRepetir).setOnClickListener{
             val intent = Intent(this@AdminLoginActivity, Ajustes::class.java)
             startActivity(intent)
         }

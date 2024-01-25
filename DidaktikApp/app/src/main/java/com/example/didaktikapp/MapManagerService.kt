@@ -44,7 +44,7 @@ class MapManagerService : Service() {
         this.context = context
 
         // BD ---
-        BDManager.Iniciar{ partidaDao, sharedPreferences ->
+        BDManager.Iniciar{ partidaDao, competitivoDao, sharedPreferences ->
             GlobalScope.launch(Dispatchers.IO){
                 val partida = partidaDao.get(sharedPreferences.getInt("partida_id", -1))
                 currentLocationIndex = partida.juegoMapa ?: 0
@@ -131,7 +131,7 @@ class MapManagerService : Service() {
             notifyLocationChanged()
 
             // BD ----
-            BDManager.Iniciar{ partidaDao, sharedPreferences ->
+            BDManager.Iniciar{ partidaDao, competitivoDao, sharedPreferences ->
                 GlobalScope.launch(Dispatchers.IO){
                     val partida = partidaDao.get(sharedPreferences.getInt("partida_id", -1))
 

@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
-import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -81,7 +80,7 @@ class GameManagerService : Service() {
             InsertWordsActivity::class.java,
             JuegoTorre::class.java,
             OrdenarImagenesActivity::class.java,
-//          Info::class.java,
+//            Info::class.java,
         )
     )
 
@@ -135,9 +134,19 @@ class GameManagerService : Service() {
             {
                 if (servicio_activo) {
                     val tiempo = servicio_tiempo.Detener()
-                    Log.i("TIEMPO", tiempo.toString())
                     context.unbindService(serviceConnection)
                     servicio_activo = false
+
+                    BDManager.Iniciar { partidaDao, competitivoDao, sharedPreferences ->
+
+                        val nuevoTiempo =  Competitivo(tiempo = tiempo, partidaId = sharedPreferences.getInt("partida_id", 1))
+                        GlobalScope.launch(Dispatchers.IO) {
+                            competitivoDao.insert(nuevoTiempo)
+                        }
+
+                    }
+
+                    //PASAR AL SERVER EL TIEMPO <-----------------------------------------novarin trabaja
 
                     val intent = Intent(context, Scoreboard::class.java)
                     context.startActivity(intent)
@@ -154,7 +163,7 @@ class GameManagerService : Service() {
 
     fun guardar()
     {
-        BDManager.Iniciar{ partidaDao, sharedPreferences ->
+        BDManager.Iniciar{ partidaDao, competitivoDao, sharedPreferences ->
             GlobalScope.launch(Dispatchers.IO){
                 partidaDao.update(
                     Partida(

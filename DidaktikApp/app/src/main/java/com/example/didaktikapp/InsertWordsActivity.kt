@@ -55,6 +55,10 @@ class InsertWordsActivity : AppCompatActivity() {
         btnValidate.setOnClickListener {
             validateText()
         }
+
+        findViewById<Button>(R.id.btnRepetir).setOnClickListener {
+            Reiniciar()
+        }
     }
 
     private fun createSpannableText(text: String): SpannableStringBuilder {
@@ -117,13 +121,19 @@ class InsertWordsActivity : AppCompatActivity() {
             .create()
 
         if (insertedText == expectedText) {
-//            alertDialog.setMessage("¡Ganaste!")
             val intent = Intent(this ,InsertWordsActivity::class.java)
             repeatActivityMenu.showGameOverDialog(this, intent)
         } else {
             alertDialog.setMessage("Perdiste")
             alertDialog.show()
+
+            Reiniciar()
         }
 
+    }
+
+    private fun Reiniciar() {
+        val intent = Intent(this, InsertWordsActivity::class.java)
+        startActivity(intent)
     }
 }
