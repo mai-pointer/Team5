@@ -21,10 +21,19 @@
         <service android:name=".ServicioTiempo" />
 
         <activity
+            android:name=".MapsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".JuegoTorre"
+            android:exported="false" />
+        <activity
             android:name=".Video"
             android:exported="false" />
         <activity
             android:name=".OrdenarImagenesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Scoreboard"
             android:exported="false" />
         <activity
             android:name=".PreguntasPistas"
@@ -41,9 +50,6 @@
             android:name=".InsertWordsActivity"
             android:exported="false" />
         <activity
-            android:name=".JuegoTorre"
-            android:exported="false" />
-        <activity
             android:name=".AdminLoginActivity"
             android:exported="false" />
         <activity
@@ -54,9 +60,6 @@
             android:exported="false" />
         <activity
             android:name=".DiferenciasActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MapsActivity"
             android:exported="false" />
         <activity
             android:name=".PuzzleActivity"

@@ -32,6 +32,8 @@
     <string name="mainMenuJugar">Jolastu</string>
     <string name="mainMenuModoLibre">Lehiaketa modua</string>
 
+    <string name="scoreboard">Marcador global</string>
+
     <!-- Diferencias -->
     <string name="diferenciasTitulo">Aurkitu 6 desberdintasunak</string>
     <string name="diferenciasRestantes">Desberdinak aurkitutakoak:</string>
@@ -179,6 +181,5 @@
     <string name="continuar">Partida jarraitu nahi duzu?</string>
     <string name="si">Jarraitu</string>
     <string name="no">Errepikatu</string>
-
 
 </resources>

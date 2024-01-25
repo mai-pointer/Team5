@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0e39599-b3b5-4490-836c-146f87560955" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/DidaktikApp/app/src/main/java/com/example/didaktikapp/LocationProvider.kt" beforeDir="false" afterPath="$PROJECT_DIR$/DidaktikApp/app/src/main/java/com/example/didaktikapp/LocationProvider.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DidaktikApp/app/src/main/java/com/example/didaktikapp/MapManagerService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/DidaktikApp/app/src/main/java/com/example/didaktikapp/MapManagerService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DidaktikApp/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/DidaktikApp/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DidaktikApp/app/src/main/res/layout/activity_ajustes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/DidaktikApp/app/src/main/res/layout/activity_ajustes.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +27,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "C:/Projects/Team5/DidaktikApp"
+    "last_opened_file_path": "C:/Users/ik_2DM3/Desktop/Team5/DidaktikApp"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
