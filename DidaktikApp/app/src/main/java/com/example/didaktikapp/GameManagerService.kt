@@ -135,14 +135,12 @@ class GameManagerService : Service() {
             {
                 if (servicio_activo) {
                     val tiempo = servicio_tiempo.Detener()
-                    Log.i("TIEMPO", tiempo)
-                    unbindService(serviceConnection)
+                    Log.i("TIEMPO", tiempo.toString())
+                    context.unbindService(serviceConnection)
                     servicio_activo = false
 
-                    //************VAS AL SCOREBOARD************
-                    val intent = Intent(context, MainMenuActivity::class.java)
+                    val intent = Intent(context, Scoreboard::class.java)
                     context.startActivity(intent)
-                    //************VAS AL SCOREBOARD************
                 }
             }
             else{
@@ -209,7 +207,7 @@ class GameManagerService : Service() {
 
     override fun onDestroy() {
         // Asegúrate de desvincular el servicio cuando la actividad se destruye
-        unbindService(serviceConnection)
+        context.unbindService(serviceConnection)
         super.onDestroy()
     }
 
