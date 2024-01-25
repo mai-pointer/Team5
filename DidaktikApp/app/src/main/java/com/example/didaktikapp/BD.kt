@@ -80,6 +80,8 @@ class  BDManager{
         {
             if(context == null) Log.d("BDManager", "Contexto nulo")
 
+            Log.d("BDManager", context.toString())
+
             // Inicializar la BD
             val appDatabase = AppDatabaseInitializer.getDatabase(context!!)
             val partidaDao = appDatabase.partidaDao()

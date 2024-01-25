@@ -43,24 +43,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMapsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        esAdmin = intent.getBooleanExtra("admin", false)
-        progressBar = findViewById(R.id.progressBar)
-
-        setupHeaderFragment(savedInstanceState)
-
-        if(!esAdmin){
-            checkPermissions()
-        }else{
-            initMap()
-        }
-        progressBar.visibility = View.VISIBLE
 
         //Inicia el HASIERAKO JARDUERA
         BDManager.Iniciar{ partidaDao, sharedPreferences ->
             GlobalScope.launch(Dispatchers.IO){
-                val partida = partidaDao.get(sharedPreferences.getInt("partida_id", 1))
+                val id = sharedPreferences.getInt("partida_id", 1)
+                val partida = partidaDao.get(id)
+
+                Log.i("BDManager", "ID: $id || BD: ${partida}")
                 if(!partida.hj){
                     GameManager.get()?.startGame("HASIERAKO JARDUERA")
                     partidaDao.update(
@@ -75,6 +65,20 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
                 }
             }
         }
+
+        binding = ActivityMapsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        esAdmin = intent.getBooleanExtra("admin", false)
+        progressBar = findViewById(R.id.progressBar)
+
+        setupHeaderFragment(savedInstanceState)
+
+        if(!esAdmin){
+            checkPermissions()
+        }else{
+            initMap()
+        }
+        progressBar.visibility = View.VISIBLE
 
     }
 
