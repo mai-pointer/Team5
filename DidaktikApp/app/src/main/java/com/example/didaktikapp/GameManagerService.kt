@@ -74,14 +74,14 @@ class GameManagerService : Service() {
             Info::class.java,
         ),
         "Competitivo" to listOf(
-//            WordSearchActivity::class.java,
-//            DiferenciasActivity::class.java,
-//            PuzzleActivity::class.java,
-//            Crucigrama::class.java,
-//            InsertWordsActivity::class.java,
-//            JuegoTorre::class.java,
-//            OrdenarImagenesActivity::class.java,
-            Info::class.java,
+            WordSearchActivity::class.java,
+            DiferenciasActivity::class.java,
+            PuzzleActivity::class.java,
+            Crucigrama::class.java,
+            InsertWordsActivity::class.java,
+            JuegoTorre::class.java,
+            OrdenarImagenesActivity::class.java,
+//          Info::class.java,
         )
     )
 
