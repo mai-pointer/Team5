@@ -44,11 +44,11 @@
         style="@style/TextoResplandecienteStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="40dp"
         android:text="@string/mainMenuTitulo1"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -57,25 +57,24 @@
         style="@style/TextoDestacadoStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="68dp"
         android:text="@string/mainMenuTitulo2"
         android:textAlignment="center"
         android:textSize="82sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/iconoLezama"
-        android:layout_width="28dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="68dp"
-        app:tint="@color/verdeOscuro"
-        app:layout_constraintBottom_toBottomOf="@+id/tvTitulo2"
-        app:layout_constraintStart_toEndOf="@+id/tvTitulo1"
-        app:srcCompat="@drawable/lezama_icon" />
+        android:layout_width="64dp"
+        android:layout_height="57dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitulo2"
+        app:srcCompat="@drawable/lezama_icon"
+        app:tint="@color/verdeOscuro" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         style="@style/CirculoMainMenu"
