@@ -7,6 +7,34 @@
     android:padding="0dp">
 
     <RelativeLayout
+        android:id="@+id/puntuaciones"
+        android:layout_width="120dp"
+        android:layout_height="108dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-159dp"
+        android:layout_marginTop="146dp"
+        android:layout_toEndOf="@+id/profesores"
+        android:background="@drawable/tarjeta">
+
+        <ImageButton
+            android:id="@+id/scoreboardButton"
+            android:layout_width="100dp"
+            android:layout_height="88dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="9dp"
+            android:background="#00FFFFFF"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/win"
+            android:contentDescription="TODO" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/inicioBtn"
         style="@style/backgroundBlancoPuro"
         android:layout_width="match_parent"
@@ -34,26 +62,26 @@
 
     <RelativeLayout
         android:id="@+id/profesores"
-        android:layout_width="342dp"
-        android:layout_height="112dp"
+        android:layout_width="194dp"
+        android:layout_height="108dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="33dp"
         android:layout_marginTop="147dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginEnd="184dp"
         android:background="@drawable/tarjeta">
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="83dp"
-            android:layout_height="82dp"
+            android:layout_width="71dp"
+            android:layout_height="62dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginBottom="13dp"
+            android:layout_marginStart="57dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginBottom="41dp"
             android:background="@drawable/tarjeta"
             app:srcCompat="@drawable/oig" />
 
@@ -61,12 +89,14 @@
             android:id="@+id/answerText"
             android:layout_width="204dp"
             android:layout_height="39dp"
+            android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="19dp"
-            android:layout_marginBottom="50dp"
-            android:layout_toEndOf="@+id/imageView2"
+            android:layout_marginStart="-8dp"
+            android:layout_marginBottom="-3dp"
             android:text="@string/profesor"
+            android:textAlignment="center"
             android:textSize="26sp" />
+
     </RelativeLayout>
 
     <RelativeLayout

@@ -29,6 +29,7 @@ class Ajustes : AppCompatActivity() {
     private lateinit var botonIngles: ImageButton
     private var idiomaPredeterminado: String? = null
 
+    private lateinit var scoreboardButton: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,10 +41,12 @@ class Ajustes : AppCompatActivity() {
         // Obtén el idioma predeterminado antes de cambiarlo
         idiomaPredeterminado = sharedPreferences.getString("language", "eu")
 
-
         botonCastellano = findViewById(R.id.botonCastellano)
         botonEuskera = findViewById(R.id.botonEuskera)
         botonIngles = findViewById(R.id.botonIngles)
+        scoreboardButton = findViewById(R.id.scoreboardButton)
+
+        scoreboardButton.setOnClickListener { startActivity(Intent(this, Scoreboard::class.java)) }
 
         // Configurar el botón para cambiar el idioma
         botonCastellano.setOnClickListener {
