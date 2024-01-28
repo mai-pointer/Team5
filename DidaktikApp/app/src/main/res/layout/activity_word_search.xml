@@ -110,12 +110,26 @@
         <TableLayout
             android:id="@+id/wordSearch"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="346dp"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:layout_weight="1">
 
         </TableLayout>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/terminar_sopaDeLetras"
+        style="@style/GreyButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/terminar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.87"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

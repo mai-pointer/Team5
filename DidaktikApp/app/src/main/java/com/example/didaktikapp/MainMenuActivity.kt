@@ -40,6 +40,8 @@ class MainMenuActivity : AppCompatActivity() {
         }
 
 
+
+
         // Agrega un OnClickListener al botón "Jugar"
         buttonJugar.setOnClickListener{
             // Crea un Intent para lanzar la actividad Jugar

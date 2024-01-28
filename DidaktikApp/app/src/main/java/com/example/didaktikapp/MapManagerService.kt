@@ -8,6 +8,7 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.Binder
 import android.os.IBinder
+import android.util.Log
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.*
 
@@ -23,6 +24,7 @@ class MapManagerService : Service() {
     // Variables
     private lateinit var context: Context
     private var currentLocationIndex = 0
+    private var currentGameFromDB = ""
     private var myCurrentPosition: Location? = null
 
     // LocationProvider para obtener la ubicación del dispositivo
@@ -42,14 +44,17 @@ class MapManagerService : Service() {
 
     fun initialize(context: Context) {
         this.context = context
-
         // BD ---
         BDManager.Iniciar{ partidaDao, sharedPreferences ->
             GlobalScope.launch(Dispatchers.IO){
                 val partida = partidaDao.get(sharedPreferences.getInt("partida_id", -1))
                 currentLocationIndex = partida.juegoMapa ?: 0
+                currentGameFromDB = partida.juego
+
             }
         }
+
+
 
         initializeMapLocations()
         locationProvider = LocationProvider()
@@ -69,10 +74,14 @@ class MapManagerService : Service() {
         miScope.launch {
             while (miScope.isActive) {
                 myCurrentPosition = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                if (checkProximity(myCurrentPosition)){
+                Log.d("MyCurrentPosition", myCurrentPosition.toString())
+                var currentLatLng = LatLng(myCurrentPosition!!.latitude, myCurrentPosition!!.longitude)
+                if (checkProximity(currentLatLng)){
                     gameManagerService = GameManager.get()
-                    val myGame = gameManagerService!!.juegoActual()
-                    gameManagerService?.startGame(myGame)
+                    //val myGame = gameManagerService!!.juegoActual()
+                    gameManagerService!!.startGame(currentGameFromDB)
+                    showNextLocation()
+                    stopSelf()
                 }
                 delay(5000)
             }
@@ -86,7 +95,7 @@ class MapManagerService : Service() {
 //        mapLocations.put("Santa Maria", LatLng(43.27387138926826, -2.8349795537580893))
 //        mapLocations.put("San Mameseko Arkua", LatLng(43.276383439897, -2.8369511900475195))
 //        mapLocations.put("Lezamako dorrea", LatLng(43.27279428065491, -2.8434245883650817))
-        mapLocations.put("PRUEBA1", LatLng(43.257559, -2.902346))
+        mapLocations.put("PRUEBA1", LatLng(43.238353, -2.881065))
         mapLocations.put("PRUEBA2", LatLng(43.257011, -2.903898))
     }
 
@@ -105,7 +114,7 @@ class MapManagerService : Service() {
         }
     }
 
-    private fun checkProximity(currentUserPos:Location?):Boolean{
+    private fun checkProximity(currentUserPos:LatLng):Boolean{
         val targetLocation = getCurrentLocation()
         val distance = calculateDistance(currentUserPos!!.latitude, currentUserPos!!.longitude, targetLocation.latitude, targetLocation.longitude)
         val proximityThreshold = 50

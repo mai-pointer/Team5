@@ -1,6 +1,8 @@
 package com.example.didaktikapp
 
+import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.Color
 import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +10,7 @@ import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewTreeObserver
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ProgressBar
 import android.widget.TableLayout
@@ -26,6 +29,7 @@ private const val SIZE = 11
 private const val NUMBER_OF_WORDS = 6
 
 class WordSearchActivity : AppCompatActivity() {
+    private val repeatActivityMenu = RepeatActivityMenu(this)
     private lateinit var tableLayout: TableLayout
     private lateinit var word1: TextView
     private lateinit var word2: TextView
@@ -54,6 +58,7 @@ class WordSearchActivity : AppCompatActivity() {
     private var startCoordinate: Pair<Float, Float>? = null
     private var newWord: String = ""
     private var selectedCells: MutableList<Int> = mutableListOf()
+    private var foundWords = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +69,14 @@ class WordSearchActivity : AppCompatActivity() {
         setupHeaderFragment(savedInstanceState)
 
         createGame()
+
+        findViewById<Button>(R.id.terminar_sopaDeLetras).setOnClickListener{
+            if (foundWords >= wordMap.size){
+                val intent = Intent(this ,Crucigrama::class.java)
+                repeatActivityMenu.showGameOverDialog(this, intent)
+            }
+
+        }
     }
 
     fun createGame() = lifecycleScope.launch {
@@ -631,6 +644,7 @@ class WordSearchActivity : AppCompatActivity() {
                                 )
                             )
                             correctCells.add(textView.id)
+                            foundWords += 1
                         } else {
                             if (correctCells.contains(textView.id)) {
                                 frameLayout.setBackgroundColor(

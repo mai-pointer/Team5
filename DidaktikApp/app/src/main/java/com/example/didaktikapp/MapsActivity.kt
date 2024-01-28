@@ -21,12 +21,18 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapClickListener,
     GoogleMap.OnMarkerClickListener {
@@ -36,6 +42,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
     private lateinit var binding: ActivityMapsBinding
     private lateinit var progressBar: ProgressBar
     private var mapManagerService: MapManagerService? = MapManagerService()
+    private var updateJob: Job? = null
+    private var marker: Marker? = null
 
 
     // Variable para saber si el usuario es admin o no
@@ -141,8 +149,29 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         mMap.setOnMapClickListener(this)
         mMap.setOnMapLoadedCallback {
             progressBar.visibility = View.GONE
+
+            updateJob = CoroutineScope(Dispatchers.Main).launch {
+                updateMarkerPosition()
+            }
         }
     }
+
+    suspend fun updateMarkerPosition() {
+        while (true) {
+            // Obtener la nueva posición del marcador
+            val newPosition = LatLng(mapManagerService!!.myPosition()!!.latitude, mapManagerService!!.myPosition()!!.longitude)
+            withContext(Dispatchers.Main) {
+                if (marker == null) {
+                    marker = mMap.addMarker(MarkerOptions().position(newPosition).icon(
+                        BitmapDescriptorFactory.fromResource(R.drawable.posicon)))
+                } else {
+                    marker?.position = newPosition
+                }
+            }
+            delay(1000)
+        }
+    }
+
 
 
     // Añade un marcador en la ubicación proporcionada
@@ -235,5 +264,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
             }
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        updateJob?.cancel()
     }
 }
