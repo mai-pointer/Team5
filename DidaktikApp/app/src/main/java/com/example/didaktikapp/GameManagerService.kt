@@ -73,13 +73,15 @@ class GameManagerService : Service() {
             Info::class.java,
         ),
         "Competitivo" to listOf(
-            WordSearchActivity::class.java,
-            DiferenciasActivity::class.java,
-            PuzzleActivity::class.java,
-            Crucigrama::class.java,
-            InsertWordsActivity::class.java,
-            JuegoTorre::class.java,
-            OrdenarImagenesActivity::class.java,
+            //WordSearchActivity::class.java,
+            //DiferenciasActivity::class.java,
+            //PuzzleActivity::class.java,
+            //Crucigrama::class.java,
+            //InsertWordsActivity::class.java,
+            //JuegoTorre::class.java,
+            //OrdenarImagenesActivity::class.java,
+
+            Info::class.java,
             )
     )
 
@@ -110,7 +112,7 @@ class GameManagerService : Service() {
             context.bindService(serviceIntent, serviceConnection, BIND_AUTO_CREATE)
         }
 
-        //nombreJuego = gameName
+        nombreJuego = gameName
         juegoActual = games[gameName]
         pantallaActual = 0
         pantalla()
@@ -124,22 +126,9 @@ class GameManagerService : Service() {
             //Si hay más pantallas, pasa a la siguiente
             pantallaActual++
             pantalla()
-        } else {
-            //Si no, vuelve al menú principal
-            pantallaActual = 0
-
-            BDManager.Iniciar{ partidaDao, CompetitivoDao, sharedPreferences ->
-                GlobalScope.launch(Dispatchers.IO) {
-                    val partida = partidaDao.get(sharedPreferences.getInt("partida_id", -1))
-
-                    val myIndex = games.keys.indexOf(partida.juego)
-                    nombreJuego = games.keys.elementAt(myIndex + 1)
-
-                    guardar()
-                }
-            }
-
-
+        }
+        //Termina el juego
+        else {
             //En caso de que sea modo competitivo
             if("Competitivo" == nombreJuego)
             {
@@ -162,6 +151,21 @@ class GameManagerService : Service() {
                     val intent = Intent(context, Scoreboard::class.java)
                     context.startActivity(intent)
                 }
+                else{
+                    BDManager.Iniciar{ partidaDao, CompetitivoDao, sharedPreferences ->
+                        GlobalScope.launch(Dispatchers.IO) {
+                            val partida = partidaDao.get(sharedPreferences.getInt("partida_id", -1))
+
+                            val myIndex = games.keys.indexOf(partida.juego)
+                            nombreJuego = games.keys.elementAt(myIndex + 1)
+
+                            guardar()
+                        }
+                    }
+                }
+
+                //Si no, vuelve al menú principal
+                pantallaActual = 0
             }
             else{
                 val intent = Intent(context, MapsActivity::class.java)

@@ -107,7 +107,7 @@ class Info : AppCompatActivity() {
 
         val pantalla = GameManager.get()?.pantallaActual()
 
-        findViewById<TextView>(R.id.info).text = informacion[pantalla]?.texto
+        findViewById<TextView>(R.id.info).text = informacion[pantalla]?.texto ?: "Nulo"
 
         // Reemplaza el contenedor con el TitleFragment
         val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
@@ -166,8 +166,6 @@ class Info : AppCompatActivity() {
         mediaPlayer?.stop()
         mediaPlayer?.release()
         mediaPlayer = null
-
-        super.onDestroy()
     }
 
     override fun onPause() {
