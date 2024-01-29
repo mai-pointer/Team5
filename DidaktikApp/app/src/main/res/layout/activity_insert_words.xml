@@ -34,24 +34,25 @@
 
     <TextView
         android:id="@+id/tv1"
-        android:layout_width="match_parent"
-        android:layout_height="243dp"
-        android:layout_marginTop="14dp"
+        android:layout_width="357dp"
+        android:layout_height="259dp"
+        android:layout_marginBottom="20dp"
         android:text="textView"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView14"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toBottomOf="@+id/ordenarImagenesProgressBar"
-        app:layout_constraintTop_toBottomOf="@+id/ordenarImagenesProgressBar" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView14"
-        android:layout_width="281dp"
-        android:layout_height="215dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="270dp"
+        android:layout_height="170dp"
+        android:layout_marginBottom="116dp"
         android:src="@drawable/_00"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv1"
         app:shapeAppearanceOverlay="@style/RoundedSquare" />
 
     <Button
