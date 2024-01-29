@@ -47,6 +47,10 @@
     <!-- AJUSTES -->
     <string name="profesor">Modo profesor</string>
     <string name="inicio">Inicio</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="nuevo">Nuevo</string>
+    <string name="partida">Partida</string>
+    <string name="error_ajustes_1">No se pueden eliminar todas las partidas</string>
 
     <!-- Multiple choice -->
     <string name="multipleChoiceExplain">Elige la respuesta correcta</string>
@@ -172,6 +176,11 @@
     <string name="puzleTitle">Completa el puzzle</string>
     <string name="infoTitle">Información</string>
     <string name="insertWordsTitle">Elije las palabras adecuadas</string>
+    <string name="juegoTorreTitle">Coloca los objetos correctamente</string>
+    <string name="mapTitle">Conoce Lezama</string>
+    <string name="ordenarImagenesTitle">Coloca las fotos</string>
+    <string name="puzzleTitle">Puzzle</string>
+    <string name="videoTitle">Mira el video</string>
 
     <!-- Repetir -->
     <string name="continuar">Quieres continuar la partida?</string>

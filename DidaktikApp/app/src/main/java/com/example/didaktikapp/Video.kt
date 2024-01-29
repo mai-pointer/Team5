@@ -75,7 +75,7 @@ class Video : AppCompatActivity() {
     private fun setupHeaderFragment(savedInstanceState: Bundle?) {
         val fragmentContainer = findViewById<FrameLayout>(R.id.fragmentContainerView)
         if (savedInstanceState == null) {
-            val titleFragment = TitleFragment.newInstance(resources.getString(R.string.pistakTitle))
+            val titleFragment = TitleFragment.newInstance(resources.getString(R.string.videoTitle))
             supportFragmentManager.beginTransaction()
                 .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
                 .commit()

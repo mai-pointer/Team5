@@ -85,7 +85,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
     private fun setupHeaderFragment(savedInstanceState: Bundle?) {
         val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
         if (savedInstanceState == null) {
-            val titleFragment = TitleFragment.newInstance("Aukeratu erantzun zuzena")
+            val titleFragment = TitleFragment.newInstance(resources.getString(R.string.multipleChoiceTitle))
             supportFragmentManager.beginTransaction()
                 .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
                 .commit()

@@ -27,8 +27,6 @@ class MapManagerService : Service() {
     private var currentGameFromDB = ""
     private var myCurrentPosition: Location? = null
 
-    // LocationProvider para obtener la ubicación del dispositivo
-    private lateinit var locationProvider: LocationProvider
 
     // Binder para la conexión con la actividad
     private val binder = LocalBinder()
@@ -42,7 +40,7 @@ class MapManagerService : Service() {
         return binder
     }
 
-    fun initialize(context: Context) {
+    fun initialize(context: Context, esAdmin: Boolean) {
         this.context = context
         // BD ---
         BDManager.Iniciar{ partidaDao, competitivoDao, sharedPreferences ->
@@ -57,8 +55,11 @@ class MapManagerService : Service() {
 
 
         initializeMapLocations()
-        locationProvider = LocationProvider()
-        //updateLocation()
+
+        if (!esAdmin){
+            updateLocation()
+        }
+
     }
 
     @SuppressLint("MissingPermission")
@@ -180,10 +181,10 @@ class MapManagerService : Service() {
         private var mapManagerService: MapManagerService? = null
 
         //Inicializa el singleton
-        fun initialize(context: Context) {
+        fun initialize(context: Context, esAdmin: Boolean) {
             if (mapManagerService == null) {
                 mapManagerService = MapManagerService()
-                mapManagerService?.initialize(context)
+                mapManagerService?.initialize(context, esAdmin)
             }
         }
 

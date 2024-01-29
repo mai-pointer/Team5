@@ -70,7 +70,7 @@ class OrdenarImagenesActivity : AppCompatActivity() {
     private fun setupHeaderFragment(savedInstanceState: Bundle?) {
         val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
         if (savedInstanceState == null) {
-            val titleFragment = TitleFragment.newInstance(resources.getString(R.string.infoTitle))
+            val titleFragment = TitleFragment.newInstance(resources.getString(R.string.ordenarImagenesTitle))
             supportFragmentManager.beginTransaction()
                 .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
                 .commit()

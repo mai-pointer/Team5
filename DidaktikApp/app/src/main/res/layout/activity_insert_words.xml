@@ -40,7 +40,6 @@
         android:text="textView"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toBottomOf="@+id/ordenarImagenesProgressBar"
         app:layout_constraintTop_toBottomOf="@+id/ordenarImagenesProgressBar" />
 
     <com.google.android.material.imageview.ShapeableImageView
