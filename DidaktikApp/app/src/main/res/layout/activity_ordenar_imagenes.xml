@@ -5,6 +5,7 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="30dp"
     tools:context=".OrdenarImagenesActivity">
 
     <!-- Contenedor principal que contiene el FragmentContainerView y otros elementos según sea necesario -->
@@ -19,7 +20,7 @@
         tools:layout="@layout/fragment_title" />
 
     <ProgressBar
-        android:id="@+id/infoProgressBar"
+        android:id="@+id/ordenarImagenesProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,10 +36,10 @@
         android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
         android:layout_height="316dp"
-        android:layout_marginBottom="317dp"
+        android:layout_marginBottom="1dp"
         android:background="@drawable/lezama"
         android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout3"
         app:layout_constraintStart_toStartOf="parent">
 
         <RelativeLayout
@@ -138,8 +139,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/relativeLayout3"
-        android:layout_width="407dp"
-        android:layout_height="296dp"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/directions"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -149,7 +150,7 @@
             android:id="@+id/imagen1"
             android:layout_width="90dp"
             android:layout_height="90dp"
-            android:layout_marginStart="93dp"
+            android:layout_marginStart="60dp"
             android:layout_marginTop="16dp"
             android:contentDescription="Imagen arrastrable"
             android:src="@drawable/idiprobak"
@@ -162,8 +163,8 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="96dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="44dp"
             android:contentDescription="Imagen arrastrable"
             android:src="@drawable/udala"
             android:tag="hueco2"
@@ -174,8 +175,8 @@
             android:id="@+id/imagen4"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginStart="18dp"
-            android:layout_marginBottom="29dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="16dp"
             android:contentDescription="Imagen arrastrable"
             android:src="@drawable/arkua"
             android:tag="hueco4"
@@ -187,8 +188,8 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="33dp"
-            android:layout_marginBottom="29dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             android:contentDescription="Imagen arrastrable"
             android:src="@drawable/txakoli"
             android:tag="hueco3"
@@ -199,8 +200,8 @@
             android:id="@+id/imagen5"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginStart="35dp"
-            android:layout_marginBottom="58dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="56dp"
             android:contentDescription="Imagen arrastrable"
             android:src="@drawable/dorrea"
             android:tag="hueco5"

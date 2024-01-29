@@ -4,6 +4,8 @@ package com.example.didaktikapp
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
+import android.widget.FrameLayout
+import android.widget.ProgressBar
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
@@ -12,6 +14,8 @@ import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
 import androidx.appcompat.app.AppCompatActivity
+import com.example.didaktikapp.navigation.NavigationUtil
+import com.example.didaktikapp.titleFragment.TitleFragment
 
 class Video : AppCompatActivity() {
 
@@ -23,11 +27,20 @@ class Video : AppCompatActivity() {
     private lateinit var exoPlayer: SimpleExoPlayer
     private lateinit var playerView: PlayerView
 
+    private var gameManagerService: GameManagerService? = GameManagerService()
+    private lateinit var progressBar: ProgressBar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video)
 
         playerView = findViewById(R.id.video)
+
+        gameManagerService = GameManager.get()
+        progressBar = findViewById(R.id.videoProgressBar)
+        gameManagerService!!.setInitialProgress(progressBar)
+
+        setupHeaderFragment(savedInstanceState)
 
         // Obtiene el identificador del recurso de video
         val videoResource = videos[GameManager.get()?.pantallaActual()]!!
@@ -54,10 +67,29 @@ class Video : AppCompatActivity() {
 
         // Botón para terminar el video
         findViewById<Button>(R.id.terminar_video).setOnClickListener {
+            gameManagerService?.addProgress(progressBar)
             GameManager.get()?.nextScreen()
         }
     }
 
+    private fun setupHeaderFragment(savedInstanceState: Bundle?) {
+        val fragmentContainer = findViewById<FrameLayout>(R.id.fragmentContainerView)
+        if (savedInstanceState == null) {
+            val titleFragment = TitleFragment.newInstance(resources.getString(R.string.pistakTitle))
+            supportFragmentManager.beginTransaction()
+                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
+                .commit()
+        }
+        val titleFragment =
+            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
+        titleFragment?.setOnHomeButtonClickListener {
+            onHomeButtonClicked()
+        }
+    }
+
+    private fun onHomeButtonClicked() {
+        NavigationUtil.navigateToMainMenu(this)
+    }
     override fun onDestroy() {
         super.onDestroy()
         // Libera los recursos de ExoPlayer

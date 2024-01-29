@@ -3,20 +3,16 @@ package com.example.didaktikapp
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.text.Spannable
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
-import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
-import android.widget.PopupMenu
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.didaktikapp.navigation.NavigationUtil
@@ -37,7 +33,7 @@ class InsertWordsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_insert_words)
 
         gameManagerService = GameManager.get()
-        progressBar = findViewById(R.id.infoProgressBar)
+        progressBar = findViewById(R.id.ordenarImagenesProgressBar)
         gameManagerService!!.setInitialProgress(progressBar)
 
         // Reemplaza el contenedor con el TitleFragment
@@ -49,7 +45,7 @@ class InsertWordsActivity : AppCompatActivity() {
         textView.text = createSpannableText(originalText)
         textView.movementMethod = LinkMovementMethod.getInstance()
 
-        val btnValidate = findViewById<Button>(R.id.btnValidate)
+        val btnValidate = findViewById<Button>(R.id.terminar_insertWords)
         btnValidate.setOnClickListener {
             validateText()
         }
@@ -135,7 +131,7 @@ class InsertWordsActivity : AppCompatActivity() {
 
         if (insertedText == expectedText) {
             gameManagerService?.addProgress(progressBar)
-            val intent = Intent(this ,Crucigrama::class.java)
+            val intent = Intent(this ,InsertWordsActivity::class.java)
             repeatActivityMenu.showGameOverDialog(this, intent)
         } else {
             alertDialog.setMessage("Perdiste")

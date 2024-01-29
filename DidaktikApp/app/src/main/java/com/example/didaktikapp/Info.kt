@@ -4,7 +4,6 @@ import android.graphics.PorterDuff
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.TextView
 import android.widget.Button
 import android.widget.FrameLayout
@@ -108,7 +107,7 @@ class Info : AppCompatActivity() {
         intent.getDoubleExtra("punto", 0.0)
 
         gameManagerService = GameManager.get()
-        progressBar = findViewById(R.id.infoProgressBar)
+        progressBar = findViewById(R.id.ordenarImagenesProgressBar)
         gameManagerService!!.setInitialProgress(progressBar)
 
         val pantalla = gameManagerService?.pantallaActual()

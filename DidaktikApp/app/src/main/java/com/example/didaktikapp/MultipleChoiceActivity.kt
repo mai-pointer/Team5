@@ -75,7 +75,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
         amaitu.setOnClickListener{
             if (chosenAnswer?.equals(correctAnswer) == true){
                 gameManagerService?.addProgress(progressBar)
-                val intent = Intent(this ,Crucigrama::class.java)
+                val intent = Intent(this ,MultipleChoiceActivity::class.java)
                 repeatActivityMenu.showGameOverDialog(this, intent)
             } else{
                 Toast.makeText(this, "Gaizki", Toast.LENGTH_SHORT).show()

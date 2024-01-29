@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_title" />
 
     <ProgressBar
-        android:id="@+id/infoProgressBar"
+        android:id="@+id/ordenarImagenesProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,62 +34,34 @@
 
     <TextView
         android:id="@+id/tv1"
-        android:layout_width="356dp"
+        android:layout_width="match_parent"
         android:layout_height="243dp"
+        android:layout_marginTop="14dp"
         android:text="textView"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView14"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toBottomOf="@+id/infoProgressBar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.859" />
+        app:layout_constraintStart_toBottomOf="@+id/ordenarImagenesProgressBar"
+        app:layout_constraintTop_toBottomOf="@+id/ordenarImagenesProgressBar" />
 
-    <LinearLayout
-            android:id="@+id/bottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent">
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageView14"
+        android:layout_width="281dp"
+        android:layout_height="215dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/_00"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv1"
+        app:shapeAppearanceOverlay="@style/RoundedSquare" />
 
-            <Button
-                android:id="@+id/btnValidate"
-                style="@style/GreenButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/noahgrotesquebold"
-                android:text="@string/btnContinue" />
+    <Button
+        android:id="@+id/terminar_insertWords"
+        style="@style/GreyButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/terminar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5" />
-
-            <Button
-                android:id="@+id/btnContinue"
-                style="@style/GreyButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                android:layout_gravity="end"
-                android:layout_weight="1"
-                android:text="@string/btnRepeat" />
-        </LinearLayout>
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imageView14"
-            android:layout_width="281dp"
-            android:layout_height="215dp"
-            android:layout_marginBottom="60dp"
-            android:src="@drawable/_00"
-            app:layout_constraintBottom_toTopOf="@+id/bottom"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.484"
-            app:layout_constraintStart_toStartOf="parent"
-            app:shapeAppearanceOverlay="@style/RoundedSquare" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 

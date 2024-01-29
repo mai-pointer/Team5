@@ -256,7 +256,7 @@ class JuegoTorre : AppCompatActivity() {
     }
 
     private fun showRestartDialog() {
-        val intent = Intent(this ,Crucigrama::class.java)
+        val intent = Intent(this, JuegoTorre::class.java)
         repeatActivityMenu.showGameOverDialog(this, intent)
     }
 }
