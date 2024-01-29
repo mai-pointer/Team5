@@ -112,9 +112,26 @@ class Info : AppCompatActivity() {
 
         val pantalla = gameManagerService?.pantallaActual()
 
-        findViewById<TextView>(R.id.info).text = informacion[pantalla]?.texto
+        findViewById<TextView>(R.id.info).text = informacion[pantalla]?.texto ?: "Nulo"
 
         setupHeaderFragment(savedInstanceState)
+        // Reemplaza el contenedor con el TitleFragment
+        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
+
+        if (savedInstanceState == null) {
+            val titleFragment = TitleFragment.newInstance("Info")
+            supportFragmentManager.beginTransaction()
+                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
+                .commit()
+        }
+
+        // Configura el click listener para el botón en el fragmento
+        val titleFragment =
+            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
+        titleFragment?.setOnHomeButtonClickListener(View.OnClickListener {
+
+            NavigationUtil.navigateToMainMenu(this)
+        })
 
         //Audios
         mediaPlayer = MediaPlayer.create(this, informacion[pantalla]?.audio!!)
@@ -134,6 +151,9 @@ class Info : AppCompatActivity() {
             pauseaudio.setColorFilter(resources.getColor(R.color.verdeOscuro), PorterDuff.Mode.SRC_IN)
             playaudio.setColorFilter(resources.getColor(R.color.grisOscuro), PorterDuff.Mode.SRC_IN)
         }
+
+        playaudio.setColorFilter(resources.getColor(R.color.verdeOscuro), PorterDuff.Mode.SRC_IN)
+        pauseaudio.setColorFilter(resources.getColor(R.color.grisOscuro), PorterDuff.Mode.SRC_IN)
 
         //Boton terminar
         findViewById<Button>(R.id.terminar_info).setOnClickListener{
@@ -165,9 +185,20 @@ class Info : AppCompatActivity() {
         NavigationUtil.navigateToMainMenu(this)
     }
     override fun onDestroy() {
-        // Liberar los recursos del MediaPlayer cuando la actividad se destruye
-        mediaPlayer?.release()
         super.onDestroy()
+
+        // Liberar los recursos del MediaPlayer cuando la actividad se destruye
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
     }
 
     data class Informacion(val texto: String, val audio: Int? = null)
