@@ -80,8 +80,7 @@ class GameManagerService : Service() {
             InsertWordsActivity::class.java,
             JuegoTorre::class.java,
             OrdenarImagenesActivity::class.java,
-//            Info::class.java,
-        )
+            )
     )
 
     //Variables

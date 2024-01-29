@@ -123,6 +123,7 @@ class Info : AppCompatActivity() {
         val titleFragment =
             supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
         titleFragment?.setOnHomeButtonClickListener(View.OnClickListener {
+
             NavigationUtil.navigateToMainMenu(this)
         })
 
@@ -145,6 +146,9 @@ class Info : AppCompatActivity() {
             playaudio.setColorFilter(resources.getColor(R.color.grisOscuro), PorterDuff.Mode.SRC_IN)
         }
 
+        playaudio.setColorFilter(resources.getColor(R.color.verdeOscuro), PorterDuff.Mode.SRC_IN)
+        pauseaudio.setColorFilter(resources.getColor(R.color.grisOscuro), PorterDuff.Mode.SRC_IN)
+
         //Boton terminar
         findViewById<Button>(R.id.terminar_info).setOnClickListener{
             mediaPlayer?.stop()
@@ -156,9 +160,22 @@ class Info : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        // Liberar los recursos del MediaPlayer cuando la actividad se destruye
-        mediaPlayer?.release()
         super.onDestroy()
+
+        // Liberar los recursos del MediaPlayer cuando la actividad se destruye
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
+
+        super.onDestroy()
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
     }
 
     data class Informacion(val texto: String, val audio: Int? = null)
