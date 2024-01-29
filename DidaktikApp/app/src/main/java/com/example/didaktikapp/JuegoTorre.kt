@@ -79,23 +79,23 @@ class JuegoTorre : AppCompatActivity() {
         setDragListener(hueco2, 1)
         setDragListener(hueco3, 2)
 
-        // Obtén una referencia al contenedor de fragmentos
-        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
-
-        if (savedInstanceState == null) {
-            val titleFragment = TitleFragment.newInstance("Dorrea")
-            supportFragmentManager.beginTransaction()
-                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag").commit()
-        }
-
-        // Configura el click listener para el botón en el fragmento
-        val titleFragment =
-            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
-        titleFragment?.setOnHomeButtonClickListener(View.OnClickListener {
-            onHomeButtonClicked()
-        })
+        setupHeaderFragment(savedInstanceState)
     }
 
+    private fun setupHeaderFragment(savedInstanceState: Bundle?) {
+        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
+        if (savedInstanceState == null) {
+            val titleFragment = TitleFragment.newInstance(resources.getString(R.string.juegoTorreTitle))
+            supportFragmentManager.beginTransaction()
+                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
+                .commit()
+        }
+        val titleFragment =
+            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
+        titleFragment?.setOnHomeButtonClickListener {
+            onHomeButtonClicked()
+        }
+    }
     fun showPreviousImage() {
         val currentItem = viewPager.currentItem
         if (currentItem > 0) {

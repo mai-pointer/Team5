@@ -49,10 +49,6 @@ class InsertWordsActivity : AppCompatActivity() {
         btnValidate.setOnClickListener {
             validateText()
         }
-
-        findViewById<Button>(R.id.btnRepetir).setOnClickListener {
-            Reiniciar()
-        }
     }
 
     private fun setupHeaderFragment(savedInstanceState: Bundle?) {

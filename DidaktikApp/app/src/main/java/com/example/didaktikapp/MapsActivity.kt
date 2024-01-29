@@ -91,11 +91,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
     }
 
     private fun initMap(){
-
         mapManagerService = MapManager.get()
 
         if(mapManagerService == null){
-            MapManager.initialize(this)
+            MapManager.initialize(this, esAdmin)
             mapManagerService = MapManager.get()
         }
 
@@ -107,7 +106,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
     private fun setupHeaderFragment(savedInstanceState: Bundle?) {
         val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
         if (savedInstanceState == null) {
-            val titleFragment = TitleFragment.newInstance("Jokoa aukeratu mapan")
+            val titleFragment = TitleFragment.newInstance(resources.getString(R.string.mapTitle))
             supportFragmentManager.beginTransaction()
                 .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
                 .commit()
@@ -151,8 +150,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         mMap.setOnMapLoadedCallback {
             progressBar.visibility = View.GONE
 
-            updateJob = CoroutineScope(Dispatchers.Main).launch {
-                updateMarkerPosition()
+            if(!esAdmin){
+                updateJob = CoroutineScope(Dispatchers.Main).launch {
+                    updateMarkerPosition()
+                }
             }
         }
     }

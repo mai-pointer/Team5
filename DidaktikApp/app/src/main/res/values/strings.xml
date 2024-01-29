@@ -49,10 +49,10 @@
     <!-- AJUSTES -->
     <string name="profesor">Irakasle modua</string>
     <string name="inicio">Hasiera</string>
-    <string name="eliminar">Eliminar</string>
-    <string name="nuevo">Nuevo</string>
+    <string name="eliminar">Ezabatu</string>
+    <string name="nuevo">Berria</string>
     <string name="partida">Partida</string>
-    <string name="error_ajustes_1">No se pueden eliminar todas las partidas</string>
+    <string name="error_ajustes_1">Ezin dira partida guztiak ezabatu</string>
     <!-- Multiple choice -->
     <string name="multipleChoiceExplain">Aukeratu erantzun zuzena</string>
     <string name="multipleChoiceAnswer">Erantzuna</string>
@@ -178,6 +178,11 @@
     <string name="puzleTitle">Amaitu puzlea</string>
     <string name="infoTitle">Informazioa</string>
     <string name="insertWordsTitle">Aukeratu hitz zuzenak</string>
+    <string name="juegoTorreTitle">Kokatu leku zuzenean</string>
+    <string name="mapTitle">Ezagutu Lezama</string>
+    <string name="ordenarImagenesTitle">Kokatu argazkiak</string>
+    <string name="puzzleTitle">Puzlea</string>
+    <string name="videoTitle">Ikusi bideoa</string>
 
     <!-- Repetir -->
     <string name="continuar">Partida jarraitu nahi duzu?</string>

@@ -47,6 +47,10 @@
     <!-- SETTINGS -->
     <string name="profesor">Teacher Mode</string>
     <string name="inicio">Home</string>
+    <string name="eliminar">Delete</string>
+    <string name="nuevo">New</string>
+    <string name="partida">Game</string>
+    <string name="error_ajustes_1">You can´t delete all the games</string>
 
     <!-- Multiple choice -->
     <string name="multipleChoiceExplain">Choose the correct answer</string>
@@ -170,6 +174,11 @@
     <string name="puzleTitle">Complete the puzzle</string>
     <string name="infoTitle">Information</string>
     <string name="insertWordsTitle">Choose the correct words</string>
+    <string name="juegoTorreTitle">Place items correctly</string>
+    <string name="mapTitle">Get to know Lezama</string>
+    <string name="ordenarImagenesTitle">Place the pictures</string>
+    <string name="puzzleTitle">Puzzle</string>
+    <string name="videoTitle">Watch the video</string>
 
     <!-- Repetir -->
     <string name="continuar">Do you want to continue the game?</string>
