@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="30dp"
     tools:context=".DiferenciasActivity">
 
     <androidx.fragment.app.FragmentContainerView
@@ -20,14 +21,26 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/fragment_title" />
 
+    <ProgressBar
+        android:id="@+id/diferenciasProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleFragmentTag" />
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"
         style="@style/CirculoMainMenu"
-        android:layout_width="175dp"
-        android:layout_height="170dp"
-        android:layout_marginBottom="40dp"
+        android:layout_width="129dp"
+        android:layout_height="137dp"
+        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
@@ -35,7 +48,7 @@
             style="@style/transparentButtonSec"
             android:layout_width="123dp"
             android:layout_height="94dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="20dp"
             android:text="0"
             android:textSize="60sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -49,13 +62,13 @@
         style="@style/TextoResplandecienteStyle"
         android:layout_width="322dp"
         android:layout_height="94dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="84dp"
         android:text="@string/diferenciasTitulo"
         android:textAlignment="center"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -117,7 +130,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView12"
         app:layout_constraintEnd_toEndOf="@+id/imageView12"
         app:layout_constraintHorizontal_bias="0.409"
-        app:layout_constraintStart_toStartOf="@+id/imageView12" >
+        app:layout_constraintStart_toStartOf="@+id/imageView12">
 
         <Button
             android:id="@+id/btnDife5"
@@ -142,7 +155,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView12"
         app:layout_constraintEnd_toEndOf="@+id/imageView12"
         app:layout_constraintHorizontal_bias="0.616"
-        app:layout_constraintStart_toStartOf="@+id/imageView12" >
+        app:layout_constraintStart_toStartOf="@+id/imageView12">
 
         <Button
             android:id="@+id/btnDife4"
@@ -167,7 +180,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView12"
         app:layout_constraintEnd_toEndOf="@+id/imageView12"
         app:layout_constraintHorizontal_bias="0.295"
-        app:layout_constraintStart_toStartOf="@+id/imageView12" >
+        app:layout_constraintStart_toStartOf="@+id/imageView12">
 
         <Button
             android:id="@+id/btnDife3"

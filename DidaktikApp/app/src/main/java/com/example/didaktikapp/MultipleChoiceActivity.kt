@@ -1,6 +1,7 @@
 package com.example.didaktikapp
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
@@ -8,6 +9,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ListView
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +17,7 @@ import com.example.didaktikapp.navigation.NavigationUtil
 import com.example.didaktikapp.titleFragment.TitleFragment
 
 class MultipleChoiceActivity : AppCompatActivity() {
-    //private val repeatActivityMenu = RepeatActivityMenu(this)
+    private val repeatActivityMenu = RepeatActivityMenu(this)
 
     var myQuestion = hashMapOf<String, MultipleChoiceActivity.Question>()
 
@@ -28,8 +30,11 @@ class MultipleChoiceActivity : AppCompatActivity() {
 
     private lateinit var galderaText: TextView
     private lateinit var aukerak: ListView
-    private lateinit var baieztatu: Button
-    private lateinit var jarraitu: Button
+    private lateinit var amaitu: Button
+
+
+    private var gameManagerService: GameManagerService? = GameManagerService()
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,16 +68,18 @@ class MultipleChoiceActivity : AppCompatActivity() {
         setupHeaderFragment(savedInstanceState)
         adaptAnswers()
 
-        baieztatu.setOnClickListener{
+        gameManagerService = GameManager.get()
+        progressBar = findViewById(R.id.multipleChoiceProgressBar)
+        gameManagerService!!.setInitialProgress(progressBar)
+
+        amaitu.setOnClickListener{
             if (chosenAnswer?.equals(correctAnswer) == true){
-                Toast.makeText(this, "Zorionak", Toast.LENGTH_SHORT).show()
-                jarraitu.isEnabled = true
+                gameManagerService?.addProgress(progressBar)
+                val intent = Intent(this ,MultipleChoiceActivity::class.java)
+                repeatActivityMenu.showGameOverDialog(this, intent)
             } else{
                 Toast.makeText(this, "Gaizki", Toast.LENGTH_SHORT).show()
             }
-        }
-        jarraitu.setOnClickListener{
-            GameManager.get()?.nextScreen()
         }
     }
     private fun setupHeaderFragment(savedInstanceState: Bundle?) {
@@ -97,8 +104,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
     private fun initializeVariables(pantalla:String?){
         galderaText = findViewById(R.id.galdera)
         aukerak = findViewById(R.id.aukerak)
-        baieztatu = findViewById(R.id.btnValidate)
-        jarraitu = findViewById(R.id.btnRepetir)
+        amaitu = findViewById(R.id.terminarMultipleChoice)
 
         if(myQuestion[pantalla]?.respuesta1 == null){
             isPictureAnswer = true

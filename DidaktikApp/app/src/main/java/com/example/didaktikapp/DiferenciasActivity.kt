@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.didaktikapp.navigation.NavigationUtil
@@ -15,6 +16,8 @@ class DiferenciasActivity : AppCompatActivity() {
     private val repeatActivityMenu = RepeatActivityMenu(this)
     lateinit var botones: List<Button>
     lateinit var diferencias: List<ConstraintLayout>
+    private var gameManagerService: GameManagerService? = GameManagerService()
+    private lateinit var progressBar: ProgressBar
 
     var contDifs = 0
 
@@ -22,24 +25,10 @@ class DiferenciasActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_diferencias)
 
-        // Obtén una referencia al contenedor de fragmentos
-        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
-
-        // Reemplaza el contenedor con el TitleFragment
-        if (savedInstanceState == null) {
-            val titleFragment = TitleFragment.newInstance("Ezberdintasunak")
-            supportFragmentManager.beginTransaction()
-                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
-                .commit()
-        }
-
-        // Configura el click listener para el botón en el fragmento
-        val titleFragment =
-            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
-        titleFragment?.setOnHomeButtonClickListener(View.OnClickListener {
-            onHomeButtonClicked()
-        })
-
+        gameManagerService = GameManager.get()
+        progressBar = findViewById(R.id.diferenciasProgressBar)
+        gameManagerService!!.setInitialProgress(progressBar)
+        setupHeaderFragment(savedInstanceState)
 
         botones = listOf(
             findViewById(R.id.btnDife6),
@@ -71,6 +60,22 @@ class DiferenciasActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupHeaderFragment(savedInstanceState: Bundle?) {
+        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
+        if (savedInstanceState == null) {
+            val titleFragment = TitleFragment.newInstance(resources.getString(R.string.diferenciasTitulo))
+            supportFragmentManager.beginTransaction()
+                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
+                .commit()
+        }
+        val titleFragment =
+            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
+        titleFragment?.setOnHomeButtonClickListener {
+            onHomeButtonClicked()
+        }
+    }
+
+
     private fun ocultarDiferencias() {
         for (diferencia in diferencias) {
             diferencia.background.alpha = 0
@@ -83,6 +88,8 @@ class DiferenciasActivity : AppCompatActivity() {
 
         if (contDifs ==5) {
             //Ganaste!
+            gameManagerService!!.addProgress(progressBar)
+
             val intent = Intent(this ,DiferenciasActivity::class.java)
             repeatActivityMenu.showGameOverDialog(this, intent)
 

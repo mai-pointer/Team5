@@ -1,14 +1,17 @@
 package com.example.didaktikapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.didaktikapp.navigation.NavigationUtil
 import com.example.didaktikapp.titleFragment.TitleFragment
 
 class PuzzleActivity : AppCompatActivity() {
+    private val repeatActivityMenu = RepeatActivityMenu(this)
 
     lateinit var image0: ImageView
     lateinit var image1: ImageView
@@ -43,9 +46,14 @@ class PuzzleActivity : AppCompatActivity() {
         )
     private var imageViewsMap: MutableMap<Pair<Int, Int>, ImageView> = mutableMapOf()
 
+    private var gameManagerService: GameManagerService? = GameManagerService()
+    private lateinit var progressBar: ProgressBar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_puzzle)
+
+        setupHeaderFragment(savedInstanceState)
 
         image0 = findViewById(R.id.emptyBlock)
         image1 = findViewById(R.id.block1)
@@ -57,6 +65,10 @@ class PuzzleActivity : AppCompatActivity() {
         image7 = findViewById(R.id.block7)
         image8 = findViewById(R.id.block8)
         clue = findViewById(R.id.clueBtn)
+
+        gameManagerService = GameManager.get()
+        progressBar = findViewById(R.id.puzzleProgressBar)
+        gameManagerService!!.setInitialProgress(progressBar)
 
         imageViewsMap = mutableMapOf(
             Pair(0, 0) to image0,
@@ -177,6 +189,19 @@ class PuzzleActivity : AppCompatActivity() {
             }
         }
 
+        val flattenedList = imageArray.flatten().toMutableList()
+        flattenedList.shuffle()
+
+        changedImageArray = Array(3) { row ->
+            Array(3) { col ->
+                flattenedList[row * 3 + col]
+            }
+        }
+        pintarImagenes()
+
+    }
+
+    private fun setupHeaderFragment(savedInstanceState: Bundle?) {
         // Obtén una referencia al contenedor de fragmentos
         val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
 
@@ -194,17 +219,6 @@ class PuzzleActivity : AppCompatActivity() {
         titleFragment?.setOnHomeButtonClickListener {
             onHomeButtonClicked()
         }
-
-        val flattenedList = imageArray.flatten().toMutableList()
-        flattenedList.shuffle()
-
-        changedImageArray = Array(3) { row ->
-            Array(3) { col ->
-                flattenedList[row * 3 + col]
-            }
-        }
-        pintarImagenes()
-
     }
 
     private fun getClue(coordinates: Pair<Int, Int>?){
@@ -470,18 +484,15 @@ class PuzzleActivity : AppCompatActivity() {
             }
         }
         if (isPuzzleComplete()) {
-            showPuzzleCompleteToast()
+            gameManagerService?.addProgress(progressBar)
+            val intent = Intent(this, PuzzleActivity::class.java)
+            repeatActivityMenu.showGameOverDialog(this, intent)
         }
     }
 
     private fun isPuzzleComplete(): Boolean {
         val flatChangedArray = changedImageArray.flatten()
         return flatChangedArray.withIndex().all { (index, value) -> index == value }
-    }
-
-    private fun showPuzzleCompleteToast() {
-        // Muestra un Toast indicando que el rompecabezas está completo
-        Toast.makeText(this, "Puzlea bukatuta. Zorionak!", Toast.LENGTH_LONG).show()
     }
 
 }

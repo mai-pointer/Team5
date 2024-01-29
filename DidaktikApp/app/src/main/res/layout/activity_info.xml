@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="30dp"
     tools:context=".Info">
 
     <androidx.fragment.app.FragmentContainerView
@@ -19,38 +20,35 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/fragment_title" />
 
-    <Button
-        android:id="@+id/terminar_info"
-        style="@style/GreyButtonStyle"
-        android:layout_width="wrap_content"
+    <ProgressBar
+        android:id="@+id/ordenarImagenesProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="40dp"
-        android:text="@string/terminar"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.851"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
-        app:layout_constraintVertical_bias="0.794" />
+        app:layout_constraintTop_toBottomOf="@+id/titleFragmentTag" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="239dp"
         android:layout_height="262dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="152dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/lamia_removebg_preview" />
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="305dp"
-        android:layout_height="289dp"
-        android:layout_marginBottom="50dp"
+        android:layout_width="290dp"
+        android:layout_height="172dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintVertical_bias="0.0">
@@ -80,7 +78,7 @@
         app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleFragmentTag"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.717"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
@@ -94,10 +92,19 @@
         android:src="@drawable/pause_1"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.779"
+        app:layout_constraintHorizontal_bias="0.81"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleFragmentTag"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.717"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/terminar_info"
+        style="@style/GreyButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/terminar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

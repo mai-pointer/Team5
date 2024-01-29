@@ -170,6 +170,8 @@
     <string name="sopaLetrasTitle">Encuentra las siguientes palabras</string>
     <string name="multipleChoiceTitle">Elige la respuesta correcta</string>
     <string name="puzleTitle">Completa el puzzle</string>
+    <string name="infoTitle">Información</string>
+    <string name="insertWordsTitle">Elije las palabras adecuadas</string>
 
     <!-- Repetir -->
     <string name="continuar">Quieres continuar la partida?</string>

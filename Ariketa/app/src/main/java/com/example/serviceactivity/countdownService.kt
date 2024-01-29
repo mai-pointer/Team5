@@ -24,7 +24,6 @@ class countdownService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val action = intent?.action
 
-
         if (action == ACTION_PAUSE) {
             pauseCountdown()
         }else if (action == ACTION_STOP) {

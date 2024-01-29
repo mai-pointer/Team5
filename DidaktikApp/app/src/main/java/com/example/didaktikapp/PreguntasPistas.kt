@@ -1,6 +1,7 @@
 package com.example.didaktikapp
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.PorterDuff
@@ -13,6 +14,7 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +22,7 @@ import com.example.didaktikapp.navigation.NavigationUtil
 import com.example.didaktikapp.titleFragment.TitleFragment
 
 class PreguntasPistas : AppCompatActivity() {
-    //private val repeatActivityMenu = RepeatActivityMenu(this)
+    private val repeatActivityMenu = RepeatActivityMenu(this)
 
     var myPista = hashMapOf<String, PreguntasPistas.Pista>()
     var mediaPlayer: MediaPlayer? = null
@@ -36,7 +38,9 @@ class PreguntasPistas : AppCompatActivity() {
     private lateinit var pistak: ImageView
     private lateinit var baieztatu: Button
     private lateinit var playaudio: ImageButton
-    private lateinit var jarraitu: Button
+
+    private var gameManagerService: GameManagerService? = GameManagerService()
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +58,10 @@ class PreguntasPistas : AppCompatActivity() {
                 resources.getString(R.string.galdera5_2), null, null, null, resources.getString(R.string.erantzun5_2a), resources.getString(R.string.erantzun5_2b))
         )
 
+        gameManagerService = GameManager.get()
+        progressBar = findViewById(R.id.puzzleProgressBar)
+        gameManagerService!!.setInitialProgress(progressBar)
+
         setContentView(R.layout.activity_preguntas_pistas)
         initializeVariables(pantalla)
         setupHeaderFragment(savedInstanceState)
@@ -66,14 +74,12 @@ class PreguntasPistas : AppCompatActivity() {
         baieztatu.setOnClickListener{
             val answer = userAnswer.text.toString().uppercase()
             if (answer == correctAnswer1 || answer == correctAnswer2){
-                Toast.makeText(this, "Zorionak", Toast.LENGTH_SHORT).show()
-                jarraitu.isEnabled = true
+                gameManagerService?.addProgress(progressBar)
+                val intent = Intent(this, PreguntasPistas::class.java)
+                repeatActivityMenu.showGameOverDialog(this, intent)
             } else{
                 Toast.makeText(this, "Gaizki", Toast.LENGTH_SHORT).show()
             }
-        }
-        jarraitu.setOnClickListener{
-            GameManager.get()?.nextScreen()
         }
     }
 
@@ -100,8 +106,7 @@ class PreguntasPistas : AppCompatActivity() {
         pistaText = findViewById(R.id.pistaText)
         pistak = findViewById(R.id.imagepista)
         playaudio = findViewById(R.id.playaudio)
-        baieztatu = findViewById(R.id.btnValidate)
-        jarraitu = findViewById(R.id.btnRepetir)
+        baieztatu = findViewById(R.id.terminar_preguntasPistas)
 
         correctAnswer1 = myPista[pantalla]?.answer!!
         correctAnswer2 = myPista[pantalla]?.answer2!!

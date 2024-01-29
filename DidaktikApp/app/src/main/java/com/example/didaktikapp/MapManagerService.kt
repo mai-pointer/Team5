@@ -58,7 +58,7 @@ class MapManagerService : Service() {
 
         initializeMapLocations()
         locationProvider = LocationProvider()
-        updateLocation()
+        //updateLocation()
     }
 
     @SuppressLint("MissingPermission")

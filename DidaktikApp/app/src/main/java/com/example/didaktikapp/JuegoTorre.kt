@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,8 @@ class JuegoTorre : AppCompatActivity() {
 
     private var draggedImagePosition: Int? = null
     private lateinit var imageAdapter: ImageAdapter
+    private lateinit var progressBar: ProgressBar
+    private var gameManagerService: GameManagerService? = GameManagerService()
 
     var images = mutableListOf(
         R.drawable.ahatea to "ahatea",
@@ -55,6 +58,8 @@ class JuegoTorre : AppCompatActivity() {
         viewPager = findViewById(R.id.viewPager)
         btnPrevious = findViewById(R.id.btnPrevious)
         btnNext = findViewById(R.id.btnNext)
+        progressBar = findViewById(R.id.juegoTorreProgressBar)
+        gameManagerService!!.setInitialProgress(progressBar)
 
         // Usa la variable images para crear el imageAdapter
         loadCarrousel()
@@ -135,6 +140,7 @@ class JuegoTorre : AppCompatActivity() {
                             if (images.isEmpty()) {
                                 // Implementa las acciones finales del juego aquí
                                 showRestartDialog()
+                                gameManagerService?.addProgress(progressBar)
 
                             }
                         } else {
@@ -250,7 +256,7 @@ class JuegoTorre : AppCompatActivity() {
     }
 
     private fun showRestartDialog() {
-        val intent = Intent(this ,Crucigrama::class.java)
+        val intent = Intent(this, JuegoTorre::class.java)
         repeatActivityMenu.showGameOverDialog(this, intent)
     }
 }

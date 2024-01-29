@@ -168,6 +168,8 @@
     <string name="sopaLetrasTitle">Find the following words</string>
     <string name="multipleChoiceTitle">Choose the correct answer</string>
     <string name="puzleTitle">Complete the puzzle</string>
+    <string name="infoTitle">Information</string>
+    <string name="insertWordsTitle">Choose the correct words</string>
 
     <!-- Repetir -->
     <string name="continuar">Do you want to continue the game?</string>

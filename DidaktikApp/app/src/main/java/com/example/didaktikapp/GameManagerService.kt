@@ -1,11 +1,14 @@
 package com.example.didaktikapp
 
+import android.animation.ObjectAnimator
 import android.app.Service
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.ProgressBar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -89,6 +92,7 @@ class GameManagerService : Service() {
     var juegoActual: List<Class<*>>? = null
     private var pantallaActual = 0
     private var nombreJuego: String = ""
+    private var screenCount: Int? = 0
 
     //Inicializa el servicio
     fun initialize(context: Context) {
@@ -114,6 +118,7 @@ class GameManagerService : Service() {
         //nombreJuego = gameName
         juegoActual = games[gameName]
         pantallaActual = 0
+        screenCount = juegoActual?.size
         pantalla()
 
         guardar()
@@ -210,6 +215,32 @@ class GameManagerService : Service() {
         return  games.entries.find { it.value == juegoActual }?.key.toString()
     }
 
+    fun getCurrentScreenIndex():Int{
+        return pantallaActual
+    }
+
+    fun getTotalScreenIndex():Int{
+        return screenCount!!
+    }
+
+    fun setInitialProgress(progressBar: ProgressBar) {
+        val normalizedProgress = if (pantallaActual > screenCount!!) screenCount!! else pantallaActual
+        // Establece el progreso inicial
+        progressBar.progress = normalizedProgress
+        progressBar.max = screenCount!!
+    }
+
+    fun addProgress(progressBar: ProgressBar){
+        val newProgress = pantallaActual + 1
+
+        GlobalScope.launch(Dispatchers.Main) {
+            val progressAnimator =
+                ObjectAnimator.ofInt(progressBar, "progress", pantallaActual, newProgress)
+            progressAnimator.duration = 1000
+            progressAnimator.interpolator = AccelerateDecelerateInterpolator()
+            progressAnimator.start()
+        }
+    }
     //VARIABLES DEL SERVICIO
 
     private lateinit var servicio_tiempo: ServicioTiempo

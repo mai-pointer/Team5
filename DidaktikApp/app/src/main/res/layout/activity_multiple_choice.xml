@@ -26,6 +26,16 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:layout="@layout/fragment_title" />
 
+        <ProgressBar
+            android:id="@+id/multipleChoiceProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleFragmentTag" />
+
         <TextView
             android:id="@+id/galdera"
             android:layout_width="match_parent"
@@ -38,39 +48,20 @@
         <ListView
             android:id="@+id/aukerak"
             android:layout_width="match_parent"
-            android:layout_height="548dp" />
+            android:layout_height="527dp" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <Button
-                android:id="@+id/btnValidate"
-                style="@style/GreenButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/noahgrotesquebold"
-                android:text="@string/btnValidate" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5" />
-
-            <Button
-                android:id="@+id/btnRepetir"
-                style="@style/GreyButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_gravity="end"
-                android:layout_weight="1"
-                android:enabled="false"
-                android:text="@string/btnContinue" />
-        </LinearLayout>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/terminarMultipleChoice"
+        style="@style/GreyButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/terminar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.87"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

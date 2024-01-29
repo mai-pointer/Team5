@@ -8,6 +8,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -28,28 +29,20 @@ class OrdenarImagenesActivity : AppCompatActivity() {
     private lateinit var hueco5: RelativeLayout
 
     private val repeatActivityMenu = RepeatActivityMenu(this)
+    private var gameManagerService: GameManagerService? = GameManagerService()
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ordenar_imagenes)
 
         // Obtén una referencia al contenedor de fragmentos
-        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
+        setupHeaderFragment(savedInstanceState)
 
-        // Reemplaza el contenedor con el TitleFragment
-        if (savedInstanceState == null) {
-            val titleFragment = TitleFragment.newInstance("Irudiak ordenatu")
-            supportFragmentManager.beginTransaction()
-                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
-                .commit()
-        }
+        gameManagerService = GameManager.get()
+        progressBar = findViewById(R.id.ordenarImagenesProgressBar)
+        gameManagerService!!.setInitialProgress(progressBar)
 
-        // Configura el click listener para el botón en el fragmento
-        val titleFragment =
-            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
-        titleFragment?.setOnHomeButtonClickListener(View.OnClickListener {
-            onHomeButtonClicked()
-        })
 
         imagen1 = findViewById(R.id.imagen1)
         hueco1 = findViewById(R.id.hueco1) as RelativeLayout
@@ -72,6 +65,21 @@ class OrdenarImagenesActivity : AppCompatActivity() {
         setDragListener(imagen3, hueco3)
         setDragListener(imagen4, hueco4)
         setDragListener(imagen5, hueco5)
+    }
+
+    private fun setupHeaderFragment(savedInstanceState: Bundle?) {
+        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
+        if (savedInstanceState == null) {
+            val titleFragment = TitleFragment.newInstance(resources.getString(R.string.infoTitle))
+            supportFragmentManager.beginTransaction()
+                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
+                .commit()
+        }
+        val titleFragment =
+            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
+        titleFragment?.setOnHomeButtonClickListener {
+            onHomeButtonClicked()
+        }
     }
 
     private fun setDragListener(
@@ -105,6 +113,7 @@ class OrdenarImagenesActivity : AppCompatActivity() {
 
                                 // Verificar si todas las imágenes están colocadas
                                 if (checkAllImagesPlacedCorrectly()) {
+                                    gameManagerService?.addProgress(progressBar)
                                     val intent = Intent(this, OrdenarImagenesActivity::class.java)
                                     repeatActivityMenu.showGameOverDialog(this, intent)
                                 }

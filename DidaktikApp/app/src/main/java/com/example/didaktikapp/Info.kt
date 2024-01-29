@@ -4,11 +4,11 @@ import android.graphics.PorterDuff
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.TextView
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import com.example.didaktikapp.navigation.NavigationUtil
 import com.example.didaktikapp.titleFragment.TitleFragment
 
@@ -97,7 +97,8 @@ class Info : AppCompatActivity() {
     )
 
     var mediaPlayer: MediaPlayer? = null
-
+    private var gameManagerService: GameManagerService? = GameManagerService()
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,26 +106,15 @@ class Info : AppCompatActivity() {
 
         intent.getDoubleExtra("punto", 0.0)
 
-        val pantalla = GameManager.get()?.pantallaActual()
+        gameManagerService = GameManager.get()
+        progressBar = findViewById(R.id.ordenarImagenesProgressBar)
+        gameManagerService!!.setInitialProgress(progressBar)
+
+        val pantalla = gameManagerService?.pantallaActual()
 
         findViewById<TextView>(R.id.info).text = informacion[pantalla]?.texto
 
-        // Reemplaza el contenedor con el TitleFragment
-        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
-
-        if (savedInstanceState == null) {
-            val titleFragment = TitleFragment.newInstance("Info")
-            supportFragmentManager.beginTransaction()
-                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
-                .commit()
-        }
-
-        // Configura el click listener para el botón en el fragmento
-        val titleFragment =
-            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
-        titleFragment?.setOnHomeButtonClickListener(View.OnClickListener {
-            NavigationUtil.navigateToMainMenu(this)
-        })
+        setupHeaderFragment(savedInstanceState)
 
         //Audios
         mediaPlayer = MediaPlayer.create(this, informacion[pantalla]?.audio!!)
@@ -147,6 +137,7 @@ class Info : AppCompatActivity() {
 
         //Boton terminar
         findViewById<Button>(R.id.terminar_info).setOnClickListener{
+            gameManagerService?.addProgress(progressBar)
             mediaPlayer?.stop()
             mediaPlayer?.release()
             mediaPlayer = null
@@ -155,6 +146,24 @@ class Info : AppCompatActivity() {
         }
     }
 
+    private fun setupHeaderFragment(savedInstanceState: Bundle?) {
+        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
+        if (savedInstanceState == null) {
+            val titleFragment = TitleFragment.newInstance(resources.getString(R.string.infoTitle))
+            supportFragmentManager.beginTransaction()
+                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
+                .commit()
+        }
+        val titleFragment =
+            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
+        titleFragment?.setOnHomeButtonClickListener {
+            onHomeButtonClicked()
+        }
+    }
+
+    private fun onHomeButtonClicked() {
+        NavigationUtil.navigateToMainMenu(this)
+    }
     override fun onDestroy() {
         // Liberar los recursos del MediaPlayer cuando la actividad se destruye
         mediaPlayer?.release()

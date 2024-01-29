@@ -14,6 +14,7 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.GridLayout
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,8 @@ import com.example.didaktikapp.titleFragment.TitleFragment
 
 class Crucigrama : AppCompatActivity() {
     private val repeatActivityMenu = RepeatActivityMenu(this)
+    private var gameManagerService: GameManagerService? = GameManagerService()
+    private lateinit var progressBar: ProgressBar
 
     //VARIABLES PARA LA PLANTILLA Y LAS PISTAS
     val pistas = arrayListOf(
@@ -51,23 +54,11 @@ class Crucigrama : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crucigrama)
 
-        // Obtén una referencia al contenedor de fragmentos
-        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
+        gameManagerService = GameManager.get()
 
-        // Reemplaza el contenedor con el TitleFragment
-        if (savedInstanceState == null) {
-            val titleFragment = TitleFragment.newInstance("Gurutzegrama")
-            supportFragmentManager.beginTransaction()
-                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
-                .commit()
-        }
-
-        // Configura el click listener para el botón en el fragmento
-        val titleFragment =
-            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
-        titleFragment?.setOnHomeButtonClickListener(View.OnClickListener {
-            onHomeButtonClicked()
-        })
+        setupHeaderFragment(savedInstanceState)
+        progressBar = findViewById(R.id.crucigramaProgressBar)
+        gameManagerService!!.setInitialProgress(progressBar)
 
         //VARIABLES
         val crucigrama: List<List<Celda>> = Crear(plantilla.trimIndent())
@@ -146,10 +137,26 @@ class Crucigrama : AppCompatActivity() {
                 }
             }
             if (bien){
+                gameManagerService!!.addProgress(progressBar)
                 val intent = Intent(this ,Crucigrama::class.java)
                 repeatActivityMenu.showGameOverDialog(this, intent)
             }
 
+        }
+    }
+
+    private fun setupHeaderFragment(savedInstanceState: Bundle?) {
+        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
+        if (savedInstanceState == null) {
+            val titleFragment = TitleFragment.newInstance(resources.getString(R.string.crucigramaTitle))
+            supportFragmentManager.beginTransaction()
+                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
+                .commit()
+        }
+        val titleFragment =
+            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
+        titleFragment?.setOnHomeButtonClickListener {
+            onHomeButtonClicked()
         }
     }
 
