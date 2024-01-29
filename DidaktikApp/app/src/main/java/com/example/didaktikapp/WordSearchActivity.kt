@@ -29,7 +29,12 @@ private const val SIZE = 11
 private const val NUMBER_OF_WORDS = 6
 
 class WordSearchActivity : AppCompatActivity() {
+
     private val repeatActivityMenu = RepeatActivityMenu(this)
+
+    private var gameManagerService: GameManagerService? = GameManagerService()
+    private lateinit var progressBar: ProgressBar
+
     private lateinit var tableLayout: TableLayout
     private lateinit var word1: TextView
     private lateinit var word2: TextView
@@ -38,7 +43,6 @@ class WordSearchActivity : AppCompatActivity() {
     private lateinit var word5: TextView
     private lateinit var word6: TextView
     private lateinit var myWordSearch: Array<Array<Char>>
-    private lateinit var progressBar: ProgressBar
 
     private val wordList = listOf(
         "ODOLA",
@@ -64,6 +68,10 @@ class WordSearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_word_search)
 
+        gameManagerService = GameManager.get()
+        progressBar = findViewById(R.id.wordSearchProgressBar)
+        gameManagerService!!.setInitialProgress(progressBar)
+
         initializeViews()
         selectWords()
         setupHeaderFragment(savedInstanceState)
@@ -72,6 +80,7 @@ class WordSearchActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.terminar_sopaDeLetras).setOnClickListener{
             if (foundWords >= wordMap.size){
+                gameManagerService?.addProgress(progressBar)
                 val intent = Intent(this ,Crucigrama::class.java)
                 repeatActivityMenu.showGameOverDialog(this, intent)
             }
