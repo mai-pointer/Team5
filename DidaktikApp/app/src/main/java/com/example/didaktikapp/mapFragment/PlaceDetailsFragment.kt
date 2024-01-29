@@ -29,7 +29,7 @@ class PlaceDetailsFragment : Fragment() {
         val textViewPlaceName: TextView = rootView.findViewById(R.id.textViewPlaceName)
         val textViewInfo: TextView = rootView.findViewById(R.id.textViewInfo)
         val imageViewPlace: ImageView = rootView.findViewById(R.id.imageViewPlace)
-        val btnBack: ImageView = rootView.findViewById(R.id.btnContinue)
+        val btnBack: ImageView = rootView.findViewById(R.id.btnRepetir)
 
         // Recibe información del lugar desde el fragmento, por ejemplo, usando argumentos
         val args = arguments

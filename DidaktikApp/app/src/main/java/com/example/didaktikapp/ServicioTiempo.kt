@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
 import android.os.SystemClock
-import java.util.Locale
 
 class ServicioTiempo : Service() {
 
@@ -25,16 +24,10 @@ class ServicioTiempo : Service() {
         return START_STICKY
     }
 
-    fun Detener(): String {
-        val tiempo : Long = SystemClock.elapsedRealtime() - tiempoInicio
+    fun Detener(): Long {
+        val tiempo: Long = SystemClock.elapsedRealtime() - tiempoInicio
         stopSelf()
-        return Formatear(tiempo)
+        return tiempo / 1000
     }
 
-    private fun Formatear(elapsedTime: Long): String {
-        val hours = elapsedTime / 3600000
-        val minutes = (elapsedTime % 3600000) / 60000
-        val seconds = (elapsedTime % 60000) / 1000
-        return String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds)
-    }
 }

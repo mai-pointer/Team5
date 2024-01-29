@@ -15,6 +15,33 @@ data class Partida(
     val hj: Boolean
 )
 
+@Entity(
+    tableName = "competitivo_table",
+    foreignKeys = [
+        ForeignKey(
+            entity = Partida::class,
+            parentColumns = ["id"],
+            childColumns = ["partidaId"],
+            onDelete = ForeignKey.CASCADE // Esto activa la eliminación en cascada
+        )
+    ]
+)
+data class Competitivo(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+    val tiempo: Long,
+    val partidaId: Int
+)
+
+data class Relacion(
+    @Embedded val partida: Partida,
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "partidaId"
+    )
+    val competitivos: List<Competitivo>
+)
+
 @Dao
 interface PartidaDao : BaseDao<Partida> {
     @Query("SELECT * FROM partida_table WHERE id = :id")
@@ -25,7 +52,14 @@ interface PartidaDao : BaseDao<Partida> {
 
     @Query("SELECT id FROM partida_table")
     fun getAllIds(): List<Int>
+
+    // Query para obtener todos los tiempos relacionados con una partida
+    @Query("SELECT * FROM competitivo_table WHERE partidaId = :partidaId")
+    fun getTiempos(partidaId: Int): List<Competitivo>
 }
+
+@Dao
+interface CompetitivoDao : BaseDao<Competitivo>
 
 interface BaseDao<T> {
     //BASICOS
@@ -49,9 +83,10 @@ interface BaseDao<T> {
 }
 
 
-@Database(entities = [Partida::class], version = 4, exportSchema = false)
+@Database(entities = [Partida::class, Competitivo::class], version = 7, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun partidaDao(): PartidaDao
+    abstract fun competitivoDao(): CompetitivoDao
 }
 
 class AppDatabaseInitializer {
@@ -76,7 +111,7 @@ class  BDManager{
     companion object{
         var context: Context? = null
 
-        fun Iniciar(funcion: (PartidaDao, SharedPreferences) -> Unit)
+        fun Iniciar(funcion: (PartidaDao, CompetitivoDao , SharedPreferences) -> Unit)
         {
             if(context == null) Log.d("BDManager", "Contexto nulo")
 
@@ -85,12 +120,13 @@ class  BDManager{
             // Inicializar la BD
             val appDatabase = AppDatabaseInitializer.getDatabase(context!!)
             val partidaDao = appDatabase.partidaDao()
+            val competitivoDao = appDatabase.competitivoDao()
 
             // Inicializar SharedPreferences
             val sharedPreferences = context!!.applicationContext.getSharedPreferences("NombrePreferencia", Context.MODE_PRIVATE)
 //            var partida_id = sharedPreferences.getInt("partida_id", -1)
 
-            funcion.invoke(partidaDao, sharedPreferences)
+            funcion.invoke(partidaDao, competitivoDao, sharedPreferences)
 
         }
     }

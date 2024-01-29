@@ -33,7 +33,6 @@ class Scoreboard : AppCompatActivity() {
         setContentView(R.layout.activity_scoreboard)
 
 
-
 // La mejor animación de la APP
         val imagen = findViewById<ImageView>(R.id.win)
 

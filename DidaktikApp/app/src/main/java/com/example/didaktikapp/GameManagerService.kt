@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
-import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -81,7 +80,7 @@ class GameManagerService : Service() {
             InsertWordsActivity::class.java,
             JuegoTorre::class.java,
             OrdenarImagenesActivity::class.java,
-//          Info::class.java,
+//            Info::class.java,
         )
     )
 
@@ -130,7 +129,7 @@ class GameManagerService : Service() {
             //Si no, vuelve al menú principal
             pantallaActual = 0
 
-            BDManager.Iniciar{ partidaDao, sharedPreferences ->
+            BDManager.Iniciar{ partidaDao, CompetitivoDao, sharedPreferences ->
                 GlobalScope.launch(Dispatchers.IO) {
                     val partida = partidaDao.get(sharedPreferences.getInt("partida_id", -1))
 
@@ -147,14 +146,22 @@ class GameManagerService : Service() {
             {
                 if (servicio_activo) {
                     val tiempo = servicio_tiempo.Detener()
-                    Log.i("TIEMPO", tiempo)
-                    unbindService(serviceConnection)
+                    context.unbindService(serviceConnection)
                     servicio_activo = false
 
-                    //************VAS AL SCOREBOARD************
-                    val intent = Intent(context, MainMenuActivity::class.java)
+                    BDManager.Iniciar { partidaDao, competitivoDao, sharedPreferences ->
+
+                        val nuevoTiempo =  Competitivo(tiempo = tiempo, partidaId = sharedPreferences.getInt("partida_id", 1))
+                        GlobalScope.launch(Dispatchers.IO) {
+                            competitivoDao.insert(nuevoTiempo)
+                        }
+
+                    }
+
+                    //PASAR AL SERVER EL TIEMPO <-----------------------------------------novarin trabaja
+
+                    val intent = Intent(context, Scoreboard::class.java)
                     context.startActivity(intent)
-                    //************VAS AL SCOREBOARD************
                 }
             }
             else{
@@ -168,7 +175,7 @@ class GameManagerService : Service() {
 
     fun guardar()
     {
-        BDManager.Iniciar{ partidaDao, sharedPreferences ->
+        BDManager.Iniciar{ partidaDao, competitivoDao, sharedPreferences ->
             GlobalScope.launch(Dispatchers.IO){
                 partidaDao.update(
                     Partida(
@@ -221,7 +228,7 @@ class GameManagerService : Service() {
 
     override fun onDestroy() {
         // Asegúrate de desvincular el servicio cuando la actividad se destruye
-        unbindService(serviceConnection)
+        context.unbindService(serviceConnection)
         super.onDestroy()
     }
 

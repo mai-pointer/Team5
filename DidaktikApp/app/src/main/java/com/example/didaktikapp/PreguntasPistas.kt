@@ -13,7 +13,6 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -102,7 +101,7 @@ class PreguntasPistas : AppCompatActivity() {
         pistak = findViewById(R.id.imagepista)
         playaudio = findViewById(R.id.playaudio)
         baieztatu = findViewById(R.id.btnValidate)
-        jarraitu = findViewById(R.id.btnContinue)
+        jarraitu = findViewById(R.id.btnRepetir)
 
         correctAnswer1 = myPista[pantalla]?.answer!!
         correctAnswer2 = myPista[pantalla]?.answer2!!

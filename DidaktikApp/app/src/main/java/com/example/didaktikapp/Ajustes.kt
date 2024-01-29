@@ -89,7 +89,7 @@ class Ajustes : AppCompatActivity() {
             startActivity(intent)
         }
 
-        BDManager.Iniciar{ partidaDao, sharedPreferences ->
+        BDManager.Iniciar{ partidaDao, competitivoDao, sharedPreferences ->
 
             //Carga los datos en el spinner
             CargarLista(partidaDao, sharedPreferences)

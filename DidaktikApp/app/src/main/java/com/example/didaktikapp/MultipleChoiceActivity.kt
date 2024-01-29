@@ -98,7 +98,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
         galderaText = findViewById(R.id.galdera)
         aukerak = findViewById(R.id.aukerak)
         baieztatu = findViewById(R.id.btnValidate)
-        jarraitu = findViewById(R.id.btnContinue)
+        jarraitu = findViewById(R.id.btnRepetir)
 
         if(myQuestion[pantalla]?.respuesta1 == null){
             isPictureAnswer = true
