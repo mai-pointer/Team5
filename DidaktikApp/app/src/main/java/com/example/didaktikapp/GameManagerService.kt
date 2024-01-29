@@ -1,10 +1,13 @@
 package com.example.didaktikapp
 
+import android.animation.ObjectAnimator
 import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.IBinder
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.ProgressBar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -145,12 +148,6 @@ class GameManagerService : Service() {
         }
     }
 
-    private fun getCurrentGameProgress(){
-        //TODO
-
-
-    }
-
     //Devuelve el número de pantalla actual
     fun pantallaActual(): String {
         return  games.entries.find { it.value == juegoActual }?.key + "." + (pantallaActual+1).toString()
@@ -166,6 +163,25 @@ class GameManagerService : Service() {
 
     fun getTotalScreenIndex():Int{
         return screenCount!!
+    }
+
+    fun setInitialProgress(progressBar: ProgressBar) {
+        val normalizedProgress = if (pantallaActual > screenCount!!) screenCount!! else pantallaActual
+        // Establece el progreso inicial
+        progressBar.progress = normalizedProgress
+        progressBar.max = screenCount!!
+    }
+
+    fun addProgress(progressBar: ProgressBar){
+        val newProgress = pantallaActual + 1
+
+        GlobalScope.launch(Dispatchers.Main) {
+            val progressAnimator =
+                ObjectAnimator.ofInt(progressBar, "progress", pantallaActual, newProgress)
+            progressAnimator.duration = 1000
+            progressAnimator.interpolator = AccelerateDecelerateInterpolator()
+            progressAnimator.start()
+        }
     }
 }
 

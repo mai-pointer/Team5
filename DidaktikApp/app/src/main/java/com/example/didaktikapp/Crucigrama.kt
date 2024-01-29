@@ -1,6 +1,5 @@
 package com.example.didaktikapp
 
-import android.animation.ObjectAnimator
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
@@ -10,7 +9,6 @@ import android.text.InputType
 import android.text.TextWatcher
 import android.view.Gravity
 import android.view.View
-import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
@@ -23,16 +21,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.didaktikapp.navigation.NavigationUtil
 import com.example.didaktikapp.titleFragment.TitleFragment
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class Crucigrama : AppCompatActivity() {
     private val repeatActivityMenu = RepeatActivityMenu(this)
     private var gameManagerService: GameManagerService? = GameManagerService()
-    private var initialProgress = 0
-    private var maxProgress = 0
     private lateinit var progressBar: ProgressBar
 
     //VARIABLES PARA LA PLANTILLA Y LAS PISTAS
@@ -65,7 +57,8 @@ class Crucigrama : AppCompatActivity() {
         gameManagerService = GameManager.get()
 
         setupHeaderFragment(savedInstanceState)
-        setupProgressBar()
+        progressBar = findViewById(R.id.crucigramaProgressBar)
+        gameManagerService!!.setInitialProgress(progressBar)
 
         //VARIABLES
         val crucigrama: List<List<Celda>> = Crear(plantilla.trimIndent())
@@ -144,9 +137,7 @@ class Crucigrama : AppCompatActivity() {
                 }
             }
             if (bien){
-                GlobalScope.launch(Dispatchers.Main) {
-                    addProgress()
-                }
+                gameManagerService!!.addProgress(progressBar)
                 val intent = Intent(this ,Crucigrama::class.java)
                 repeatActivityMenu.showGameOverDialog(this, intent)
             }
@@ -169,33 +160,6 @@ class Crucigrama : AppCompatActivity() {
         }
     }
 
-    private fun setupProgressBar() {
-        progressBar = findViewById(R.id.crucigramaProgressBar)
-        initialProgress = gameManagerService!!.getCurrentScreenIndex()
-        maxProgress = gameManagerService!!.getTotalScreenIndex()
-        setInitialProgress(initialProgress, maxProgress)
-    }
-
-    private fun setInitialProgress(initialProgress: Int, maxProgress: Int) {
-        // Asegúrate de que el progreso inicial no exceda el máximo
-        val normalizedProgress = if (initialProgress > maxProgress) maxProgress else initialProgress
-        // Establece el progreso inicial
-        progressBar.progress = normalizedProgress
-
-        // Establece el máximo progreso (opcional, pero es una buena práctica)
-        progressBar.max = maxProgress
-    }
-
-    private suspend fun addProgress(){
-        val newProgress = initialProgress + 1
-        withContext(Dispatchers.IO) {
-            val progressAnimator =
-                ObjectAnimator.ofInt(progressBar, "progress", initialProgress, newProgress)
-            progressAnimator.duration = 5000
-            progressAnimator.interpolator = AccelerateDecelerateInterpolator()
-            progressAnimator.start()
-        }
-    }
     fun Pistas(cambio: Int, literal: Boolean = false){
 
         //Cambia el color

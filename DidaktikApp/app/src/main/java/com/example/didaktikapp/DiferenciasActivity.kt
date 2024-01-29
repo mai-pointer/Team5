@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.didaktikapp.navigation.NavigationUtil
@@ -15,6 +16,8 @@ class DiferenciasActivity : AppCompatActivity() {
     private val repeatActivityMenu = RepeatActivityMenu(this)
     lateinit var botones: List<Button>
     lateinit var diferencias: List<ConstraintLayout>
+    private var gameManagerService: GameManagerService? = GameManagerService()
+    private lateinit var progressBar: ProgressBar
 
     var contDifs = 0
 
@@ -22,8 +25,10 @@ class DiferenciasActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_diferencias)
 
+        gameManagerService = GameManager.get()
+        progressBar = findViewById(R.id.diferenciasProgressBar)
+        gameManagerService!!.setInitialProgress(progressBar)
         setupHeaderFragment(savedInstanceState)
-
 
         botones = listOf(
             findViewById(R.id.btnDife6),
@@ -83,6 +88,8 @@ class DiferenciasActivity : AppCompatActivity() {
 
         if (contDifs ==5) {
             //Ganaste!
+            gameManagerService!!.addProgress(progressBar)
+
             val intent = Intent(this ,DiferenciasActivity::class.java)
             repeatActivityMenu.showGameOverDialog(this, intent)
 

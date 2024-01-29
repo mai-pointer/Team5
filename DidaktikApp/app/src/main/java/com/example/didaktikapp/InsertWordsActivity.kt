@@ -14,6 +14,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.PopupMenu
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -28,28 +29,21 @@ class InsertWordsActivity : AppCompatActivity() {
 
     private val selectedOptions = mutableSetOf<String>()
     private val repeatActivityMenu = RepeatActivityMenu(this)
+    private var gameManagerService: GameManagerService? = GameManagerService()
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_insert_words)
 
+        gameManagerService = GameManager.get()
+        progressBar = findViewById(R.id.infoProgressBar)
+        gameManagerService!!.setInitialProgress(progressBar)
 
         // Reemplaza el contenedor con el TitleFragment
         val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
 
-        if (savedInstanceState == null) {
-            val titleFragment = TitleFragment.newInstance("InsertWords")
-            supportFragmentManager.beginTransaction()
-                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
-                .commit()
-        }
-
-        // Configura el click listener para el botón en el fragmento
-        val titleFragment =
-            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
-        titleFragment?.setOnHomeButtonClickListener(View.OnClickListener {
-            NavigationUtil.navigateToMainMenu(this)
-        })
+        setupHeaderFragment(savedInstanceState)
 
         val textView = findViewById<TextView>(R.id.tv1)
         textView.text = createSpannableText(originalText)
@@ -59,6 +53,25 @@ class InsertWordsActivity : AppCompatActivity() {
         btnValidate.setOnClickListener {
             validateText()
         }
+    }
+
+    private fun setupHeaderFragment(savedInstanceState: Bundle?) {
+        val fragmentContainer = findViewById<FrameLayout>(R.id.titleFragmentTag)
+        if (savedInstanceState == null) {
+            val titleFragment = TitleFragment.newInstance(resources.getString(R.string.insertWordsTitle))
+            supportFragmentManager.beginTransaction()
+                .replace(fragmentContainer.id, titleFragment, "titleFragmentTag")
+                .commit()
+        }
+        val titleFragment =
+            supportFragmentManager.findFragmentByTag("titleFragmentTag") as TitleFragment?
+        titleFragment?.setOnHomeButtonClickListener {
+            onHomeButtonClicked()
+        }
+    }
+
+    private fun onHomeButtonClicked() {
+        NavigationUtil.navigateToMainMenu(this)
     }
 
     private fun createSpannableText(text: String): SpannableStringBuilder {
@@ -121,7 +134,7 @@ class InsertWordsActivity : AppCompatActivity() {
             .create()
 
         if (insertedText == expectedText) {
-//            alertDialog.setMessage("¡Ganaste!")
+            gameManagerService?.addProgress(progressBar)
             val intent = Intent(this ,Crucigrama::class.java)
             repeatActivityMenu.showGameOverDialog(this, intent)
         } else {

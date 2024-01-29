@@ -18,20 +18,18 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/fragment_title" />
 
+    <ProgressBar
+        android:id="@+id/infoProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleFragmentTag" />
+
     <!-- Huecos para las imágenes con nombres -->
 
     <!-- Imágenes que se pueden arrastrar -->
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/progressContainerView"
-        android:layout_width="399dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginEnd="6dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleFragmentTag"
-        tools:layout="@layout/fragment_progress" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"
