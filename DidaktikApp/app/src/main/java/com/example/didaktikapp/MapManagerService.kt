@@ -81,23 +81,24 @@ class MapManagerService : Service() {
                 Log.d("MyCurrentPosition", myCurrentPosition.toString())
                 var currentLatLng = LatLng(myCurrentPosition!!.latitude, myCurrentPosition!!.longitude)
                 if (checkProximity(currentLatLng)){
-                    mapsActivity.openPlaceDetailsFragment(getCurrentLocationMarker())
+                    gameManagerService = GameManager.get()
+                    gameManagerService!!.startGame(mapLocations.keys.elementAt(currentLocationIndex))
+                    showNextLocation()
                     stopSelf()
+                    break
                 }
                 delay(5000)
             }
         }
     }
     private fun initializeMapLocations() {
-//        mapLocations.put("Idi probak", LatLng(43.27556360817825, -2.827742396615327))
-//        mapLocations.put("Odolostea", LatLng(43.27394169280981, -2.832619209726283))
-//        mapLocations.put("Txakoli", LatLng(43.27758426733325, -2.8308136897866447))
-//        mapLocations.put("Udala", LatLng(43.27421110063913, -2.83285560353813))
-//        mapLocations.put("Santa Maria", LatLng(43.27387138926826, -2.8349795537580893))
-//        mapLocations.put("San Mameseko Arkua", LatLng(43.276383439897, -2.8369511900475195))
-//        mapLocations.put("Lezamako dorrea", LatLng(43.27279428065491, -2.8434245883650817))
-        mapLocations.put("Idi probak", LatLng(43.257559, -2.902346))
-        mapLocations.put("San Mameseko Arkua", LatLng(43.257011, -2.903898))
+        mapLocations.put("Idi probak", LatLng(43.27556360817825, -2.827742396615327))
+        mapLocations.put("Odolostea", LatLng(43.27394169280981, -2.832619209726283))
+        mapLocations.put("Txakoli", LatLng(43.27758426733325, -2.8308136897866447))
+        mapLocations.put("Udala", LatLng(43.27421110063913, -2.83285560353813))
+        mapLocations.put("Santa Maria", LatLng(43.27387138926826, -2.8349795537580893))
+        mapLocations.put("San Mameseko Arkua", LatLng(43.276383439897, -2.8369511900475195))
+        mapLocations.put("Lezamako dorrea", LatLng(43.27279428065491, -2.8434245883650817))
     }
 
     fun myPosition(): Location? {
@@ -161,9 +162,11 @@ class MapManagerService : Service() {
             }
 
         } else {
-            MapManager.destroy()
-            gameManagerService = GameManager.get()
-            gameManagerService?.startGame("AMAIERAKO JARDUERA")
+//            -----------------------------------------------------------------------------------
+//            MapManager.destroy()
+//            gameManagerService = GameManager.get()
+//            gameManagerService?.startGame("AMAIERAKO JARDUERA")
+//            -----------------------------------------------------------------------------------
         }
     }
 
