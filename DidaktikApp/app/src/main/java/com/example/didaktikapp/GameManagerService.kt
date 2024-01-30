@@ -142,7 +142,7 @@ class GameManagerService : Service() {
                     context.unbindService(serviceConnection)
                     servicio_activo = false
 
-                    BDManager.Iniciar { partidaDao, competitivoDao, sharedPreferences ->
+                    BDManager.Iniciar(applicationContext) { partidaDao, competitivoDao, sharedPreferences ->
 
                         val nuevoTiempo =  Competitivo(tiempo = tiempo, partidaId = sharedPreferences.getInt("partida_id", 1))
                         GlobalScope.launch(Dispatchers.IO) {
@@ -158,7 +158,7 @@ class GameManagerService : Service() {
                     context.startActivity(intent)
                 }
                 else{
-                    BDManager.Iniciar{ partidaDao, CompetitivoDao, sharedPreferences ->
+                    BDManager.Iniciar(applicationContext){ partidaDao, CompetitivoDao, sharedPreferences ->
                         GlobalScope.launch(Dispatchers.IO) {
                             val partida = partidaDao.get(sharedPreferences.getInt("partida_id", -1))
 
@@ -184,7 +184,7 @@ class GameManagerService : Service() {
 
     fun guardar()
     {
-        BDManager.Iniciar{ partidaDao, competitivoDao, sharedPreferences ->
+        BDManager.Iniciar(applicationContext){ partidaDao, competitivoDao, sharedPreferences ->
             GlobalScope.launch(Dispatchers.IO){
                 partidaDao.update(
                     Partida(

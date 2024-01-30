@@ -47,13 +47,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
 
 
     // Variable para saber si el usuario es admin o no
-    private var esAdmin: Boolean = true
+    private var esAdmin: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         //Inicia el HASIERAKO JARDUERA
-        BDManager.Iniciar{ partidaDao, competitivoDao, sharedPreferences ->
+        BDManager.Iniciar(applicationContext){ partidaDao, competitivoDao, sharedPreferences ->
             GlobalScope.launch(Dispatchers.IO){
                 val id = sharedPreferences.getInt("partida_id", 1)
                 val partida = partidaDao.get(id)
@@ -80,11 +80,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
 
         setupHeaderFragment(savedInstanceState)
 
-        if(!esAdmin){
-            checkPermissions()
-        }else{
-            initMap()
-        }
+        initMap()
+
         progressBar.visibility = View.VISIBLE
 
     }

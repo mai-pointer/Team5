@@ -109,9 +109,8 @@ class AppDatabaseInitializer {
 
 class  BDManager{
     companion object{
-        var context: Context? = null
-
-        fun Iniciar(funcion: (PartidaDao, CompetitivoDao , SharedPreferences) -> Unit)
+        //var context: Context? = null
+        fun Iniciar( context: Context, funcion: (PartidaDao, CompetitivoDao , SharedPreferences) -> Unit)
         {
             if(context == null) Log.d("BDManager", "Contexto nulo")
 
