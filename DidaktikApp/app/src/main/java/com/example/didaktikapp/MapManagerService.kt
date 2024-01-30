@@ -79,8 +79,6 @@ class MapManagerService : Service() {
                 var currentLatLng = LatLng(myCurrentPosition!!.latitude, myCurrentPosition!!.longitude)
                 if (checkProximity(currentLatLng)){
                     gameManagerService = GameManager.get()
-                    //val myGame = gameManagerService!!.juegoActual()
-                    //gameManagerService!!.startGame(currentGameFromDB)---------------------------------
                     gameManagerService!!.startGame(mapLocations.keys.elementAt(currentLocationIndex))
                     showNextLocation()
                     stopSelf()

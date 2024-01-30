@@ -1,5 +1,6 @@
 package com.example.didaktikapp
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -44,9 +45,19 @@ class MainMenuActivity : AppCompatActivity() {
 
         // Agrega un OnClickListener al botón "Jugar"
         buttonJugar.setOnClickListener{
-            // Crea un Intent para lanzar la actividad Jugar
-            val intent = Intent(this@MainMenuActivity, MapsActivity::class.java)
-            startActivity(intent)
+            val sharedPreferences = getSharedPreferences("mySharedPrefs", Context.MODE_PRIVATE)
+            val hj = sharedPreferences.getBoolean("hj", false)
+            if (hj){
+                val intent = Intent(this@MainMenuActivity, MapsActivity::class.java)
+                intent.putExtra("admin", false)
+                startActivity(intent)
+            } else {
+                GameManager.get()?.startGame("HASIERAKO JARDUERA")
+                val editor = sharedPreferences.edit()
+                editor.putBoolean("hj", true)
+                editor.apply()
+            }
+
         }
         // Agrega un OnClickListener al botón "Ajustes"
         buttonAjustes.setOnClickListener{
