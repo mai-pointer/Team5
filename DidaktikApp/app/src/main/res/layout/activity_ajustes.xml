@@ -117,14 +117,14 @@
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/modoOscuro"
-            android:layout_width="215dp"
-            android:layout_height="48dp"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/idiomas"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="35dp"
+            android:layout_marginStart="0dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="66dp"
+            android:layout_marginEnd="14dp"
             android:minHeight="48dp"
             android:text="@string/btnDarkMode"
             android:textSize="26sp"
