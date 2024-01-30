@@ -71,7 +71,7 @@
     <string name="continuar2">CONTINUE</string>
     <string name="anonimo">The score has been saved anonymously.</string>
     <string name="nombreCorrecto">The score has been saved.</string>
-    
+
     <!-- Repeat -->
     <string name="terminar_juego">Game over</string>
 
@@ -211,6 +211,9 @@
     <string name="AMAIERAKO_JARDUERA_1">We have reached the end of our journey. We have given many laps around the town, learning about significant places and important people, immersing ourselves in their local customs. I can say with great satisfaction that you have fully experienced the cultural and historical heritage of Lezama, and thanks to knowing this, you will help preserve its heritage for the future, just as I do.\nSurely, you will be a little tired, but before leaving Lezama, I have a final surprise for you. I am sure that you have paid attention throughout the journey, so it will be easy. You will need to fill in a map by indicating the route you have taken, thus always remembering those important points you have visited.</string>
     <string name="AMAIERAKO_JARDUERA_3">The moment to say goodbye to the traveler has arrived. With the visit from top to bottom, you have learned a lot about the town. You have discovered its customs, people, and places, and you will forever have the experience of it. Now Lezama is a part of you.\nYou may be a little sad, but before leaving, I have a small gift for you as a memento of the entire journey. Rest assured, you have done well throughout the journey, so it will be easy. You will need to fill in a map by indicating the route you have taken, thus always remembering those important points you have visited.</string>
 
-
+    <string name="dialog_title_lost">You Lost!</string>
+    <string name="dialog_message_lost">You lost. Press the button to restart the game and try again.</string>
+    <string name="button_restart">Restart</string>
+    
 </resources>
 

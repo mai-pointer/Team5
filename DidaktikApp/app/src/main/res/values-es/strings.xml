@@ -215,4 +215,8 @@
     <string name="AMAIERAKO_JARDUERA_3">Ha llegado el momento de despedirse del viajero. Junto con la visita al pueblo de Lezama, habéis aprendido cosas increíbles. Habéis conocido las costumbres, las personas y los lugares locales, y esto será parte de vosotros para siempre. Ahora Lezama forma parte de vuestros corazones.\nSoy una guía agradecida que ha tenido la oportunidad de compartir esta experiencia con vosotros. Buena suerte en vuestros futuros viajes y recordad, Lezama siempre os espera con los brazos abiertos. </string>
 
 
+    <string name="dialog_title_lost">¡Perdiste!</string>
+    <string name="dialog_message_lost">Has perdido. Pulsa el botón para reiniciar el juego y volver a intentarlo.</string>
+    <string name="button_restart">Reiniciar</string>
+
 </resources>

@@ -134,10 +134,18 @@ class InsertWordsActivity : AppCompatActivity() {
             val intent = Intent(this ,InsertWordsActivity::class.java)
             repeatActivityMenu.showGameOverDialog(this, intent)
         } else {
-            alertDialog.setMessage("Perdiste")
-            alertDialog.show()
+            val alertDialog = AlertDialog.Builder(this)
+                .setTitle(getString(R.string.dialog_title_lost))
+                .setMessage(getString(R.string.dialog_message_lost))
+                .setPositiveButton(getString(R.string.button_restart)) { _, _ ->
+                    Reiniciar()
+                }
+                .setOnCancelListener {
+                    Reiniciar()
+                }
+                .create()
 
-            Reiniciar()
+            alertDialog.show()
         }
 
     }

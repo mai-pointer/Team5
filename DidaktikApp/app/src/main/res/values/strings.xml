@@ -213,4 +213,10 @@
     <string name="AMAIERAKO_JARDUERA_1">Gure ibilbidearen amaierara heldu gara. Lezamako herritik hainbat buelta eman ditugu leku esanguratsu zein pertsona garrantzitsuei buruzko informazioa berenaganatuz eta tokiko ohiturak ezagutuz. Harrotasun osoz, Lezamako ondarea guztiz ezagutu duzuela esan dezaket eta horren berri izateari esker, biharamunean bere ondarea bizi mantentzen lagunduko duzue baita, nik egiten dudan moduan. Segurazki neke-neke egongo zarete, baina Lezamatik alde egin baino lehen, azken lantxo bat daukat zuentzat. Argi daukat adi egon zaretela ibilbide osoan zehar, beraz, erraza izango da. Mapa bat bete beharko duzue egin duzuen ibilbidea irudikatuz, horrela bisitatutako puntu garrantzitsu horiek beti gogoratuko dituzue</string>
     <string name="AMAIERAKO_JARDUERA_3">Bidaiari agur esateko momentua ailegatu da. Lezamako herria goitik behera bisitatzearekin batera izugarri ikasi duzue. Bertako ohiturak, pertsonak eta lekuak ezagutu dituzue eta horren bizipena betirako izango duzue. Orain Lezama zuen bihotzen parte da. Gidari ona izan duzue baina zuek, duda barik, ikasle bikainak izan zarete. Eskerrik asko eta laster arte neska-mutilak!, </string>
 
+
+    <string name="dialog_title_lost">Galdu duzu!</string>
+    <string name="dialog_message_lost">Galdu duzu. Sakatu botoia jolasa berrabiarazteko eta berriro saiatzeko.</string>
+    <string name="button_restart">Berrabiarazi</string>
+
+
 </resources>

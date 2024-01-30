@@ -20,7 +20,7 @@
 
     <!--Boton fondo gris-->
     <style name="GreyButtonStyle">
-        <item name="android:background">@color/material_dynamic_neutral10</item>
+        <item name="android:background">@color/cardview_dark_background</item>
         <item name="android:textColor">@color/grisClaro</item>
         <item name="android:radius">2dp</item>
         <item name="android:fontFamily">@font/noahgrotesquebold</item>
