@@ -78,10 +78,12 @@
             android:layout_height="62dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="57dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginBottom="41dp"
+            android:layout_marginStart="61dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="62dp"
+            android:layout_marginBottom="38dp"
             android:background="@drawable/tarjeta"
             app:srcCompat="@drawable/oig" />
 
@@ -99,7 +101,7 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/contenedor"
         style="@style/backgroundGrisClaro"
         android:layout_width="wrap_content"
@@ -117,28 +119,30 @@
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/modoOscuro"
-            android:layout_width="306dp"
-            android:layout_height="38dp"
+            android:layout_width="261dp"
+            android:layout_height="49dp"
             android:layout_below="@+id/idiomas"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="4dp"
             android:minHeight="48dp"
             android:text="@string/btnDarkMode"
-            android:textSize="26sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.292"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/idiomas"
+            app:layout_constraintVertical_bias="0.083" />
 
         <LinearLayout
             android:id="@+id/idiomas"
-            android:layout_width="279dp"
-            android:layout_height="100dp"
-            android:orientation="horizontal">
+            android:layout_width="229dp"
+            android:layout_height="57dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageButton
                 android:id="@+id/botonEuskera"
@@ -148,7 +152,7 @@
                 android:backgroundTint="#00FFFFFF"
                 android:scaleType="centerCrop"
                 android:src="@drawable/eu"
-                tools:ignore="SpeakableTextPresentCheck"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
                 tools:src="@drawable/eu" />
 
             <ImageButton
@@ -160,7 +164,7 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/es"
                 android:tint="#00FFFFFF"
-                tools:ignore="UseAppTint,SpeakableTextPresentCheck"
+                tools:ignore="UseAppTint,SpeakableTextPresentCheck,TouchTargetSizeCheck"
                 tools:src="@drawable/es" />
 
             <ImageButton
@@ -171,13 +175,13 @@
                 android:backgroundTint="#00FFFFFF"
                 android:scaleType="centerCrop"
                 android:src="@drawable/en"
-                tools:ignore="SpeakableTextPresentCheck"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
                 tools:src="@drawable/en" />
 
 
         </LinearLayout>
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <RelativeLayout
         android:id="@+id/about"
@@ -221,15 +225,17 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="39dp"
         android:layout_toEndOf="@+id/eliminarpartida"
+        style="@style/GreyButtonStyle"
         android:text="@string/nuevo" />
 
     <Button
         android:id="@+id/eliminarpartida"
+        style="@style/GreyButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="27dp"
+        android:layout_marginStart="37dp"
         android:layout_marginTop="39dp"
         android:text="@string/eliminar" />
 
