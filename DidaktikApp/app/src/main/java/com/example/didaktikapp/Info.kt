@@ -25,7 +25,7 @@ class Info : AppCompatActivity() {
             R.raw.juegodosuno
         ),
         "Juego2.4" to Informacion(
-            "(falta el texto)",
+            "...",
             R.raw.juegodoscuatro
         ),
         "Juego3.2" to Informacion(
@@ -37,7 +37,7 @@ class Info : AppCompatActivity() {
             R.raw.juegotrestres
         ),
         "Juego3.5" to Informacion(
-            "(falta el texto)",
+            "...",
             R.raw.juegotrescinco
         ),
         "Juego4.1" to Informacion(
@@ -45,7 +45,7 @@ class Info : AppCompatActivity() {
             R.raw.juegocuatrouno
         ),
         "Juego4.4" to Informacion(
-            "(falta el texto)",
+            "...",
             R.raw.juegocuatrocuatro
         ),
         "Juego5.1" to Informacion(
@@ -58,7 +58,7 @@ class Info : AppCompatActivity() {
             R.raw.juegocincotres
         ),
         "Juego5.6" to Informacion(
-            "(falta el texto)",
+            "...",
             R.raw.juegocincoseis
         ),
         "Juego6.1" to Informacion(
@@ -67,7 +67,7 @@ class Info : AppCompatActivity() {
             R.raw.juegoseisuno
         ),
         "Juego6.3" to Informacion(
-            "(falta el texto)",
+            "...",
             R.raw.juegoseistres
         ),
         "Juego7.1" to Informacion(
