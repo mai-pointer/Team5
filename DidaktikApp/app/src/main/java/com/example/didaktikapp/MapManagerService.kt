@@ -80,7 +80,8 @@ class MapManagerService : Service() {
                 if (checkProximity(currentLatLng)){
                     gameManagerService = GameManager.get()
                     //val myGame = gameManagerService!!.juegoActual()
-                    gameManagerService!!.startGame(currentGameFromDB)
+                    //gameManagerService!!.startGame(currentGameFromDB)---------------------------------
+                    gameManagerService!!.startGame(mapLocations.keys.elementAt(currentLocationIndex))
                     showNextLocation()
                     stopSelf()
                 }
@@ -96,8 +97,10 @@ class MapManagerService : Service() {
 //        mapLocations.put("Santa Maria", LatLng(43.27387138926826, -2.8349795537580893))
 //        mapLocations.put("San Mameseko Arkua", LatLng(43.276383439897, -2.8369511900475195))
 //        mapLocations.put("Lezamako dorrea", LatLng(43.27279428065491, -2.8434245883650817))
-        mapLocations.put("Idi probak", LatLng(43.257559, -2.902346))
-        mapLocations.put("San Mameseko Arkua", LatLng(43.257011, -2.903898))
+
+
+//        mapLocations.put("Idi probak", LatLng(43.257518, -2.902324))
+        mapLocations.put("San Mameseko Arkua", LatLng(43.257518, -2.902324))
     }
 
     fun myPosition(): Location? {
@@ -158,9 +161,11 @@ class MapManagerService : Service() {
             }
 
         } else {
-            MapManager.destroy()
-            gameManagerService = GameManager.get()
-            gameManagerService?.startGame("AMAIERAKO JARDUERA")
+//            -----------------------------------------------------------------------------------
+//            MapManager.destroy()
+//            gameManagerService = GameManager.get()
+//            gameManagerService?.startGame("AMAIERAKO JARDUERA")
+//            -----------------------------------------------------------------------------------
         }
     }
 

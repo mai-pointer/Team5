@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
+import android.util.Log
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ProgressBar
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +18,7 @@ class GameManagerService : Service() {
 
     //Almacena la información de los juegos
     val games = mapOf(
-        "Juego1" to listOf(
+        "Idi probak" to listOf(
             PreguntasPistas::class.java,
             Info::class.java,
             MultipleChoiceActivity::class.java,
@@ -25,20 +26,20 @@ class GameManagerService : Service() {
             MultipleChoiceActivity::class.java,
             MultipleChoiceActivity::class.java
         ),
-        "Juego2" to listOf(
+        "Odolostea" to listOf(
             PreguntasPistas::class.java,
             Info::class.java,
             WordSearchActivity::class.java,
             Info::class.java
         ),
-        "Juego3" to listOf(
+        "Txakoli" to listOf(
             PreguntasPistas::class.java,
             Info::class.java,
             Info::class.java,
             Video::class.java,
             Info::class.java,
         ),
-        "Juego4" to listOf(
+        "Udala" to listOf(
             Info::class.java,
             DiferenciasActivity::class.java,
             MultipleChoiceActivity::class.java,
@@ -49,7 +50,7 @@ class GameManagerService : Service() {
             MultipleChoiceActivity::class.java,
             Info::class.java
         ),
-        "Juego5" to listOf(
+        "Santa Maria" to listOf(
             Info::class.java,
             PreguntasPistas::class.java,
             Info::class.java,
@@ -57,12 +58,12 @@ class GameManagerService : Service() {
             PuzzleActivity::class.java,
             Info::class.java,
         ),
-        "Juego6" to listOf(
+        "San Mameseko Arkua" to listOf(
             Info::class.java,
             Crucigrama::class.java,
             Info::class.java,
         ),
-        "Juego7" to listOf(
+        "Lezamako dorrea" to listOf(
             Info::class.java,
             InsertWordsActivity::class.java,
             JuegoTorre::class.java,
@@ -212,12 +213,27 @@ class GameManagerService : Service() {
 
     //Devuelve el número de pantalla actual
     fun pantallaActual(): String {
-        return  games.entries.find { it.value == juegoActual }?.key + "." + (pantallaActual+1).toString()
+        Log.i("FALLO-GM", cambiarNombre(games.entries.find { it.value == juegoActual }?.key.toString()) + "." + (pantallaActual+1).toString())
+        return  cambiarNombre(games.entries.find { it.value == juegoActual }?.key.toString()) + "." + (pantallaActual+1).toString()
     }
 
     fun juegoActual(): String {
-        return  games.entries.find { it.value == juegoActual }?.key.toString()
+        return cambiarNombre(games.entries.find { it.value == juegoActual }?.key.toString())
     }
+
+    fun cambiarNombre(nombre : String) : String{
+        return when (nombre) {
+            "Idi probak" -> "Juego1"
+            "Odolostea" -> "Juego2"
+            "Txakoli" -> "Juego3"
+            "Udala" -> "Juego4"
+            "Santa Maria" -> "Juego5"
+            "San Mameseko Arkua" -> "Juego6"
+            "Lezamako dorrea" -> "Juego7"
+            else -> ""
+        }
+    }
+
 
     fun getCurrentScreenIndex():Int{
         return pantallaActual
