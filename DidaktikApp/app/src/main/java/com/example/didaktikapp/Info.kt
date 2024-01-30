@@ -15,76 +15,7 @@ import com.example.didaktikapp.titleFragment.TitleFragment
 
 class Info : AppCompatActivity() {
 
-    val informacion = hashMapOf<String, Informacion>(
-        "Juego1_2" to Informacion(
-            getString(R.string.Juego1_2),
-            R.raw.juegounodos
-        ),
-        "Juego2_2" to Informacion(
-            getString(R.string.Juego2_2),
-            R.raw.juegodosuno
-        ),
-        "Juego2_4" to Informacion(
-            getString(R.string.Juego2_4),
-            R.raw.juegodoscuatro
-        ),
-        "Juego3_2" to Informacion(
-            getString(R.string.Juego3_2),
-            R.raw.juegotresdos
-        ),
-        "Juego3_3" to Informacion(
-            getString(R.string.Juego3_3),
-            R.raw.juegotrestres
-        ),
-        "Juego3_5" to Informacion(
-            getString(R.string.Juego3_5),
-            R.raw.juegotrescinco
-        ),
-        "Juego4_1" to Informacion(
-            getString(R.string.Juego4_1),
-            R.raw.juegocuatrouno
-        ),
-        "Juego4_4" to Informacion(
-            getString(R.string.Juego4_4),
-            R.raw.juegocuatrocuatro
-        ),
-        "Juego5_1" to Informacion(
-            getString(R.string.Juego5_1),
-            R.raw.juegocincouno
-        ),
-        "Juego5_3" to Informacion(
-            getString(R.string.Juego5_3),
-            R.raw.juegocincotres
-        ),
-        "Juego5_6" to Informacion(
-            getString(R.string.Juego5_6),
-            R.raw.juegocincoseis
-        ),
-        "Juego6_1" to Informacion(
-            getString(R.string.Juego6_1),
-            R.raw.juegoseisuno
-        ),
-        "Juego6_3" to Informacion(
-            getString(R.string.Juego6_3),
-            R.raw.juegoseistres
-        ),
-        "Juego7_1" to Informacion(
-            getString(R.string.Juego7_1),
-            R.raw.juegosieteuno
-        ),
-        "HASIERAKO_JARDUERA_1" to Informacion(
-            getString(R.string.HASIERAKO_JARDUERA_1),
-            R.raw.hjuno
-        ),
-        "AMAIERAKO_JARDUERA_1" to Informacion(
-            getString(R.string.AMAIERAKO_JARDUERA_1),
-            R.raw.ajuno
-        ),
-        "AMAIERAKO_JARDUERA_3" to Informacion(
-            getString(R.string.AMAIERAKO_JARDUERA_3),
-            R.raw.ajtres
-        )
-    )
+
 
 
     var mediaPlayer: MediaPlayer? = null
@@ -94,6 +25,77 @@ class Info : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info)
+
+        val informacion = hashMapOf<String, Informacion>(
+            "Juego1.2" to Informacion(
+                resources.getString(R.string.Juego1_2),
+                R.raw.juegounodos
+            ),
+            "Juego2.2" to Informacion(
+                resources.getString(R.string.Juego2_2),
+                R.raw.juegodosuno
+            ),
+            "Juego2.4" to Informacion(
+                resources.getString(R.string.Juego2_4),
+                R.raw.juegodoscuatro
+            ),
+            "Juego3.2" to Informacion(
+                resources.getString(R.string.Juego3_2),
+                R.raw.juegotresdos
+            ),
+            "Juego3.3" to Informacion(
+                resources.getString(R.string.Juego3_3),
+                R.raw.juegotrestres
+            ),
+            "Juego3.5" to Informacion(
+                resources.getString(R.string.Juego3_5),
+                R.raw.juegotrescinco
+            ),
+            "Juego4.1" to Informacion(
+                resources.getString(R.string.Juego4_1),
+                R.raw.juegocuatrouno
+            ),
+            "Juego4.4" to Informacion(
+                resources.getString(R.string.Juego4_4),
+                R.raw.juegocuatrocuatro
+            ),
+            "Juego5.1" to Informacion(
+                resources.getString(R.string.Juego5_1),
+                R.raw.juegocincouno
+            ),
+            "Juego5.3" to Informacion(
+                resources.getString(R.string.Juego5_3),
+                R.raw.juegocincotres
+            ),
+            "Juego5.6" to Informacion(
+                resources.getString(R.string.Juego5_6),
+                R.raw.juegocincoseis
+            ),
+            "Juego6.1" to Informacion(
+                resources.getString(R.string.Juego6_1),
+                R.raw.juegoseisuno
+            ),
+            "Juego6.3" to Informacion(
+                resources.getString(R.string.Juego6_3),
+                R.raw.juegoseistres
+            ),
+            "Juego7.1" to Informacion(
+                resources.getString(R.string.Juego7_1),
+                R.raw.juegosieteuno
+            ),
+            "HASIERAKO JARDUERA.1" to Informacion(
+                resources.getString(R.string.HASIERAKO_JARDUERA_1),
+                R.raw.hjuno
+            ),
+            "AMAIERAKO JARDUERA.1" to Informacion(
+                resources.getString(R.string.AMAIERAKO_JARDUERA_1),
+                R.raw.ajuno
+            ),
+            "AMAIERAKO JARDUERA.3" to Informacion(
+                resources.getString(R.string.AMAIERAKO_JARDUERA_3),
+                R.raw.ajtres
+            )
+        )
 
         intent.getDoubleExtra("punto", 0.0)
 
@@ -125,6 +127,7 @@ class Info : AppCompatActivity() {
         })
 
         //Audios
+        informacion[pantalla]?.audio!!
         mediaPlayer = MediaPlayer.create(this, informacion[pantalla]?.audio!!)
         mediaPlayer?.start()
 
