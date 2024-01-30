@@ -96,6 +96,13 @@
     <string name="aukera1.4.3.c">Bainas</string>
     <string name="erantzun1.4.3">a</string>
 
+    <!-- Modo PVP -->
+    <string name="scoreboard">Marcador global</string>
+    <string name="introduceNombre">Introduce tu nombre</string>
+    <string name="continuar2">CONTINUAR</string>
+    <string name="anonimo">Se ha guardado la puntuacion de forma anonima.</string>
+    <string name="nombreCorrecto">Se ha guardado la puntuacion.</string>
+
     <!-- 4.3 -->
     <!--1-->
     <string name="galdera4.3.1">¿Quién fue Mikel Zarate?</string>

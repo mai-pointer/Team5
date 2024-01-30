@@ -151,10 +151,10 @@ class GameManagerService : Service() {
 
                     }
 
-                    //PASAR AL SERVER EL TIEMPO <-----------------------------------------novarin trabaja
-
+                    //PASAR AL SERVER EL TIEMPO
                     val intent = Intent(context, Scoreboard::class.java)
-                    intent.putExtra("puntuacion", 342)
+                    var numeroToPotente = tiempo.toString().toInt()
+                    intent.putExtra("puntuacion", numeroToPotente)
                     context.startActivity(intent)
                 }
                 else{
