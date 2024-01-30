@@ -93,11 +93,11 @@
             android:layout_height="39dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="-8dp"
-            android:layout_marginBottom="-3dp"
+            android:layout_marginStart="-5dp"
+            android:layout_marginBottom="-7dp"
             android:text="@string/profesor"
             android:textAlignment="center"
-            android:textSize="26sp" />
+            android:textSize="20sp" />
 
     </RelativeLayout>
 
@@ -119,7 +119,7 @@
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/modoOscuro"
-            android:layout_width="261dp"
+            android:layout_width="wrap_content"
             android:layout_height="49dp"
             android:layout_below="@+id/idiomas"
             android:layout_alignParentStart="true"
