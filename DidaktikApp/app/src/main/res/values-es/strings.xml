@@ -44,6 +44,13 @@
     <string name="next">Siguiente</string>
     <string name="previous">Anterior</string>
 
+    <!-- Modo PVP -->
+    <string name="scoreboard">Marcador global</string>
+    <string name="introduceNombre">Introduce tu nombre</string>
+    <string name="continuar2">CONTINUAR</string>
+    <string name="anonimo">Se ha guardado la puntuacion de forma anonima.</string>
+    <string name="nombreCorrecto">Se ha guardado la puntuacion.</string>
+
     <!-- AJUSTES -->
     <string name="profesor">Modo profesor</string>
     <string name="inicio">Inicio</string>

@@ -65,6 +65,13 @@
     <string name="wordSearchExplain">Find the following words</string>
     <string name="mensaje_fallido">You failed!</string>
 
+    <!-- Modo PVP -->
+    <string name="scoreboard">Top scores</string>
+    <string name="introduceNombre">Insert name</string>
+    <string name="continuar2">CONTINUE</string>
+    <string name="anonimo">The score has been saved anonymously.</string>
+    <string name="nombreCorrecto">The score has been saved.</string>
+    
     <!-- Repeat -->
     <string name="terminar_juego">Game over</string>
 

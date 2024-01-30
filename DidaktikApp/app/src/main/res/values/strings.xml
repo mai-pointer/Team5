@@ -32,7 +32,12 @@
     <string name="mainMenuJugar">Jolastu</string>
     <string name="mainMenuModoLibre">Lehiaketa modua</string>
 
-    <string name="scoreboard">Marcador global</string>
+    <!-- Modo PVP -->
+    <string name="scoreboard">Markatzaile globala</string>
+    <string name="introduceNombre">Sartu zure izena</string>
+    <string name="continuar2">JARRAITU</string>
+    <string name="anonimo">Puntuazioa anonimoki gorde da.</string>
+    <string name="nombreCorrecto">Puntuazioa gorde da.</string>
 
     <!-- Diferencias -->
     <string name="diferenciasTitulo">Aurkitu 6 desberdintasunak</string>
