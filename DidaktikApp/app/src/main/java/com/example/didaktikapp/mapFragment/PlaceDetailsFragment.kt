@@ -68,16 +68,17 @@ class PlaceDetailsFragment : Fragment() {
 //****          val intent = getPlaceIntent(placeName)
 //****          startActivity(intent)
 
-                when (placeName) {
-                    "Idi probak" -> GameManager.get()?.startGame("Juego1")
-                    "Odolostea" -> GameManager.get()?.startGame("Juego2")
-                    "Txakoli" -> GameManager.get()?.startGame("Juego3")
-                    "Udala" -> GameManager.get()?.startGame("Juego4")
-                    "Santa Maria" -> GameManager.get()?.startGame("Juego5")
-                    "San Mameseko Arkua" -> GameManager.get()?.startGame("Juego6")
-                    "Lezamako dorrea" -> GameManager.get()?.startGame("Juego7")
-                    else -> Intent(activity, MapsActivity::class.java)
-                }
+                GameManager.get()?.startGame(placeName!!)
+//                when (placeName) {
+//                    "Idi probak" -> GameManager.get()?.startGame("Juego1")
+//                    "Odolostea" -> GameManager.get()?.startGame("Juego2")
+//                    "Txakoli" -> GameManager.get()?.startGame("Juego3")
+//                    "Udala" -> GameManager.get()?.startGame("Juego4")
+//                    "Santa Maria" -> GameManager.get()?.startGame("Juego5")
+//                    "San Mameseko Arkua" -> GameManager.get()?.startGame("Juego6")
+//                    "Lezamako dorrea" -> GameManager.get()?.startGame("Juego7")
+//                    else -> Intent(activity, MapsActivity::class.java)
+//                }
             }
         }
 
