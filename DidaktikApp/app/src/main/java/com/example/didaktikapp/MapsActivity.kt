@@ -135,7 +135,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
             }
         }
 
-        val zoomLevel = 14.0fss
+        val zoomLevel = 14.0f
 
         if (esAdmin){
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(referenceMarker!!, zoomLevel))
