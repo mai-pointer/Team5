@@ -75,8 +75,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
 
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        esAdmin = intent.getBooleanExtra("admin", true)
-        esAdmin = true
+        esAdmin = intent.getBooleanExtra("admin", false)
         progressBar = findViewById(R.id.progressBar)
 
         setupHeaderFragment(savedInstanceState)
