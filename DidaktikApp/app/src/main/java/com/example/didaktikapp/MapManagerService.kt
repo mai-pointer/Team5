@@ -42,17 +42,17 @@ class MapManagerService : Service() {
 
     fun initialize(context: Context, esAdmin: Boolean) {
         this.context = context
-        // BD ---
+        // BD - Iniciar ---
         BDManager.Iniciar{ partidaDao, competitivoDao, sharedPreferences ->
             GlobalScope.launch(Dispatchers.IO){
                 val partida = partidaDao.get(sharedPreferences.getInt("partida_id", -1))
-                currentLocationIndex = partida.juegoMapa ?: 0
+                currentLocationIndex = partida.juegoMapa
                 currentGameFromDB = partida.juego
+
+                Log.i("PARTIDA", "Cargado: " + currentLocationIndex)
 
             }
         }
-
-
 
         initializeMapLocations()
 
@@ -80,7 +80,7 @@ class MapManagerService : Service() {
                 if (checkProximity(currentLatLng)){
                     gameManagerService = GameManager.get()
                     gameManagerService!!.startGame(mapLocations.keys.elementAt(currentLocationIndex))
-                    showNextLocation()
+                    // showNextLocation() // Tiene que ser al acabar el juego
                     stopSelf()
                     break
                 }
@@ -89,13 +89,21 @@ class MapManagerService : Service() {
         }
     }
     private fun initializeMapLocations() {
-        mapLocations.put("Idi probak", LatLng(43.27556360817825, -2.827742396615327))
-        mapLocations.put("Odolostea", LatLng(43.27394169280981, -2.832619209726283))
-        mapLocations.put("Txakoli", LatLng(43.27758426733325, -2.8308136897866447))
-        mapLocations.put("Udala", LatLng(43.27421110063913, -2.83285560353813))
-        mapLocations.put("Santa Maria", LatLng(43.27387138926826, -2.8349795537580893))
-        mapLocations.put("San Mameseko Arkua", LatLng(43.276383439897, -2.8369511900475195))
-        mapLocations.put("Lezamako dorrea", LatLng(43.27279428065491, -2.8434245883650817))
+//        mapLocations.put("Idi probak", LatLng(43.27556360817825, -2.827742396615327))
+//        mapLocations.put("Odolostea", LatLng(43.27394169280981, -2.832619209726283))
+//        mapLocations.put("Txakoli", LatLng(43.27758426733325, -2.8308136897866447))
+//        mapLocations.put("Udala", LatLng(43.27421110063913, -2.83285560353813))
+//        mapLocations.put("Santa Maria", LatLng(43.27387138926826, -2.8349795537580893))
+//        mapLocations.put("San Mameseko Arkua", LatLng(43.276383439897, -2.8369511900475195))
+//        mapLocations.put("Lezamako dorrea", LatLng(43.27279428065491, -2.8434245883650817))
+
+        mapLocations.put("Idi probak", LatLng(43.257562, -2.902381))
+        mapLocations.put("Odolostea", LatLng(43.257562, -2.902381))
+        mapLocations.put("Txakoli", LatLng(43.257562, -2.902381))
+        mapLocations.put("Udala", LatLng(43.257562, -2.902381))
+        mapLocations.put("Santa Maria", LatLng(43.257562, -2.902381))
+        mapLocations.put("San Mameseko Arkua", LatLng(43.257562, -2.902381))
+        mapLocations.put("Lezamako dorrea", LatLng(43.257562, -2.902381))
     }
 
     fun myPosition(): Location? {
@@ -138,7 +146,7 @@ class MapManagerService : Service() {
             currentLocationIndex++
             notifyLocationChanged()
 
-            // BD ----
+            // BD - Guardar ----
             BDManager.Iniciar{ partidaDao, competitivoDao, sharedPreferences ->
                 GlobalScope.launch(Dispatchers.IO){
                     val partida = partidaDao.get(sharedPreferences.getInt("partida_id", -1))
@@ -152,6 +160,9 @@ class MapManagerService : Service() {
                             hj = partida.hj
                         )
                     )
+
+                    Log.i("PARTIDA", "Update: " + partidaDao.get(sharedPreferences.getInt("partida_id", -1)).juegoMapa)
+
                 }
             }
 
