@@ -172,9 +172,22 @@ class GameManagerService : Service() {
                 //Si no, vuelve al menú principal
                 pantallaActual = 0
             }
+            //En caso de que sea un juego normal
             else{
                 val intent = Intent(context, MapsActivity::class.java)
                 context.startActivity(intent)
+
+                //Cambia el index del mapa
+                var mapManagerService = MapManagerService.MapManager.get()
+
+                if(mapManagerService == null){
+                    MapManagerService.MapManager.initialize(this, false)
+                    mapManagerService = MapManagerService.MapManager.get()
+                }
+
+
+                mapManagerService!!.showNextLocation()
+
             }
         }
 
