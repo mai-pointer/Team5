@@ -51,9 +51,6 @@ class MapManagerService : Service() {
 
             }
         }
-
-
-
         initializeMapLocations()
 
         if (!esAdmin){
