@@ -230,7 +230,7 @@ class GameManagerService : Service() {
             "Santa Maria" -> "Juego5"
             "San Mameseko Arkua" -> "Juego6"
             "Lezamako dorrea" -> "Juego7"
-            else -> ""
+            else -> nombre
         }
     }
 
