@@ -11,9 +11,12 @@ import android.os.IBinder
 import android.util.Log
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.*
+import com.example.didaktikapp.MapsActivity
 
 class MapManagerService : Service() {
     private var gameManagerService: GameManagerService? = GameManagerService()
+
+    private var mapsActivity: MapsActivity = MapsActivity()
 
     private val miJob = Job()
     private val miScope = CoroutineScope(Dispatchers.Default + miJob)
@@ -78,10 +81,7 @@ class MapManagerService : Service() {
                 Log.d("MyCurrentPosition", myCurrentPosition.toString())
                 var currentLatLng = LatLng(myCurrentPosition!!.latitude, myCurrentPosition!!.longitude)
                 if (checkProximity(currentLatLng)){
-                    gameManagerService = GameManager.get()
-                    //val myGame = gameManagerService!!.juegoActual()
-                    gameManagerService!!.startGame(currentGameFromDB)
-                    showNextLocation()
+                    mapsActivity.openPlaceDetailsFragment(getCurrentLocationMarker())
                     stopSelf()
                 }
                 delay(5000)
@@ -133,6 +133,9 @@ class MapManagerService : Service() {
         return mapLocations.values.elementAt(currentLocationIndex)
     }
 
+    fun getCurrentLocationMarker(): String {
+        return mapLocations.keys.elementAt(currentLocationIndex)
+    }
 
     // Muestra la siguiente ubicación del mapa
     fun showNextLocation() {
