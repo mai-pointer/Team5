@@ -52,6 +52,13 @@
     <string name="partida">Game</string>
     <string name="error_ajustes_1">You can´t delete all the games</string>
 
+    <!-- Modo PVP -->
+    <string name="scoreboard">Top scores</string>
+    <string name="introduceNombre">Insert name</string>
+    <string name="continuar2">CONTINUE</string>
+    <string name="anonimo">The score has been saved anonymously.</string>
+    <string name="nombreCorrecto">The score has been saved.</string>
+
     <!-- Multiple choice -->
     <string name="multipleChoiceExplain">Choose the correct answer</string>
     <string name="multipleChoiceAnswer">Answer</string>

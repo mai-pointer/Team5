@@ -2,11 +2,16 @@ package com.example.didaktikapp
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -163,13 +168,23 @@ class Scoreboard : AppCompatActivity() {
         }
 
         if (intent.hasExtra("puntuacion")) {
-            val puntuacion = intent.getIntExtra("puntuacion", 0)
-            val nombre = "Jonsina"
-            val jsonMessage = "{\"nombre\":\"$nombre\",\"puntuacion\":$puntuacion}"
-            socket.emit("talk", jsonMessage)
+            // Crear un objeto para manejar el resultado del diálogo
+            val dialogCallback = object : DialogCallback {
+                override fun onDialogResult(textoIngresado: String) {
+                    // Aquí puedes realizar operaciones con el texto ingresado
+                    val puntuacion = intent.getIntExtra("puntuacion", 0)
+                    val nombre = textoIngresado
+                    val jsonMessage = "{\"nombre\":\"$nombre\",\"puntuacion\":$puntuacion}"
+                    socket.emit("talk", jsonMessage)
+                }
+            }
+
+            // Mostrar el diálogo y pasar el objeto DialogCallback como parámetro
+            mostrarDialogo(this, dialogCallback)
         } else {
             Log.d("Scoreboard", "No se recibió la puntuación esperada.")
         }
+
 
 
     }
@@ -177,7 +192,7 @@ class Scoreboard : AppCompatActivity() {
     fun updateScoresList(newList: List<Score>) {
         // Invertir el orden de la lista
         val listaInvertida = newList.toMutableList()
-        listaInvertida.reverse()
+        //listaInvertida.reverse()
 
         // Actualizar la lista en el adaptador y notificar los cambios
         scoresAdapter.submitList(listaInvertida)
@@ -197,6 +212,38 @@ class Scoreboard : AppCompatActivity() {
             )
         }
     }
+
+    interface DialogCallback {
+        fun onDialogResult(textoIngresado: String)
+    }
+
+    private fun mostrarDialogo(context: Context, callback: DialogCallback) {
+        val editText = EditText(context)
+        val linearLayout = LinearLayout(context)
+        linearLayout.orientation = LinearLayout.VERTICAL
+        linearLayout.addView(editText)
+
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle(R.string.introduceNombre)
+        builder.setView(linearLayout)
+
+        builder.setPositiveButton(R.string.continuar2) { _, _ ->
+            val textoIngresado = editText.text.toString().trim()
+
+            if (textoIngresado.isNotEmpty()) {
+                // El usuario ha ingresado algo, puedes continuar
+                Toast.makeText(context, R.string.nombreCorrecto, Toast.LENGTH_SHORT).show()
+                callback.onDialogResult(textoIngresado)
+            } else {
+                // El usuario no ingresó nada, puedes mostrar un mensaje o tomar otra acción
+                Toast.makeText(context, R.string.anonimo, Toast.LENGTH_SHORT).show()
+                callback.onDialogResult("Anonimo"+(0..100000).random())
+            }
+        }
+
+        builder.show()
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()
