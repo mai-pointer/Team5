@@ -29,7 +29,7 @@
         tools:layout="@layout/fragment_title" />
 
     <ProgressBar
-        android:id="@+id/puzzleProgressBar"
+        android:id="@+id/pistaProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

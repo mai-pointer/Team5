@@ -44,6 +44,7 @@ class PreguntasPistas : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_preguntas_pistas)
 
         val pantalla = GameManager.get()?.pantallaActual()
 
@@ -59,10 +60,9 @@ class PreguntasPistas : AppCompatActivity() {
         )
 
         gameManagerService = GameManager.get()
-        progressBar = findViewById(R.id.puzzleProgressBar)
+        progressBar = findViewById(R.id.pistaProgressBar)
         gameManagerService!!.setInitialProgress(progressBar)
 
-        setContentView(R.layout.activity_preguntas_pistas)
         initializeVariables(pantalla)
         setupHeaderFragment(savedInstanceState)
 
