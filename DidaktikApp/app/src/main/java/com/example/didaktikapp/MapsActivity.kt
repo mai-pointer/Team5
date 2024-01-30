@@ -160,16 +160,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
     suspend fun updateMarkerPosition() {
         while (true) {
             // Obtener la nueva posición del marcador
-            val newPosition = LatLng(mapManagerService!!.myPosition()!!.latitude, mapManagerService!!.myPosition()!!.longitude)
             withContext(Dispatchers.Main) {
+                val newPosition = LatLng(mapManagerService!!.myPosition()!!.latitude, mapManagerService!!.myPosition()!!.longitude)
                 if (marker == null) {
                     marker = mMap.addMarker(MarkerOptions().position(newPosition).icon(
                         BitmapDescriptorFactory.fromResource(R.drawable.posicon)))
                 } else {
                     marker?.position = newPosition
                 }
+                delay(1000)
             }
-            delay(1000)
+
         }
     }
 
@@ -192,15 +193,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
 
     override fun onMarkerClick(marker: Marker): Boolean {
         Log.d("MarkerClick", "Click en el marcador: ${marker.title}, Snippet: ${marker.snippet}")
-        openPlaceDetailsFragment(marker)
+        openPlaceDetailsFragment(marker.title!!)
 
         return true
     }
 
-    private fun openPlaceDetailsFragment(marker: Marker) {
+    fun openPlaceDetailsFragment(marker: String) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
 
-        val text:String = when (marker.title) {
+        val text:String = when (marker) {
             "Idi probak" -> this.getString(R.string.agricolaText)
             "Txakoli" -> this.getString(R.string.txakoli)
             "Udala" -> this.getString(R.string.udala)
@@ -212,7 +213,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         }
 
         val bundle = Bundle()
-        bundle.putString("placeName", marker.title)
+        bundle.putString("placeName", marker)
         bundle.putString("placeSnippet", text)
 
         val fragment = PlaceDetailsFragment()
