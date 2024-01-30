@@ -3,6 +3,7 @@ package com.example.didaktikapp
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -37,6 +38,13 @@ class Scoreboard : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scoreboard)
+
+        val imagenSalir: ImageView = findViewById(R.id.imgSalirScore)
+
+        imagenSalir.setOnClickListener {
+            val intent = Intent(this, MainMenuActivity::class.java)
+            startActivity(intent)
+        }
 
 // La mejor animación de la APP
         val imagen = findViewById<ImageView>(R.id.win)
