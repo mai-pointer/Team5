@@ -84,6 +84,7 @@ class MapManagerService : Service() {
                     gameManagerService!!.startGame(mapLocations.keys.elementAt(currentLocationIndex))
                     showNextLocation()
                     stopSelf()
+                    break
                 }
                 delay(5000)
             }
@@ -101,6 +102,7 @@ class MapManagerService : Service() {
 
 //        mapLocations.put("Idi probak", LatLng(43.257518, -2.902324))
         mapLocations.put("San Mameseko Arkua", LatLng(43.257518, -2.902324))
+
     }
 
     fun myPosition(): Location? {
