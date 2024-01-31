@@ -5,7 +5,6 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.location.Location
-import android.location.LocationManager
 import android.os.Binder
 import android.os.IBinder
 import android.util.Log
@@ -26,7 +25,6 @@ class MapManagerService : Service() {
     private var currentLocationIndex = 0
     private var currentGameFromDB = ""
     private var myCurrentPosition: Location? = null
-    private lateinit var locationProvider: LocationProvider
 
 
     // Binder para la conexión con la actividad
@@ -58,29 +56,16 @@ class MapManagerService : Service() {
         initializeMapLocations()
 
         if (!esAdmin){
-            locationProvider = LocationProvider()
-            updateLocation()
+            //checkLocation()
         }
 
     }
 
     @SuppressLint("MissingPermission")
-    fun updateLocation(){
-        val locationManager : LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        /*runBlocking {
-            val myPos: Deferred<Location?> = async {
-                //return@async locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                return@async locationProvider.getUserLocation(context)
-            }
-            myCurrentPosition = myPos.await()
-        }*/
-
+    /*fun checkLocation(){
         miScope.launch {
             while (miScope.isActive) {
-                //myCurrentPosition = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                myCurrentPosition = locationProvider.getUserLocation(context)
-                Log.d("MyCurrentPosition", myCurrentPosition.toString())
-                var currentLatLng = LatLng(myCurrentPosition!!.latitude, myCurrentPosition!!.longitude)
+                var currentLatLng = LatLng(mapsActivity.returnPlayerPos()!!.latitude, mapsActivity.returnPlayerPos()!!.longitude)
                 if (checkProximity(currentLatLng)){
                     gameManagerService = GameManager.get()
                     gameManagerService!!.startGame(mapLocations.keys.elementAt(currentLocationIndex))
@@ -91,7 +76,7 @@ class MapManagerService : Service() {
                 delay(5000)
             }
         }
-    }
+    }*/
     private fun initializeMapLocations() {
         mapLocations.put("Idi probak", LatLng(43.27556360817825, -2.827742396615327))
         mapLocations.put("Odolostea", LatLng(43.27394169280981, -2.832619209726283))
@@ -125,11 +110,16 @@ class MapManagerService : Service() {
         }
     }
 
-    private fun checkProximity(currentUserPos:LatLng):Boolean{
+    fun checkProximity(currentUserPos:Location?){
         val targetLocation = getCurrentLocation()
         val distance = calculateDistance(currentUserPos!!.latitude, currentUserPos!!.longitude, targetLocation.latitude, targetLocation.longitude)
         val proximityThreshold = 50
-        return distance <= proximityThreshold
+        if (distance <= proximityThreshold){
+            gameManagerService = GameManager.get()
+            gameManagerService!!.startGame(mapLocations.keys.elementAt(currentLocationIndex))
+            // showNextLocation() // Tiene que ser al acabar el juego
+            stopSelf()
+        }
     }
 
     private fun calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Float {
