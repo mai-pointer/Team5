@@ -57,12 +57,12 @@ class PlaceDetailsFragment : Fragment() {
             // Agrega OnClickListener al TextView del lugar
             textViewPlaceName.setOnClickListener {
                 // Lanza la actividad correspondiente al lugar
-                GameManager.get()?.startGame(placeName!!)
+                GameManager.get()?.startGame(placeName!!, true)
             }
 
             rootView.findViewById<Button>(R.id.jugarBtnFragmento).setOnClickListener {
                 // Lanza la actividad correspondiente al lugar
-                GameManager.get()?.startGame(placeName!!)
+                GameManager.get()?.startGame(placeName!!, true)
             }
         }
 
