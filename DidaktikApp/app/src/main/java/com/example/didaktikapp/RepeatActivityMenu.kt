@@ -35,6 +35,7 @@ class RepeatActivityMenu(private val activity: AppCompatActivity)  {
             // Reinicia la actividad
             restartActivity(intent)
         }
+        builder.setCancelable(false)
 
         // Mostrar el cuadro de diálogo
         builder.show()

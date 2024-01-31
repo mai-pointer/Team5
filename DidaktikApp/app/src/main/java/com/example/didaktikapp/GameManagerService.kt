@@ -93,6 +93,7 @@ class GameManagerService : Service() {
     private var pantallaActual = 0
     private var nombreJuego: String = ""
     private var screenCount: Int? = 0
+    private var admin: Boolean = false
 
     //Inicializa el servicio
     fun initialize(context: Context) {
@@ -104,7 +105,7 @@ class GameManagerService : Service() {
     }
 
     //Inicia el juego seleccionado
-    fun startGame(gameName: String) {
+    fun startGame(gameName: String, esAdmin : Boolean = false) {
 
         //En caso de que sea modo competitivo
         if("Competitivo" == gameName)
@@ -119,6 +120,7 @@ class GameManagerService : Service() {
         juegoActual = games[gameName]
         pantallaActual = 0
         screenCount = juegoActual?.size
+        admin = esAdmin
         pantalla()
 
         guardar()
@@ -174,20 +176,23 @@ class GameManagerService : Service() {
             }
             //En caso de que sea un juego normal
             else{
-                val intent = Intent(context, MapsActivity::class.java)
-                context.startActivity(intent)
+                if (!admin){
+                    //Cambia el index del mapa
+                    var mapManagerService = MapManagerService.MapManager.get()
 
-                //Cambia el index del mapa
-                var mapManagerService = MapManagerService.MapManager.get()
+                    if(mapManagerService == null){
+                        MapManagerService.MapManager.initialize(this, false)
+                        mapManagerService = MapManagerService.MapManager.get()
+                    }
+                    mapManagerService!!.showNextLocation()
 
-                if(mapManagerService == null){
-                    MapManagerService.MapManager.initialize(this, false)
-                    mapManagerService = MapManagerService.MapManager.get()
+                    val intent = Intent(context, MapsActivity::class.java)
+                    context.startActivity(intent)
+                } else{
+                    val intent = Intent(context, MapsActivity::class.java)
+                    intent.putExtra("admin", true)
+                    context.startActivity(intent)
                 }
-
-
-                mapManagerService!!.showNextLocation()
-
             }
         }
 
