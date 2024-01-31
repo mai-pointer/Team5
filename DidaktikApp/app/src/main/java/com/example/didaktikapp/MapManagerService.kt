@@ -13,9 +13,9 @@ import kotlinx.coroutines.*
 
 class MapManagerService : Service() {
     private var gameManagerService: GameManagerService? = GameManagerService()
+    var isPlaying = false
 
     private val miJob = Job()
-    private val miScope = CoroutineScope(Dispatchers.Default + miJob)
 
     // Almacena la información de las ubicaciones del mapa
     private val mapLocations = mutableMapOf<String, LatLng>()
@@ -54,29 +54,10 @@ class MapManagerService : Service() {
         }
 
         initializeMapLocations()
-
-        if (!esAdmin){
-            //checkLocation()
-        }
-
     }
 
     @SuppressLint("MissingPermission")
-    /*fun checkLocation(){
-        miScope.launch {
-            while (miScope.isActive) {
-                var currentLatLng = LatLng(mapsActivity.returnPlayerPos()!!.latitude, mapsActivity.returnPlayerPos()!!.longitude)
-                if (checkProximity(currentLatLng)){
-                    gameManagerService = GameManager.get()
-                    gameManagerService!!.startGame(mapLocations.keys.elementAt(currentLocationIndex))
-                    // showNextLocation() // Tiene que ser al acabar el juego
-                    stopSelf()
-                    break
-                }
-                delay(5000)
-            }
-        }
-    }*/
+
     private fun initializeMapLocations() {
         mapLocations.put("Idi probak", LatLng(43.27556360817825, -2.827742396615327))
         mapLocations.put("Odolostea", LatLng(43.27394169280981, -2.832619209726283))
@@ -85,18 +66,6 @@ class MapManagerService : Service() {
         mapLocations.put("Santa Maria", LatLng(43.27387138926826, -2.8349795537580893))
         mapLocations.put("San Mameseko Arkua", LatLng(43.276383439897, -2.8369511900475195))
         mapLocations.put("Lezamako dorrea", LatLng(43.27279428065491, -2.8434245883650817))
-
-//        mapLocations.put("Idi probak", LatLng(43.257562, -2.902381))
-//        mapLocations.put("Odolostea", LatLng(43.257562, -2.902381))
-//        mapLocations.put("Txakoli", LatLng(43.257562, -2.902381))
-//        mapLocations.put("Udala", LatLng(43.257562, -2.902381))
-//        mapLocations.put("Santa Maria", LatLng(43.257562, -2.902381))
-//        mapLocations.put("San Mameseko Arkua", LatLng(43.257562, -2.902381))
-//        mapLocations.put("Lezamako dorrea", LatLng(43.257562, -2.902381))
-    }
-
-    fun myPosition(): Location? {
-        return myCurrentPosition
     }
 
     fun getLocationsToShow(esAdmin:Boolean): MutableMap<String, LatLng> {
@@ -117,9 +86,15 @@ class MapManagerService : Service() {
         if (distance <= proximityThreshold){
             gameManagerService = GameManager.get()
             gameManagerService!!.startGame(mapLocations.keys.elementAt(currentLocationIndex))
-            // showNextLocation() // Tiene que ser al acabar el juego
-            stopSelf()
+            isPlaying = true
         }
+    }
+
+    fun stopMaps() {
+        val intent = Intent(this, MapsActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+        intent.putExtra("EXIT", true)
+        startActivity(intent)
     }
 
     private fun calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Float {

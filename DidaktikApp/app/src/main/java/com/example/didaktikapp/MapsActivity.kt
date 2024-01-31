@@ -62,26 +62,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //Inicia el HASIERAKO JARDUERA
-        /*BDManager.Iniciar{ partidaDao, competitivoDao, sharedPreferences ->
-            GlobalScope.launch(Dispatchers.IO){
-                val id = sharedPreferences.getInt("partida_id", 1)
-                val partida = partidaDao.get(id)
-
-                if(!partida.hj){
-                    GameManager.get()?.startGame("HASIERAKO JARDUERA")
-                    partidaDao.update(
-                        Partida(
-                            partida.id,
-                            partida.juego,
-                            partida.pantalla,
-                            partida.juegoMapa,
-                            true
-                        )
-                    )
-                }
-            }
-        }*/
+        mapManagerService = MapManager.get()
+        if(mapManagerService == null){
+            MapManager.initialize(this, esAdmin)
+            mapManagerService = MapManager.get()
+        }
+        mapManagerService!!.isPlaying = false
 
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -100,13 +86,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
     }
 
     private fun initMap(){
-        mapManagerService = MapManager.get()
-
-        if(mapManagerService == null){
-            MapManager.initialize(this, esAdmin)
-            mapManagerService = MapManager.get()
-        }
-
         val mapFragment =
             supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -179,7 +158,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
                 }
             }
             delay(1000)
-            Toast.makeText(this, "Latitude: ${newPosition.latitude}, Longitude: ${newPosition.longitude} ", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "Latitude: ${newPosition.latitude}, Longitude: ${newPosition.longitude} ", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -300,7 +279,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
                     for (location in locationResult.locations) {
                         myCurrentPosition = location
                     }
-                    mapManagerService!!.checkProximity(myCurrentPosition)
+                    if(!mapManagerService!!.isPlaying){
+                        mapManagerService!!.checkProximity(myCurrentPosition)
+                    }
+
                 }
             }
             fusedLocationClient.requestLocationUpdates(

@@ -57,9 +57,9 @@ class MultipleChoiceActivity : AppCompatActivity() {
             "Juego4.6" to MultipleChoiceActivity.Question(
                 this.resources.getString(R.string.galdera4_3_4), this.resources.getString(R.string.aukera4_3_4_a), this.resources.getString(R.string.aukera4_3_2_b), this.resources.getString(R.string.aukera4_3_4_c), this.resources.getString(R.string.aukera4_3_4_d), null, null, null, this.resources.getString(R.string.erantzun4_3_4)[0]),
             "Juego4.7" to MultipleChoiceActivity.Question(
-                this.resources.getString(R.string.galdera4_3_5), this.resources.getString(R.string.aukera4_3_5_a), this.resources.getString(R.string.aukera4_3_2_b), this.resources.getString(R.string.aukera4_3_5_c), this.resources.getString(R.string.aukera4_3_5_d), null, null, null, this.resources.getString(R.string.erantzun4_3_5)[0]),
+                this.resources.getString(R.string.galdera4_3_5), this.resources.getString(R.string.aukera4_3_5_a), this.resources.getString(R.string.aukera4_3_5_b), this.resources.getString(R.string.aukera4_3_5_c), this.resources.getString(R.string.aukera4_3_5_d), null, null, null, this.resources.getString(R.string.erantzun4_3_5)[0]),
             "Juego4.8" to MultipleChoiceActivity.Question(
-                this.resources.getString(R.string.galdera4_3_6), this.resources.getString(R.string.aukera4_3_6_a), this.resources.getString(R.string.aukera4_3_2_b), this.resources.getString(R.string.aukera4_3_6_c), this.resources.getString(R.string.aukera4_3_6_d), null, null, null, this.resources.getString(R.string.erantzun4_3_6)[0])
+                this.resources.getString(R.string.galdera4_3_6), this.resources.getString(R.string.aukera4_3_6_a), this.resources.getString(R.string.aukera4_3_6_b), this.resources.getString(R.string.aukera4_3_6_c), this.resources.getString(R.string.aukera4_3_6_d), null, null, null, this.resources.getString(R.string.erantzun4_3_6)[0])
         )
         setContentView(R.layout.activity_multiple_choice)
 
