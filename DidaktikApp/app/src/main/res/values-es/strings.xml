@@ -98,9 +98,9 @@
 
     <!--3-->
     <string name="galdera1.4.3">¿Qué comen los bueyes antes de participar en las pruebas?</string>
-    <string name="aukera1.4.3.a">Abas</string>
+    <string name="aukera1.4.3.a">Habas</string>
     <string name="aukera1.4.3.b">Lechuga</string>
-    <string name="aukera1.4.3.c">Bainas</string>
+    <string name="aukera1.4.3.c">Vainas</string>
     <string name="erantzun1.4.3">a</string>
 
     <!-- 4.3 -->
@@ -162,8 +162,8 @@
 
     <!-- 2.1 -->
     <string name="galdera2.1">En la carnicería de Lezama preparan un producto muy popular con estos ingredientes. ¿Qué producto es?</string>
-    <string name="erantzun2.1a">CHORIZO</string>
-    <string name="erantzun2.1b">CHORIZOS</string>
+    <string name="erantzun2.1a">MORCILLA</string>
+    <string name="erantzun2.1b">MORCILLAS</string>
 
     <!-- 3.1 -->
     <string name="galdera3.1">¿Sabéis qué bebida es esta?</string>

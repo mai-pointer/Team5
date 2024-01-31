@@ -2,7 +2,9 @@ package com.example.didaktikapp
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -17,6 +19,11 @@ import com.example.didaktikapp.databinding.ActivityMapsBinding
 import com.example.didaktikapp.mapFragment.PlaceDetailsFragment
 import com.example.didaktikapp.navigation.NavigationUtil
 import com.example.didaktikapp.titleFragment.TitleFragment
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -45,6 +52,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
     private var updateJob: Job? = null
     private var marker: Marker? = null
 
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var locationCallback: LocationCallback
+    private var myCurrentPosition: Location? = null
 
     // Variable para saber si el usuario es admin o no
     private var esAdmin: Boolean = false
@@ -52,26 +62,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //Inicia el HASIERAKO JARDUERA
-        /*BDManager.Iniciar{ partidaDao, competitivoDao, sharedPreferences ->
-            GlobalScope.launch(Dispatchers.IO){
-                val id = sharedPreferences.getInt("partida_id", 1)
-                val partida = partidaDao.get(id)
-
-                if(!partida.hj){
-                    GameManager.get()?.startGame("HASIERAKO JARDUERA")
-                    partidaDao.update(
-                        Partida(
-                            partida.id,
-                            partida.juego,
-                            partida.pantalla,
-                            partida.juegoMapa,
-                            true
-                        )
-                    )
-                }
-            }
-        }*/
+        mapManagerService = MapManager.get()
+        if(mapManagerService == null){
+            MapManager.initialize(this, esAdmin)
+            mapManagerService = MapManager.get()
+        }
+        mapManagerService!!.isPlaying = false
 
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -90,13 +86,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
     }
 
     private fun initMap(){
-        mapManagerService = MapManager.get()
-
-        if(mapManagerService == null){
-            MapManager.initialize(this, esAdmin)
-            mapManagerService = MapManager.get()
-        }
-
         val mapFragment =
             supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -141,7 +130,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(referenceMarker!!, zoomLevel))
             mMap.setOnMarkerClickListener(this)
         }else{
-            val myPos = LatLng (mapManagerService?.myPosition()!!.latitude, mapManagerService?.myPosition()!!.longitude)
+            val myPos = LatLng (myCurrentPosition!!.latitude, myCurrentPosition!!.longitude)
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPos, zoomLevel))
         }
 
@@ -159,8 +148,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
 
     suspend fun updateMarkerPosition() {
         while (true) {
-            // Obtener la nueva posición del marcador
-            val newPosition = LatLng(mapManagerService!!.myPosition()!!.latitude, mapManagerService!!.myPosition()!!.longitude)
+            val newPosition = LatLng(myCurrentPosition!!.latitude, myCurrentPosition!!.longitude)
             withContext(Dispatchers.Main) {
                 if (marker == null) {
                     marker = mMap.addMarker(MarkerOptions().position(newPosition).icon(
@@ -170,6 +158,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
                 }
             }
             delay(1000)
+            //Toast.makeText(this, "Latitude: ${newPosition.latitude}, Longitude: ${newPosition.longitude} ", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -239,7 +228,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             requestLocationPermision()
         }else{
-            initMap()
+            getUserLocation()
         }
     }
 
@@ -259,12 +248,56 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if(requestCode == 777){
             if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED){
-                initMap()
+                getUserLocation()
             }else{
                 Toast.makeText(this, "Baimenak baztertu dituzu", Toast.LENGTH_LONG).show()
             }
         }
 
+    }
+
+    private fun getUserLocation(){
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        try {
+            fusedLocationClient.lastLocation.addOnSuccessListener {
+                if (it != null) {
+                    myCurrentPosition = it
+                    initMap()
+                } else {
+                    Log.d("Ubicacion", "No se pudo obtener la ubicación")
+                }
+            }
+            val locationRequest = LocationRequest.create().apply {
+                interval = 5000
+                fastestInterval = 2000
+                priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+            }
+            locationCallback = object : LocationCallback() {
+                override fun onLocationResult(locationResult: LocationResult) {
+                    locationResult
+                    Log.d("Ubicacion", "Se recibió una actualización")
+                    for (location in locationResult.locations) {
+                        myCurrentPosition = location
+                    }
+                    if(!mapManagerService!!.isPlaying){
+                        mapManagerService!!.checkProximity(myCurrentPosition)
+                    }
+
+                }
+            }
+            fusedLocationClient.requestLocationUpdates(
+                locationRequest,
+                locationCallback,
+                Looper.getMainLooper()
+            )
+
+        }catch (e: SecurityException) {
+            Log.d("Ubicacion", "Tal vez no solicitaste permiso antes")
+        }
+    }
+
+    fun returnPlayerPos(): Location?{
+        return myCurrentPosition
     }
 
     override fun onDestroy() {
