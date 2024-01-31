@@ -26,6 +26,7 @@ class MapManagerService : Service() {
     private var currentLocationIndex = 0
     private var currentGameFromDB = ""
     private var myCurrentPosition: Location? = null
+    private lateinit var locationProvider: LocationProvider
 
 
     // Binder para la conexión con la actividad
@@ -57,6 +58,7 @@ class MapManagerService : Service() {
         initializeMapLocations()
 
         if (!esAdmin){
+            locationProvider = LocationProvider()
             updateLocation()
         }
 
@@ -65,16 +67,18 @@ class MapManagerService : Service() {
     @SuppressLint("MissingPermission")
     fun updateLocation(){
         val locationManager : LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        runBlocking {
+        /*runBlocking {
             val myPos: Deferred<Location?> = async {
-                return@async locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                //return@async locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                return@async locationProvider.getUserLocation(context)
             }
             myCurrentPosition = myPos.await()
-        }
+        }*/
 
         miScope.launch {
             while (miScope.isActive) {
-                myCurrentPosition = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                //myCurrentPosition = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                myCurrentPosition = locationProvider.getUserLocation(context)
                 Log.d("MyCurrentPosition", myCurrentPosition.toString())
                 var currentLatLng = LatLng(myCurrentPosition!!.latitude, myCurrentPosition!!.longitude)
                 if (checkProximity(currentLatLng)){

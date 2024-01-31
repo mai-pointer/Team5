@@ -43,22 +43,4 @@ class LocationProvider{
            }
        }
    }
-
-    private fun checkPermissions(context: Context){
-        if(ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            //TODO: llamar a las funciones requestPermission
-        }else{
-
-        }
-    }
-
-    fun requestLocationPermision(activity: Activity){
-        if(ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.ACCESS_COARSE_LOCATION)){
-
-        }else{
-            ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION), 777)
-        }
-    }
-
-
 }
