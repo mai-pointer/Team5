@@ -170,6 +170,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
                 }
             }
             delay(1000)
+            Toast.makeText(this, "Latitude: ${newPosition.latitude}, Longitude: ${newPosition.longitude} ", Toast.LENGTH_SHORT).show()
         }
     }
 
