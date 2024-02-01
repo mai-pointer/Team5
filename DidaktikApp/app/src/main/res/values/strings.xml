@@ -26,8 +26,8 @@
     <string name="incorrecto">Pasahitza ez da zuzena</string>
 
     <!-- Main Menu -->
-    <string name="mainMenuTitulo1">Lezamaren misterioa</string>
-    <string name="mainMenuTitulo2">Lezama</string>
+    <string name="mainMenuTitulo1">Lezamaren</string>
+    <string name="mainMenuTitulo2">altxorra</string>
     <string name="mainMenuAjustes">Doikuntzak</string>
     <string name="mainMenuJugar">Jolastu</string>
     <string name="mainMenuModoLibre">Lehiaketa modua</string>
