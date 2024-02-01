@@ -22,7 +22,7 @@ class MapManagerService : Service() {
 
     // Variables
     private lateinit var context: Context
-    private var currentLocationIndex = 0
+    var currentLocationIndex = 0
     private var currentGameFromDB = ""
     private var myCurrentPosition: Location? = null
 
@@ -59,6 +59,7 @@ class MapManagerService : Service() {
     @SuppressLint("MissingPermission")
 
     private fun initializeMapLocations() {
+//        mapLocations.put("Idi probak", LatLng(43.257557, -2.902372))
         mapLocations.put("Idi probak", LatLng(43.27556360817825, -2.827742396615327))
         mapLocations.put("Odolostea", LatLng(43.27394169280981, -2.832619209726283))
         mapLocations.put("Txakoli", LatLng(43.27758426733325, -2.8308136897866447))
@@ -115,23 +116,31 @@ class MapManagerService : Service() {
             currentLocationIndex++
             notifyLocationChanged()
 
+            val index = currentLocationIndex
+
             // BD - Guardar ----
             BDManager.Iniciar{ partidaDao, competitivoDao, sharedPreferences ->
                 GlobalScope.launch(Dispatchers.IO){
-                    val partida = partidaDao.get(sharedPreferences.getInt("partida_id", -1))
+                    var partida = partidaDao.get(sharedPreferences.getInt("partida_id", -1))
+                    var index = currentLocationIndex
+
+                    Log.i("PARTIDA", "Index: " + index)
+
+
+                    var partidaNueva = partida
+
+                    partidaNueva.juegoMapa = index
 
                     partidaDao.update(
-                        Partida(
-                            id = sharedPreferences.getInt("partida_id", 1),
-                            juego = partida.juego,
-                            pantalla = partida.pantalla,
-                            juegoMapa = currentLocationIndex,
-                            hj = partida.hj
-                        )
+                        partidaNueva
                     )
 
-                    Log.i("PARTIDA", "Update: " + partidaDao.get(sharedPreferences.getInt("partida_id", -1)).juegoMapa)
+                    Log.i("PARTIDA", "Update: " + partidaNueva.juegoMapa)
 
+                    delay(1000)
+
+                    val intent = Intent(context, MapsActivity::class.java)
+                    context.startActivity(intent)
                 }
             }
 

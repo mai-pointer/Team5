@@ -186,8 +186,8 @@ class GameManagerService : Service() {
                     }
                     mapManagerService!!.showNextLocation()
 
-                    val intent = Intent(context, MapsActivity::class.java)
-                    context.startActivity(intent)
+//                    val intent = Intent(context, MapsActivity::class.java)
+//                    context.startActivity(intent)
                 } else{
                     val intent = Intent(context, MapsActivity::class.java)
                     intent.putExtra("admin", true)
