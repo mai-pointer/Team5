@@ -34,10 +34,8 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -68,6 +66,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
             mapManagerService = MapManager.get()
         }
         mapManagerService!!.isPlaying = false
+        Log.i("PARTIDA", "Local: " + mapManagerService?.currentLocationIndex)
+
 
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)

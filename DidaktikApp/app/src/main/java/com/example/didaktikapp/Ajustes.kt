@@ -153,9 +153,6 @@ class Ajustes : AppCompatActivity() {
 
                         val selectedPartidaId = partidas[position].id
                         sharedPreferences.edit().putInt("partida_id", selectedPartidaId).apply()
-
-                        Log.i("PARTIDA", "Cargado: " + partidas[position].juegoMapa)
-
                     }
 
                     override fun onNothingSelected(parentView: AdapterView<*>){}
